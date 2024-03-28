@@ -1,0 +1,21 @@
+<div class="sidebar" [ngClass]="{ expanded: isExpanded }">
+  <div class="header">
+    <h1 class="title">Aulas</h1>
+    <div class="toggle" (click)="handleSidebarToggle()">
+      <span class="chevron"></span>
+    </div>
+  </div>
+  <div class="content" *ngFor="let route of routes">
+    <div class="link">
+      <div
+        class="content"
+        [routerLink]="['/', route.route]"
+        [routerLinkActive]="'active'"
+      >
+        <app-icon></app-icon>
+        <div class="title">{{ route.title }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"></div>
+</div>
