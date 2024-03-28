@@ -17,11 +17,14 @@ export class LoginComponent {
 
   constructor(public auth: AuthService) {}
 
-  onSubmit() {
+  async onSubmit(): Promise<void> {
     console.log(this.loginForm.value);
     const { email, password } = this.loginForm.value;
     if (email?.length && password?.length) {
-      this.auth.emailSignin(email, password);
+      const res: any = await this.auth.emailSignin(email, password);
+      if (res._delegate?.accessToken.length > 0) {
+        // this.navi
+      }
     }
   }
 }

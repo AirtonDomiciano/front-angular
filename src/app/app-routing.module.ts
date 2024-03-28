@@ -5,6 +5,7 @@ import { UserComponent } from './pages/user/user.component';
 import { ProductComponent } from './pages/product/product.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'user', component: UserComponent },
   { path: 'product', component: ProductComponent },
