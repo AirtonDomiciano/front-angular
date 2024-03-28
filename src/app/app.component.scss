@@ -1,0 +1,15 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.content {
+  margin-left: 100px;
+  transition: 0.3s;
+  &.sidebarExpanded {
+    margin-left: 12%;
+  }
+}
