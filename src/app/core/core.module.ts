@@ -15,7 +15,7 @@ import { IconModule } from '../shared/components/icon/icon.module';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    IconModule
+    IconModule,
     // NgbModule,
     // MatToolbarModule
   ],
