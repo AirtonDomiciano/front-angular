@@ -30,4 +30,5 @@ import { LoginModule } from './pages/login/login.module';
   providers: [],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}
