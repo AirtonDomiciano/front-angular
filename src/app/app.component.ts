@@ -12,4 +12,8 @@ export class AppComponent {
   receiveEmitLoggedIn() {
     this.loggedIn = true;
   }
+
+  receiveEmitSignOut(answear: boolean) {
+    this.loggedIn = answear;
+  }
 }
