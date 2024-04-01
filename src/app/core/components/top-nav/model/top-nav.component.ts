@@ -1,8 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-top-nav',
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.scss'],
 })
-export class TopNavComponent {}
+export class TopNavComponent {
+  @Output() emitterSignOut: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  signOut() {
+    this.emitterSignOut.emit(false);
+  }
+}
