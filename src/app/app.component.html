@@ -1,3 +1,4 @@
+
 <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
   <app-top-nav></app-top-nav>
 </div>
@@ -10,3 +11,20 @@
 </div>
 
 <!-- <app-login></app-login> -->
+<!-- <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
+  <app-top-nav></app-top-nav>
+</div> -->
+<div *ngIf="!loggedIn">
+  <app-login (emitterLoggedIn)="receiveEmitLoggedIn()"></app-login>
+</div>
+
+<div *ngIf="loggedIn">
+  <app-side-nav
+    [isExpanded]="sidebarExpanded"
+    (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
+  ></app-side-nav>
+  <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
