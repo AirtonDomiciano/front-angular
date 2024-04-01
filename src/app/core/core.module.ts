@@ -6,9 +6,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '../app-routing.module';
 import { IconModule } from '../shared/components/icon/icon.module';
+import { TopNavComponent } from './components/top-nav/model/top-nav.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
-  declarations: [SideNavComponent],
+  declarations: [SideNavComponent, TopNavComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -19,6 +20,6 @@ import { IconModule } from '../shared/components/icon/icon.module';
     // NgbModule,
     // MatToolbarModule
   ],
-  exports: [SideNavComponent],
+  exports: [SideNavComponent, TopNavComponent],
 })
 export class CoreModule {}
