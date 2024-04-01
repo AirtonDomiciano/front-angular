@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public sidebarExpanded = true;
+  public loggedIn = false;
+
+  receiveEmitLoggedIn() {
+    this.loggedIn = true;
+  }
 }
