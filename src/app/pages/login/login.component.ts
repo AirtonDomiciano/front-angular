@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,11 @@ export class LoginComponent {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(public auth: AuthService, private router: Router) {}
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+    private LocalStorageService: LocalStorageService
+  ) {}
 
   async onSubmit(): Promise<void> {
     if (this.loginForm.valid) {
@@ -26,6 +31,7 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
       if (email?.length && password?.length) {
         this.wrongLogin = true;
+        this.LocalStorageService.saveLogin(email, password);
         const res: any = await this.auth.emailSignin(email, password);
         if (res._delegate?.accessToken.length > 0) {
           this.wrongLogin = false;
