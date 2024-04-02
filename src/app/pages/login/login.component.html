@@ -2,13 +2,15 @@
   <div class="card">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <label>
-
         <h1>LOGIN</h1>
         <div class="email">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScHgMaplY57PEG9zf0pMikuTHwG5BfgiOz57z8RnwB3nJZ1-FNtUVPKwx0YpvZDYMrIbw&usqp=CAU"
           />
           <input type="email" formControlName="email" placeholder="Email" />
+        </div>
+        <div class="validationError" *ngIf="loginForm.get('email')?.invalid">
+          <p>E-mail is required!</p>
         </div>
         <!-- <ng-container
         *ngIf="
@@ -29,16 +31,28 @@
       </label>
       <br />
       <label>
-        <div class="senha">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ98VXg3uv4u5_qBB842YZahZP4HL_bdtCww&usqp=CAU"
-          />
-          <input
-            type="password"
-            formControlName="password"
-            placeholder="Senha"
-          />
+        <div class="row">
+          <div class="senha">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ98VXg3uv4u5_qBB842YZahZP4HL_bdtCww&usqp=CAU"
+            />
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="Senha"
+            />
+          </div>
+
+          <div
+            class="validationError"
+            *ngIf="loginForm.get('password')?.invalid"
+          >
+            <p>Password is required!</p>
+          </div>
         </div>
+        <ng-container *ngIf="wrongLogin">
+          <p>Password or e-mail is wrong!</p>
+        </ng-container>
         <!-- <ng-container
         *ngIf="
           loginForm.controls.password.errors?.required &&
