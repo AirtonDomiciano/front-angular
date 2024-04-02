@@ -1,6 +1,6 @@
 export const RoutesArray: Routes[] = [
   { title: 'Home', route: 'home', icon: '' },
-  { title: 'Usuarios', route: 'user', icon: '', childs: [] },
+  { title: 'Usuario', route: 'user', icon: '', childs: [] },
   { title: 'Produtos', route: 'product', icon: '', childs: [] },
 ];
 
