@@ -13,9 +13,7 @@ import { firebaseConfig } from './core/firebase/config/config';
 import { LoginModule } from './pages/login/login.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,12 +21,12 @@ import { LoginModule } from './pages/login/login.module';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    CoreModule, UserModule,
+    CoreModule,
+    UserModule,
     //!REMOVER
-    LoginModule
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {}
