@@ -1,8 +1,18 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <label>
-    Email:
-    <input type="email" formControlName="email" />
-    <!-- <ng-container
+<div class="container">
+  <div class="card">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <label>
+        <h1>LOGIN</h1>
+        <div class="email">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScHgMaplY57PEG9zf0pMikuTHwG5BfgiOz57z8RnwB3nJZ1-FNtUVPKwx0YpvZDYMrIbw&usqp=CAU"
+          />
+          <input type="email" formControlName="email" placeholder="Email" />
+        </div>
+        <div class="validationError" *ngIf="loginForm.get('email')?.invalid">
+          <p>E-mail is required!</p>
+        </div>
+        <!-- <ng-container
         *ngIf="
           loginForm.controls.email.errors?.required &&
           loginForm.controls.email.touched
@@ -10,7 +20,7 @@
       >
         Email is required
       </ng-container> -->
-    <!-- <ng-container
+        <!-- <ng-container
         *ngIf="
           loginForm.controls.email.errors['email'] &&
           loginForm.controls.email.touched
@@ -18,12 +28,32 @@
       >
         Email must be valid
       </ng-container> -->
-  </label>
-  <br />
-  <label>
-    Password:
-    <input type="password" formControlName="password" />
-    <!-- <ng-container
+      </label>
+      <br />
+      <label>
+        <div class="row">
+          <div class="senha">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ98VXg3uv4u5_qBB842YZahZP4HL_bdtCww&usqp=CAU"
+            />
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="Senha"
+            />
+          </div>
+
+          <div
+            class="validationError"
+            *ngIf="loginForm.get('password')?.invalid"
+          >
+            <p>Password is required!</p>
+          </div>
+        </div>
+        <ng-container *ngIf="wrongLogin">
+          <p>Password or e-mail is wrong!</p>
+        </ng-container>
+        <!-- <ng-container
         *ngIf="
           loginForm.controls.password.errors?.required &&
           loginForm.controls.password.touched
@@ -31,7 +61,9 @@
       >
         Password is required
       </ng-container> -->
-  </label>
-  <br />
-  <button type="submit">Submit</button>
-</form>
+      </label>
+      <br />
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>

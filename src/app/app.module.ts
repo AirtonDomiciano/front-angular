@@ -14,9 +14,7 @@ import { LoginModule } from './pages/login/login.module';
 import { ProductModule } from './pages/product/product.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,11 +24,11 @@ import { ProductModule } from './pages/product/product.module';
     AngularFireDatabaseModule,
     CoreModule, UserModule,
     ProductModule,
+
     //!REMOVER
-    LoginModule
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {}

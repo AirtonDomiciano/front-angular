@@ -1,7 +1,6 @@
 <!-- <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
-  
+  <app-top-nav></app-top-nav>
 </div>
-
 <app-side-nav
   [isExpanded]="sidebarExpanded"
   (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
@@ -9,6 +8,7 @@
 <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
   <router-outlet></router-outlet>
 </div> -->
+
 <!-- <app-login></app-login> -->
 <!-- <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
   <app-top-nav></app-top-nav>
@@ -19,12 +19,13 @@
 </div>
 
 <div *ngIf="loggedIn">
-  <app-top-nav></app-top-nav>
-  <app-side-nav [isExpanded]="sidebarExpanded" (toggleSidebar)="sidebarExpanded = !sidebarExpanded"></app-side-nav>
-  <app-footer></app-footer>
+  <app-top-nav (emitterSignOut)="receiveEmitSignOut($event)"></app-top-nav>
+  <app-side-nav
+    [isExpanded]="sidebarExpanded"
+    (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
+  ></app-side-nav>
   <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
+    <app-footer></app-footer>
     <router-outlet></router-outlet>
   </div>
 </div>
-
-<!-- <app-product></app-product> -->

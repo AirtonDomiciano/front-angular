@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   public user: any;
+  public wrongLogin: boolean = false;
   @Output() emitterLoggedIn: EventEmitter<boolean> =
     new EventEmitter<boolean>();
   loginForm = new FormGroup({
@@ -20,13 +21,17 @@ export class LoginComponent {
   constructor(public auth: AuthService, private router: Router) {}
 
   async onSubmit(): Promise<void> {
-    console.log(this.loginForm.value);
-    const { email, password } = this.loginForm.value;
-    if (email?.length && password?.length) {
-      const res: any = await this.auth.emailSignin(email, password);
-      if (res._delegate?.accessToken.length > 0) {
-        this.emitterLoggedIn.emit();
-        this.router.navigate([`home/`]);
+    if (this.loginForm.valid) {
+      console.log(this.loginForm.value);
+      const { email, password } = this.loginForm.value;
+      if (email?.length && password?.length) {
+        this.wrongLogin = true;
+        const res: any = await this.auth.emailSignin(email, password);
+        if (res._delegate?.accessToken.length > 0) {
+          this.wrongLogin = false;
+          this.emitterLoggedIn.emit();
+          this.router.navigate([`home/`]);
+        }
       }
     }
   }
