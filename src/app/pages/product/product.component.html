@@ -1,1 +1,24 @@
-<p>product works!</p>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Descrição</th>
+            </tr>
+        </thead>
+        <ng-container *ngFor="let produto of listagemProdutos">
+            <tbody>
+                <tr>
+                    <th scope="row" class="id">{{produto.id}}</th>
+                    <td>{{produto.nome}}</td>                    
+                    <td>{{produto.categoria}}</td>                    
+                    <td>R$: {{produto.preco}}</td>                    
+                    <td class="descricao">{{produto.descricao}}</td>             
+                </tr>
+            </tbody>
+        </ng-container>
+    </table>
+</div>
