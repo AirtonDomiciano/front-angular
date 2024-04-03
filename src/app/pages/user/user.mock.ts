@@ -1,24 +1,8 @@
-// import { UserInterface } from './user.interface';
+import { UserInterface } from "./user.interface"
 
-// export const usuariosMock: UserInterface[] = [
-//   {
-//     id: 1,
-//     name: 'Airton',
-//     email: 'airton@xpert.com.br',
-//   },
-//   {
-//     id: 2,
-//     name: 'Yuri',
-//     email: 'yuri.teze@xpert.com.br',
-//   },
-//   {
-//     id: 3,
-//     name: 'Pedro',
-//     email: 'pedro.ribeiro@xpert.com.br',
-//   },
-//   {
-//     id: 4,
-//     name: 'Cauã',
-//     email: 'caua.silva@xpert.com.br',
-//   },
-// ];
+export const UsersMock: UserInterface[] = [
+    // { id: 1, nome: 'Airton', sobrenome: 'Domiciano', idade: 50, email: 'lolzeiro@xpert.com', cep: '83477721', funcao: 'Desenvolvedor sênior full-stack' },
+    // { id: 2, nome: 'Cauã', sobrenome: 'Kelly', idade: 18, email: 'caua@xpert.com', cep: '87734721', funcao: 'Hackerman' },
+    // { id: 3, nome: 'Pedro', sobrenome: 'Ribeiro', idade: 17, email: 'mutante@xpert.com', cep: '83477721', funcao: 'dev estagiário' },
+    // { id: 4, nome: 'Yuri', sobrenome: 'Schenkel', idade: 18, email: 'nome-impronunciavel@xpert.com', cep: '87734721', funcao: 'dev estagiário'},
+]

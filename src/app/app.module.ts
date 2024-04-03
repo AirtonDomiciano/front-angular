@@ -22,7 +22,8 @@ import { ProductModule } from './pages/product/product.module';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    CoreModule, UserModule,
+    CoreModule,
+    UserModule,
     ProductModule,
 
     //!REMOVER
