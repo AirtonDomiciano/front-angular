@@ -2,13 +2,13 @@
     background: #0f1017;
     border: 1px solid;
     width: 800px;
-    height: 60px;
+    height: 55px;
     color: #a2a3b6;
     text-align: center;
     // justify-content: center;
     // align-items: center;
-    margin-top: 75px;
-    margin-left: 100px;
+    margin-top: 80px;
+    margin-left: 170px;
 }
 
 .descricao{
@@ -24,6 +24,41 @@ th{
     background-color: rgb(98, 109, 119);
 }
 
-// background: #0f1017;
-// color: #6d6e7e;
-// border-radius: 1px solid rgb(58, 57, 57);
+.acao {
+    background-color: rgb(98, 109, 119);
+}
+
+.acao button {
+    width: 100px;
+    height: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.editar {
+    background-color: #32b6ee;
+}
+
+.excluir {
+    background-color: rgb(220, 22, 22);
+    margin-top: 7px;
+}
+
+.editar:hover {
+    background-color: #108fc5;
+}
+
+.excluir:hover {
+    background-color: rgb(182, 15, 15);
+    margin-top: 7px;
+}
+
+.editar:active {
+    background-color: #0c6d96;
+}
+
+.excluir:active {
+    background-color: rgb(133, 12, 12);
+    margin-top: 7px;
+}

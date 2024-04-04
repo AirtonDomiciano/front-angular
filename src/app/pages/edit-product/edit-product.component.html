@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="productFormGroup" #formDir="ngForm">
+      <h1>Editar Produtos</h1>
+      <div class="label">
+        <span for="">Nome:</span>
+      </div>
+      <div>
+        <input type="text" class="input" formControlName="nome" required/>
+        <div class="obrigatorio" *ngIf="productFormGroup.get('nome')?.invalid">Nome é obrigatório!</div>
+      </div>
+      <div class="label">
+        <span for="categoria">Categoria:</span>
+      </div>
+      <div>
+        <input type="text" class="input" formControlName="categoria" required/>
+        <div class="obrigatorio" *ngIf="productFormGroup.get('categoria')?.invalid">Categoria é obrigatório!</div>
+      </div>
+      <div class="label">
+        <span for="preco">Preço:</span>
+      </div>
+      <div>
+        <input type="number" class="input" formControlName="preco" required/>
+        <div class="obrigatorio" *ngIf="productFormGroup.get('preco')?.invalid">Preço é obrigatório!</div>
+      </div>
+      <div class="label">
+        <span for="descricao">Descrição</span>
+      </div>
+      <div>
+        <input type="text" class="input" formControlName="descricao" required=""/>
+        <div class="obrigatorio" *ngIf="productFormGroup.get('descricao')?.invalid">Descrição é obrigatório!</div>
+      </div>
+      <div>
+        <button class="botao" type="submit">Enviar</button>
+      </div>
+    </form>
+  </div>
+</div>
