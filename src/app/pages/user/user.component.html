@@ -7,36 +7,63 @@
       </div>
       <div>
         <input type="text" class="input" formControlName="nome" required />
+        <div class="obrigatorio" *ngIf="cadastroGroup.get('nome')?.invalid">
+          Nome é obrigatório!
+        </div>
       </div>
       <div class="label">
         <span for="sobrenome">Sobrenome:</span>
       </div>
       <div>
         <input type="text" class="input" formControlName="sobrenome" required />
+        <div
+          class="obrigatorio"
+          *ngIf="cadastroGroup.get('sobrenome')?.invalid"
+        >
+          Sobrenome é obrigatório!
+        </div>
       </div>
       <div class="label">
         <span for="idade">Idade:</span>
       </div>
       <div>
         <input type="number" class="input" formControlName="idade" required />
+        <div class="obrigatorio" *ngIf="cadastroGroup.get('idade')?.invalid">
+          Idade é obrigatório!
+        </div>
       </div>
       <div class="label">
         <span for="email">Email:</span>
       </div>
       <div>
         <input type="email" class="input" formControlName="email" required />
+        <div class="obrigatorio" *ngIf="cadastroGroup.get('email')?.invalid">
+          Email é obrigatório!
+        </div>
       </div>
       <div class="label">
         <span for="cep">CEP:</span>
       </div>
       <div>
-        <input type="text" class="input" formControlName="cep" required />
+        <input
+          type="text"
+          class="input"
+          (input)="onLoadCep($event)"
+          formControlName="cep"
+          required
+        />
+        <div class="obrigatorio" *ngIf="cadastroGroup.get('cep')?.invalid">
+          Cep é obrigatório!
+        </div>
       </div>
       <div class="label">
         <span for="funcao">Função:</span>
       </div>
       <div>
         <input type="text" class="input" formControlName="funcao" required />
+        <div class="obrigatorio" *ngIf="cadastroGroup.get('funcao')?.invalid">
+          Função é obrigatório!
+        </div>
       </div>
       <div>
         <button class="botao" type="submit">Enviar</button>

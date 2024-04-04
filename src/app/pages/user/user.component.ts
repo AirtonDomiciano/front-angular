@@ -38,4 +38,40 @@ export class UserComponent {
       UsersMock.push(input);
     }
   }
+
+  onLoadCep(event: Event) {
+    const cep = this.cadastroGroup.get('cep')?.value;
+    const isValid: boolean = this.cepIsValid(cep);
+
+    if (isValid) {
+      const formatedCep: string = this.formatedCep(cep);
+      this.cadastroGroup.controls['cep'].setValue(formatedCep);
+      if (
+        cep.length === 6 &&
+        event instanceof InputEvent &&
+        event.inputType === 'deleteContentBackward'
+      ) {
+        let newCep = cep.slice(0, -1);
+        this.cadastroGroup.controls['cep'].setValue(newCep);
+      }
+    } else {
+      let newCep = cep.slice(0, -1);
+      this.cadastroGroup.controls['cep'].setValue(newCep);
+    }
+  }
+
+  cepIsValid(cep: string): boolean {
+    if (cep.length <= 9) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  formatedCep(cep: string): string {
+    if (cep.length === 5) {
+      cep += '-';
+    }
+    return cep;
+  }
 }
