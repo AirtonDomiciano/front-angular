@@ -14,18 +14,22 @@
   <app-top-nav></app-top-nav>
 </div> -->
 
-<div *ngIf="!loggedIn">
+<!-- <div *ngIf="!loggedIn">
   <app-login (emitterLoggedIn)="receiveEmitLoggedIn()"></app-login>
 </div>
 
-<div *ngIf="loggedIn">
+<div *ngIf="loggedIn"> -->
   <app-top-nav (emitterSignOut)="receiveEmitSignOut($event)"></app-top-nav>
   <app-side-nav
     [isExpanded]="sidebarExpanded"
     (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
   ></app-side-nav>
   <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
-    <app-footer></app-footer>
+    
+    <!-- <app-users ></app-users>
+    <app-edit-user></app-edit-user> -->
     <router-outlet></router-outlet>
+    <app-footer></app-footer>
   </div>
-</div>
+<!-- </div> -->
+
