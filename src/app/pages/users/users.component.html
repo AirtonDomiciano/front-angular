@@ -9,7 +9,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Cep</th>
                 <th scope="col">Função</th>
-                <th scope="col">Ações</th>
+                <th scope="col" >Ações</th>
             </tr>
         </thead>
         <ng-container *ngFor="let usuario of listagemUsuarios">
@@ -22,9 +22,9 @@
                     <th>{{usuario.email}}</th>
                     <th>{{usuario.cep}}</th>
                     <th>{{usuario.funcao}}</th>
-                    <td>
-                        <button (click)="editarUser(usuario.id!)">Editar</button>
-                        <button (click)="removerUser(usuario.id!)">Remover</button>
+                    <td class="acao">
+                        <button (click)="editarUser(usuario.id!)" class="editar">Editar</button>
+                        <button (click)="removerUser(usuario.id!)" class="excluir">Remover</button>
                     </td>
                 </tr>
             </tbody>

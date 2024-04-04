@@ -1,16 +1,15 @@
 .container {
   display: flex;
   justify-content: center;
-  margin-top: 17px;
-  overflow-x: scroll;
+  padding-bottom: 50px;
 }
 
 .card {
-  margin-top: 50px;
+  margin-top: 60px;
   background: #1d1e2c;
   color: #6d6e7e;
   width: 380px;
-  height: 630px;
+  height: auto;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -49,6 +48,7 @@ form h1 {
   width: 100px;
   height: 40px;
   font-size: large;
+  margin-bottom: 20px;
 }
 
 .botao:hover {
