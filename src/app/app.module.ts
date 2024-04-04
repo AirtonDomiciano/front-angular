@@ -12,6 +12,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { firebaseConfig } from './core/firebase/config/config';
 import { LoginModule } from './pages/login/login.module';
 import { ProductModule } from './pages/product/product.module';
+import { UsersModule } from './pages/users/users.module';
+import { EditUserModule } from './edit-user/edit-user.module';
 import { EditProductModule } from './pages/edit-product/edit-product.module';
 import { ProductRegisterModule } from './pages/product-register/product-register.module';
 
@@ -29,11 +31,13 @@ import { ProductRegisterModule } from './pages/product-register/product-register
     ProductModule,
     EditProductModule,
     ProductRegisterModule,
-
+    EditUserModule,
+    UsersModule,
     //!REMOVER
     LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}

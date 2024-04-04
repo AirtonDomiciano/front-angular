@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { UserInterface } from './user.interface';
-import { UsersMock } from './user.mock';
+import { UserModel } from './user.model';
+import { UsersMock } from '../users/users.mock';
 
 @Component({
   selector: 'app-user',
@@ -26,7 +26,7 @@ export class UserComponent {
     if (this.cadastroGroup.valid) {
       let usersLength = UsersMock.length - 1;
 
-      let input: UserInterface = this.cadastroGroup.value;
+      let input: UserModel = this.cadastroGroup.value;
 
       if (UsersMock.length < 1) {
         input.id = 1;
