@@ -52,7 +52,9 @@
           formControlName="cep"
           required
         />
-
+        <div class="obrigatorio" *ngIf="cadastroGroup.get('cep')?.invalid">
+          Cep é obrigatório!
+        </div>
       </div>
       <div class="label">
         <span for="funcao">Função:</span>
