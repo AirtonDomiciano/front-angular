@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { UsersMock } from './user.mock';
 import { UserModel } from './user.model';
+import { UsersMock } from '../users/users.mock';
 
 @Component({
   selector: 'app-user',
