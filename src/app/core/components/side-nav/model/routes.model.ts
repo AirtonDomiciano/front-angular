@@ -2,6 +2,7 @@ export const RoutesArray: Routes[] = [
   { title: 'Home', route: 'home', icon: '' },
   { title: 'Usuario', route: 'user', icon: '', childs: [] },
   { title: 'Produtos', route: 'product', icon: '', childs: [] },
+  { title: 'Usuarios', route: 'users', icon: '', childs: [] },
 ];
 
 export class Routes {

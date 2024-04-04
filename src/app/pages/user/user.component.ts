@@ -10,7 +10,7 @@ import { UsersMock } from './user.mock';
 })
 export class UserComponent implements OnInit {
   public cadastroGroup: UntypedFormGroup;
-
+  
   constructor(fb: FormBuilder) {
     this.cadastroGroup = fb.group({
       nome: ['', Validators.required],
