@@ -13,6 +13,7 @@ import { firebaseConfig } from './core/firebase/config/config';
 import { LoginModule } from './pages/login/login.module';
 import { ProductModule } from './pages/product/product.module';
 import { EditProductModule } from './pages/edit-product/edit-product.module';
+import { ProductRegisterModule } from './pages/product-register/product-register.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { EditProductModule } from './pages/edit-product/edit-product.module';
     UserModule,
     ProductModule,
     EditProductModule,
+    ProductRegisterModule,
 
     //!REMOVER
     LoginModule,

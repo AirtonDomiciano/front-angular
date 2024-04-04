@@ -19,8 +19,12 @@
           <td>R$: {{ produto.preco }}</td>
           <td class="descricao">{{ produto.descricao }}</td>
           <td class="acao">
-            <button class="editar" (click)="editarProduto(produto.id!)">Editar</button>
-            <button class="excluir" (click)="excluirProduto(produto.id!)">Excluir</button>
+            <button class="editar" (click)="editarProduto(produto.id!)">
+              Editar
+            </button>
+            <button class="excluir" (click)="excluirProduto(produto.id!)">
+              Excluir
+            </button>
           </td>
         </tr>
       </tbody>

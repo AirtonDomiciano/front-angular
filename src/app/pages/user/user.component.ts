@@ -8,7 +8,7 @@ import { UsersMock } from './user.mock';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
-export class UserComponent implements OnInit {
+export class UserComponent {
   public cadastroGroup: UntypedFormGroup;
 
   constructor(fb: FormBuilder) {
@@ -21,8 +21,6 @@ export class UserComponent implements OnInit {
       funcao: ['', Validators.required],
     });
   }
-
-  ngOnInit(): void {}
 
   onSubmit() {
     if (this.cadastroGroup.valid) {
@@ -38,8 +36,6 @@ export class UserComponent implements OnInit {
       }
 
       UsersMock.push(input);
-      console.log(UsersMock);
-      console.log(this.cadastroGroup);
     }
   }
 }
