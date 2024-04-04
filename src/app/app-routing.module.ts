@@ -7,13 +7,15 @@ import { LoginComponent } from './pages/login/login.component';
 import { UsersComponent } from './pages/users/users.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { EditProductComponent } from './pages/edit-product/edit-product.component';
+import { ProductRegisterComponent } from './pages/product-register/product-register.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'product', component: ProductComponent },
+  { path: 'product', component: ProductRegisterComponent },
+  { path: 'products', component: ProductComponent },
   { path: 'user', component: UserComponent },
   { path: 'users', component: UsersComponent },
   { path: 'edit-user/:id', component: EditUserComponent},

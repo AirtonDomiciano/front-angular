@@ -15,6 +15,7 @@ import { ProductModule } from './pages/product/product.module';
 import { UsersModule } from './pages/users/users.module';
 import { EditUserModule } from './edit-user/edit-user.module';
 import { EditProductModule } from './pages/edit-product/edit-product.module';
+import { ProductRegisterModule } from './pages/product-register/product-register.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,8 +30,9 @@ import { EditProductModule } from './pages/edit-product/edit-product.module';
     UserModule,
     ProductModule,
     EditProductModule,
+    ProductRegisterModule,
     EditUserModule,
-    UsersModule, 
+    UsersModule,
     //!REMOVER
     LoginModule,
   ],
