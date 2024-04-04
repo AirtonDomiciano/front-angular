@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { UserInterface } from './user.interface';
 import { UsersMock } from './user.mock';
+import { UserModel } from './user.model';
 
 @Component({
   selector: 'app-user',
@@ -10,7 +10,7 @@ import { UsersMock } from './user.mock';
 })
 export class UserComponent implements OnInit {
   public cadastroGroup: UntypedFormGroup;
-  
+
   constructor(fb: FormBuilder) {
     this.cadastroGroup = fb.group({
       nome: ['', Validators.required],
@@ -28,7 +28,7 @@ export class UserComponent implements OnInit {
     if (this.cadastroGroup.valid) {
       let usersLength = UsersMock.length - 1;
 
-      let input: UserInterface = this.cadastroGroup.value;
+      let input: UserModel = this.cadastroGroup.value;
 
       if (UsersMock.length < 1) {
         input.id = 1;
