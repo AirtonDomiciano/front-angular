@@ -1,6 +1,6 @@
-import { products } from "./product.interface";
+import { productsModel } from "./product.model";
 
-export const produtosMock: products[] = [
+export const produtosMock: productsModel[] = [
     { id: 1, nome: 'Computador', categoria: 'eletrônicos', preco: 2499.99, descricao: 'da pra jogar'},    
     { id: 2, nome: 'Celular', categoria: 'eletrônicos', preco: 3000.00, descricao: 'é de mexer'},    
     { id: 3, nome: 'Nintendo Switch', categoria: 'eletrônicos', preco: 2999.00, descricao: 'é de jogar'},    
