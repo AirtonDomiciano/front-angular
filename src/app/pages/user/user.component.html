@@ -30,7 +30,13 @@
         <span for="cep">CEP:</span>
       </div>
       <div>
-        <input type="text" class="input" formControlName="cep" required />
+        <input
+          type="text"
+          class="input"
+          (input)="onLoadCep($event)"
+          formControlName="cep"
+          required
+        />
       </div>
       <div class="label">
         <span for="funcao">Função:</span>

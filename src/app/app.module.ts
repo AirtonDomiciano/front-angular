@@ -39,5 +39,4 @@ import { ProductRegisterModule } from './pages/product-register/product-register
   providers: [],
   bootstrap: [AppComponent],
 })
-
 export class AppModule {}
