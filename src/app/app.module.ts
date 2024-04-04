@@ -14,6 +14,7 @@ import { LoginModule } from './pages/login/login.module';
 import { ProductModule } from './pages/product/product.module';
 import { UsersModule } from './pages/users/users.module';
 import { EditUserModule } from './edit-user/edit-user.module';
+import { EditProductModule } from './pages/edit-product/edit-product.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,9 +25,12 @@ import { EditUserModule } from './edit-user/edit-user.module';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    CoreModule, UserModule,
-    ProductModule, UsersModule, 
+    CoreModule,
+    UserModule,
+    ProductModule,
+    EditProductModule,
     EditUserModule,
+    UsersModule, 
     //!REMOVER
     LoginModule,
   ],
