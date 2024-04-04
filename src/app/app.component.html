@@ -1,9 +1,9 @@
-
+<!-- 
 <div *ngIf="!loggedIn">
   <app-login (emitterLoggedIn)="receiveEmitLoggedIn()"></app-login>
 </div>
 
-<div *ngIf="loggedIn"> -->
+<div *ngIf="loggedIn"> --> 
   <app-top-nav (emitterSignOut)="receiveEmitSignOut($event)"></app-top-nav>
   <app-side-nav
     [isExpanded]="sidebarExpanded"

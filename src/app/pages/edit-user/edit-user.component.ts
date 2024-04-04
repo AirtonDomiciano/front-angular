@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserModel } from '../pages/user/user.model';
-import { UsersMock } from '../pages/users/users.mock';
+import { UserModel } from '../user/user.model';
+import { UsersMock } from '../users/users.mock';
 
 @Component({
   selector: 'app-edit-user',
