@@ -64,6 +64,9 @@
         <div class="obrigatorio" *ngIf="!cepHaveOnlyNumbers">
           O CEP só pode conter números!
         </div>
+        <div class="obrigatorio" *ngIf="cepIsWrong">
+          O CEP precisa conter 8 números!
+        </div>
       </div>
       <div class="label">
         <span for="funcao">Função:</span>

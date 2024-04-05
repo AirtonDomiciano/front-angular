@@ -14,6 +14,7 @@ export class UserComponent {
   public cepHaveOnlyNumbers: boolean = true;
   public emailIsWrong: boolean = false;
   public ageIsWrong: boolean = false;
+  public cepIsWrong: boolean = false;
 
   constructor(fb: FormBuilder, private router: Router) {
     this.cadastroGroup = fb.group({
@@ -27,6 +28,9 @@ export class UserComponent {
   }
 
   onSubmit() {
+    this.emailIsWrong = false;
+    this.ageIsWrong = false;
+    this.cepHaveOnlyNumbers = true;
     if (this.cadastroGroup.valid) {
       const validation: boolean = this.validationSave(this.cadastroGroup.value);
       if (validation) {
@@ -52,9 +56,6 @@ export class UserComponent {
   onLoadCep(event: Event) {
     const cep = this.cadastroGroup.get('cep')?.value;
     const isValid: boolean = this.cepIsValid(cep);
-    this.emailIsWrong = false;
-    this.ageIsWrong = false;
-    this.cepHaveOnlyNumbers = true;
 
     if (isValid) {
       const formatedCep: string = this.formatedCep(cep);
@@ -100,6 +101,11 @@ export class UserComponent {
 
     if (isNaN(Number(input.cep))) {
       this.cepHaveOnlyNumbers = false;
+      validation = false;
+    }
+
+    if (input.cep.length !== 8) {
+      this.cepIsWrong = true;
       validation = false;
     }
 
