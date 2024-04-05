@@ -11,23 +11,22 @@
       </div>
       <div>
         <input type="text" class="input" formControlName="nome" required />
-        <div
-          class="obrigatorio"
-          *ngIf="productRegisterFormGroup.get('nome')?.invalid"
-        >
-          Nome é obrigatório!
-        </div>
+        <div class="obrigatorio" *ngIf="semNome">Nome é obrigatório!</div>
       </div>
       <div class="label">
         <span for="categoria">Categoria:</span>
       </div>
       <div>
-        <input type="text" class="input" formControlName="categoria" required />
-        <div
-          class="obrigatorio"
-          *ngIf="productRegisterFormGroup.get('categoria')?.invalid"
+        <select
+          class="select-categoria"
+          aria-label="Large select example"
+          formControlName="categoria"
+          required
         >
-          Categoria é obrigatório!
+          <option *ngFor="let categoria of categorias">{{ categoria }}</option>
+        </select>
+        <div class="obrigatorio" *ngIf="semCategoria">
+          Selecione uma categoria!
         </div>
       </div>
       <div class="label">
@@ -35,13 +34,7 @@
       </div>
       <div>
         <input type="number" class="input" formControlName="preco" required />
-        <div
-          class="obrigatorio"
-          *ngIf="productRegisterFormGroup.get('preco')?.invalid"
-        >
-          Preço é obrigatório!
-        </div>
-        <div class="obrigatorio" *ngIf="precoIsWrong === true">
+        <div class="obrigatorio" *ngIf="precoIsWrong">
           Adicione um preço valido!
         </div>
       </div>
@@ -50,10 +43,7 @@
       </div>
       <div>
         <input type="text" class="input" formControlName="descricao" required />
-        <div
-          class="obrigatorio"
-          *ngIf="productRegisterFormGroup.get('descricao')?.invalid"
-        >
+        <div class="obrigatorio" *ngIf="semDescricao">
           Descrição é obrigatório!
         </div>
       </div>
