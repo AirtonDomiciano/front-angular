@@ -31,14 +31,20 @@
         <div class="obrigatorio" *ngIf="cadastroGroup.get('idade')?.invalid">
           Idade é obrigatório!
         </div>
+        <div class="obrigatorio" *ngIf="ageIsWrong">
+          A Idade não pode ser negativa!
+        </div>
       </div>
       <div class="label">
-        <span for="email">Email:</span>
+        <span for="email">E-mail:</span>
       </div>
       <div>
         <input type="email" class="input" formControlName="email" required />
         <div class="obrigatorio" *ngIf="cadastroGroup.get('email')?.invalid">
-          Email é obrigatório!
+          E-mail é obrigatório!
+        </div>
+        <div class="obrigatorio" *ngIf="emailIsWrong">
+          O E-mail está incorreto!
         </div>
       </div>
       <div class="label">
@@ -54,6 +60,9 @@
         />
         <div class="obrigatorio" *ngIf="cadastroGroup.get('cep')?.invalid">
           Cep é obrigatório!
+        </div>
+        <div class="obrigatorio" *ngIf="!cepHaveOnlyNumbers">
+          O CEP só pode conter números!
         </div>
       </div>
       <div class="label">

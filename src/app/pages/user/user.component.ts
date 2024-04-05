@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserModel } from './user.model';
 import { UsersMock } from '../users/users.mock';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -10,8 +11,11 @@ import { UsersMock } from '../users/users.mock';
 })
 export class UserComponent {
   public cadastroGroup: UntypedFormGroup;
+  public cepHaveOnlyNumbers: boolean = true;
+  public emailIsWrong: boolean = false;
+  public ageIsWrong: boolean = false;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private router: Router) {
     this.cadastroGroup = fb.group({
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
@@ -24,24 +28,33 @@ export class UserComponent {
 
   onSubmit() {
     if (this.cadastroGroup.valid) {
-      let usersLength = UsersMock.length - 1;
+      const validation: boolean = this.validationSave(this.cadastroGroup.value);
+      if (validation) {
+        let usersLength = UsersMock.length - 1;
 
-      let input: UserModel = this.cadastroGroup.value;
+        let input: UserModel = this.cadastroGroup.value;
 
-      if (UsersMock.length < 1) {
-        input.id = 1;
-      } else {
-        let newId = UsersMock[usersLength].id! + 1;
-        input.id = newId;
+        if (UsersMock.length < 1) {
+          input.id = 1;
+        } else {
+          let newId = UsersMock[usersLength].id! + 1;
+          input.id = newId;
+        }
+
+        input.email = input.email.toLocaleLowerCase();
+
+        UsersMock.push(input);
+        this.router.navigate([`users`]);
       }
-
-      UsersMock.push(input);
     }
   }
 
   onLoadCep(event: Event) {
     const cep = this.cadastroGroup.get('cep')?.value;
     const isValid: boolean = this.cepIsValid(cep);
+    this.emailIsWrong = false;
+    this.ageIsWrong = false;
+    this.cepHaveOnlyNumbers = true;
 
     if (isValid) {
       const formatedCep: string = this.formatedCep(cep);
@@ -73,5 +86,27 @@ export class UserComponent {
       cep += '-';
     }
     return cep;
+  }
+
+  validationSave(input: UserModel): boolean {
+    let validation = true;
+
+    input.cep = input.cep.replace('-', '');
+
+    if (input.idade < 0) {
+      this.ageIsWrong = true;
+      validation = false;
+    }
+
+    if (isNaN(Number(input.cep))) {
+      this.cepHaveOnlyNumbers = false;
+      validation = false;
+    }
+
+    if (!input.email.includes('@')) {
+      this.emailIsWrong = true;
+      validation = false;
+    }
+    return validation;
   }
 }
