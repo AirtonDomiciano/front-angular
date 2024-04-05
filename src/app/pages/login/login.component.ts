@@ -35,7 +35,7 @@ export class LoginComponent {
         } finally {
           setTimeout(() => {
             this.wrongLogin = true;
-          }, 800);
+          }, 1000);
         }
         const res: any = await this.auth.emailSignin(email, password);
         if (res._delegate?.accessToken.length > 0) {
