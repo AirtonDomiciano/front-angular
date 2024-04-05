@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { productsModel } from '../product/product.model';
 import { produtosMock } from '../product/product.mock';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-register',
@@ -12,8 +13,8 @@ export class ProductRegisterComponent {
   public productRegisterFormGroup: UntypedFormGroup;
   public precoIsWrong: boolean = false;
 
-  constructor(fb: FormBuilder) {
-    this.productRegisterFormGroup = fb.group({
+  constructor(private fb: FormBuilder, private router: Router) {
+    this.productRegisterFormGroup = this.fb.group({
       nome: ['', Validators.required],
       categoria: ['', Validators.required],
       preco: ['', Validators.required],
@@ -36,6 +37,7 @@ export class ProductRegisterComponent {
           input.id = newId;
         }
         produtosMock.push(input);
+        this.router.navigate([`products`]);
       }
     }
   }
@@ -43,7 +45,7 @@ export class ProductRegisterComponent {
   validationSave(input: productsModel): boolean {
     let validation = true;
 
-    if (input.preco < 0) {
+    if (input.preco <= 0) {
       this.precoIsWrong = true;
       validation = false;
     }
