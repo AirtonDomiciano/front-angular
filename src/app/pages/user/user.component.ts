@@ -31,6 +31,8 @@ export class UserComponent {
     this.emailIsWrong = false;
     this.ageIsWrong = false;
     this.cepHaveOnlyNumbers = true;
+    this.cepIsWrong = false;
+
     if (this.cadastroGroup.valid) {
       const validation: boolean = this.validationSave(this.cadastroGroup.value);
       if (validation) {
