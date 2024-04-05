@@ -41,17 +41,15 @@
         >
           Preço é obrigatório!
         </div>
+        <div class="obrigatorio" *ngIf="precoIsWrong === true">
+          Preço não pode ser menor que R$0!
+        </div>
       </div>
       <div class="label">
         <span for="descricao">Descrição</span>
       </div>
       <div>
-        <input
-          type="text"
-          class="input"
-          formControlName="descricao"
-          required=""
-        />
+        <input type="text" class="input" formControlName="descricao" required />
         <div
           class="obrigatorio"
           *ngIf="productRegisterFormGroup.get('descricao')?.invalid"

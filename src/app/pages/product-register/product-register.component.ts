@@ -10,6 +10,7 @@ import { produtosMock } from '../product/product.mock';
 })
 export class ProductRegisterComponent {
   public productRegisterFormGroup: UntypedFormGroup;
+  public precoIsWrong: boolean = false;
 
   constructor(fb: FormBuilder) {
     this.productRegisterFormGroup = fb.group({
@@ -22,15 +23,31 @@ export class ProductRegisterComponent {
 
   onSubmit() {
     if (this.productRegisterFormGroup.valid) {
+      const validation: boolean = this.validationSave(
+        this.productRegisterFormGroup.value
+      );
       let input: productsModel = this.productRegisterFormGroup.value;
 
-      if (produtosMock.length < 1) {
-        input.id = 1;
-      } else {
-        let newId = produtosMock[produtosMock.length - 1].id! + 1;
-        input.id = newId;
+      if (validation) {
+        if (produtosMock.length < 1) {
+          input.id = 1;
+        } else {
+          let newId = produtosMock[produtosMock.length - 1].id! + 1;
+          input.id = newId;
+        }
+        produtosMock.push(input);
       }
-      produtosMock.push(input);
     }
+  }
+
+  validationSave(input: productsModel): boolean {
+    let validation = true;
+
+    if (input.preco < 0) {
+      this.precoIsWrong = true;
+      validation = false;
+    }
+
+    return validation;
   }
 }
