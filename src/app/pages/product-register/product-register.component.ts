@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ProductsModel } from '../product/product.model';
 import { produtosMock } from '../product/product.mock';
@@ -12,9 +12,6 @@ import { CategoriasProdutos } from './array-categorias';
 })
 export class ProductRegisterComponent {
   public productRegisterFormGroup: UntypedFormGroup;
-  public newProducts: ProductsModel[] = [];
-  @Output() emitterNewProducts: EventEmitter<ProductsModel[]> =
-    new EventEmitter<ProductsModel[]>();
   public precoIsWrong: boolean = false;
   public semCategoria: boolean = false;
   public semNome: boolean = false;
@@ -34,31 +31,29 @@ export class ProductRegisterComponent {
   onSubmit() {
     if (this.productRegisterFormGroup.valid) {
       let input: ProductsModel = this.productRegisterFormGroup.value;
-    this.precoIsWrong = false;
-    this.semCategoria = false;
-    this.semNome = false;
-    this.semDescricao = false;
-    this.semPreco = false;
-    const validation: boolean = this.validationSave(
-      this.productRegisterFormGroup.value
-    );
-    let input: productsModel = this.productRegisterFormGroup.value;
+      this.precoIsWrong = false;
+      this.semCategoria = false;
+      this.semNome = false;
+      this.semDescricao = false;
+      this.semPreco = false;
+      const validation: boolean = this.validationSave(
+        this.productRegisterFormGroup.value
+      );
 
-    if (validation) {
-      if (produtosMock.length < 1) {
-        input.id = 1;
-      } else {
-        let newId = produtosMock[produtosMock.length - 1].id! + 1;
-        input.id = newId;
+      if (validation) {
+        if (produtosMock.length < 1) {
+          input.id = 1;
+        } else {
+          let newId = produtosMock[produtosMock.length - 1].id! + 1;
+          input.id = newId;
+        }
+        produtosMock.push(input);
+        this.router.navigate([`products`]);
       }
-      produtosMock.push(input);
-      this.newProducts.push(input);
-      this.emitterNewProducts.emit(this.newProducts);
-      this.router.navigate([`products`]);    
     }
   }
 
-  validationSave(input: productsModel): boolean {
+  validationSave(input: ProductsModel): boolean {
     let validation = true;
 
     if (input.categoria === 'Opções') {

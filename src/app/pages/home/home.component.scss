@@ -1,17 +1,16 @@
-.container{
-    background-color: rgb(90, 72, 104);
-    margin-top: 40px;
-    margin-left: 5px;
-    margin-right: 40px;
-    height: auto;  
-      
+.container {
+  margin-top: 40px;
+  margin-left: 5px;
+  margin-right: 40px;
+  height: auto;
+  display: flex;
+  align-items: center;
 }
 
-.card{
-    background: #1d1e2c;
-    vertical-align: top;
-    border-radius: 5px;
-    color: #6d6e7e;
-    font-size: 40px;   
+.card {
+  background: #1d1e2c;
+  vertical-align: top;
+  border-radius: 5px;
+  color: #6d6e7e;
+  font-size: 40px;
 }
-
