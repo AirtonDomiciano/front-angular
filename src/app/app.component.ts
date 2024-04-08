@@ -9,7 +9,6 @@ import { ProductsModel } from './pages/product/product.model';
 export class AppComponent {
   public sidebarExpanded = true;
   public loggedIn = false;
-  public novosProdutos: ProductsModel[] = [];
 
   receiveEmitLoggedIn() {
     this.loggedIn = true;
@@ -17,10 +16,5 @@ export class AppComponent {
 
   receiveEmitSignOut(answear: boolean) {
     this.loggedIn = answear;
-  }
-
-  receiveProducts(input: ProductsModel[]) {
-    this.novosProdutos = input;
-    console.log(input);
   }
 }
