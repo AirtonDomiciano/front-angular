@@ -7,19 +7,14 @@
       </div>
       <div>
         <input type="text" class="input" formControlName="nome" required />
-        <div class="obrigatorio" *ngIf="cadastroGroup.get('nome')?.invalid">
-          Nome é obrigatório!
-        </div>
+        <div class="obrigatorio" *ngIf="semNome">Nome é obrigatório!</div>
       </div>
       <div class="label">
         <span for="sobrenome">Sobrenome:</span>
       </div>
       <div>
         <input type="text" class="input" formControlName="sobrenome" required />
-        <div
-          class="obrigatorio"
-          *ngIf="cadastroGroup.get('sobrenome')?.invalid"
-        >
+        <div class="obrigatorio" *ngIf="semSobrenome">
           Sobrenome é obrigatório!
         </div>
       </div>
@@ -28,9 +23,7 @@
       </div>
       <div>
         <input type="number" class="input" formControlName="idade" required />
-        <div class="obrigatorio" *ngIf="cadastroGroup.get('idade')?.invalid">
-          Idade é obrigatório!
-        </div>
+        <div class="obrigatorio" *ngIf="semIdade">Idade é obrigatório!</div>
         <div class="obrigatorio" *ngIf="ageIsWrong">
           A Idade não pode ser negativa!
         </div>
@@ -40,9 +33,6 @@
       </div>
       <div>
         <input type="email" class="input" formControlName="email" required />
-        <div class="obrigatorio" *ngIf="cadastroGroup.get('email')?.invalid">
-          E-mail é obrigatório!
-        </div>
         <div class="obrigatorio" *ngIf="emailIsWrong">
           O E-mail está incorreto!
         </div>
@@ -58,9 +48,6 @@
           formControlName="cep"
           required
         />
-        <div class="obrigatorio" *ngIf="cadastroGroup.get('cep')?.invalid">
-          Cep é obrigatório!
-        </div>
         <div class="obrigatorio" *ngIf="!cepHaveOnlyNumbers">
           O CEP só pode conter números!
         </div>
@@ -73,9 +60,7 @@
       </div>
       <div>
         <input type="text" class="input" formControlName="funcao" required />
-        <div class="obrigatorio" *ngIf="cadastroGroup.get('funcao')?.invalid">
-          Função é obrigatório!
-        </div>
+        <div class="obrigatorio" *ngIf="semFuncao">Função é obrigatório!</div>
       </div>
       <div>
         <button class="botao" type="submit">Enviar</button>

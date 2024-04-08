@@ -15,6 +15,12 @@ export class UserComponent {
   public emailIsWrong: boolean = false;
   public ageIsWrong: boolean = false;
   public cepIsWrong: boolean = false;
+  public semNome: boolean = false;
+  public semSobrenome: boolean = false;
+  public semIdade: boolean = false;
+  public semEmail: boolean = false;
+  public semCep: boolean = false;
+  public semFuncao: boolean = false;
 
   constructor(fb: FormBuilder, private router: Router) {
     this.cadastroGroup = fb.group({
@@ -32,28 +38,34 @@ export class UserComponent {
     this.ageIsWrong = false;
     this.cepHaveOnlyNumbers = true;
     this.cepIsWrong = false;
+    this.semNome = false;
+    this.semSobrenome = false;
+    this.semIdade = false;
+    this.semEmail = false;
+    this.semCep = false;
+    this.semFuncao = false;
 
-    if (this.cadastroGroup.valid) {
-      const validation: boolean = this.validationSave(this.cadastroGroup.value);
-      if (validation) {
-        let usersLength = UsersMock.length - 1;
+    // if (this.cadastroGroup.valid) {
+    const validation: boolean = this.validationSave(this.cadastroGroup.value);
+    if (validation) {
+      let usersLength = UsersMock.length - 1;
 
-        let input: UserModel = this.cadastroGroup.value;
+      let input: UserModel = this.cadastroGroup.value;
 
-        if (UsersMock.length < 1) {
-          input.id = 1;
-        } else {
-          let newId = UsersMock[usersLength].id! + 1;
-          input.id = newId;
-        }
-
-        input.email = input.email.toLocaleLowerCase();
-
-        UsersMock.push(input);
-        this.router.navigate([`users`]);
+      if (UsersMock.length < 1) {
+        input.id = 1;
+      } else {
+        let newId = UsersMock[usersLength].id! + 1;
+        input.id = newId;
       }
+
+      input.email = input.email.toLocaleLowerCase();
+
+      UsersMock.push(input);
+      this.router.navigate([`users`]);
     }
   }
+  // }
 
   onLoadCep(event: Event) {
     const cep = this.cadastroGroup.get('cep')?.value;
@@ -95,6 +107,36 @@ export class UserComponent {
     let validation = true;
 
     input.cep = input.cep.replace('-', '');
+
+    if (input.nome === '') {
+      this.semNome = true;
+      validation = false;
+    }
+
+    if (input.sobrenome === '') {
+      this.semSobrenome = true;
+      validation = false;
+    }
+
+    if (!input.idade) {
+      this.semIdade = true;
+      validation = false;
+    }
+
+    if (input.email === '') {
+      this.semEmail = true;
+      validation = false;
+    }
+
+    if (input.cep === '') {
+      this.semCep = true;
+      validation = false;
+    }
+
+    if (input.funcao === '') {
+      this.semFuncao = true;
+      validation = false;
+    }
 
     if (input.idade < 0) {
       this.ageIsWrong = true;
