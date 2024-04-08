@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { productsModel } from './product.model';
+import { ProductsModel } from './product.model';
 import { produtosMock } from './product.mock';
 import { Router } from '@angular/router';
 
@@ -9,11 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  public listagemProdutos: productsModel[] = [];
+  public listagemProdutos: ProductsModel[] = [];
 
-  constructor(private router: Router) {
-
-  }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.listagemProdutos = produtosMock;
@@ -21,7 +19,7 @@ export class ProductComponent implements OnInit {
 
   editarProduto(id: number) {
     this.router.navigate([`edit-product/${id}`]);
-    console.log(id)
+    console.log(id);
   }
 
   excluirProduto(id: number) {

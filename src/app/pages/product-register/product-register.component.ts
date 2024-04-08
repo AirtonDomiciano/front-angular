@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { productsModel } from '../product/product.model';
+import { ProductsModel } from '../product/product.model';
 import { produtosMock } from '../product/product.mock';
 
 @Component({
@@ -10,6 +10,10 @@ import { produtosMock } from '../product/product.mock';
 })
 export class ProductRegisterComponent {
   public productRegisterFormGroup: UntypedFormGroup;
+  public newProducts: ProductsModel[] = [];
+
+  @Output() emitterNewProducts: EventEmitter<ProductsModel[]> =
+    new EventEmitter<ProductsModel[]>();
 
   constructor(fb: FormBuilder) {
     this.productRegisterFormGroup = fb.group({
@@ -22,7 +26,7 @@ export class ProductRegisterComponent {
 
   onSubmit() {
     if (this.productRegisterFormGroup.valid) {
-      let input: productsModel = this.productRegisterFormGroup.value;
+      let input: ProductsModel = this.productRegisterFormGroup.value;
 
       if (produtosMock.length < 1) {
         input.id = 1;
@@ -31,6 +35,8 @@ export class ProductRegisterComponent {
         input.id = newId;
       }
       produtosMock.push(input);
+      this.newProducts.push(input);
+      this.emitterNewProducts.emit(this.newProducts);
     }
   }
 }
