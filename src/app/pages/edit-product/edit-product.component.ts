@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntypedFormGroup, FormBuilder } from '@angular/forms';
-import { productsModel } from '../product/product.model';
+import { ProductsModel } from '../product/product.model';
 import { produtosMock } from '../product/product.mock';
 import { Validators } from '@angular/forms';
 
@@ -13,8 +13,8 @@ import { Validators } from '@angular/forms';
 export class EditProductComponent implements OnInit {
   public productFormGroup: UntypedFormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
-  public model: productsModel;
-  public product = new productsModel();
+  public model: ProductsModel;
+  public product = new ProductsModel();
 
   public index = produtosMock.findIndex((el) => el.id === this.id);
 
@@ -44,7 +44,7 @@ export class EditProductComponent implements OnInit {
 
   onSubmit() {
     if (this.productFormGroup.valid) {
-      let input: productsModel = this.productFormGroup.value;
+      let input: ProductsModel = this.productFormGroup.value;
 
       produtosMock[this.index] = input;
       this.router.navigate([`products`]);

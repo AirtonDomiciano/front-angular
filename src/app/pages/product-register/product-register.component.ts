@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { productsModel } from '../product/product.model';
+import { ProductsModel } from '../product/product.model';
 import { produtosMock } from '../product/product.mock';
 import { Router } from '@angular/router';
 import { CategoriasProdutos } from './array-categorias';
@@ -12,6 +12,9 @@ import { CategoriasProdutos } from './array-categorias';
 })
 export class ProductRegisterComponent {
   public productRegisterFormGroup: UntypedFormGroup;
+  public newProducts: ProductsModel[] = [];
+  @Output() emitterNewProducts: EventEmitter<ProductsModel[]> =
+    new EventEmitter<ProductsModel[]>();
   public precoIsWrong: boolean = false;
   public semCategoria: boolean = false;
   public semNome: boolean = false;
@@ -29,6 +32,8 @@ export class ProductRegisterComponent {
   }
 
   onSubmit() {
+    if (this.productRegisterFormGroup.valid) {
+      let input: ProductsModel = this.productRegisterFormGroup.value;
     this.precoIsWrong = false;
     this.semCategoria = false;
     this.semNome = false;
@@ -47,7 +52,9 @@ export class ProductRegisterComponent {
         input.id = newId;
       }
       produtosMock.push(input);
-      this.router.navigate([`products`]);
+      this.newProducts.push(input);
+      this.emitterNewProducts.emit(this.newProducts);
+      this.router.navigate([`products`]);    
     }
   }
 
