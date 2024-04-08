@@ -2,6 +2,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ProductsModel } from '../product/product.model';
 import { produtosMock } from '../product/product.mock';
+import { Router } from '@angular/router';
+import { CategoriasProdutos } from './array-categorias';
 
 @Component({
   selector: 'app-product-register',
@@ -11,14 +13,19 @@ import { produtosMock } from '../product/product.mock';
 export class ProductRegisterComponent {
   public productRegisterFormGroup: UntypedFormGroup;
   public newProducts: ProductsModel[] = [];
-
   @Output() emitterNewProducts: EventEmitter<ProductsModel[]> =
     new EventEmitter<ProductsModel[]>();
+  public precoIsWrong: boolean = false;
+  public semCategoria: boolean = false;
+  public semNome: boolean = false;
+  public semDescricao: boolean = false;
+  public semPreco: boolean = false;
+  public categorias = CategoriasProdutos;
 
-  constructor(fb: FormBuilder) {
-    this.productRegisterFormGroup = fb.group({
+  constructor(private fb: FormBuilder, private router: Router) {
+    this.productRegisterFormGroup = this.fb.group({
       nome: ['', Validators.required],
-      categoria: ['', Validators.required],
+      categoria: ['Opções', Validators.required],
       preco: ['', Validators.required],
       descricao: ['', Validators.required],
     });
@@ -27,7 +34,17 @@ export class ProductRegisterComponent {
   onSubmit() {
     if (this.productRegisterFormGroup.valid) {
       let input: ProductsModel = this.productRegisterFormGroup.value;
+    this.precoIsWrong = false;
+    this.semCategoria = false;
+    this.semNome = false;
+    this.semDescricao = false;
+    this.semPreco = false;
+    const validation: boolean = this.validationSave(
+      this.productRegisterFormGroup.value
+    );
+    let input: productsModel = this.productRegisterFormGroup.value;
 
+    if (validation) {
       if (produtosMock.length < 1) {
         input.id = 1;
       } else {
@@ -37,6 +54,38 @@ export class ProductRegisterComponent {
       produtosMock.push(input);
       this.newProducts.push(input);
       this.emitterNewProducts.emit(this.newProducts);
+      this.router.navigate([`products`]);    
     }
+  }
+
+  validationSave(input: productsModel): boolean {
+    let validation = true;
+
+    if (input.categoria === 'Opções') {
+      this.semCategoria = true;
+      validation = false;
+    }
+
+    if (input.preco <= 0) {
+      this.precoIsWrong = true;
+      validation = false;
+    }
+
+    if (input.nome.length === 0) {
+      this.semNome = true;
+      validation = false;
+    }
+
+    if (input.preco === undefined) {
+      this.semPreco = true;
+      validation = false;
+    }
+
+    if (input.descricao.length === 0) {
+      this.semDescricao = true;
+      validation = false;
+    }
+
+    return validation;
   }
 }

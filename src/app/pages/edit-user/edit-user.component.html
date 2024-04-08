@@ -6,16 +6,16 @@
         <span for="">Nome:</span>
       </div>
       <div>
-        <input type="text" class="input" formControlName = "nome" required/>
+        <input type="text" class="input" formControlName="nome" required />
       </div>
       <div *ngIf="userFormGroup.get('nome')?.invalid" class="required">
         <p>O nome é obrigatório</p>
       </div>
       <div class="label">
         <span for="categoria">Sobrenome:</span>
-      </div>      
+      </div>
       <div>
-        <input type="text" class="input" formControlName = "sobrenome" required/>
+        <input type="text" class="input" formControlName="sobrenome" required />
       </div>
       <div *ngIf="userFormGroup.get('sobrenome')?.invalid" class="required">
         <p>O sobrenome é obrigatório</p>
@@ -24,36 +24,50 @@
         <span for="preco">Idade:</span>
       </div>
       <div>
-        <input type="number" class="input" formControlName = "idade" required/>
+        <input type="number" class="input" formControlName="idade" required />
       </div>
       <div *ngIf="userFormGroup.get('idade')?.invalid" class="required">
         <p>A idade é obrigatória</p>
+      </div>
+      <div class="required" *ngIf="ageIsWrong">
+        A Idade não pode ser negativa!
       </div>
       <div class="label">
         <span for="descricao">Email</span>
       </div>
       <div>
-        <input type="text" class="input" formControlName = "email" required/>
+        <input type="text" class="input" formControlName="email" required />
       </div>
       <div *ngIf="userFormGroup.get('email')?.invalid" class="required">
         <p>O email é obrigatório</p>
       </div>
+      <div class="required" *ngIf="emailIsWrong">O E-mail está incorreto!</div>
       <div class="label">
-        <span for="descricao">CEP:</span>
+        <span for="cep">CEP:</span>
       </div>
-      <div>
-        <input type="text" class="input" formControlName = "cep" required/>
+      <input
+        type="text"
+        class="input"
+        (input)="onLoadCep($event)"
+        formControlName="cep"
+        required
+      />
+      <div class="required" *ngIf="userFormGroup.get('cep')?.invalid">
+        Cep é obrigatório!
       </div>
-      <div *ngIf="userFormGroup.get('cep')?.invalid" class="required">
-        <p>O CEP é obrigatório</p>
+      <div class="required" *ngIf="!cepHaveOnlyNumbers">
+        O CEP só pode conter números!
+      </div>
+      <div class="required" *ngIf="cepIsWrong">
+        O CEP precisa conter 8 números!
       </div>
       <div class="label">
         <span for="descricao">Função:</span>
       </div>
       <div>
-        <input type="text" class="input" formControlName = "funcao" required/>
+        <input type="text" class="input" formControlName="funcao" required />
       </div>
-      <div *ngIf="userFormGroup.get('funcao')?.invalid"  class="required">
+      <div *ngIf="userFormGroup.get('funcao')?.invalid" class="required">
         <p>A Função é obrigatória</p>
       </div>
       <div>

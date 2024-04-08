@@ -47,7 +47,7 @@ export class EditProductComponent implements OnInit {
       let input: ProductsModel = this.productFormGroup.value;
 
       produtosMock[this.index] = input;
-      this.router.navigate([`product`]);
+      this.router.navigate([`products`]);
     }
   }
 }

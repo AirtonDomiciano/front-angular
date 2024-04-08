@@ -30,8 +30,13 @@ export class LoginComponent {
       console.log(this.loginForm.value);
       const { email, password } = this.loginForm.value;
       if (email?.length && password?.length) {
-        this.wrongLogin = true;
-        this.LocalStorageService.saveLogin(email, password);
+        try {
+          this.LocalStorageService.saveLogin(email, password);
+        } finally {
+          setTimeout(() => {
+            this.wrongLogin = true;
+          }, 1000);
+        }
         const res: any = await this.auth.emailSignin(email, password);
         if (res._delegate?.accessToken.length > 0) {
           this.wrongLogin = false;
