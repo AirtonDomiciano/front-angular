@@ -18,6 +18,7 @@ export class ProductRegisterComponent {
   public semNome: boolean = false;
   public semDescricao: boolean = false;
   public semPreco: boolean = false;
+  public semImagem: boolean = false;
   public categorias = CategoriasProdutos;
 
   constructor(private fb: FormBuilder, private router: Router) {
@@ -26,30 +27,30 @@ export class ProductRegisterComponent {
       categoria: ['Opções', Validators.required],
       preco: ['', Validators.required],
       descricao: ['', Validators.required],
+      imagem: ['', Validators.required],
     });
   }
 
   onSubmit() {
-    if (this.productRegisterFormGroup.valid) {
-      let input: ProductsModel = this.productRegisterFormGroup.value;
-      this.precoIsWrong = false;
-      this.semCategoria = false;
-      this.semNome = false;
-      this.semDescricao = false;
-      this.semPreco = false;
-      const validation: boolean = this.validationSave(
-        this.productRegisterFormGroup.value
-      );
-      if (validation) {
-        if (produtosMock.length < 1) {
-          input.id = 1;
-        } else {
-          let newId = produtosMock[produtosMock.length - 1].id! + 1;
-          input.id = newId;
-        }
-        produtosMock.push(input);
-        this.router.navigate([`products`]);
+    let input: ProductsModel = this.productRegisterFormGroup.value;
+    this.precoIsWrong = false;
+    this.semCategoria = false;
+    this.semNome = false;
+    this.semDescricao = false;
+    this.semPreco = false;
+    this.semImagem = false;
+    const validation: boolean = this.validationSave(
+      this.productRegisterFormGroup.value
+    );
+    if (validation) {
+      if (produtosMock.length < 1) {
+        input.id = 1;
+      } else {
+        let newId = produtosMock[produtosMock.length - 1].id! + 1;
+        input.id = newId;
       }
+      produtosMock.push(input);
+      this.router.navigate([`products`]);
     }
   }
 
@@ -78,6 +79,11 @@ export class ProductRegisterComponent {
 
     if (input.descricao.length === 0) {
       this.semDescricao = true;
+      validation = false;
+    }
+
+    if (input.imagem.length === 0) {
+      this.semImagem = true;
       validation = false;
     }
 

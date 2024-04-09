@@ -1,1 +1,16 @@
-<p>catalogo works!</p>
+<div class="container">
+  <ng-container *ngFor="let produto of produtos">
+    <div class="card">
+      <div class="img">
+        <img src="{{ produto.imagem }}" />
+      </div>
+      <div class="nome">
+        {{ produto.nome }}
+      </div>
+      <div class="preco">R${{ produto.preco }}</div>
+      <button type="button" class="btn btn-success">
+        Adicionar ao carrinho
+      </button>
+    </div>
+  </ng-container>
+</div>

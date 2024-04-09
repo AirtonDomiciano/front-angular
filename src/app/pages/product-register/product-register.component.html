@@ -47,6 +47,15 @@
           Descrição é obrigatório!
         </div>
       </div>
+      <div class="label">
+        <span for="imagem">Imagem:</span>
+      </div>
+      <div>
+        <input type="text" class="input" formControlName="imagem" required />
+        <div class="obrigatorio" *ngIf="semImagem">
+          Coloque a URL de uma imagem!
+        </div>
+      </div>
       <div>
         <button class="botao" type="submit">Enviar</button>
       </div>
