@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ProductsModel } from '../product/product.model';
 import { produtosMock } from '../product/product.mock';
@@ -12,6 +12,7 @@ import { CategoriasProdutos } from './array-categorias';
 })
 export class ProductRegisterComponent {
   public productRegisterFormGroup: UntypedFormGroup;
+  public newProducts: ProductsModel[] = [];
   public precoIsWrong: boolean = false;
   public semCategoria: boolean = false;
   public semNome: boolean = false;
@@ -39,7 +40,6 @@ export class ProductRegisterComponent {
       const validation: boolean = this.validationSave(
         this.productRegisterFormGroup.value
       );
-
       if (validation) {
         if (produtosMock.length < 1) {
           input.id = 1;
