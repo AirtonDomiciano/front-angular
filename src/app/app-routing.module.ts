@@ -8,6 +8,7 @@ import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { EditProductComponent } from './pages/edit-product/edit-product.component';
 import { ProductRegisterComponent } from './pages/product-register/product-register.component';
 import { HomeComponent } from './pages/home/home.component';
+import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'edit-product/:id', component: EditProductComponent },
+  { path: 'catalog', component: CatalogoComponent },
 ];
 
 @NgModule({

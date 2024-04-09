@@ -17,6 +17,7 @@ import { EditUserModule } from './pages/edit-user/edit-user.module';
 import { EditProductModule } from './pages/edit-product/edit-product.module';
 import { ProductRegisterModule } from './pages/product-register/product-register.module';
 import { HomeModule } from './pages/home/home.module';
+import { CatalogoModule } from './pages/catalogo/catalogo.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { HomeModule } from './pages/home/home.module';
     EditUserModule,
     UsersModule,
     HomeModule,
+    CatalogoModule,
     //!REMOVER
     LoginModule,
   ],
