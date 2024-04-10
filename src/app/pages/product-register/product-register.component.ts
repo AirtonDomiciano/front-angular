@@ -57,7 +57,7 @@ export class ProductRegisterComponent {
         let newCategoria: string;
         newCategoria = input.categoria.charAt(0).toUpperCase();
         newCategoria += input.categoria.slice(1);
-        this.categorias.push(newCategoria);
+        CategoriasProdutos.push(newCategoria);
       }
       produtosMock.push(input);
       this.router.navigate([`products`]);

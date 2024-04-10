@@ -4,6 +4,7 @@ import { UntypedFormGroup, FormBuilder } from '@angular/forms';
 import { ProductsModel } from '../product/product.model';
 import { produtosMock } from '../product/product.mock';
 import { Validators } from '@angular/forms';
+import { CategoriasProdutos } from '../product-register/array-categorias';
 
 @Component({
   selector: 'app-edit-product',
@@ -15,6 +16,7 @@ export class EditProductComponent implements OnInit {
   public id = Number(this.route.snapshot.paramMap.get('id'));
   public model: ProductsModel;
   public product = new ProductsModel();
+  public categorias = CategoriasProdutos;
 
   public index = produtosMock.findIndex((el) => el.id === this.id);
 
