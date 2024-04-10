@@ -18,6 +18,8 @@ import { EditProductModule } from './pages/edit-product/edit-product.module';
 import { ProductRegisterModule } from './pages/product-register/product-register.module';
 import { HomeModule } from './pages/home/home.module';
 import { CatalogoModule } from './pages/catalogo/catalogo.module';
+import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
+import { CarrinhoModule } from './pages/carrinho/carrinho.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +39,7 @@ import { CatalogoModule } from './pages/catalogo/catalogo.module';
     UsersModule,
     HomeModule,
     CatalogoModule,
+    CarrinhoModule,
     //!REMOVER
     LoginModule,
   ],
