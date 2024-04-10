@@ -17,14 +17,15 @@
         <span for="categoria">Categoria:</span>
       </div>
       <div>
-        <select
-          class="select-categoria"
-          aria-label="Large select example"
+        <input
+          class="categoria"
+          list="categorias"
           formControlName="categoria"
           required
-        >
+        />
+        <datalist id="categorias" formControlName="categoria" required>
           <option *ngFor="let categoria of categorias">{{ categoria }}</option>
-        </select>
+        </datalist>
         <div class="obrigatorio" *ngIf="semCategoria">
           Selecione uma categoria!
         </div>

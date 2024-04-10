@@ -24,7 +24,7 @@ export class ProductRegisterComponent {
   constructor(private fb: FormBuilder, private router: Router) {
     this.productRegisterFormGroup = this.fb.group({
       nome: ['', Validators.required],
-      categoria: ['Opções', Validators.required],
+      categoria: ['', Validators.required],
       preco: ['', Validators.required],
       descricao: ['', Validators.required],
       imagem: ['', Validators.required],
@@ -49,6 +49,16 @@ export class ProductRegisterComponent {
         let newId = produtosMock[produtosMock.length - 1].id! + 1;
         input.id = newId;
       }
+      let indexCategoria = this.categorias.findIndex(
+        (el) => el === input.categoria
+      );
+
+      if (indexCategoria === -1) {
+        let newCategoria: string;
+        newCategoria = input.categoria.charAt(0).toUpperCase();
+        newCategoria += input.categoria.slice(1);
+        this.categorias.push(newCategoria);
+      }
       produtosMock.push(input);
       this.router.navigate([`products`]);
     }
@@ -57,7 +67,7 @@ export class ProductRegisterComponent {
   validationSave(input: ProductsModel): boolean {
     let validation = true;
 
-    if (input.categoria === 'Opções') {
+    if (input.categoria === '') {
       this.semCategoria = true;
       validation = false;
     }
