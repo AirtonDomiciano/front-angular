@@ -9,6 +9,7 @@ import { EditProductComponent } from './pages/edit-product/edit-product.componen
 import { ProductRegisterComponent } from './pages/product-register/product-register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CatalogoComponent } from './pages/catalogo/catalogo.component';
+import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'edit-user/:id', component: EditUserComponent },
   { path: 'edit-product/:id', component: EditProductComponent },
   { path: 'catalog', component: CatalogoComponent },
+  { path: 'cart', component: CarrinhoComponent },
 ];
 
 @NgModule({

@@ -19,7 +19,6 @@ export class ProductComponent implements OnInit {
 
   editarProduto(id: number) {
     this.router.navigate([`edit-product/${id}`]);
-    console.log(id);
   }
 
   excluirProduto(id: number) {
