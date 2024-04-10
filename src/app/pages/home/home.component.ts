@@ -12,6 +12,10 @@ export class HomeComponent implements OnInit {
   public length: number = produtosMock.length;
 
   ngOnInit(): void {
+    this.produtosRecentes();
+  }
+
+  produtosRecentes() {
     this.newProducts = produtosMock.slice(this.length - 5, this.length);
     this.newProducts.reverse();
   }
