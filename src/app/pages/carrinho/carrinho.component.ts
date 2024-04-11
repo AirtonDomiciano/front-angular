@@ -47,6 +47,8 @@ export class CarrinhoComponent implements OnInit {
     }
 
     this.precoTotal = precoTotal;
+    let precoArredondado = this.precoTotal.toFixed(2);
+    this.precoTotal = Number(precoArredondado);
   }
 
   calcularPrecoQtd(id?: number) {
@@ -72,6 +74,8 @@ export class CarrinhoComponent implements OnInit {
     this.lastId = id!;
 
     this.precoTotal = precoTotal;
+    let precoArredondado = this.precoTotal.toFixed(2);
+    this.precoTotal = Number(precoArredondado);
   }
 
   zerarQtds() {
@@ -89,6 +93,11 @@ export class CarrinhoComponent implements OnInit {
       this.produtosCarrinho[index].preco * this.produtosCarrinho[index].qtd!;
 
     this.precoTotal -= valorProduto;
+    let precoArredondado = this.precoTotal.toFixed(2);
+    this.precoTotal = Number(precoArredondado);
+    if (this.produtosCarrinho.length === 1) {
+      this.precoTotal = 0;
+    }
   }
 
   comprarProduto() {
