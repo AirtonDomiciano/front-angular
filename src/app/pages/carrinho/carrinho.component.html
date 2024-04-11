@@ -1,4 +1,4 @@
-<div class="shopping-cart">
+<div class="shopping-cart" *ngIf="temProdutos">
   <h1>Carrinho</h1>
   <div class="column-labels">
     <label class="product-image">Image</label>
@@ -54,4 +54,10 @@
   <h2 class="valor-total">Total: ${{ precoTotal }}</h2>
 
   <button class="checkout" (click)="comprarProduto()">Checkout</button>
+</div>
+
+<div class="container" *ngIf="!temProdutos">
+  <h1>Não há nada por aqui ainda ...</h1>
+  <p>Vamos adicionar itens ao carrinho?</p>
+  <a [routerLink]="['/catalog']" class="btn">Ir ao catálogo</a>
 </div>

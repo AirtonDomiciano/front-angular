@@ -17,6 +17,7 @@ export class CarrinhoComponent implements OnInit {
   public lastQtd: number = 0;
   public lastId: number = 0;
   public contQtdIsFull: number = 0;
+  public temProdutos = false;
 
   constructor(fb: FormBuilder, private router: Router) {
     this.qtdFormGroup = fb.group({
@@ -31,6 +32,11 @@ export class CarrinhoComponent implements OnInit {
     this.lastId = 0;
     this.contQtdIsFull = 0;
     this.zerarQtds();
+    if (this.produtosCarrinho.length === 0) {
+      this.temProdutos = false;
+    } else {
+      this.temProdutos = true;
+    }
   }
 
   removerProdutoCarrinho(id: number) {
@@ -97,6 +103,7 @@ export class CarrinhoComponent implements OnInit {
     this.precoTotal = Number(precoArredondado);
     if (this.produtosCarrinho.length === 1) {
       this.precoTotal = 0;
+      this.temProdutos = false;
     }
   }
 
