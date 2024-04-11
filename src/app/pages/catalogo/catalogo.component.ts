@@ -10,9 +10,10 @@ import { produtosCarrinhoMock } from '../carrinho/carrinho.mock';
 })
 export class CatalogoComponent implements OnInit {
   public produtos: ProductsModel[] = [];
-
+  public produtosCarrinho: ProductsModel[] = [];
   ngOnInit(): void {
     this.produtos = produtosMock;
+    this.produtosCarrinho = produtosCarrinhoMock;
   }
 
   adicionarProdutoNoCarrinho(id: number) {
