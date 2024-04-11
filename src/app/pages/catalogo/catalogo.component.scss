@@ -47,3 +47,53 @@ button:hover {
 button:active {
   background-color: #2cc34a;
 }
+
+.custom-select {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 3px;
+
+  overflow: hidden;
+  position: relative;
+}
+.custom-select,
+.custom-select select {
+  width: 240px;
+}
+select:focus {
+  outline: none;
+}
+.custom-select select {
+  height: 34px;
+  padding: 5px 0 5px 5px;
+  background: transparent;
+  border: none;
+}
+
+@-moz-document url-prefix() {
+  .custom-select select {
+    width: 110%;
+  }
+}
+
+.fa-sort-desc {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  font-size: 24px;
+}
+
+select::-ms-expand {
+  display: none;
+}
+_:-o-prefocus,
+.selector {
+  .custom-select {
+    background: none;
+  }
+}
+
+.input-group {
+  margin-top: 75px;
+  margin-left: 135px;
+}

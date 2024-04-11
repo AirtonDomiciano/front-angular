@@ -4,7 +4,7 @@ export const produtosMock: ProductsModel[] = [
   {
     id: 1,
     nome: 'PC Gamer',
-    categoria: 'eletrônicos',
+    categoria: 'Eletrônicos',
     preco: 2499.99,
     descricao: 'da pra jogar',
     imagem:
@@ -13,7 +13,7 @@ export const produtosMock: ProductsModel[] = [
   {
     id: 2,
     nome: 'Samsung S23 FE',
-    categoria: 'eletrônicos',
+    categoria: 'Eletrônicos',
     preco: 3000.0,
     descricao: 'é de mexer',
     imagem:
@@ -22,7 +22,7 @@ export const produtosMock: ProductsModel[] = [
   {
     id: 3,
     nome: 'Nintendo Switch',
-    categoria: 'eletrônicos',
+    categoria: 'Eletrônicos',
     preco: 2999.0,
     descricao: 'é de jogar',
     imagem:
@@ -31,7 +31,7 @@ export const produtosMock: ProductsModel[] = [
   {
     id: 4,
     nome: 'Geladeira Consul 451 L',
-    categoria: 'eletrodoméstico',
+    categoria: 'Eletrodomésticos',
     preco: 2999.99,
     descricao: 'A melhor do mercado para armazenar o seu produto',
     imagem:
@@ -40,7 +40,7 @@ export const produtosMock: ProductsModel[] = [
   {
     id: 5,
     nome: 'Fogão Itamaster',
-    categoria: 'eletrodoméstico',
+    categoria: 'Eletrodoméstico',
     preco: 2499.99,
     descricao: 'Tecnologia de  ultima geração e anti óleo',
     imagem:
@@ -49,7 +49,7 @@ export const produtosMock: ProductsModel[] = [
   {
     id: 6,
     nome: 'Coxinha de Frango com Catupiry',
-    categoria: 'comida',
+    categoria: 'Comida',
     preco: 8.0,
     descricao: 'vem com catupiry',
     imagem:
@@ -58,7 +58,7 @@ export const produtosMock: ProductsModel[] = [
   {
     id: 7,
     nome: 'Long Neck Antártica',
-    categoria: 'bebida',
+    categoria: 'Bebida',
     preco: 9.0,
     descricao: 'tem maispersonalidade que coca-cola',
     imagem:
