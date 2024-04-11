@@ -10,6 +10,7 @@ import { ProductRegisterComponent } from './pages/product-register/product-regis
 import { HomeComponent } from './pages/home/home.component';
 import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
+import { ShoppingComponent } from './pages/shopping/shopping.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'edit-product/:id', component: EditProductComponent },
   { path: 'catalog', component: CatalogoComponent },
   { path: 'cart', component: CarrinhoComponent },
+  { path: 'shopping', component: ShoppingComponent },
 ];
 
 @NgModule({

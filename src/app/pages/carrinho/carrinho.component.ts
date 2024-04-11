@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { produtosCarrinhoMock } from './carrinho.mock';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ProductsCarrinhoInterface } from './carrinho.interface';
+import { ShoppingMock } from '../shopping/shopping.mock';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrinho',
@@ -16,7 +18,7 @@ export class CarrinhoComponent implements OnInit {
   public lastId: number = 0;
   public contQtdIsFull: number = 0;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private router: Router) {
     this.qtdFormGroup = fb.group({
       qtd: [1, Validators.required],
     });
@@ -87,5 +89,13 @@ export class CarrinhoComponent implements OnInit {
       this.produtosCarrinho[index].preco * this.produtosCarrinho[index].qtd!;
 
     this.precoTotal -= valorProduto;
+  }
+
+  comprarProduto() {
+    for (var i = 0; i < this.produtosCarrinho.length; i++) {
+      ShoppingMock.push(this.produtosCarrinho[i]);
+    }
+    produtosCarrinhoMock.splice(0, produtosCarrinhoMock.length);
+    this.router.navigate(['/shopping']);
   }
 }
