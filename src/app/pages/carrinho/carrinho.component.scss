@@ -169,10 +169,15 @@ label {
   color: #fff;
   font-size: 25px;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .checkout:hover {
   background-color: #494;
+}
+
+.checkout:active {
+  background-color: rgb(37, 100, 37);
 }
 
 /* Make adjustments for tablet */
