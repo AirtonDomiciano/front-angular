@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { produtosCarrinhoMock } from './carrinho.mock';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ProductsCarrinhoInterface } from './carrinho.interface';
+import { ShoppingMock } from '../shopping/shopping.mock';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrinho',
@@ -15,8 +17,9 @@ export class CarrinhoComponent implements OnInit {
   public lastQtd: number = 0;
   public lastId: number = 0;
   public contQtdIsFull: number = 0;
+  public temProdutos = false;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private router: Router) {
     this.qtdFormGroup = fb.group({
       qtd: [1, Validators.required],
     });
@@ -29,6 +32,11 @@ export class CarrinhoComponent implements OnInit {
     this.lastId = 0;
     this.contQtdIsFull = 0;
     this.zerarQtds();
+    if (this.produtosCarrinho.length === 0) {
+      this.temProdutos = false;
+    } else {
+      this.temProdutos = true;
+    }
   }
 
   removerProdutoCarrinho(id: number) {
@@ -45,6 +53,8 @@ export class CarrinhoComponent implements OnInit {
     }
 
     this.precoTotal = precoTotal;
+    let precoArredondado = this.precoTotal.toFixed(2);
+    this.precoTotal = Number(precoArredondado);
   }
 
   calcularPrecoQtd(id?: number) {
@@ -70,6 +80,8 @@ export class CarrinhoComponent implements OnInit {
     this.lastId = id!;
 
     this.precoTotal = precoTotal;
+    let precoArredondado = this.precoTotal.toFixed(2);
+    this.precoTotal = Number(precoArredondado);
   }
 
   zerarQtds() {
@@ -87,5 +99,19 @@ export class CarrinhoComponent implements OnInit {
       this.produtosCarrinho[index].preco * this.produtosCarrinho[index].qtd!;
 
     this.precoTotal -= valorProduto;
+    let precoArredondado = this.precoTotal.toFixed(2);
+    this.precoTotal = Number(precoArredondado);
+    if (this.produtosCarrinho.length === 1) {
+      this.precoTotal = 0;
+      this.temProdutos = false;
+    }
+  }
+
+  comprarProduto() {
+    for (var i = 0; i < this.produtosCarrinho.length; i++) {
+      ShoppingMock.push(this.produtosCarrinho[i]);
+    }
+    produtosCarrinhoMock.splice(0, produtosCarrinhoMock.length);
+    this.router.navigate(['/shopping']);
   }
 }

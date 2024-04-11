@@ -1,4 +1,44 @@
-<div class="container">
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01"
+      >Filtro de Categorias</label
+    >
+  </div>
+  <div [formGroup]="categoriasFormGroup" #formDir="ngForm">
+    <select
+      (change)="filtrarCategoria()"
+      class="custom-select"
+      id="inputGroupSelect01"
+      formControlName="categoria"
+    >
+      <option selected>Choose...</option>
+      <ng-container *ngFor="let categoria of arrayCategorias">
+        <option value="{{ categoria }}">{{ categoria }}</option>
+      </ng-container>
+    </select>
+  </div>
+</div>
+<div class="container" *ngIf="filtroAtivo">
+  <ng-container *ngFor="let produto of produtosFiltrados">
+    <div class="card">
+      <div class="img">
+        <img src="{{ produto.imagem }}" />
+      </div>
+      <div class="nome">
+        {{ produto.nome }}
+      </div>
+      <div class="preco">R${{ produto.preco }}</div>
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="adicionarProdutoNoCarrinho(produto.id!)"
+      >
+        Adicionar ao carrinho
+      </button>
+    </div>
+  </ng-container>
+</div>
+<div class="container" *ngIf="!filtroAtivo">
   <ng-container *ngFor="let produto of produtos">
     <div class="card">
       <div class="img">

@@ -1,0 +1,24 @@
+<div class="shopping">
+  <div class="titulo" *ngIf="produtosComprados.length === 0">
+    <h2>Você não efetuou nenhuma compra</h2>
+    <h3><a [routerLink]="['/catalog']">Veja os nossos produtos</a></h3>
+  </div>
+  <div class="titulo" *ngIf="produtosComprados.length !== 0">
+    <h2>Minhas compras</h2>
+  </div>
+
+  <ng-container *ngFor="let produto of produtosComprados">
+    <div class="produto">
+      <div class="produto-imagem">
+        <img src="{{ produto.imagem }}" />
+      </div>
+      <div class="produto-nome">
+        {{ produto.nome }}
+      </div>
+      <div class="produto-qtd">Quantidade: {{ produto.qtd }}</div>
+      <div class="produto-preco">
+        Total: R${{ produto.preco! * produto.qtd! }}
+      </div>
+    </div>
+  </ng-container>
+</div>

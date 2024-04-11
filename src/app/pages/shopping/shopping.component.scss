@@ -1,0 +1,39 @@
+.shopping {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 900px;
+  font-size: 20px;
+  margin-left: 100px;
+  padding-bottom: 60px;
+  text-align: center;
+}
+
+.titulo {
+  margin-bottom: 40px;
+}
+
+.produto {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  border-bottom: 1px solid rgb(190, 190, 190);
+}
+
+img {
+  width: 95px;
+  height: 95px;
+  margin-left: 10px;
+  margin-right: 110px;
+}
+
+.produto-nome {
+  width: 200px;
+  margin-right: 110px;
+}
+
+.produto-qtd {
+  margin-right: 110px;
+}
