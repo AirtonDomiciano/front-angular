@@ -16,6 +16,7 @@ export class CatalogoComponent implements OnInit {
   public categoriasFormGroup: UntypedFormGroup;
   public filtroAtivo = false;
   public produtosFiltrados: ProductsModel[] = [];
+  public produtosCarrinho: ProductsModel[] = [];
 
   constructor(fb: FormBuilder) {
     this.categoriasFormGroup = fb.group({
@@ -26,6 +27,7 @@ export class CatalogoComponent implements OnInit {
   ngOnInit(): void {
     this.produtos = produtosMock;
     this.arrayCategorias = CategoriasProdutos;
+    this.produtosCarrinho = produtosCarrinhoMock;
   }
 
   adicionarProdutoNoCarrinho(id: number) {
