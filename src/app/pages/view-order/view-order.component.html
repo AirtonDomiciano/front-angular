@@ -1,0 +1,19 @@
+<div class="titulo">
+  <h1>Pedido {{ produtosComprados.id }}</h1>
+</div>
+<div class="shopping">
+  <ng-container *ngFor="let product of produtosComprados.produtos">
+    <div class="produto">
+      <div class="produto-imagem">
+        <img src="{{ product.imagem }}" />
+      </div>
+      <div class="produto-nome">
+        {{ product.nome }}
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<div class="total">
+  <strong>Total: R${{ produtosComprados.preco }}</strong>
+</div>
