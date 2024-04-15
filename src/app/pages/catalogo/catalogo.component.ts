@@ -32,7 +32,9 @@ export class CatalogoComponent implements OnInit {
 
   adicionarProdutoNoCarrinho(id: number) {
     const index = this.produtos.findIndex((el) => el.id === id);
-    produtosCarrinhoMock.push(this.produtos[index]);
+    if (!produtosCarrinhoMock.includes(this.produtos[index])) {
+      produtosCarrinhoMock.push(this.produtos[index]);
+    }
   }
 
   filtrarCategoria() {

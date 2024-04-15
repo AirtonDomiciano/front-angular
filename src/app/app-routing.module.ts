@@ -11,6 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { ShoppingComponent } from './pages/shopping/shopping.component';
+import { ViewOrderComponent } from './pages/view-order/view-order.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'catalog', component: CatalogoComponent },
   { path: 'cart', component: CarrinhoComponent },
   { path: 'shopping', component: ShoppingComponent },
+  { path: 'view-order/:id', component: ViewOrderComponent },
 ];
 
 @NgModule({

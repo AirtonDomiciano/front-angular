@@ -20,6 +20,7 @@ import { HomeModule } from './pages/home/home.module';
 import { CatalogoModule } from './pages/catalogo/catalogo.module';
 import { CarrinhoModule } from './pages/carrinho/carrinho.module';
 import { ShoppingModule } from './pages/shopping/shopping.module';
+import { ViewOrderModule } from './pages/view-order/view-order.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +42,7 @@ import { ShoppingModule } from './pages/shopping/shopping.module';
     CatalogoModule,
     CarrinhoModule,
     ShoppingModule,
+    ViewOrderModule,
     //!REMOVER
     LoginModule,
   ],
