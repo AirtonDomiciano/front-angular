@@ -17,6 +17,10 @@ export class ProductComponent implements OnInit {
     this.listagemProdutos = produtosMock;
   }
 
+  addProduto() {
+    this.router.navigate([`product`]);
+  }
+
   editarProduto(id: number) {
     this.router.navigate([`edit-product/${id}`]);
   }
