@@ -38,3 +38,24 @@
     <button (click)="addUser()">Adicionar Usuário</button>
   </div>
 </div>
+<div class="desfazer-acao" *ngIf="usuariosRemovidos.length === 1">
+  <div>
+    Usuario
+    <ng-container *ngFor="let usuarioRemovido of usuariosRemovidos">
+      <strong>{{ usuarioRemovido.nome }}</strong>
+    </ng-container>
+    <span> removido!</span>
+    <button class="desfazer" (click)="desfazerAcao()">Desfazer ação</button>
+  </div>
+</div>
+<div class="desfazer-acao" *ngIf="usuariosRemovidos.length > 1">
+  <div>
+    Usuarios
+    <ng-container *ngFor="let usuarioRemovido of usuariosRemovidos">
+      <strong>{{ usuarioRemovido.nome }}</strong
+      >,
+    </ng-container>
+    <span> removidos!</span>
+    <button class="desfazer" (click)="desfazerAcao()">Desfazer ação</button>
+  </div>
+</div>
