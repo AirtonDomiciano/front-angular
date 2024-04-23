@@ -17,6 +17,10 @@ export class UsersComponent implements OnInit {
     this.listagemUsuarios = UsersMock;
   }
 
+  addUser() {
+    this.router.navigate([`user`]);
+  }
+
   editarUser(id: number) {
     this.router.navigate([`edit-user/${id}`]);
   }

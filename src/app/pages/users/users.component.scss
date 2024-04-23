@@ -1,7 +1,3 @@
-.container {
-  padding-bottom: 50px;
-}
-
 .table,
 th,
 td {
@@ -68,4 +64,29 @@ button {
 .excluir:active {
   background-color: rgb(133, 12, 12);
   margin-top: 7px;
+}
+
+.add-user {
+  margin-top: 20px;
+
+  button {
+    width: 200px;
+    height: 30px;
+    background-color: #68f592;
+    font-size: large;
+  }
+
+  button:hover {
+    background-color: #34b159;
+  }
+
+  button:active {
+    background-color: #167533;
+  }
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  margin-bottom: 50px;
 }
