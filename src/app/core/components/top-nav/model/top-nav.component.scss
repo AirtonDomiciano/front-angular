@@ -8,13 +8,14 @@
   height: 60px;
   top: 0;
   left: 0;
+  align-items: center;
 }
 
 /* Style the links inside the navigation bar */
 .topnav div {
   margin-left: 10px;
   margin-right: 10px;
-  margin-top: 3px;
+  // margin-top: 3px;
   float: left;
   color: #6d6e7e;
   text-align: center;
@@ -43,4 +44,71 @@
 
 .topnav div:nth-child(2):hover {
   color: rgb(198, 198, 198);
+}
+
+.avatar {
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+  }
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.avatar img:hover {
+  filter: brightness(0.8);
+}
+
+.avatar img:active {
+  filter: brightness(0.5);
+}
+
+.popup {
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #333;
+  width: 180px;
+  height: auto;
+  position: fixed;
+  left: 83.5%;
+  top: 63px;
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .editar-perfil,
+  .minhas-compras {
+    border-bottom: solid 1px black;
+  }
+}
+
+.editar-perfil button,
+.minhas-compras button,
+.logOut button {
+  width: 140px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+}
+
+.editar-perfil button:hover,
+.minhas-compras button:hover,
+.logOut button:hover {
+  border-bottom: solid 1px;
+}
+
+.editar-perfil,
+.minhas-compras,
+.logOut {
+  display: flex;
+  flex-wrap: nowrap;
 }
