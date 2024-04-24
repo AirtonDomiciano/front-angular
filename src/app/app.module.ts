@@ -21,6 +21,9 @@ import { CatalogoModule } from './pages/catalogo/catalogo.module';
 import { CarrinhoModule } from './pages/carrinho/carrinho.module';
 import { ShoppingModule } from './pages/shopping/shopping.module';
 import { ViewOrderModule } from './pages/view-order/view-order.module';
+import { ApiModule } from './pages/api/api.module';
+import { ApisModule } from './pages/apis/apis.module';
+import { EditApiModule } from './pages/edit-api/edit-api.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +46,9 @@ import { ViewOrderModule } from './pages/view-order/view-order.module';
     CarrinhoModule,
     ShoppingModule,
     ViewOrderModule,
+    ApiModule,
+    ApisModule,
+    EditApiModule,
     //!REMOVER
     LoginModule,
   ],

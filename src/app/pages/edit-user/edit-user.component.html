@@ -8,7 +8,7 @@
       <div>
         <input type="text" class="input" formControlName="nome" required />
       </div>
-      <div *ngIf="userFormGroup.get('nome')?.invalid" class="required">
+      <div *ngIf="nomeIsEmpty" class="required">
         <p>O nome é obrigatório</p>
       </div>
       <div class="label">
@@ -17,7 +17,7 @@
       <div>
         <input type="text" class="input" formControlName="sobrenome" required />
       </div>
-      <div *ngIf="userFormGroup.get('sobrenome')?.invalid" class="required">
+      <div *ngIf="sobrenomeIsEmpty" class="required">
         <p>O sobrenome é obrigatório</p>
       </div>
       <div class="label">
@@ -26,20 +26,12 @@
       <div>
         <input type="number" class="input" formControlName="idade" required />
       </div>
-      <div *ngIf="userFormGroup.get('idade')?.invalid" class="required">
-        <p>A idade é obrigatória</p>
-      </div>
-      <div class="required" *ngIf="ageIsWrong">
-        A Idade não pode ser negativa!
-      </div>
+      <div class="required" *ngIf="ageIsWrong">A Idade está errada!</div>
       <div class="label">
         <span for="descricao">Email</span>
       </div>
       <div>
         <input type="text" class="input" formControlName="email" required />
-      </div>
-      <div *ngIf="userFormGroup.get('email')?.invalid" class="required">
-        <p>O email é obrigatório</p>
       </div>
       <div class="required" *ngIf="emailIsWrong">O E-mail está incorreto!</div>
       <div class="label">
@@ -67,9 +59,10 @@
       <div>
         <input type="text" class="input" formControlName="funcao" required />
       </div>
-      <div *ngIf="userFormGroup.get('funcao')?.invalid" class="required">
+      <div *ngIf="funcaoIsEmpty" class="required">
         <p>A Função é obrigatória</p>
       </div>
+
       <div>
         <button class="botao" type="submit">Enviar</button>
       </div>

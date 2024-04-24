@@ -12,6 +12,9 @@ import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { ShoppingComponent } from './pages/shopping/shopping.component';
 import { ViewOrderComponent } from './pages/view-order/view-order.component';
+import { ApiComponent } from './pages/api/api.component';
+import { ApisComponent } from './pages/apis/apis.component';
+import { EditApiComponent } from './pages/edit-api/edit-api.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -27,6 +30,9 @@ const routes: Routes = [
   { path: 'cart', component: CarrinhoComponent },
   { path: 'shopping', component: ShoppingComponent },
   { path: 'view-order/:id', component: ViewOrderComponent },
+  { path: 'apis', component: ApisComponent },
+  { path: 'api', component: ApiComponent },
+  { path: 'edit-api/:id', component: EditApiComponent },
 ];
 
 @NgModule({

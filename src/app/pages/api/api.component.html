@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="apiFormGroup" #formDir="ngForm">
+      <h1>Cadastro</h1>
+      <div class="label">
+        <span for="">Nome:</span>
+      </div>
+      <div>
+        <input type="text" class="input" formControlName="nome" required />
+        <div class="obrigatorio" *ngIf="semNome">
+          O campo Nome é obrigatório!
+        </div>
+      </div>
+      <div class="label">
+        <span for="sobrenome">URL:</span>
+      </div>
+      <div>
+        <input type="text" class="input" formControlName="url" required />
+        <div class="obrigatorio" *ngIf="semUrl">O campo URL é obrigatório!</div>
+      </div>
+      <div class="label">
+        <span for="rapidApi-Host">RapidApi-Host:</span>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="input"
+          formControlName="rapidApi-Host"
+          required
+        />
+        <div class="obrigatorio" *ngIf="semRapidApiHost">
+          O campo RapidApi-Host é obrigatório!
+        </div>
+      </div>
+      <div>
+        <button class="botao" type="submit">Enviar</button>
+      </div>
+    </form>
+  </div>
+</div>

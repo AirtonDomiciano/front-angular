@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserModel } from '../user/user.model';
 import { UsersMock } from '../users/users.mock';
+import { ApisModel } from '../apis/api.model';
+import { apisMock } from '../apis/apis.mock';
 
 @Component({
   selector: 'app-edit-user',
@@ -19,6 +27,10 @@ export class EditUserComponent implements OnInit {
   public emailIsWrong: boolean = false;
   public ageIsWrong: boolean = false;
   public cepIsWrong: boolean = false;
+  public nomeIsEmpty: boolean = false;
+  public sobrenomeIsEmpty: boolean = false;
+  public funcaoIsEmpty: boolean = false;
+  public listagemApis: ApisModel[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +44,7 @@ export class EditUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.listagemApis = apisMock;
     this.user = UsersMock[this.index];
     this.userFormGroup.controls['nome'].setValidators(Validators.required);
     this.userFormGroup.controls['sobrenome'].setValidators(Validators.required);
@@ -42,21 +55,22 @@ export class EditUserComponent implements OnInit {
   }
 
   onSubmit() {
+    this.nomeIsEmpty = false;
+    this.sobrenomeIsEmpty = false;
     this.emailIsWrong = false;
+    this.funcaoIsEmpty = false;
     this.ageIsWrong = false;
     this.cepHaveOnlyNumbers = true;
     this.cepIsWrong = false;
 
-    if (this.userFormGroup.valid) {
-      const validation: boolean = this.validationSave(this.userFormGroup.value);
-      if (validation) {
-        let input: UserModel = this.userFormGroup.value;
+    const validation: boolean = this.validationSave(this.userFormGroup.value);
+    if (validation) {
+      let input: UserModel = this.userFormGroup.value;
 
-        input.email = input.email.toLocaleLowerCase();
+      input.email = input.email.toLocaleLowerCase();
 
-        UsersMock[this.index] = input;
-        this.router.navigate([`users`]);
-      }
+      UsersMock[this.index] = input;
+      this.router.navigate([`users`]);
     }
   }
 
@@ -101,8 +115,23 @@ export class EditUserComponent implements OnInit {
 
     input.cep = input.cep.replace('-', '');
 
-    if (input.idade < 0) {
+    if (input.idade < 0 || input.idade === null) {
       this.ageIsWrong = true;
+      validation = false;
+    }
+
+    if (input.nome.length === 0 || input.nome.length === null) {
+      this.nomeIsEmpty = true;
+      validation = false;
+    }
+
+    if (input.sobrenome.length === 0 || input.sobrenome.length === null) {
+      this.sobrenomeIsEmpty = true;
+      validation = false;
+    }
+
+    if (input.funcao.length === 0 || input.funcao.length === null) {
+      this.funcaoIsEmpty = true;
       validation = false;
     }
 
