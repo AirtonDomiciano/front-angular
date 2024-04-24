@@ -24,6 +24,7 @@ import { ViewOrderModule } from './pages/view-order/view-order.module';
 import { ApiModule } from './pages/api/api.module';
 import { ApisModule } from './pages/apis/apis.module';
 import { EditApiModule } from './pages/edit-api/edit-api.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -49,6 +50,7 @@ import { EditApiModule } from './pages/edit-api/edit-api.module';
     ApiModule,
     ApisModule,
     EditApiModule,
+    NgbModule,
     //!REMOVER
     LoginModule,
   ],

@@ -9,7 +9,7 @@
     (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
   ></app-side-nav>
   <div class="content" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
-    <router-outlet></router-outlet>
+    <app-body></app-body>
     <app-footer></app-footer>
   </div>
 </div>

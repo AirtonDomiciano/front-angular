@@ -8,10 +8,16 @@ import { AppRoutingModule } from '../app-routing.module';
 import { IconModule } from '../shared/components/icon/icon.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { TopNavComponent } from './components/top-nav/model/top-nav.component';
+import { BodyComponent } from './components/body/body.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [SideNavComponent, TopNavComponent, FooterComponent],
+  declarations: [
+    SideNavComponent,
+    TopNavComponent,
+    FooterComponent,
+    BodyComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -22,6 +28,6 @@ import { TopNavComponent } from './components/top-nav/model/top-nav.component';
     // NgbModule,
     // MatToolbarModule
   ],
-  exports: [SideNavComponent, TopNavComponent, FooterComponent],
+  exports: [SideNavComponent, TopNavComponent, FooterComponent, BodyComponent],
 })
 export class CoreModule {}

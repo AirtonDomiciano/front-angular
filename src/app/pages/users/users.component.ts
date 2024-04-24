@@ -20,6 +20,10 @@ export class UsersComponent implements OnInit {
     this.inicializandoAtivos();
   }
 
+  addUser() {
+    this.router.navigate([`user`]);
+  }
+
   editarUser(id: number) {
     this.router.navigate([`edit-user/${id}`]);
   }
