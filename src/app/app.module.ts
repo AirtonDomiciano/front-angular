@@ -21,6 +21,7 @@ import { CatalogoModule } from './pages/catalogo/catalogo.module';
 import { CarrinhoModule } from './pages/carrinho/carrinho.module';
 import { ShoppingModule } from './pages/shopping/shopping.module';
 import { ViewOrderModule } from './pages/view-order/view-order.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,6 +44,7 @@ import { ViewOrderModule } from './pages/view-order/view-order.module';
     CarrinhoModule,
     ShoppingModule,
     ViewOrderModule,
+    NgbModule,
     //!REMOVER
     LoginModule,
   ],
