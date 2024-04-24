@@ -9,11 +9,7 @@ export class ExampleService extends BaseService {
     super(http);
   }
 
-  //   Chamando o método  para ir na API
-  metodoExample(example: string): Observable<Response<boolean>> {
-    // super.post método generico usado para comunicar com API
-    // '/example' é o controler
-    // { example } parametro que está sendo passado
-    return super.post('/example', { example });
+  metodoExample(example: string): Observable<Response<any>> {
+    return super.get('/users');
   }
 }
