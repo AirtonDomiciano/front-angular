@@ -6,6 +6,7 @@ export class UserModel {
   email: string;
   cep: string;
   funcao: string;
+  removido: boolean;
   ativo?: boolean;
   apis: number[];
 
@@ -16,6 +17,7 @@ export class UserModel {
     this.email = '';
     this.cep = '';
     this.funcao = '';
+    this.removido = false;
     this.ativo = true;
     this.apis = [];
   }
