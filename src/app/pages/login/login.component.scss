@@ -1,76 +1,68 @@
 .container {
-  margin-top: 70px;
   display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0f3eb6;
   justify-content: center;
+  align-items: center;
 }
 
-.card {
-  background: #1d1e2c;
-  color: #bbbbbb;
-  border-radius: 10px;
-  width: 400px;
+.box {
+  width: 350px;
   height: 500px;
-  display: flex;
-  justify-content: center;
+  background-color: white;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+img {
+  width: auto;
+  height: 500px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.message {
+  margin-top: 50px;
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  margin-bottom: 30px;
 }
 
-.card input {
-  width: 230px;
-  height: 40px;
-  border: none;
-  border-radius: 0 5px 5px 0;
-}
-
-.card img {
-  width: 42px;
-  height: 42px;
-  border-radius: 5px 0 0 5px;
-}
-
-h1 {
-  font-size: 50px;
-  margin-top: 50px;
-}
-
-.email {
-  margin-top: 50px;
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-.senha {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: nowrap;
+input {
+  border-radius: 25px;
+  margin-left: 15px;
+  width: 315px;
+  margin-bottom: 30px;
+  height: 45px;
+  font-size: 13px;
 }
 
 button {
-  margin-top: 20px;
-  font-size: 17px;
-  background: white;
-  width: 90px;
+  border-radius: 25px;
+  font-size: 13px;
+  width: 315px;
   height: 45px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
+  margin-left: 15px;
 }
 
-button:hover {
-  background: rgb(225, 225, 225);
+hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 22.5px;
+  width: 300px;
 }
 
-button:active {
-  background: rgb(186, 186, 186);
+.small {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  font-size: 80%;
+  font-weight: 400;
 }
 
-.validationError p {
+.error-message {
   color: red;
-  margin-top: 0.4em;
-  padding-left: 0.2em;
-}
-
-.wrongLogin {
-  color: red;
-  font-size: 20px;
+  text-align: center;
 }
