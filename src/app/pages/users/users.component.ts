@@ -11,6 +11,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class UsersComponent implements OnInit {
   public listagemUsuarios: UserModel[] = [];
+  public contUsuariosRemovidos: number = 0;
   public ativoFormGroup: FormGroup = new FormGroup({});
 
   constructor(private router: Router) {}
@@ -18,6 +19,7 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.listagemUsuarios = UsersMock;
     this.inicializandoAtivos();
+    this.contadorUsersRemovidos();
   }
 
   addUser() {
@@ -38,7 +40,25 @@ export class UsersComponent implements OnInit {
   removerUser(id: number): void {
     const index = this.listagemUsuarios.findIndex((el) => el.id === id);
     if (index !== -1) {
-      UsersMock.splice(index, 1);
+      this.contUsuariosRemovidos++;
+      UsersMock[index].removido = true;
+    }
+  }
+
+  desfazerAcao() {
+    for (var i = 0; i < this.listagemUsuarios.length; i++) {
+      if (this.listagemUsuarios[i].removido) {
+        this.listagemUsuarios[i].removido = false;
+      }
+      this.contUsuariosRemovidos = 0;
+    }
+  }
+
+  contadorUsersRemovidos() {
+    for (var i = 0; i < this.listagemUsuarios.length; i++) {
+      if (this.listagemUsuarios[i].removido) {
+        this.contUsuariosRemovidos++;
+      }
     }
   }
 
