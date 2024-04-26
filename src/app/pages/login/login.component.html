@@ -3,55 +3,68 @@
 >
   <img
     class="rounded-left"
-    src="https://img.freepik.com/fotos-premium/um-cachorro-pug-vestindo-uma-jaqueta-amarela-e-oculos_911949-103.jpg"
+    src="https://img.freepik.com/fotos-premi  um/um-cachorro-pug-vestindo-uma-jaqueta-amarela-e-oculos_911949-103.jpg"
   />
   <div class="box bg-light rounded-right">
     <p class="message text-center mt-5 h4 mb-5">Welcome Back!</p>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="form-group d-flex justify-content-center mb-4">
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputEmail"
-          aria-describedby="emailHelp"
-          placeholder="E-mail"
-          formControlName="email"
-          required
-        />
-      </div>
-      <div class="form-group d-flex justify-content-center mb-4">
-        <input
-          type="password"
-          class="form-control"
-          id="exampleInputPassword1"
-          placeholder="Senha"
-          formControlName="password"
-          required
-        />
-      </div>
-      <div class="d-flex justify-content-center align-items-center">
-        <div
-          *ngIf="wrongLogin"
-          class="alert alert-danger mb-4 d-flex align-items-center"
-          role="alert"
-        >
-          E-mail ou senha incorretos!
+      <div class="row px-3 py-1">
+        <div class="col-sm-12">
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail"
+            aria-describedby="emailHelp"
+            placeholder="E-mail"
+            formControlName="email"
+            required
+          />
         </div>
       </div>
-      <div class="d-flex justify-content-center align-items-center mb-4">
-        <button type="submit" class="btn btn-primary rounded-pill">
-          Login
-        </button>
+
+      <div class="row px-3 py-1">
+        <div class="col-sm-12">
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            placeholder="Senha"
+            formControlName="password"
+            required
+          />
+        </div>
       </div>
-      <div class="d-flex justify-content-center align-items-center mb-3">
-        <hr />
+      <div class="row px-3 py-2">
+        <div class="col-sm-12">
+          <div
+            *ngIf="wrongLogin"
+            class="alert alert-danger p-2 mt-2 mb-2"
+            role="alert"
+          >
+            <strong>E-mail ou senha incorretos!</strong>
+          </div>
+        </div>
+      </div>
+      <div class="row px-3 py-2">
+        <div class="col-sm-12">
+          <button class="btn btn-primary rounded-pill w-100">Login</button>
+        </div>
+      </div>
+      <div class="row px-3 py-2">
+        <div class="col-sm-12">
+          <hr />
+        </div>
       </div>
     </form>
-    <div class="d-flex justify-content-center align-items-center mb-1">
-      <a href=""><p class="h6">Esqueceu a senha?</p></a>
+    <div class="row py-3">
+      <div class="col-sm-12">
+        <a href=""><p class="h6 text-center">Esqueceu a senha?</p></a>
+      </div>
     </div>
-    <div class="d-flex justify-content-center align-items-center">
-      <a href=""><p class="h6">Criar uma conta!</p></a>
+    <div class="row">
+      <div class="col-sm-12">
+        <a href=""><p class="h6 text-center">Criar uma conta!</p></a>
+      </div>
     </div>
   </div>
 </div>
