@@ -1,4 +1,4 @@
-.topnav {
+.topnav-aulas {
   display: flex;
   justify-content: space-between;
   background: #0f1017;
@@ -8,22 +8,10 @@
   height: 60px;
   top: 0;
   left: 0;
+  align-items: center;
 }
 
-/* Style the links inside the navigation bar */
-.topnav div {
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 3px;
-  float: left;
-  color: #6d6e7e;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 22px;
-}
-
-.topnav a {
+.topnav-aulas a {
   color: #6d6e7e;
   padding: 14px 16px;
   text-decoration: none;
@@ -31,16 +19,38 @@
 }
 
 /* Change the color of links on hover */
-.topnav a:hover {
+.topnav-aulas a:hover {
   color: white;
 }
 
-.topnav div:nth-child(2) {
+.topnav-aulas div:nth-child(2) {
   margin-top: 0px !important;
   font-size: 30px;
   color: rgb(198, 198, 198);
 }
 
-.topnav div:nth-child(2):hover {
+.topnav-aulas div:nth-child(2):hover {
   color: rgb(198, 198, 198);
+}
+
+.dropdown-menu {
+  position: fixed;
+  right: 10px;
+  a {
+    color: #0f1017;
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: #0f1017;
+    background-color: rgb(240, 240, 240);
+  }
+}
+
+// .nav-item {
+//   margin-right: 20px;
+// }
+
+.nav-link {
+  top: 0;
 }
