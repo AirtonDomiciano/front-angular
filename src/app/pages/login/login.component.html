@@ -1,69 +1,70 @@
-<div class="container">
-  <div class="card">
+<div
+  class="container d-flex justify-content-center bg-primary align-items-center"
+>
+  <img
+    class="rounded-left"
+    src="https://img.freepik.com/fotos-premi  um/um-cachorro-pug-vestindo-uma-jaqueta-amarela-e-oculos_911949-103.jpg"
+  />
+  <div class="box bg-light rounded-right">
+    <p class="message text-center mt-5 h4 mb-5">Welcome Back!</p>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <label>
-        <h1>LOGIN</h1>
-        <div class="email">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScHgMaplY57PEG9zf0pMikuTHwG5BfgiOz57z8RnwB3nJZ1-FNtUVPKwx0YpvZDYMrIbw&usqp=CAU"
+      <div class="row px-3 py-1">
+        <div class="col-sm-12">
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail"
+            aria-describedby="emailHelp"
+            placeholder="E-mail"
+            formControlName="email"
+            required
           />
-          <input type="email" formControlName="email" placeholder="Email" />
         </div>
-        <div class="validationError" *ngIf="loginForm.get('email')?.invalid">
-          <p>E-mail is required!</p>
-        </div>
-        <!-- <ng-container
-        *ngIf="
-          loginForm.controls.email.errors?.required &&
-          loginForm.controls.email.touched
-        "
-      >
-        Email is required
-      </ng-container> -->
-        <!-- <ng-container
-        *ngIf="
-          loginForm.controls.email.errors['email'] &&
-          loginForm.controls.email.touched
-        "
-      >
-        Email must be valid
-      </ng-container> -->
-      </label>
-      <br />
-      <label>
-        <div class="row">
-          <div class="senha">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ98VXg3uv4u5_qBB842YZahZP4HL_bdtCww&usqp=CAU"
-            />
-            <input
-              type="password"
-              formControlName="password"
-              placeholder="Senha"
-            />
-          </div>
+      </div>
 
+      <div class="row px-3 py-1">
+        <div class="col-sm-12">
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            placeholder="Senha"
+            formControlName="password"
+            required
+          />
+        </div>
+      </div>
+      <div class="row px-3 py-2">
+        <div class="col-sm-12">
           <div
-            class="validationError"
-            *ngIf="loginForm.get('password')?.invalid"
+            *ngIf="wrongLogin"
+            class="alert alert-danger p-2 mt-2 mb-2"
+            role="alert"
           >
-            <p>Password is required!</p>
+            <strong>E-mail ou senha incorretos!</strong>
           </div>
         </div>
-        <ng-container *ngIf="wrongLogin">
-          <p class="wrongLogin">Password or e-mail is wrong!</p>
-        </ng-container>
-        <!-- <ng-container
-        *ngIf="
-          loginForm.controls.password.errors?.required &&
-          loginForm.controls.password.touched
-        "
-      >
-        Password is required
-      </ng-container> -->
-      </label>
-      <br />
-      <button type="submit">Login</button>
+      </div>
+      <div class="row px-3 py-2">
+        <div class="col-sm-12">
+          <button class="btn btn-primary rounded-pill w-100">Login</button>
+        </div>
+      </div>
+      <div class="row px-3 py-2">
+        <div class="col-sm-12">
+          <hr />
+        </div>
+      </div>
     </form>
+    <div class="row py-3">
+      <div class="col-sm-12">
+        <a href=""><p class="h6 text-center">Esqueceu a senha?</p></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <a href=""><p class="h6 text-center">Criar uma conta!</p></a>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+.rounded-left {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.rounded-right {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
