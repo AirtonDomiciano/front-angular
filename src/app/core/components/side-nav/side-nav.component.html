@@ -1,4 +1,8 @@
-<div class="sidebar" [ngClass]="{ expanded: isExpanded }">
+<div
+  class="sidebar sidebar-dark"
+  [ngClass]="{ expanded: isExpanded }"
+  style="background-color: #007bff; color: #fff"
+>
   <div class="header">
     <h1 class="title">Aulas</h1>
     <div class="toggle" (click)="handleSidebarToggle()">

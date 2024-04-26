@@ -1,5 +1,18 @@
-<div class="topnav">
-  <div><a routerLink="">News</a></div>
-  <div>Aulas</div>
+<div class="topnav bg-secondary">
+  <!-- <div><a routerLink="">News</a></div> -->
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control border-0 bg-light small"
+      placeholder="procurar..."
+      aria-label="procurar"
+      aria-describedby="basic-addon2"
+    />
+    <div class="input-group-append">
+      <button class="btn btn-primary" type="button">
+        <i class="fas fas-search fa-sm"></i>
+      </button>
+    </div>
+  </div>
   <div><a routerLink="login" (click)="signOut()">Sign out</a></div>
 </div>

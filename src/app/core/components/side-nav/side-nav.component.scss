@@ -13,7 +13,7 @@
 .sidebar {
   position: fixed;
   left: 0;
-  top: 60px;
+  top: 0px;
 
   height: 100vh;
   transition: 0.3s;
@@ -52,8 +52,8 @@
     }
   }
 
-  background: #1d1e2c;
-  color: #6d6e7e;
+  background: #0f3eb6;
+  color: #ffffff;
 
   .header {
     display: flex;
@@ -61,11 +61,11 @@
     justify-content: center;
     padding: 10px;
 
-    background: #0f1017;
+    background:#79b0d4;
 
     h1 {
       font-size: 20px;
-      color: #6d6e7e;
+      color: #ffffff;
       margin: 0;
       flex: 1;
       transition: 0.3s;
@@ -74,7 +74,7 @@
     }
 
     .chevron {
-      color: #6d6e7e;
+      color: #ffffff;
       cursor: pointer;
       transition: 0.3s;
       margin-left: -25px;
@@ -100,12 +100,12 @@
     .link {
       .children {
         .content {
-          background: #27283a;
+          background: #82c5e2;
           // padding-left: 30px;
           padding-left: 10px;
 
           &.active {
-            background: #191a27;
+            background: #82c5e2;
           }
         }
       }
@@ -120,7 +120,7 @@
         transition: 0.3s;
 
         &:hover {
-          background: #0f1017;
+          background: #82c5e2;
           .title {
             color: white;
           }
@@ -130,7 +130,7 @@
         }
 
         &.active {
-          background: #0f1017;
+          background: #2a63af;
           .title {
             color: white;
           }
@@ -146,7 +146,7 @@
         .title {
           flex: 1;
           // display: none;
-          color: #6d6e7e;
+          color: #ffffff;
           transition: 0.3s;
           max-width: 0px;
           overflow: hidden;
