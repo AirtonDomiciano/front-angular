@@ -34,23 +34,9 @@
 }
 
 .dropdown-menu {
-  position: fixed;
   right: 10px;
-  a {
-    color: #0f1017;
-    cursor: pointer;
-  }
-
-  a:hover {
-    color: #0f1017;
-    background-color: rgb(240, 240, 240);
-  }
 }
 
-// .nav-item {
-//   margin-right: 20px;
-// }
-
-.nav-link {
-  top: 0;
+.dropdown-item:hover {
+  background-color: #ecf0f1;
 }
