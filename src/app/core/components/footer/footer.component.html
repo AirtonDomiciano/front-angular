@@ -1,3 +1,5 @@
-<div class="footer">
-    <p class="mat-elevation-28">Aulas</p>
+<div class="footer bg-primary" [ngClass]="{ expanded: footerExpaned }">
+  <div class="toggle" (click)="handleFooterToggle()">
+    <p class="mat-elevation-28 text-white">Aulas</p>
+  </div>
 </div>

@@ -1,7 +1,6 @@
 .topnav {
   display: flex;
   justify-content: space-between;
-  // background: #fff;
   overflow: hidden;
   position: fixed;
   width: 100%;
@@ -12,13 +11,11 @@
   text-align: end;
 }
 
-/* Style the links inside the navigation bar */
 .topnav div {
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 3px;
   float: left;
-  // color: #ffffff;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -26,25 +23,14 @@
 }
 
 .topnav a {
-  // color: #0d6efd;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 22px;
 }
 
-/* Change the color of links on hover */
-.topnav a:hover {
-  // color: #0d6efd;
-}
-
 .topnav div:nth-child(2) {
   margin-top: 0px !important;
   font-size: 30px;
-  // color: #0d6efd;
-}
-
-.topnav div:nth-child(2):hover {
-  // color: #0d6efd;
 }
 
 .aulas{
@@ -54,19 +40,6 @@
 input{
   width: 150px;
   margin-left: 150px;
-  // border-radius: 15px;
-}
-
-// .border-custom {
-//   border-top: none;
-//   border-left: none;
-//   border-right: none;
-//   border-bottom: 2px solid #17a2b8;
-// }
-
-i{
-  // color: #0d6efd;
-  // background-color: #0d6efd;
 }
 
 .signout{

@@ -52,9 +52,6 @@
     }
   }
 
-  background: #0f3eb6;
-  color: #ffffff;
-
   .header {
     display: flex;
     align-items: center;
@@ -65,16 +62,15 @@
 
     h1 {
       font-size: 20px;
-      color: #ffffff;
+ 
       margin: 0;
       flex: 1;
       transition: 0.3s;
-
       margin-left: -100px;
     }
 
     .chevron {
-      color: #ffffff;
+
       cursor: pointer;
       transition: 0.3s;
       margin-left: -25px;
@@ -90,9 +86,7 @@
         transform: rotate(45deg);
       }
 
-      &:hover {
-        color: white;
-      }
+
     }
   }
 
@@ -101,7 +95,6 @@
       .children {
         .content {
           background: #82c5e2;
-          // padding-left: 30px;
           padding-left: 10px;
 
           &.active {
@@ -121,19 +114,6 @@
 
         &:hover {
           background: #82c5e2;
-          .title {
-            color: white;
-          }
-          svg {
-            fill: white;
-          }
-        }
-
-        &.active {
-          background: #2a63af;
-          .title {
-            color: white;
-          }
         }
 
         .icon {
@@ -145,8 +125,7 @@
         }
         .title {
           flex: 1;
-          // display: none;
-          color: #ffffff;
+
           transition: 0.3s;
           max-width: 0px;
           overflow: hidden;
