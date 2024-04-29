@@ -14,6 +14,8 @@ export class LoginComponent {
   public wrongLogin: boolean = false;
   @Output() emitterLoggedIn: EventEmitter<boolean> =
     new EventEmitter<boolean>();
+  @Output() emitterEscolheuCadastro: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
@@ -45,5 +47,10 @@ export class LoginComponent {
         }
       }
     }
+  }
+
+  escolheuCadastro() {
+    this.router.navigate([`cadastro`]);
+    this.emitterEscolheuCadastro.emit();
   }
 }

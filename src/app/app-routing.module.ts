@@ -15,6 +15,7 @@ import { ViewOrderComponent } from './pages/view-order/view-order.component';
 import { ApiComponent } from './pages/api/api.component';
 import { ApisComponent } from './pages/apis/apis.component';
 import { EditApiComponent } from './pages/edit-api/edit-api.component';
+import { CadastroComponent } from './pages/cadastro/cadastro.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'apis', component: ApisComponent },
   { path: 'api', component: ApiComponent },
   { path: 'edit-api/:id', component: EditApiComponent },
+  { path: 'cadastro', component: CadastroComponent },
 ];
 
 @NgModule({

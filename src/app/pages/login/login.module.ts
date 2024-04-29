@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login.component';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { CadastroModule } from '../cadastro/cadastro.module';
 
 @NgModule({
   declarations: [LoginComponent],

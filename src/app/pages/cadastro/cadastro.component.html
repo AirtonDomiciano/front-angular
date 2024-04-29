@@ -1,0 +1,108 @@
+<div
+  class="container d-flex justify-content-center bg-primary align-items-center"
+>
+  <img
+    class="rounded-left"
+    src="https://img.freepik.com/fotos-premium/cao-pug-usando-oculos-escuros-em-um-fundo-preto_902338-14062.jpg"
+  />
+  <div class="box bg-light rounded-right">
+    <p class="message text-center mt-5 h4 mb-4">Criar conta!</p>
+    <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+      <div class="row px-3 py-2">
+        <div class="col-sm-6">
+          <input
+            type="text"
+            class="form-control rounded-pill"
+            id="exampleInputEmail"
+            aria-describedby="emailHelp"
+            placeholder="Nome"
+            formControlName="nome"
+            required
+          />
+          <div class="text-danger" *ngIf="!temNome">
+            <p>O <strong>nome</strong> é obrigatório!</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <input
+            type="text"
+            class="form-control rounded-pill"
+            id="exampleInputPassword1"
+            placeholder="Sobrenome"
+            formControlName="sobrenome"
+            required
+          />
+          <div class="text-danger" *ngIf="!temSobrenome">
+            <p>O <strong>sobrenome</strong> é obrigatório!</p>
+          </div>
+        </div>
+      </div>
+      <div class="row px-3 py-2">
+        <div class="col-sm-12">
+          <input
+            type="email"
+            class="form-control rounded-pill"
+            id="exampleInputPassword1"
+            placeholder="E-mail"
+            formControlName="email"
+            required
+          />
+          <div class="text-danger" *ngIf="!temEmail">
+            <p>O <strong>email</strong> é obrigatório!</p>
+          </div>
+        </div>
+      </div>
+      <div class="row px-3 py-2">
+        <div class="col-sm-6">
+          <input
+            type="password"
+            class="form-control rounded-pill"
+            id="exampleInputEmail"
+            aria-describedby="emailHelp"
+            placeholder="Senha"
+            formControlName="senha"
+            required
+          />
+          <div class="text-danger" *ngIf="!temSenha">
+            <p>A <strong>senha</strong> é obrigatória!</p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <input
+            type="password"
+            class="form-control rounded-pill"
+            id="exampleInputPassword1"
+            placeholder="Confirmar Senha"
+            formControlName="repetirSenha"
+            required
+          />
+          <div class="text-danger" *ngIf="!temRepetirSenha">
+            <p>O campo <strong>repetirSenha</strong> é obrigatório!</p>
+          </div>
+        </div>
+        <div class="text-danger text-center" *ngIf="!senhaSaoIguais">
+          <p>As <strong>senhas</strong> não coincidem!</p>
+        </div>
+      </div>
+      <div class="row px-3 py-2">
+        <div class="col-sm-12">
+          <button class="btn btn-primary rounded-pill w-100">
+            Registrar Conta
+          </button>
+        </div>
+      </div>
+      <div class="row px-3 py-2">
+        <div class="col-sm-12">
+          <hr />
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-sm-12">
+        <a [routerLink]="['login']" (click)="escolheuLogin()"
+          ><p class="h6 text-center">Já tem uma conta? Login!</p></a
+        >
+      </div>
+    </div>
+  </div>
+</div>
