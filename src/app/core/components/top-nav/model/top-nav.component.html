@@ -1,17 +1,13 @@
 <div class="topnav-aulas">
   <div><a routerLink="">News</a></div>
   <div>Aulas</div>
-  <li class="nav-item dropdown no-arrow mb-3 mr-20">
+  <li class="nav-item dropdown no-arrow mb-3">
     <a
       class="nav-link dropdown-toggle show text-light h1"
       id="userDropdown"
       role="button"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="true"
       (click)="popUp()"
     >
-      <span class="h5">Perfil </span>
       <i class="bi bi-person-circle">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -32,63 +28,57 @@
 
     <!-- Dropdown - User Information -->
     <div
-      class="dropdown-menu shadow animated--grow-in show position-fixed bg-light text-dark"
+      class="dropdown-menu shadow show position-fixed bg-light text-dark mt-2 d-flex justify-content-center flex-column"
       aria-labelledby="userDropdown"
       *ngIf="popUpAtivo"
     >
       <a
-        class="dropdown-item text-dark hover-overlay d-flex justify-content-center"
+        class="dropdown-item text-dark hover-overlay"
         (click)="editarPerfil()"
         role="button"
       >
-        <i class="bi bi-person">
+        <i class="bi bi-person pe-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
+            width="14"
+            height="14"
             fill="currentColor"
             class="bi bi-person"
-            viewBox="0 0 16 16"
           >
             <path
               d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"
             />
           </svg>
-          <a class="fs-5 text-dark">Editar Perfil</a>
         </i>
+        <a class="fs-6 text-dark">Editar Perfil</a>
       </a>
       <a
-        class="dropdown-item text-dark d-flex justify-content-center"
+        class="dropdown-item text-dark"
         (click)="minhasCompras()"
         role="button"
       >
-        <i class="bi bi-cart2">
+        <i class="bi bi-cart2 pe-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
+            width="15"
+            height="16"
             fill="currentColor"
             class="bi bi-cart2"
-            viewBox="0 0 16 16"
           >
             <path
               d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"
             />
           </svg>
-          <a class="fs-5 text-dark">Minhas Compras</a>
         </i>
+        <a class="fs-6 text-dark">Compras</a>
       </a>
       <div class="dropdown-divider"></div>
-      <a
-        class="dropdown-item text-dark d-flex justify-content-center"
-        (click)="signOut()"
-        role="button"
-      >
-        <i class="bi bi-box-arrow-left"
+      <a class="dropdown-item text-dark" (click)="signOut()" role="button">
+        <i class="bi bi-box-arrow-left pe-3"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
+            width="16"
+            height="14"
             fill="currentColor"
             class="bi bi-box-arrow-left"
           >
@@ -101,8 +91,8 @@
               d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"
             />
           </svg>
-          <a class="fs-5 text-dark">Logout</a>
         </i>
+        <a class="fs-6 text-dark">Logout</a>
       </a>
     </div>
   </li>
