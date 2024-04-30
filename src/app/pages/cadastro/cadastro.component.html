@@ -10,17 +10,11 @@
     <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
       <div class="row px-3 py-2">
         <div class="col-sm-6">
-          <app-input
-            id="exampleInputNome"
-            placeholder="Nome"
-            frmName="nome"
-            [form]="cadastroForm"
-          >
+          <app-input placeholder="Nome" frmName="nome" [form]="cadastroForm">
           </app-input>
         </div>
         <div class="col-sm-6">
           <app-input
-            id="exampleInputSobrenome"
             placeholder="Sobrenome"
             frmName="sobrenome"
             [form]="cadastroForm"
@@ -31,7 +25,6 @@
         <div class="col-sm-12">
           <app-input
             type="email"
-            id="exampleInputEmail"
             placeholder="E-mail"
             frmName="email"
             [form]="cadastroForm"
@@ -42,7 +35,6 @@
         <div class="col-sm-6">
           <app-input
             type="password"
-            id="exampleInputSenha"
             placeholder="Senha"
             frmName="senha"
             [form]="cadastroForm"
@@ -51,13 +43,12 @@
         <div class="col-sm-6">
           <app-input
             type="password"
-            id="exampleInputRepetirSenha"
             placeholder="Confirmar Senha"
             frmName="confirmarSenha"
             [form]="cadastroForm"
           ></app-input>
         </div>
-        <div class="text-danger text-center mt-3" *ngIf="!senhaSaoIguais">
+        <div class="text-danger text-center mt-3" *ngIf="!senhasSaoIguais">
           <p>As <strong>senhas</strong> não coincidem!</p>
         </div>
       </div>
@@ -76,7 +67,7 @@
     </form>
     <div class="row">
       <div class="col-sm-12">
-        <a [routerLink]="['login']" (click)="escolheuLogin()"
+        <a (click)="login()"
           ><p class="h6 text-center">Já tem uma conta? Login!</p></a
         >
       </div>

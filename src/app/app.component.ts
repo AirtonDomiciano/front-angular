@@ -9,7 +9,7 @@ import { ProductsModel } from './pages/product/product.model';
 export class AppComponent {
   public sidebarExpanded = true;
   public loggedIn = false;
-  public escolheuCadastro = false;
+  public cadastro = false;
 
   receiveEmitLoggedIn() {
     this.loggedIn = true;
@@ -19,11 +19,11 @@ export class AppComponent {
     this.loggedIn = answear;
   }
 
-  receiveEmitEscolheuCadastro() {
-    this.escolheuCadastro = true;
+  receiveEmitCadastro() {
+    this.cadastro = true;
   }
 
-  receiveEmitEscolheuLogin() {
-    this.escolheuCadastro = false;
+  receiveEmitLogin() {
+    this.cadastro = false;
   }
 }

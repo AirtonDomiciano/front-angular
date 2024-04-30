@@ -1,4 +1,4 @@
-export interface cadastroInterface {
+export interface CadastroInterface {
   nome: string;
   sobrenome: string;
   email: string;

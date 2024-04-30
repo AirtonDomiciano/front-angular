@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { cadastroInterface } from './cadastro.interface';
+import { CadastroInterface } from './cadastro.interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,9 +10,8 @@ import { Router } from '@angular/router';
 })
 export class CadastroComponent {
   public cadastroForm: UntypedFormGroup;
-  public senhaSaoIguais: boolean = true;
-  @Output() emitterEscolheuLogin: EventEmitter<boolean> =
-    new EventEmitter<boolean>();
+  public senhasSaoIguais: boolean = true;
+  @Output() emitterLogin: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.cadastroForm = this.fb.group({
@@ -31,12 +30,12 @@ export class CadastroComponent {
 
     if (verificao) {
       this.router.navigate([`login`]);
-      this.escolheuLogin();
+      this.login();
     }
   }
 
-  validacaoSalvar(dadosCadastro: cadastroInterface): boolean {
-    this.senhaSaoIguais = true;
+  validacaoSalvar(dadosCadastro: CadastroInterface): boolean {
+    this.senhasSaoIguais = true;
 
     let verificao: boolean = true;
 
@@ -65,13 +64,14 @@ export class CadastroComponent {
       verificao = false;
     } else if (dadosCadastro.senha !== dadosCadastro.confirmarSenha) {
       verificao = false;
-      this.senhaSaoIguais = false;
+      this.senhasSaoIguais = false;
     }
 
     return verificao;
   }
 
-  escolheuLogin() {
-    this.emitterEscolheuLogin.emit();
+  login() {
+    this.emitterLogin.emit();
+    this.router.navigate([`login`]);
   }
 }

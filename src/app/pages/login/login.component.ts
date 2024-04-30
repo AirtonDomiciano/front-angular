@@ -17,10 +17,9 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class LoginComponent implements OnInit {
   @Output() emitterLoggedIn: EventEmitter<boolean> =
     new EventEmitter<boolean>();
-  @Output() emitterEscolheuCadastro: EventEmitter<boolean> =
+  @Output() emitterCadastro: EventEmitter<boolean> =
     new EventEmitter<boolean>();
 
-  public user: any;
   public wrongLogin: boolean = false;
   public loginForm!: FormGroup;
 
@@ -60,8 +59,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  escolheuCadastro() {
+  cadastro() {
     this.router.navigate([`cadastro`]);
-    this.emitterEscolheuCadastro.emit();
+    this.emitterCadastro.emit();
   }
 }

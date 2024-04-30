@@ -1,14 +1,12 @@
 <div *ngIf="!loggedIn">
-  <div *ngIf="!escolheuCadastro">
+  <div *ngIf="!cadastro">
     <app-login
       (emitterLoggedIn)="receiveEmitLoggedIn()"
-      (emitterEscolheuCadastro)="receiveEmitEscolheuCadastro()"
+      (emitterCadastro)="receiveEmitCadastro()"
     ></app-login>
   </div>
-  <div *ngIf="escolheuCadastro">
-    <app-cadastro
-      (emitterEscolheuLogin)="receiveEmitEscolheuLogin()"
-    ></app-cadastro>
+  <div *ngIf="cadastro">
+    <app-cadastro (emitterLogin)="receiveEmitLogin()"></app-cadastro>
   </div>
 </div>
 
