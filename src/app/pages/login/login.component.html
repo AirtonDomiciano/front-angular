@@ -10,28 +10,25 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="row px-3 py-1">
         <div class="col-sm-12">
-          <input
+          <app-input
             type="email"
-            class="form-control rounded-pill"
-            id="exampleInputEmail"
-            aria-describedby="emailHelp"
             placeholder="E-mail"
-            formControlName="email"
-            required
-          />
+            frmName="email"
+            [form]="loginForm"
+          >
+          </app-input>
         </div>
       </div>
 
       <div class="row px-3 py-1">
         <div class="col-sm-12">
-          <input
+          <app-input
             type="password"
-            class="form-control rounded-pill"
-            id="exampleInputPassword1"
             placeholder="Senha"
-            formControlName="password"
-            required
-          />
+            frmName="password"
+            [form]="loginForm"
+          >
+          </app-input>
         </div>
       </div>
       <div class="row px-3 py-2">

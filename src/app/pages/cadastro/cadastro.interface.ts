@@ -3,5 +3,5 @@ export interface cadastroInterface {
   sobrenome: string;
   email: string;
   senha: string;
-  repetirSenha: string;
+  confirmarSenha: string;
 }

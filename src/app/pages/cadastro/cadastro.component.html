@@ -10,77 +10,54 @@
     <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
       <div class="row px-3 py-2">
         <div class="col-sm-6">
-          <input
-            type="text"
-            class="form-control rounded-pill"
-            id="exampleInputEmail"
-            aria-describedby="emailHelp"
+          <app-input
+            id="exampleInputNome"
             placeholder="Nome"
-            formControlName="nome"
-            required
-          />
-          <div class="text-danger" *ngIf="!temNome">
-            <p>O <strong>nome</strong> é obrigatório!</p>
-          </div>
+            frmName="nome"
+            [form]="cadastroForm"
+          >
+          </app-input>
         </div>
         <div class="col-sm-6">
-          <input
-            type="text"
-            class="form-control rounded-pill"
-            id="exampleInputPassword1"
+          <app-input
+            id="exampleInputSobrenome"
             placeholder="Sobrenome"
-            formControlName="sobrenome"
-            required
-          />
-          <div class="text-danger" *ngIf="!temSobrenome">
-            <p>O <strong>sobrenome</strong> é obrigatório!</p>
-          </div>
+            frmName="sobrenome"
+            [form]="cadastroForm"
+          ></app-input>
         </div>
       </div>
       <div class="row px-3 py-2">
         <div class="col-sm-12">
-          <input
+          <app-input
             type="email"
-            class="form-control rounded-pill"
-            id="exampleInputPassword1"
+            id="exampleInputEmail"
             placeholder="E-mail"
-            formControlName="email"
-            required
-          />
-          <div class="text-danger" *ngIf="!temEmail">
-            <p>O <strong>email</strong> é obrigatório!</p>
-          </div>
+            frmName="email"
+            [form]="cadastroForm"
+          ></app-input>
         </div>
       </div>
       <div class="row px-3 py-2">
         <div class="col-sm-6">
-          <input
+          <app-input
             type="password"
-            class="form-control rounded-pill"
-            id="exampleInputEmail"
-            aria-describedby="emailHelp"
+            id="exampleInputSenha"
             placeholder="Senha"
-            formControlName="senha"
-            required
-          />
-          <div class="text-danger" *ngIf="!temSenha">
-            <p>A <strong>senha</strong> é obrigatória!</p>
-          </div>
+            frmName="senha"
+            [form]="cadastroForm"
+          ></app-input>
         </div>
         <div class="col-sm-6">
-          <input
+          <app-input
             type="password"
-            class="form-control rounded-pill"
-            id="exampleInputPassword1"
+            id="exampleInputRepetirSenha"
             placeholder="Confirmar Senha"
-            formControlName="repetirSenha"
-            required
-          />
-          <div class="text-danger" *ngIf="!temRepetirSenha">
-            <p>O campo <strong>repetirSenha</strong> é obrigatório!</p>
-          </div>
+            frmName="confirmarSenha"
+            [form]="cadastroForm"
+          ></app-input>
         </div>
-        <div class="text-danger text-center" *ngIf="!senhaSaoIguais">
+        <div class="text-danger text-center mt-3" *ngIf="!senhaSaoIguais">
           <p>As <strong>senhas</strong> não coincidem!</p>
         </div>
       </div>

@@ -10,11 +10,6 @@ import { Router } from '@angular/router';
 })
 export class CadastroComponent {
   public cadastroForm: UntypedFormGroup;
-  public temNome: boolean = true;
-  public temSobrenome: boolean = true;
-  public temEmail: boolean = true;
-  public temSenha: boolean = true;
-  public temRepetirSenha: boolean = true;
   public senhaSaoIguais: boolean = true;
   @Output() emitterEscolheuLogin: EventEmitter<boolean> =
     new EventEmitter<boolean>();
@@ -25,7 +20,7 @@ export class CadastroComponent {
       sobrenome: ['', Validators.required],
       email: ['', Validators.required, Validators.email],
       senha: ['', Validators.required],
-      repetirSenha: ['', Validators.required],
+      confirmarSenha: ['', Validators.required],
     });
   }
 
@@ -41,51 +36,34 @@ export class CadastroComponent {
   }
 
   validacaoSalvar(dadosCadastro: cadastroInterface): boolean {
-    this.temNome = true;
-    this.temSobrenome = true;
-    this.temEmail = true;
-    this.temSenha = true;
-    this.temRepetirSenha = true;
     this.senhaSaoIguais = true;
 
     let verificao: boolean = true;
 
     if (dadosCadastro.nome.length === 0 || dadosCadastro.nome === null) {
       verificao = false;
-      this.temNome = false;
-    }
-
-    if (
+    } else if (
       dadosCadastro.sobrenome.length === 0 ||
       dadosCadastro.sobrenome === null
     ) {
       verificao = false;
-      this.temSobrenome = false;
-    }
-
-    if (
+    } else if (
       dadosCadastro.email.length === 0 ||
       dadosCadastro.email === null ||
       !dadosCadastro.email.includes('@')
     ) {
       verificao = false;
-      this.temEmail = false;
-    }
-
-    if (dadosCadastro.senha.length === 0 || dadosCadastro.senha === null) {
-      verificao = false;
-      this.temSenha = false;
-    }
-
-    if (
-      dadosCadastro.repetirSenha.length === 0 ||
-      dadosCadastro.repetirSenha === null
+    } else if (
+      dadosCadastro.senha.length === 0 ||
+      dadosCadastro.senha === null
     ) {
       verificao = false;
-      this.temRepetirSenha = false;
-    }
-
-    if (dadosCadastro.senha !== dadosCadastro.repetirSenha) {
+    } else if (
+      dadosCadastro.confirmarSenha.length === 0 ||
+      dadosCadastro.confirmarSenha === null
+    ) {
+      verificao = false;
+    } else if (dadosCadastro.senha !== dadosCadastro.confirmarSenha) {
       verificao = false;
       this.senhaSaoIguais = false;
     }

@@ -1,5 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -9,23 +14,29 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-  public user: any;
-  public wrongLogin: boolean = false;
+export class LoginComponent implements OnInit {
   @Output() emitterLoggedIn: EventEmitter<boolean> =
     new EventEmitter<boolean>();
   @Output() emitterEscolheuCadastro: EventEmitter<boolean> =
     new EventEmitter<boolean>();
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required),
-  });
+
+  public user: any;
+  public wrongLogin: boolean = false;
+  public loginForm!: FormGroup;
 
   constructor(
+    public fb: FormBuilder,
     public auth: AuthService,
     private router: Router,
     private LocalStorageService: LocalStorageService
   ) {}
+
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
+    });
+  }
 
   async onSubmit(): Promise<void> {
     if (this.loginForm.valid) {
