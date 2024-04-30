@@ -14,8 +14,8 @@
       </tr>
     </thead>
     <ng-container *ngFor="let usuario of listagemUsuarios">
-      <tbody>
-        <ng-container *ngIf="!usuario.removido">
+      <ng-container *ngIf="!usuario.removido">
+        <tbody>
           <tr>
             <th scope="row" class="id">{{ usuario.id }}</th>
             <th>{{ usuario.nome }}</th>
@@ -44,8 +44,8 @@
               </div>
             </td>
           </tr>
-        </ng-container>
-      </tbody>
+        </tbody>
+      </ng-container>
     </ng-container>
   </table>
   <div class="add-user">
@@ -57,18 +57,16 @@
     Usuário
     <ng-container *ngFor="let usuario of listagemUsuarios">
       <ng-container *ngIf="usuario.removido">
-        <strong>{{ usuario.nome }}</strong>
+        {{ usuario.nome }} foi
       </ng-container>
     </ng-container>
-    <span> removido!</span>
+    <span class="text-danger"> removido!</span>
     <button class="desfazer" (click)="desfazerAcao()">Desfazer ação</button>
   </div>
 </div>
 <div class="desfazer-acao" *ngIf="contUsuariosRemovidos > 1">
   <div>
-    <strong>{{ contUsuariosRemovidos }} </strong>usuários foram<span
-      class="text-danger"
-    >
+    {{ contUsuariosRemovidos }} usuários foram<span class="text-danger">
       removidos!</span
     >
     <button class="desfazer" (click)="desfazerAcao()">Desfazer ação</button>

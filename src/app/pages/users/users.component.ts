@@ -46,11 +46,9 @@ export class UsersComponent implements OnInit {
   }
 
   desfazerAcao() {
+    this.contUsuariosRemovidos = 0;
     for (var i = 0; i < this.listagemUsuarios.length; i++) {
-      if (this.listagemUsuarios[i].removido) {
-        this.listagemUsuarios[i].removido = false;
-      }
-      this.contUsuariosRemovidos = 0;
+      this.listagemUsuarios[i].removido = false;
     }
   }
 
