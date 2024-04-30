@@ -90,3 +90,25 @@ button {
   width: 100%;
   margin-bottom: 50px;
 }
+
+.desfazer-acao {
+  margin-left: 100px;
+  width: 1000px;
+  display: flex;
+  justify-content: end;
+}
+
+.desfazer {
+  width: auto;
+  height: auto;
+  margin-left: 15px;
+  background-color: #a2a3b6;
+}
+
+.desfazer:hover {
+  background-color: #66666d;
+}
+
+.desfazer:active {
+  background-color: #363638;
+}
