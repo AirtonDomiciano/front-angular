@@ -15,8 +15,8 @@
     </thead>
     <ng-container *ngFor="let usuario of listagemUsuarios">
       <tbody>
-        <tr>
-          <ng-container *ngIf="!usuario.removido">
+        <ng-container *ngIf="!usuario.removido">
+          <tr>
             <th scope="row" class="id">{{ usuario.id }}</th>
             <th>{{ usuario.nome }}</th>
             <th>{{ usuario.sobrenome }}</th>
@@ -43,8 +43,8 @@
                 />
               </div>
             </td>
-          </ng-container>
-        </tr>
+          </tr>
+        </ng-container>
       </tbody>
     </ng-container>
   </table>
@@ -66,7 +66,9 @@
 </div>
 <div class="desfazer-acao" *ngIf="contUsuariosRemovidos > 1">
   <div>
-    <strong>{{ contUsuariosRemovidos }} </strong>usuários foram<span>
+    <strong>{{ contUsuariosRemovidos }} </strong>usuários foram<span
+      class="text-danger"
+    >
       removidos!</span
     >
     <button class="desfazer" (click)="desfazerAcao()">Desfazer ação</button>
