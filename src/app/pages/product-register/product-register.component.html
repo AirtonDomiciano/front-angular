@@ -1,65 +1,71 @@
-<div class="container">
-  <div class="card">
-    <form
-      (ngSubmit)="onSubmit()"
-      [formGroup]="productRegisterFormGroup"
-      #formDir="ngForm"
-    >
-      <h1>Cadastrar Produtos</h1>
-      <div class="label">
-        <span for="">Nome:</span>
+<div class="bg-primary w-100 h-100">
+  <div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body border rounded">
+        <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="productRegisterFormGroup"
+          #formDir="ngForm"
+        >
+          <h1>Cadastrar Produtos</h1>
+          <div>
+            <app-input
+              type="text"
+              placeholder="Nome"
+              frmName="nome"
+              [form]="productRegisterFormGroup"
+            >
+            </app-input>
+          </div>
+          <div>
+            <app-input
+              type="text"
+              placeholder="Categoria"
+              frmName="categoria"
+              [form]="productRegisterFormGroup"
+            >
+            </app-input>
+            <datalist id="categorias" formControlName="categoria" required>
+              <option *ngFor="let categoria of categorias">
+                {{ categoria }}
+              </option>
+            </datalist>
+          </div>
+          <app-input
+            type="text"
+            placeholder="Nome"
+            frmName="nome"
+            [form]="productRegisterFormGroup"
+          >
+          </app-input>
+          <div>
+            <app-input
+              type="text"
+              placeholder="Nome"
+              frmName="nome"
+              [form]="productRegisterFormGroup"
+            >
+            </app-input>
+          </div>
+          <div>
+            <app-input
+              type="text"
+              placeholder="Nome"
+              frmName="nome"
+              [form]="productRegisterFormGroup"
+            >
+            </app-input>
+          </div>
+          <div>
+            <button
+              class="btn btn-primary rounded-pill mt-2 w-100"
+              type="submit"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
       </div>
-      <div>
-        <input type="text" class="input" formControlName="nome" required />
-        <div class="obrigatorio" *ngIf="semNome">Nome é obrigatório!</div>
-      </div>
-      <div class="label">
-        <span for="categoria">Categoria:</span>
-      </div>
-      <div>
-        <input
-          class="categoria"
-          list="categorias"
-          formControlName="categoria"
-          required
-        />
-        <datalist id="categorias" formControlName="categoria" required>
-          <option *ngFor="let categoria of categorias">{{ categoria }}</option>
-        </datalist>
-        <div class="obrigatorio" *ngIf="semCategoria">
-          Selecione uma categoria!
-        </div>
-      </div>
-      <div class="label">
-        <span for="preco">Preço:</span>
-      </div>
-      <div>
-        <input type="number" class="input" formControlName="preco" required />
-        <div class="obrigatorio" *ngIf="precoIsWrong">
-          Adicione um preço valido!
-        </div>
-      </div>
-      <div class="label">
-        <span for="descricao">Descrição</span>
-      </div>
-      <div>
-        <input type="text" class="input" formControlName="descricao" required />
-        <div class="obrigatorio" *ngIf="semDescricao">
-          Descrição é obrigatório!
-        </div>
-      </div>
-      <div class="label">
-        <span for="imagem">Imagem:</span>
-      </div>
-      <div>
-        <input type="text" class="input" formControlName="imagem" required />
-        <div class="obrigatorio" *ngIf="semImagem">
-          Coloque a URL de uma imagem!
-        </div>
-      </div>
-      <div>
-        <button class="botao" type="submit">Enviar</button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>
