@@ -1,71 +1,64 @@
-<div class="bg-primary w-100 h-100">
-  <div class="container">
-    <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body border rounded">
-        <form
-          (ngSubmit)="onSubmit()"
-          [formGroup]="productRegisterFormGroup"
-          #formDir="ngForm"
+<div class="card o-hidden border-0 shadow-lg my-5">
+  <div class="card-body border rounded">
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="productRegisterFormGroup"
+      #formDir="ngForm"
+    >
+      <h1>Cadastrar Produtos</h1>
+      <div>
+        <app-input
+          type="text"
+          placeholder="Nome"
+          frmName="nome"
+          [form]="productRegisterFormGroup"
         >
-          <h1>Cadastrar Produtos</h1>
-          <div>
-            <app-input
-              type="text"
-              placeholder="Nome"
-              frmName="nome"
-              [form]="productRegisterFormGroup"
-            >
-            </app-input>
-          </div>
-          <div>
-            <app-input
-              type="text"
-              placeholder="Categoria"
-              frmName="categoria"
-              [form]="productRegisterFormGroup"
-            >
-            </app-input>
-            <datalist id="categorias" formControlName="categoria" required>
-              <option *ngFor="let categoria of categorias">
-                {{ categoria }}
-              </option>
-            </datalist>
-          </div>
-          <app-input
-            type="text"
-            placeholder="Nome"
-            frmName="nome"
-            [form]="productRegisterFormGroup"
-          >
-          </app-input>
-          <div>
-            <app-input
-              type="text"
-              placeholder="Nome"
-              frmName="nome"
-              [form]="productRegisterFormGroup"
-            >
-            </app-input>
-          </div>
-          <div>
-            <app-input
-              type="text"
-              placeholder="Nome"
-              frmName="nome"
-              [form]="productRegisterFormGroup"
-            >
-            </app-input>
-          </div>
-          <div>
-            <button
-              class="btn btn-primary rounded-pill mt-2 w-100"
-              type="submit"
-            >
-              Enviar
-            </button>
-          </div>
-        </form>
+        </app-input>
       </div>
-    </div>
+      <div>
+        <app-input
+          type="text"
+          placeholder="Categoria"
+          frmName="categoria"
+          [form]="productRegisterFormGroup"
+        >
+        </app-input>
+        <datalist id="categorias" formControlName="categoria" required>
+          <option *ngFor="let categoria of categorias">
+            {{ categoria }}
+          </option>
+        </datalist>
+      </div>
+      <app-input
+        type="text"
+        placeholder="Nome"
+        frmName="nome"
+        [form]="productRegisterFormGroup"
+      >
+      </app-input>
+      <div>
+        <app-input
+          type="text"
+          placeholder="Nome"
+          frmName="nome"
+          [form]="productRegisterFormGroup"
+        >
+        </app-input>
+      </div>
+      <div>
+        <app-input
+          type="text"
+          placeholder="Nome"
+          frmName="nome"
+          [form]="productRegisterFormGroup"
+        >
+        </app-input>
+      </div>
+      <div>
+        <button class="btn btn-primary rounded-pill mt-2 w-100" type="submit">
+          Enviar
+        </button>
+      </div>
+    </form>
   </div>
 </div>
