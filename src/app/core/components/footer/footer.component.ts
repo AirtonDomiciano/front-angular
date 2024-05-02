@@ -1,16 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
+export class FooterComponent {
+  @Input() footerExpaned = true;
+  @Output() toggleFooter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-export class FooterComponent implements OnInit{  
-  public sidebarExpanded = true;  
-  
-  constructor(){}
-
-  ngOnInit(): void {      
-  }
+  handleFooterToggle = () => this.toggleFooter.emit(!this.footerExpaned);
 }

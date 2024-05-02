@@ -1,20 +1,20 @@
-<div class="sidebar" [ngClass]="{ expanded: isExpanded }">
-  <div class="header">
-    <h1 class="title">Aulas</h1>
+<div class="sidebar bg-primary" [ngClass]="{ expanded: isExpanded }">
+  <div class="bg-gradient-primary">
     <div class="toggle" (click)="handleSidebarToggle()">
-      <span class="chevron"></span>
+      <h2 class="text-white text-center">Aulas ></h2>
     </div>
   </div>
-  <div class="content" *ngFor="let route of routes">
+  <hr class="sidebar-divided" />
+  <div class="content text-white" *ngFor="let route of routes">
     <div class="link">
       <div
         class="content"
         [routerLink]="['/', route.route]"
         [routerLinkActive]="'active'"
       >
-        <app-icon></app-icon>
-        <div class="title">{{ route.title }}</div>
+        <div class="a.text-white">{{ route.title }}</div>
       </div>
+      <hr class="sidebar-divided" />
     </div>
   </div>
   <div class="footer"></div>

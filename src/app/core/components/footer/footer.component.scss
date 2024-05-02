@@ -1,21 +1,13 @@
 .footer {
   height: 50px;
-  width: 100%;
-  position: fixed;
   bottom: 0%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: #0f1017;
   left: 0;
 }
 
 p {
-  color: #6d6e7e;
   margin: 0%;
   font-size: medium;
-  border-radius: 1px solid rgb(58, 57, 57);
+  border-radius: 1px solid;
   padding: 0 8%;
   border-radius: 20px;
 }

@@ -40,7 +40,7 @@ export const produtosMock: ProductsModel[] = [
   {
     id: 5,
     nome: 'Fogão Itamaster',
-    categoria: 'Eletrodoméstico',
+    categoria: 'Eletrodomésticos',
     preco: 2499.99,
     descricao: 'Tecnologia de  ultima geração e anti óleo',
     imagem:
