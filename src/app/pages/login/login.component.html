@@ -6,32 +6,29 @@
     src="https://img.freepik.com/fotos-premi  um/um-cachorro-pug-vestindo-uma-jaqueta-amarela-e-oculos_911949-103.jpg"
   />
   <div class="box bg-light rounded-right">
-    <p class="message text-center mt-5 h4 mb-5">Welcome Back!</p>
+    <p class="message text-center mt-5 h4 mb-5">Login</p>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="row px-3 py-1">
         <div class="col-sm-12">
-          <input
+          <app-input
             type="email"
-            class="form-control"
-            id="exampleInputEmail"
-            aria-describedby="emailHelp"
             placeholder="E-mail"
-            formControlName="email"
-            required
-          />
+            frmName="email"
+            [form]="loginForm"
+          >
+          </app-input>
         </div>
       </div>
 
       <div class="row px-3 py-1">
         <div class="col-sm-12">
-          <input
+          <app-input
             type="password"
-            class="form-control"
-            id="exampleInputPassword1"
             placeholder="Senha"
-            formControlName="password"
-            required
-          />
+            frmName="password"
+            [form]="loginForm"
+          >
+          </app-input>
         </div>
       </div>
       <div class="row px-3 py-2">
@@ -63,7 +60,9 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <a href=""><p class="h6 text-center">Criar uma conta!</p></a>
+        <a (click)="cadastro()"
+          ><p class="h6 text-center">Criar uma conta!</p></a
+        >
       </div>
     </div>
   </div>

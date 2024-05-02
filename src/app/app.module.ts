@@ -25,6 +25,7 @@ import { ApiModule } from './pages/api/api.module';
 import { ApisModule } from './pages/apis/apis.module';
 import { EditApiModule } from './pages/edit-api/edit-api.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CadastroModule } from './pages/cadastro/cadastro.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -51,6 +52,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ApisModule,
     EditApiModule,
     NgbModule,
+    CadastroModule,
     //!REMOVER
     LoginModule,
   ],
