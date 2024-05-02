@@ -12,40 +12,25 @@ import { Router } from '@angular/router';
 export class UserComponent {
   public cadastroGroup: UntypedFormGroup;
   public cepHaveOnlyNumbers: boolean = true;
-  public emailIsWrong: boolean = false;
   public ageIsWrong: boolean = false;
   public cepIsWrong: boolean = false;
-  public semNome: boolean = false;
-  public semSobrenome: boolean = false;
-  public semIdade: boolean = false;
-  public semEmail: boolean = false;
-  public semCep: boolean = false;
-  public semFuncao: boolean = false;
 
   constructor(fb: FormBuilder, private router: Router) {
     this.cadastroGroup = fb.group({
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
       idade: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       cep: ['', Validators.required],
       funcao: ['', Validators.required],
     });
   }
 
   onSubmit() {
-    this.emailIsWrong = false;
     this.ageIsWrong = false;
     this.cepHaveOnlyNumbers = true;
     this.cepIsWrong = false;
-    this.semNome = false;
-    this.semSobrenome = false;
-    this.semIdade = false;
-    this.semEmail = false;
-    this.semCep = false;
-    this.semFuncao = false;
 
-    // if (this.cadastroGroup.valid) {
     const validation: boolean = this.validationSave(this.cadastroGroup.value);
     if (validation) {
       let usersLength = UsersMock.length - 1;
@@ -60,12 +45,11 @@ export class UserComponent {
       }
 
       input.email = input.email.toLocaleLowerCase();
-
+      input.ativo = true;
       UsersMock.push(input);
       this.router.navigate([`users`]);
     }
   }
-  // }
 
   onLoadCep(event: Event) {
     const cep = this.cadastroGroup.get('cep')?.value;
@@ -109,32 +93,26 @@ export class UserComponent {
     input.cep = input.cep.replace('-', '');
 
     if (input.nome === '') {
-      this.semNome = true;
       validation = false;
     }
 
     if (input.sobrenome === '') {
-      this.semSobrenome = true;
       validation = false;
     }
 
     if (!input.idade) {
-      this.semIdade = true;
       validation = false;
     }
 
     if (input.email === '') {
-      this.semEmail = true;
       validation = false;
     }
 
     if (input.cep === '') {
-      this.semCep = true;
       validation = false;
     }
 
     if (input.funcao === '') {
-      this.semFuncao = true;
       validation = false;
     }
 
@@ -154,8 +132,11 @@ export class UserComponent {
     }
 
     if (!input.email.includes('@')) {
-      this.emailIsWrong = true;
       validation = false;
+    }
+
+    if (input.idade < 0) {
+      this.ageIsWrong = true;
     }
     return validation;
   }

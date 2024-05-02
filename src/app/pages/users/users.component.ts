@@ -20,6 +20,7 @@ export class UsersComponent implements OnInit {
     this.listagemUsuarios = UsersMock;
     this.inicializandoAtivos();
     this.contadorUsersRemovidos();
+    console.log(this.listagemUsuarios);
   }
 
   addUser() {
