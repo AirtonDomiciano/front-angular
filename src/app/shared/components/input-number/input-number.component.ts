@@ -8,9 +8,9 @@ import { FormGroup } from '@angular/forms';
 })
 export class InputNumberComponent {
   @Input() form!: FormGroup;
-  @Input() type: string = 'number';
   @Input() class = 'form-control rounded-pill mt-2';
   @Input() id = '';
   @Input() frmName = '';
   @Input() placeholder = '';
+  @Input() min = '0';
 }
