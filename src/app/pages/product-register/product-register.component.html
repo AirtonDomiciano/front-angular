@@ -1,55 +1,63 @@
-<div class="card o-hidden border-0 shadow-lg my-5">
-  <div class="card-body border rounded">
+<div class="container d-flex justify-content-center align-items-center py-5">
+  <div class="card bg-white w-100 p-3">
     <form
+      class="was-validated"
       (ngSubmit)="onSubmit()"
       [formGroup]="productRegisterFormGroup"
       #formDir="ngForm"
     >
-      <h1>Cadastrar Produtos</h1>
-      <div>
-        <app-input
-          type="text"
-          placeholder="Nome"
-          frmName="nome"
-          [form]="productRegisterFormGroup"
-        >
-        </app-input>
+      <h1 class="text-center mb-4">Cadastrar Produto</h1>
+      <div class="row px-4 py-2">
+        <div class="col-sm-9">
+          <app-input
+            type="text"
+            placeholder="Nome"
+            frmName="nome"
+            [form]="productRegisterFormGroup"
+          >
+          </app-input>
+        </div>
+        <div class="col-sm-3">
+          <input
+            class="form-control rounded-pill mt-2"
+            list="categorias"
+            formControlName="categoria"
+            placeholder="Categoria"
+            required
+          />
+          <datalist id="categorias" formControlName="categoria" required>
+            <option *ngFor="let categoria of categorias">
+              {{ categoria }}
+            </option>
+          </datalist>
+          <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div>
+        </div>
       </div>
-      <div>
-        <app-input
-          type="text"
-          placeholder="Categoria"
-          frmName="categoria"
-          [form]="productRegisterFormGroup"
-        >
-        </app-input>
-        <datalist id="categorias" formControlName="categoria" required>
-          <option *ngFor="let categoria of categorias">
-            {{ categoria }}
-          </option>
-        </datalist>
+      <div class="row px-4 py-2">
+        <div class="col-sm-9">
+          <app-input
+            type="text"
+            placeholder="Descrição"
+            frmName="descricao"
+            [form]="productRegisterFormGroup"
+          >
+          </app-input>
+        </div>
+        <div class="col-sm-3">
+          <app-input
+            type="number"
+            placeholder="Preço"
+            frmName="preco"
+            [form]="productRegisterFormGroup"
+          >
+          </app-input>
+        </div>
       </div>
-      <app-input
-        type="text"
-        placeholder="Nome"
-        frmName="nome"
-        [form]="productRegisterFormGroup"
-      >
-      </app-input>
-      <div>
+      <div class="px-4 py-2">
         <app-input
           type="text"
-          placeholder="Nome"
-          frmName="nome"
-          [form]="productRegisterFormGroup"
-        >
-        </app-input>
-      </div>
-      <div>
-        <app-input
-          type="text"
-          placeholder="Nome"
-          frmName="nome"
+          placeholder="Imagem"
+          frmName="imagem"
           [form]="productRegisterFormGroup"
         >
         </app-input>
