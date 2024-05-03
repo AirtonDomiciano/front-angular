@@ -1,10 +1,10 @@
 <div class="sidebar bg-primary" [ngClass]="{ expanded: isExpanded }">
   <div class="bg-gradient-primary">
-    <div class="toggle" (click)="handleSidebarToggle()">
-      <h2 class="text-white text-center">Aulas ></h2>
+    <div class="toggle">
+      <h2 class="text-white text-center py-1 mt-2">Aulas</h2>
     </div>
   </div>
-  <hr class="sidebar-divided" />
+  <hr class="sidebar-divided mt-3" />
   <div class="content text-white" *ngFor="let route of routes">
     <div class="link">
       <div
