@@ -16,11 +16,11 @@ export class InputNumberComponent implements OnInit {
 export class InputNumberComponent {
 >>>>>>> e579271 (criando input number)
   @Input() form!: FormGroup;
-  @Input() type: string = 'number';
   @Input() class = 'form-control rounded-pill mt-2';
   @Input() id = '';
   @Input() frmName = '';
   @Input() placeholder = '';
+<<<<<<< HEAD
 <<<<<<< HEAD
 
   constructor() {}
@@ -28,4 +28,7 @@ export class InputNumberComponent {
   ngOnInit(): void {}
 =======
 >>>>>>> e579271 (criando input number)
+=======
+  @Input() min = '0';
+>>>>>>> 0b267ab (criando input number)
 }
