@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApisModel } from '../apis/api.model';
 import { apisMock } from '../apis/apis.mock';
@@ -10,7 +10,7 @@ import { apisMock } from '../apis/apis.mock';
   styleUrls: ['./edit-api.component.scss'],
 })
 export class EditApiComponent implements OnInit {
-  public apiFormGroup: UntypedFormGroup;
+  public apiFormGroup: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
   public model: ApisModel;
   public api = new ApisModel();

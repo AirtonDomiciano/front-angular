@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { produtosCarrinhoMock } from './carrinho.mock';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ProductsCarrinhoInterface } from './carrinho.interface';
-import { ShoppingMock } from '../shopping/shopping.mock';
+import { ShoppingMock } from '../shopping/models/shopping.mock';
 import { Router } from '@angular/router';
-import { ShoppingInterface } from '../shopping/shopping-interface';
+import { ShoppingInterface } from '../shopping/models/shopping-interface';
 
 @Component({
   selector: 'app-carrinho',

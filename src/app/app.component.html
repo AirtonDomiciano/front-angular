@@ -1,17 +1,8 @@
-<div *ngIf="!loggedIn">
-  <div *ngIf="!cadastro">
-    <app-login
-      (emitterLoggedIn)="receiveEmitLoggedIn()"
-      (emitterCadastro)="receiveEmitCadastro()"
-    ></app-login>
-  </div>
-  <div *ngIf="cadastro">
-    <app-cadastro (emitterLogin)="receiveEmitLogin()"></app-cadastro>
-  </div>
-</div>
-
 <div *ngIf="loggedIn">
-  <app-top-nav (emitterSignOut)="receiveEmitSignOut($event)"></app-top-nav>
+  <app-top-nav
+    [isExpanded]="sidebarExpanded"
+    (emitterSignOut)="receiveEmitSignOut($event)"
+  ></app-top-nav>
   <app-side-nav
     [isExpanded]="sidebarExpanded"
     (toggleSidebar)="sidebarExpanded = !sidebarExpanded"

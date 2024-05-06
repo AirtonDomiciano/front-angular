@@ -1,4 +1,4 @@
-import { ProductsCarrinhoInterface } from '../carrinho/carrinho.interface';
+import { ProductsCarrinhoInterface } from '../../carrinho/carrinho.interface';
 
 export interface ShoppingInterface {
   id?: number;

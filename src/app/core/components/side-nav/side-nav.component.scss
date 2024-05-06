@@ -10,6 +10,7 @@
   vertical-align: top;
   width: 0.35em;
 }
+
 .sidebar {
   position: fixed;
   left: 0;
@@ -58,11 +59,11 @@
     justify-content: center;
     padding: 10px;
 
-    background:#79b0d4;
+    background: #79b0d4;
 
     h1 {
       font-size: 20px;
- 
+
       margin: 0;
       flex: 1;
       transition: 0.3s;
@@ -84,8 +85,6 @@
         transition: 0.3s;
         transform: rotate(45deg);
       }
-
-
     }
   }
 

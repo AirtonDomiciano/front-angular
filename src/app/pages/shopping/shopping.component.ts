@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsCarrinhoInterface } from '../carrinho/carrinho.interface';
-import { ShoppingMock } from './shopping.mock';
-import { ShoppingInterface } from './shopping-interface';
+import { ShoppingMock } from './models/shopping.mock';
+import { ShoppingInterface } from './models/shopping-interface';
 import { Router } from '@angular/router';
 
 @Component({

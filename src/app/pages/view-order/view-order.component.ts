@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ShoppingInterface } from '../shopping/shopping-interface';
-import { ShoppingMock } from '../shopping/shopping.mock';
+import { ShoppingInterface } from '../shopping/models/shopping-interface';
+import { ShoppingMock } from '../shopping/models/shopping.mock';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
