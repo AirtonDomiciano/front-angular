@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'auth-layout',
-  template: ` <div id="content-wrapper" class="d-flex flex-column">
+  template: ` <div>
     <div id="content">
       <div>
         <router-outlet></router-outlet>

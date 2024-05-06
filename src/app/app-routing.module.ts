@@ -15,11 +15,22 @@ const routes: Routes = [
         loadChildren: () =>
           import('src/app/pages/login/login.module').then((m) => m.LoginModule),
       },
+      {
+        // { path: 'cadastro', component: CadastroComponent },
+        path: 'cadastro',
+        loadChildren: () =>
+          import('./pages/cadastro/cadastro.module').then(
+            (m) => m.CadastroModule
+          ),
+      },
     ],
   },
+  // ROTA DASHBOARD.
+  // quando o usuário tiver acesso.
   {
     data: { title: '' },
     path: '',
+    // canActivate: [AuthGuard],
     component: BaseLayoutComponent,
     children: [
       {
@@ -36,31 +47,25 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
       },
       {
-        path: 'cadastro',
+        path: 'products',
         loadChildren: () =>
-          import('./pages/cadastro/cadastro.module').then(
-            (m) => m.CadastroModule
-          ),
+          import('./pages/product/product.module').then((m) => m.ProductModule),
         // canActivate: [AuthGuard],
       },
+      // { path: 'products', component: ProductComponent },
+      // { path: 'user', component: UserComponent },
+      // { path: 'users', component: UsersComponent },
+      // { path: 'edit-user/:id', component: EditUserComponent },
+      // { path: 'edit-product/:id', component: EditProductComponent },
+      // { path: 'catalog', component: CatalogoComponent },
+      // { path: 'cart', component: CarrinhoComponent },
+      // { path: 'shopping', component: ShoppingComponent },
+      // { path: 'view-order/:id', component: ViewOrderComponent },
+      // { path: 'apis', component: ApisComponent },
+      // { path: 'api', component: ApiComponent },
+      // { path: 'edit-api/:id', component: EditApiComponent },
     ],
   },
-
-  // { path: 'cadastro', component: CadastroComponent },
-  // { path: 'home', component: HomeComponent },
-  // { path: 'product', component: ProductRegisterComponent },
-  // { path: 'products', component: ProductComponent },
-  // { path: 'user', component: UserComponent },
-  // { path: 'users', component: UsersComponent },
-  // { path: 'edit-user/:id', component: EditUserComponent },
-  // { path: 'edit-product/:id', component: EditProductComponent },
-  // { path: 'catalog', component: CatalogoComponent },
-  // { path: 'cart', component: CarrinhoComponent },
-  // { path: 'shopping', component: ShoppingComponent },
-  // { path: 'view-order/:id', component: ViewOrderComponent },
-  // { path: 'apis', component: ApisComponent },
-  // { path: 'api', component: ApiComponent },
-  // { path: 'edit-api/:id', component: EditApiComponent },
 ];
 
 @NgModule({
