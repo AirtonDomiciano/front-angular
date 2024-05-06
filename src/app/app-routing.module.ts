@@ -35,6 +35,14 @@ const routes: Routes = [
           ),
         // canActivate: [AuthGuard],
       },
+      {
+        path: 'cadastro',
+        loadChildren: () =>
+          import('./pages/cadastro/cadastro.module').then(
+            (m) => m.CadastroModule
+          ),
+        // canActivate: [AuthGuard],
+      },
     ],
   },
 

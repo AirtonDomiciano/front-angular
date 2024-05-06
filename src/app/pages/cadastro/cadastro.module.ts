@@ -5,12 +5,12 @@ import { CadastroComponent } from './cadastro.component';
 import { RouterModule } from '@angular/router';
 import { InputModule } from 'src/app/shared/components/input/input.module';
 import { CoreModule } from 'src/app/core/core.module';
+import { CadastroRoutingModule } from './cadastro-routing.module';
 
 @NgModule({
   declarations: [CadastroComponent],
   imports: [
-    CoreModule,
-    BrowserModule,
+    CadastroRoutingModule,
     ReactiveFormsModule,
     RouterModule,
     InputModule,
