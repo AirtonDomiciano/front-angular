@@ -1,17 +1,41 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthLayoutComponent } from './core/components/auth-layout/auth-layout.component';
+import { BaseLayoutComponent } from './core/components/base-layout/base-layout.component';
 
 const routes: Routes = [
   {
-    path: 'login',
-    loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginModule),
-    // canActivate: [AuthGuard],
+    data: { title: '' },
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      {
+        data: { title: 'Login', pathValidate: '' },
+        path: 'login',
+        loadChildren: () =>
+          import('src/app/pages/login/login.module').then((m) => m.LoginModule),
+      },
+    ],
   },
   {
-    path: 'edit-api',
-    loadChildren: () =>
-      import('./pages/edit-api/edit-api.module').then((m) => m.EditApiModule),
+    data: { title: '' },
+    path: '',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./pages/home/home.module').then((m) => m.HomeModule),
+      },
+      {
+        path: 'edit-api',
+        loadChildren: () =>
+          import('./pages/edit-api/edit-api.module').then(
+            (m) => m.EditApiModule
+          ),
+        // canActivate: [AuthGuard],
+      },
+    ],
   },
 
   // { path: 'cadastro', component: CadastroComponent },

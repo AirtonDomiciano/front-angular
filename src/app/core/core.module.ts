@@ -8,7 +8,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { IconModule } from '../shared/components/icon/icon.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { TopNavComponent } from './components/top-nav/model/top-nav.component';
-import { BodyComponent } from './components/body/body.component';
+import { BaseLayoutComponent } from './components/base-layout/base-layout.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { BodyComponent } from './components/body/body.component';
     SideNavComponent,
     TopNavComponent,
     FooterComponent,
-    BodyComponent,
+    BaseLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +28,6 @@ import { BodyComponent } from './components/body/body.component';
     // NgbModule,
     // MatToolbarModule
   ],
-  exports: [SideNavComponent, TopNavComponent, FooterComponent, BodyComponent],
+  exports: [SideNavComponent, TopNavComponent, FooterComponent],
 })
 export class CoreModule {}

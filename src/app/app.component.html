@@ -1,17 +1,2 @@
-<div *ngIf="loggedIn">
-  <app-top-nav
-    [isExpanded]="sidebarExpanded"
-    (emitterSignOut)="receiveEmitSignOut($event)"
-  ></app-top-nav>
-  <app-side-nav
-    [isExpanded]="sidebarExpanded"
-    (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
-  ></app-side-nav>
-  <div
-    class="content bg-light"
-    [ngClass]="{ sidebarExpanded: sidebarExpanded }"
-  >
-    <app-body></app-body>
-    <app-footer></app-footer>
-  </div>
-</div>
+<router-outlet></router-outlet>
+<ng-template #container></ng-template>

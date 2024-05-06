@@ -39,22 +39,20 @@ export class LoginComponent implements OnInit {
 
   async onSubmit(): Promise<void> {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
       const { email, password } = this.loginForm.value;
-      if (email?.length && password?.length) {
-        try {
-          this.LocalStorageService.saveLogin(email, password);
-        } finally {
-          setTimeout(() => {
-            this.wrongLogin = true;
-          }, 1000);
-        }
-        const res: any = await this.auth.emailSignin(email, password);
-        if (res._delegate?.accessToken.length > 0) {
-          this.wrongLogin = false;
-          this.emitterLoggedIn.emit();
-          this.router.navigate([`home/`]);
-        }
+
+      if (!email?.length && !password?.length) {
+        return;
+      }
+
+      this.LocalStorageService.saveLogin(email, password);
+
+      const res: any = await this.auth.login(email, password);
+
+      if (res) {
+        this.wrongLogin = false;
+        this.emitterLoggedIn.emit();
+        this.router.navigate([`home/`]);
       }
     }
   }

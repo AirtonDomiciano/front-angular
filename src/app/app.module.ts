@@ -25,9 +25,10 @@ import { ViewOrderModule } from './pages/view-order/view-order.module';
 import { ApiModule } from './pages/api/api.module';
 import { ApisModule } from './pages/apis/apis.module';
 import { CadastroModule } from './pages/cadastro/cadastro.module';
+import { AuthLayoutComponent } from './core/components/auth-layout/auth-layout.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AuthLayoutComponent],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
