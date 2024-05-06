@@ -1,9 +1,22 @@
+<!-- <div class="bg-primary" *ngIf="!loggedIn">
+  <div *ngIf="!cadastro">
+    <app-login
+      (emitterLoggedIn)="receiveEmitLoggedIn()"
+      (emitterCadastro)="receiveEmitCadastro()"
+    ></app-login>
+  </div>
+  <div *ngIf="cadastro">
+    <app-cadastro (emitterLogin)="receiveEmitLogin()"></app-cadastro>
+  </div>
+</div> -->
+
 <div>
   <app-top-nav
-    [isExpanded]="sidebarExpanded"
     (emitterSignOut)="receiveEmitSignOut($event)"
+    class="top-nav d-flex justify-content-end align-items-end"
   ></app-top-nav>
   <app-side-nav
+    class="side-nav"
     [isExpanded]="sidebarExpanded"
     (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
   ></app-side-nav>
