@@ -1,23 +1,43 @@
-<div class="container">
-  <h1>Exercício</h1>
-  <div class="card">
-    <a [routerLink]="['/user']">cadastre-se em nosso site</a>
-    <h1></h1>
-    <a [routerLink]="['/catalog']">veja os nossos produtos</a>
-  </div>
-</div>
-<div class="container2">
-  <div class="products">
-    <h1 class="h1">Produtos adicionados Recentemente:</h1>
-    <ng-container *ngFor="let produto of newProducts">
-      <table class="tabela">
-        <thead>
-          <tr>
-            <td scope="row" class="nome">{{ produto.nome }}</td>
-            <td scope="row" class="preco">R${{ produto.preco }}</td>
-          </tr>
-        </thead>
-      </table>
-    </ng-container>
+<div class="div-principal">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-12">
+        <div class="container bg-light shadow">
+          <h1 class="title text-primary">Bem Vindo</h1>
+          <div class="bg-white">
+            <hr class="sidebar-divided" />
+            <p class="text-muted">
+              Bem vindo a zona mais baixa do mercado negro, onde os produtos
+              variam entre uma coxinha até a uma bomba núclear.
+            </p>
+            <a [routerLink]="['/user']">cadastre-se em nosso site</a>
+            <h1></h1>
+            <a [routerLink]="['/catalog']">veja os nossos produtos</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="products bg-light shadow">
+          <h3 class="titulo text-primary">
+            Produtos adicionados Recentemente:
+          </h3>
+          <hr class="sidebar-divided" />
+          <ng-container *ngFor="let produto of newProducts">
+            <table class="table bg-white">
+              <thead>
+                <tr>
+                  <td scope="row" class="nome text-left w-50 text-muted">
+                    {{ produto.nome }}
+                  </td>
+                  <td scope="row" class="preco text-right w-50 text-muted">
+                    R${{ produto.preco }}
+                  </td>
+                </tr>
+              </thead>
+            </table>
+          </ng-container>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
