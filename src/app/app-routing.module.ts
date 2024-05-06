@@ -15,7 +15,6 @@ const routes: Routes = [
           import('src/app/pages/login/login.module').then((m) => m.LoginModule),
       },
       {
-        // { path: 'cadastro', component: CadastroComponent },
         path: 'cadastro',
         loadChildren: () =>
           import('./pages/registro-usuario/registro-usuario.module').then(
@@ -35,6 +34,7 @@ const routes: Routes = [
           import('./pages/home/home.module').then((m) => m.HomeModule),
         canActivate: [AuthGuard],
       },
+
       {
         path: 'produtos',
         loadChildren: () =>
@@ -43,23 +43,84 @@ const routes: Routes = [
           ),
         canActivate: [AuthGuard],
       },
+
       {
         data: { title: 'Início', pathValidate: '' },
         path: '**',
         redirectTo: '',
       },
-      // { path: 'products', component: ProductComponent },
-      // { path: 'user', component: UserComponent },
-      // { path: 'users', component: UsersComponent },
-      // { path: 'edit-user/:id', component: EditUserComponent },
-      // { path: 'edit-product/:id', component: EditProductComponent },
-      // { path: 'catalog', component: CatalogoComponent },
-      // { path: 'cart', component: CarrinhoComponent },
-      // { path: 'shopping', component: ShoppingComponent },
-      // { path: 'view-order/:id', component: ViewOrderComponent },
-      // { path: 'apis', component: ApisComponent },
-      // { path: 'api', component: ApiComponent },
-      // { path: 'edit-api/:id', component: EditApiComponent },
+
+      {
+        path: 'user',
+        loadChildren: () =>
+          import('./pages/user/user.module').then((m) => m.UserModule),
+      },
+
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./pages/users/users.module').then((m) => m.UsersModule),
+      },
+
+      {
+        path: 'edit-user',
+        loadChildren: () =>
+          import('./pages/edit-user/edit-user.module').then(
+            (m) => m.EditUserModule
+          ),
+      },
+
+      {
+        path: 'edit-product',
+        loadChildren: () =>
+          import('./pages/edit-product/edit-product.module').then(
+            (m) => m.EditProductModule
+          ),
+      },
+
+      {
+        path: 'catalog',
+        loadChildren: () =>
+          import('./pages/catalogo/catalogo.module').then(
+            (m) => m.CatalogoModule
+          ),
+      },
+
+      {
+        path: 'cart',
+        loadChildren: () =>
+          import('./pages/carrinho/carrinho.module').then(
+            (m) => m.CarrinhoModule
+          ),
+      },
+
+      {
+        path: 'shopping',
+        loadChildren: () =>
+          import('./pages/shopping/shopping.module').then(
+            (m) => m.ShoppingModule
+          ),
+      },
+
+      {
+        path: 'view-order',
+        loadChildren: () =>
+          import('./pages/view-order/view-order.module').then(
+            (m) => m.ViewOrderModule
+          ),
+      },
+
+      {
+        path: 'apis',
+        loadChildren: () =>
+          import('./pages/apis/apis.module').then((m) => m.ApisModule),
+      },
+
+      {
+        path: 'api',
+        loadChildren: () =>
+          import('./pages/api/api.module').then((m) => m.ApiModule),
+      },
     ],
   },
 ];
