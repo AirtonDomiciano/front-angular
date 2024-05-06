@@ -1,64 +1,71 @@
-<div class="container">
-  <div class="card">
+<div class="container d-flex justify-content-center align-items-center py-5">
+  <div class="card bg-white w-100 p-3">
     <form
+      class="was-validated"
       (ngSubmit)="onSubmit()"
       [formGroup]="productRegisterFormGroup"
       #formDir="ngForm"
     >
-      <h1>Cadastrar Produtos</h1>
-      <div class="label">
-        <span for="">Nome:</span>
-      </div>
-      <div>
-        <input type="text" class="input" formControlName="nome" required />
-        <div class="obrigatorio" *ngIf="semNome">Nome é obrigatório!</div>
-      </div>
-      <div class="label">
-        <span for="categoria">Categoria:</span>
-      </div>
-      <div>
-        <input
-          class="categoria"
-          list="categorias"
-          formControlName="categoria"
-          required
-        />
-        <datalist id="categorias" formControlName="categoria" required>
-          <option *ngFor="let categoria of categorias">{{ categoria }}</option>
-        </datalist>
-        <div class="obrigatorio" *ngIf="semCategoria">
-          Selecione uma categoria!
+      <h1 class="text-center mb-4">Cadastrar Produto</h1>
+      <div class="row px-4 py-2">
+        <div class="col-sm-9">
+          <app-input
+            type="text"
+            placeholder="Nome"
+            frmName="nome"
+            [form]="productRegisterFormGroup"
+          >
+          </app-input>
+        </div>
+        <div class="col-sm-3">
+          <input
+            class="form-control rounded-pill mt-2"
+            list="categorias"
+            formControlName="categoria"
+            placeholder="Categoria"
+            required
+          />
+          <datalist id="categorias" formControlName="categoria" required>
+            <option *ngFor="let categoria of categorias">
+              {{ categoria }}
+            </option>
+          </datalist>
+          <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div>
         </div>
       </div>
-      <div class="label">
-        <span for="preco">Preço:</span>
-      </div>
-      <div>
-        <input type="number" class="input" formControlName="preco" required />
-        <div class="obrigatorio" *ngIf="precoIsWrong">
-          Adicione um preço valido!
+      <div class="row px-4 py-2">
+        <div class="col-sm-9">
+          <app-input
+            type="text"
+            placeholder="Descrição"
+            frmName="descricao"
+            [form]="productRegisterFormGroup"
+          >
+          </app-input>
+        </div>
+        <div class="col-sm-3">
+          <app-input
+            type="number"
+            placeholder="Preço"
+            frmName="preco"
+            [form]="productRegisterFormGroup"
+          >
+          </app-input>
         </div>
       </div>
-      <div class="label">
-        <span for="descricao">Descrição</span>
+      <div class="px-4 py-2">
+        <app-input
+          type="text"
+          placeholder="Imagem"
+          frmName="imagem"
+          [form]="productRegisterFormGroup"
+        >
+        </app-input>
       </div>
       <div>
-        <input type="text" class="input" formControlName="descricao" required />
-        <div class="obrigatorio" *ngIf="semDescricao">
-          Descrição é obrigatório!
-        </div>
-      </div>
-      <div class="label">
-        <span for="imagem">Imagem:</span>
-      </div>
-      <div>
-        <input type="text" class="input" formControlName="imagem" required />
-        <div class="obrigatorio" *ngIf="semImagem">
-          Coloque a URL de uma imagem!
-        </div>
-      </div>
-      <div>
-        <button class="botao" type="submit">Enviar</button>
+        <button class="btn btn-primary rounded-pill mt-2 w-100" type="submit">
+          Enviar
+        </button>
       </div>
     </form>
   </div>
