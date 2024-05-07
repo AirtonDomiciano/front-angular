@@ -13,16 +13,19 @@
     <ng-container *ngFor="let produto of listagemProdutos">
       <tbody>
         <tr>
-          <th scope="row" class="id">{{ produto.id }}</th>
+          <th scope="row" class="id">{{ produto.idProdutos }}</th>
           <td>{{ produto.nome }}</td>
           <td>{{ produto.categoria }}</td>
           <td>R$: {{ produto.preco }}</td>
           <td class="descricao">{{ produto.descricao }}</td>
           <td class="acao">
-            <button class="editar" (click)="editarProduto(produto.id!)">
+            <button class="editar" (click)="editarProduto(produto.idProdutos!)">
               Editar
             </button>
-            <button class="excluir" (click)="excluirProduto(produto.id!)">
+            <button
+              class="excluir"
+              (click)="excluirProduto(produto.idProdutos!)"
+            >
               Excluir
             </button>
           </td>

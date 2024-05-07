@@ -42,9 +42,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'products',
+        path: 'produtos',
         loadChildren: () =>
-          import('./pages/product/product.module').then((m) => m.ProductModule),
+          import('./pages/produtos/produtos.module').then(
+            (m) => m.ProdutosModule
+          ),
         canActivate: [AuthGuard],
       },
       // { path: 'products', component: ProductComponent },
