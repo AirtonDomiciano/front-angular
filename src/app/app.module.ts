@@ -11,10 +11,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { firebaseConfig } from './core/firebase/config/config';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { UserModule } from './pages/user/user.module';
+import { UsuarioModule } from './pages/usuario/usuario.module';
+import { UsuariosModule } from './pages/usuarios/usuarios.module';
 import { ProdutosModule } from './pages/produtos/produtos.module';
-import { UsersModule } from './pages/users/users.module';
-import { EditUserModule } from './pages/edit-user/edit-user.module';
 import { ProdutoModule } from './pages/produto/produto.module';
 import { HomeModule } from './pages/home/home.module';
 import { CatalogoModule } from './pages/catalogo/catalogo.module';
@@ -38,7 +37,6 @@ import { AuthLayoutComponent } from './core/components/auth-layout/auth-layout.c
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

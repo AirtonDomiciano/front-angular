@@ -9,7 +9,6 @@
       <th scope="col">Cep</th>
       <th scope="col">Função</th>
       <th scope="col">Ações</th>
-      <th scope="col">Ativo</th>
     </tr>
   </thead>
   <tbody *ngFor="let usuario of listagemUsuarios">
@@ -22,27 +21,18 @@
       <th>{{ usuario.cep | cep }}</th>
       <th>{{ usuario.funcao }}</th>
       <td class="acao">
-        <button (click)="editarUser(usuario.idUsuario!)" class="editar">
+        <button (click)="editarUsuario(usuario.idUsuario!)" class="editar">
           Editar
         </button>
-        <button (click)="removerUser(usuario.idUsuario!)" class="excluir">
+        <button (click)="removerUsuario(usuario.idUsuario!)" class="excluir">
           Remover
         </button>
-      </td>
-      <td>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            [formControlName]="usuario.idUsuario!.toString()"
-          />
-        </div>
       </td>
     </tr>
   </tbody>
 </table>
-<div class="add-user">
-  <button (click)="addUser()">Adicionar Usuário</button>
+<div class="adicionar-usuario">
+  <button (click)="adicionarUsuario()">Adicionar Usuário</button>
 </div>
 <div class="desfazer-acao" *ngIf="contUsuariosRemovidos === 1">
   <div>
