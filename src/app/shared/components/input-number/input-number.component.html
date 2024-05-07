@@ -1,13 +1,12 @@
 <form [formGroup]="form" action="" method="get">
   <input
-    type="number"
+    type="{{ type }}"
     class="{{ class }}"
     id="{{ frmName }}"
     placeholder="{{ placeholder }}"
     formControlName="{{ frmName }}"
-    min="{{ min }}"
     [ngClass]="{
-      'is-invalid': form.get(frmName)?.invalid || form.get(frmName)?.errors?.[min]
+      'is-invalid': form.get(frmName)?.invalid
     }"
     required
   />
