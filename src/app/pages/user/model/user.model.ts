@@ -1,5 +1,5 @@
 export class UserModel {
-  id?: number;
+  idUsuario?: number;
   nome: string;
   sobrenome: string;
   idade: number;
@@ -9,14 +9,22 @@ export class UserModel {
   removido: boolean;
   ativo?: boolean;
   apis: number[];
+  localidade?: string;
+  uf?: string;
+  bairro?: string;
+  logradouro?: string;
 
   constructor() {
-    this.nome = '';
-    this.sobrenome = '';
     this.idade = 0;
-    this.email = '';
+    this.uf = '';
     this.cep = '';
+    this.nome = '';
+    this.email = '';
     this.funcao = '';
+    this.sobrenome = '';
+    this.localidade = '';
+    this.bairro = '';
+    this.logradouro = '';
     this.removido = false;
     this.ativo = true;
     this.apis = [];

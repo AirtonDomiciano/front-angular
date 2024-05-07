@@ -2,24 +2,18 @@
   class="container d-flex justify-content-center align-items-center mt-5 py-5"
 >
   <div class="card bg-white w-100">
-    <form (ngSubmit)="onSubmit()" [formGroup]="cadastroGroup" #formDir="ngForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
       <h1 class="text-center">Cadastro</h1>
       <div class="row px-4 py-2">
         <div class="col-sm-6">
-          <app-input
-            type="text"
-            placeholder="Nome"
-            frmName="nome"
-            [form]="cadastroGroup"
-          >
+          <app-input placeholder="Nome" frmName="nome" [form]="formGroup">
           </app-input>
         </div>
         <div class="col-sm-6">
           <app-input
-            type="text"
-            placeholder="Sobrenome"
             frmName="sobrenome"
-            [form]="cadastroGroup"
+            placeholder="Sobrenome"
+            [form]="formGroup"
           >
           </app-input>
         </div>
@@ -30,35 +24,23 @@
             type="email"
             placeholder="E-mail"
             frmName="email"
-            [form]="cadastroGroup"
+            [form]="formGroup"
           >
           </app-input>
         </div>
         <div class="col-sm-6">
-          <app-input
-            type="text"
+          <app-input-cep
             placeholder="CEP"
-            (input)="onLoadCep($event)"
+            (onEvent)="onLoadCep($event)"
             frmName="cep"
-            [form]="cadastroGroup"
+            [form]="formGroup"
           >
-          </app-input>
-          <div *ngIf="cepIsWrong">
-            <p class="text-danger">O cep precisa ter 8 caracteres</p>
-          </div>
-          <div *ngIf="!cepHaveOnlyNumbers">
-            <p class="text-danger">O cep só pode conter números!</p>
-          </div>
+          </app-input-cep>
         </div>
       </div>
       <div class="row px-4 py-2">
         <div class="col-sm-9">
-          <app-input
-            type="text"
-            placeholder="Função"
-            frmName="funcao"
-            [form]="cadastroGroup"
-          >
+          <app-input placeholder="Função" frmName="funcao" [form]="formGroup">
           </app-input>
         </div>
         <div class="col-sm-3">
@@ -66,17 +48,60 @@
             type="number"
             placeholder="Idade"
             frmName="idade"
-            [form]="cadastroGroup"
+            [form]="formGroup"
           >
           </app-input>
-          <div *ngIf="ageIsWrong">
-            <p class="text-danger">A idade não pode ser negativa!</p>
-          </div>
+        </div>
+      </div>
+      <div class="row px-4 py-2">
+        <div class="col-sm-9">
+          <app-input
+            type="text"
+            placeholder="Cidade"
+            frmName="localidade"
+            [form]="formGroup"
+          >
+          </app-input>
+        </div>
+        <div class="col-sm-3">
+          <app-input
+            type="text"
+            placeholder="UF"
+            frmName="uf"
+            [form]="formGroup"
+          >
+          </app-input>
+        </div>
+      </div>
+      <div class="row px-4 py-2">
+        <div class="col-sm-6">
+          <app-input
+            type="text"
+            placeholder="Rua"
+            frmName="logradouro"
+            [form]="formGroup"
+          >
+          </app-input>
+        </div>
+        <div class="col-sm-6">
+          <app-input
+            type="text"
+            placeholder="Bairro"
+            frmName="bairro"
+            [form]="formGroup"
+          >
+          </app-input>
         </div>
       </div>
       <div class="row px-4 py-2 mt-3">
         <div class="col-sm-12">
-          <button class="btn btn-primary rounded-pill w-100">Enviar</button>
+          <button
+            [disabled]="this.formGroup.invalid"
+            class="btn btn-primary rounded-pill w-100"
+            type="submit"
+          >
+            Salvar
+          </button>
         </div>
       </div>
     </form>

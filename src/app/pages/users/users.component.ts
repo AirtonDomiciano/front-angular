@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from '../user/user.model';
+import { UserModel } from '../user/model/user.model';
 import { UsersMock } from './users.mock';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -31,15 +31,8 @@ export class UsersComponent implements OnInit {
     this.router.navigate([`edit-user/${id}`]);
   }
 
-  alterouAtivo(id: number) {
-    const ativo = this.ativoFormGroup.get(id.toString())?.value;
-    const index = this.listagemUsuarios.findIndex((el) => el.id === id);
-    this.listagemUsuarios[index].ativo = ativo;
-    UsersMock[index].ativo = this.listagemUsuarios[index].ativo;
-  }
-
   removerUser(id: number): void {
-    const index = this.listagemUsuarios.findIndex((el) => el.id === id);
+    const index = this.listagemUsuarios.findIndex((el) => el.idUsuario === id);
     if (index !== -1) {
       this.contUsuariosRemovidos++;
       UsersMock[index].removido = true;
@@ -64,7 +57,7 @@ export class UsersComponent implements OnInit {
   inicializandoAtivos(): void {
     const group: any = {};
     this.listagemUsuarios.forEach((api) => {
-      group[api.id!.toString()] = new FormControl(api.ativo === true);
+      group[api.idUsuario!.toString()] = new FormControl(api.ativo === true);
     });
     this.ativoFormGroup = new FormGroup(group);
   }
