@@ -18,7 +18,7 @@ import { HomeModule } from './pages/home/home.module';
 import { CatalogoModule } from './pages/catalogo/catalogo.module';
 import { CarrinhoModule } from './pages/carrinho/carrinho.module';
 import { ShoppingModule } from './pages/shopping/shopping.module';
-import { ViewOrderModule } from './pages/view-order/view-order.module';
+import { PedidosModule } from './pages/pedidos/pedidos.module';
 import { ApiModule } from './pages/api/api.module';
 import { ApisModule } from './pages/apis/apis.module';
 >>>>>>> 582be8699f0780368fb2b2270bf82848c1567bbc

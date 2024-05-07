@@ -4,11 +4,11 @@ import { ShoppingMock } from '../shopping/models/shopping.mock';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-view-order',
-  templateUrl: './view-order.component.html',
-  styleUrls: ['./view-order.component.scss'],
+  selector: 'app-pedidos',
+  templateUrl: './pedidos.component.html',
+  styleUrls: ['./pedidos.component.scss'],
 })
-export class ViewOrderComponent implements OnInit {
+export class PedidosComponent implements OnInit {
   public produtosComprados!: ShoppingInterface;
   public id = Number(this.route.snapshot.paramMap.get('id'));
 
