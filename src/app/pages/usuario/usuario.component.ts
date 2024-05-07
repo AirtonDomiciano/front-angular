@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { UserModel } from './model/user.model';
+import { UsuarioModel } from './model/usuario.model';
 import { Router } from '@angular/router';
 import { EnderecoInterface } from 'src/app/shared/components/input-cep/endereco.interface';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  selector: 'app-usuario',
+  templateUrl: './usuario.component.html',
+  styleUrls: ['./usuario.component.scss'],
 })
-export class UserComponent implements OnInit {
+export class UsuarioComponent implements OnInit {
   public formGroup!: UntypedFormGroup;
 
-  public model: UserModel = new UserModel();
+  public model: UsuarioModel = new UsuarioModel();
 
   constructor(fb: FormBuilder, private router: Router) {
     this.formGroup = fb.group(this.model);
@@ -32,14 +32,14 @@ export class UserComponent implements OnInit {
       return;
     }
 
-    const input: UserModel = this.formGroup.value;
+    const input: UsuarioModel = this.formGroup.value;
 
     input.email = input.email.toLocaleLowerCase();
 
     const res = () => true;
 
     if (res()) {
-      this.router.navigate([`users`]);
+      this.router.navigate([`usuarios`]);
     }
   }
 

@@ -1,4 +1,4 @@
-export class UserModel {
+export class UsuariosModel {
   idUsuario?: number;
   nome: any;
   sobrenome: any;

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { UserComponent } from './user.component';
+import { UsuarioComponent } from './usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputModule } from 'src/app/shared/components/input/input.module';
 import { RouterModule } from '@angular/router';
 import { InputCepModule } from 'src/app/shared/components/input-cep/input-cep.module';
 
 @NgModule({
-  declarations: [UserComponent],
+  declarations: [UsuarioComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -16,6 +16,6 @@ import { InputCepModule } from 'src/app/shared/components/input-cep/input-cep.mo
     InputModule,
     InputCepModule,
   ],
-  exports: [UserComponent],
+  exports: [UsuarioComponent],
 })
-export class UserModule {}
+export class UsuarioModule {}

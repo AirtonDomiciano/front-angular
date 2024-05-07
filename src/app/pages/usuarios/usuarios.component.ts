@@ -1,41 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from '../user/model/user.model';
-import { UsersMock } from './users.mock';
+import { UsuariosMock } from './usuarios.mock';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
+import { UsuarioModel } from '../usuario/model/usuario.model';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  selector: 'app-usuarios',
+  templateUrl: './usuarios.component.html',
+  styleUrls: ['./usuarios.component.scss'],
 })
-export class UsersComponent implements OnInit {
-  public listagemUsuarios: UserModel[] = [];
+export class UsuariosComponent implements OnInit {
+  public listagemUsuarios: UsuarioModel[] = [];
   public contUsuariosRemovidos: number = 0;
   public ativoFormGroup: FormGroup = new FormGroup({});
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.listagemUsuarios = UsersMock;
+    this.listagemUsuarios = UsuariosMock;
     this.inicializandoAtivos();
-    this.contadorUsersRemovidos();
+    this.contadorUsuariosRemovidos();
     console.log(this.listagemUsuarios);
   }
 
-  addUser() {
-    this.router.navigate([`user`]);
+  adicionarUsuario() {
+    this.router.navigate([`usuario`]);
   }
 
-  editarUser(id: number) {
-    this.router.navigate([`edit-user/${id}`]);
+  editarUsuario(id: number) {
+    this.router.navigate([`usuario/${id}`]);
   }
 
-  removerUser(id: number): void {
+  removerUsuario(id: number): void {
     const index = this.listagemUsuarios.findIndex((el) => el.idUsuario === id);
     if (index !== -1) {
       this.contUsuariosRemovidos++;
-      UsersMock[index].removido = true;
+      UsuariosMock[index].removido = true;
     }
   }
 
@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  contadorUsersRemovidos() {
+  contadorUsuariosRemovidos() {
     for (var i = 0; i < this.listagemUsuarios.length; i++) {
       if (this.listagemUsuarios[i].removido) {
         this.contUsuariosRemovidos++;
