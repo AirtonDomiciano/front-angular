@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './core/components/auth-layout/auth-layout.component';
-import { BaseLayoutComponent } from './core/components/base-layout/base-layout.component';
+import BaseLayoutComponent from './core/components/base-layout/base-layout.component';
 import { AuthGuardService as AuthGuard } from './core/guards/auth-guard.service';
 
 const routes: Routes = [
   {
-    data: { title: '' },
-    path: '',
+    path: 'auth',
     component: AuthLayoutComponent,
     children: [
       {
-        data: { title: 'Login', pathValidate: '' },
         path: 'login',
         loadChildren: () =>
           import('src/app/pages/login/login.module').then((m) => m.LoginModule),
@@ -27,14 +25,10 @@ const routes: Routes = [
       { path: '**', redirectTo: 'login' },
     ],
   },
-  // ROTA DASHBOARD.
-  // quando o usuário tiver acesso.
   {
-    data: { title: '' },
     path: '',
     component: BaseLayoutComponent,
     children: [
-      { path: '**', redirectTo: 'home' },
       {
         path: 'home',
         loadChildren: () =>
@@ -46,6 +40,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./pages/product/product.module').then((m) => m.ProductModule),
         canActivate: [AuthGuard],
+      },
+      {
+        data: { title: 'Início', pathValidate: '' },
+        path: '**',
+        redirectTo: '',
       },
       // { path: 'products', component: ProductComponent },
       // { path: 'user', component: UserComponent },

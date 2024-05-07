@@ -8,16 +8,10 @@ import { AppRoutingModule } from '../app-routing.module';
 import { IconModule } from '../shared/components/icon/icon.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { TopNavComponent } from './components/top-nav/model/top-nav.component';
-import { BaseLayoutComponent } from './components/base-layout/base-layout.component';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [
-    SideNavComponent,
-    TopNavComponent,
-    FooterComponent,
-    BaseLayoutComponent,
-  ],
+  declarations: [SideNavComponent, TopNavComponent, FooterComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
