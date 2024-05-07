@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApisModel } from './api.model';
+import { ApisModel } from './model/apis.model';
 import { apisMock } from './apis.mock';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';

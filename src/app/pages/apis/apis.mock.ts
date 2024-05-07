@@ -1,4 +1,4 @@
-import { ApisModel } from './api.model';
+import { ApisModel } from './model/apis.model';
 
 export const apisMock: ApisModel[] = [
   {
