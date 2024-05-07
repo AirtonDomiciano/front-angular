@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserModel } from '../user/user.model';
+import { UserModel } from '../user/model/user.model';
 import { UsersMock } from '../users/users.mock';
 import { ApisModel } from '../apis/api.model';
 import { apisMock } from '../apis/apis.mock';
@@ -21,7 +21,7 @@ export class EditUserComponent implements OnInit {
   public id = Number(this.route.snapshot.paramMap.get('id'));
   public userFormGroup: UntypedFormGroup;
   public model: UserModel;
-  public index = UsersMock.findIndex((el) => el.id === this.id);
+  public index = UsersMock.findIndex((el) => el.idUsuario === this.id);
   public user = new UserModel();
   public cepHaveOnlyNumbers: boolean = true;
   public emailIsWrong: boolean = false;
