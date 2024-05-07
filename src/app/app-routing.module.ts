@@ -18,8 +18,8 @@ const routes: Routes = [
         // { path: 'cadastro', component: CadastroComponent },
         path: 'cadastro',
         loadChildren: () =>
-          import('./pages/cadastro/cadastro.module').then(
-            (m) => m.CadastroModule
+          import('./pages/registro-usuario/registro-usuario.module').then(
+            (m) => m.RegistroUsuarioModule
           ),
       },
       { path: '**', redirectTo: 'login' },
@@ -36,9 +36,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'products',
+        path: 'produtos',
         loadChildren: () =>
-          import('./pages/product/product.module').then((m) => m.ProductModule),
+          import('./pages/produtos/produtos.module').then(
+            (m) => m.ProdutosModule
+          ),
         canActivate: [AuthGuard],
       },
       {

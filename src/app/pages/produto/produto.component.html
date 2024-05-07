@@ -1,0 +1,61 @@
+<div class="container d-flex justify-content-center align-items-center py-5">
+  <div class="card bg-white w-100 p-3">
+    <form
+      class="was-validated"
+      (ngSubmit)="onSubmit()"
+      [formGroup]="formGroup"
+      #formDir="ngForm"
+    >
+      <h1 class="text-center mb-4">Cadastrar Produto</h1>
+      <div class="row px-4 py-2">
+        <div class="col-sm-9">
+          <app-input placeholder="Nome" frmName="nome" [form]="formGroup">
+          </app-input>
+        </div>
+        <div class="col-sm-3">
+          <input
+            class="form-control rounded-pill mt-2"
+            list="categorias"
+            formControlName="categoria"
+            placeholder="Categoria"
+            required
+          />
+          <datalist id="categorias" formControlName="categoria" required>
+            <option *ngFor="let categoria of categorias">
+              {{ categoria }}
+            </option>
+          </datalist>
+          <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div>
+        </div>
+      </div>
+      <div class="row px-4 py-2">
+        <div class="col-sm-9">
+          <app-input
+            placeholder="Descrição"
+            frmName="descricao"
+            [form]="formGroup"
+          >
+          </app-input>
+        </div>
+        <div class="col-sm-3">
+          <app-input
+            type="number"
+            placeholder="Preço"
+            frmName="preco"
+            [form]="formGroup"
+          >
+          </app-input>
+        </div>
+      </div>
+      <div class="px-4 py-2">
+        <app-input placeholder="Imagem" frmName="imagem" [form]="formGroup">
+        </app-input>
+      </div>
+      <div>
+        <button class="btn btn-primary rounded-pill mt-2 w-100" type="submit">
+          Enviar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Preço</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Ação</th>
+      </tr>
+    </thead>
+    <ng-container *ngFor="let produto of listagemProdutos">
+      <tbody>
+        <tr>
+          <th scope="row" class="id">{{ produto.idProdutos }}</th>
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.categoria }}</td>
+          <td>R$: {{ produto.preco }}</td>
+          <td class="descricao">{{ produto.descricao }}</td>
+          <td class="acao">
+            <button class="editar" (click)="editarProduto(produto.idProdutos!)">
+              Editar
+            </button>
+            <button
+              class="excluir"
+              (click)="excluirProduto(produto.idProdutos!)"
+            >
+              Excluir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </ng-container>
+  </table>
+  <div class="add-product">
+    <button (click)="addProduto()">Adicionar Produto</button>
+  </div>
+</div>
