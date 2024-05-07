@@ -7,9 +7,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-<<<<<<< HEAD
-import { UserModule } from './pages/user/user.module';
-=======
 import { UsuarioModule } from './pages/usuario/usuario.module';
 import { UsuariosModule } from './pages/usuarios/usuarios.module';
 import { ProdutosModule } from './pages/produtos/produtos.module';
@@ -21,7 +18,6 @@ import { ShoppingModule } from './pages/shopping/shopping.module';
 import { PedidosModule } from './pages/pedidos/pedidos.module';
 import { ApiModule } from './pages/api/api.module';
 import { ApisModule } from './pages/apis/apis.module';
->>>>>>> 582be8699f0780368fb2b2270bf82848c1567bbc
 import { AuthLayoutComponent } from './core/components/auth-layout/auth-layout.component';
 import BaseLayoutComponent from './core/components/base-layout/base-layout.component';
 
