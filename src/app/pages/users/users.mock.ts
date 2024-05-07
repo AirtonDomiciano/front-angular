@@ -1,8 +1,8 @@
-import { UserModel } from '../user/user.model';
+import { UserModel } from '../user/model/user.model';
 
 export const UsersMock: UserModel[] = [
   {
-    id: 1,
+    idUsuario: 1,
     nome: 'Airton',
     sobrenome: 'Domiciano',
     idade: 50,
@@ -14,7 +14,7 @@ export const UsersMock: UserModel[] = [
     apis: [],
   },
   {
-    id: 2,
+    idUsuario: 2,
     nome: 'Cauã',
     sobrenome: 'Kelly',
     idade: 18,
@@ -26,7 +26,7 @@ export const UsersMock: UserModel[] = [
     apis: [],
   },
   {
-    id: 3,
+    idUsuario: 3,
     nome: 'Pedro',
     sobrenome: 'Ribeiro',
     idade: 17,
@@ -38,7 +38,7 @@ export const UsersMock: UserModel[] = [
     apis: [],
   },
   {
-    id: 4,
+    idUsuario: 4,
     nome: 'Yuri',
     sobrenome: 'Schenkel',
     idade: 18,

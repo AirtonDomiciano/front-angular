@@ -15,7 +15,6 @@ import { UserModule } from './pages/user/user.module';
 import { ProductModule } from './pages/product/product.module';
 import { UsersModule } from './pages/users/users.module';
 import { EditUserModule } from './pages/edit-user/edit-user.module';
-import { EditProductModule } from './pages/edit-product/edit-product.module';
 import { ProductRegisterModule } from './pages/product-register/product-register.module';
 import { HomeModule } from './pages/home/home.module';
 import { CatalogoModule } from './pages/catalogo/catalogo.module';
@@ -39,6 +38,7 @@ import { AuthLayoutComponent } from './core/components/auth-layout/auth-layout.c
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

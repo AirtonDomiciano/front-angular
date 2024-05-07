@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ApisComponent } from './apis.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InputCepComponent } from './input-cep.component';
 
 @NgModule({
-  declarations: [ApisComponent],
+  declarations: [InputCepComponent],
   imports: [BrowserModule, ReactiveFormsModule],
-  exports: [ApisComponent],
+  exports: [InputCepComponent],
 })
-export class ApisModule {}
+export class InputCepModule {}

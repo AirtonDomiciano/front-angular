@@ -42,14 +42,6 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
-        path: 'edit-api',
-        loadChildren: () =>
-          import('./pages/edit-api/edit-api.module').then(
-            (m) => m.EditApiModule
-          ),
-        canActivate: [AuthGuard],
-      },
-      {
         path: 'products',
         loadChildren: () =>
           import('./pages/product/product.module').then((m) => m.ProductModule),
