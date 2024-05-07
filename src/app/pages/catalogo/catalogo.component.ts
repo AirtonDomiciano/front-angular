@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { produtosMock } from '../product/product.mock';
-import { ProductsModel } from '../product/product.model';
+import { produtosMock } from '../produtos/produtos.mock';
+import { ProdutosModel } from '../produtos/model/produtos.model';
 import { produtosCarrinhoMock } from '../carrinho/carrinho.mock';
-import { CategoriasProdutos } from '../product-register/array-categorias';
+import { CategoriasProdutos } from '../produto/array-categorias';
 import { FormBuilder, UntypedFormGroup } from '@angular/forms';
 
 @Component({
@@ -11,12 +11,12 @@ import { FormBuilder, UntypedFormGroup } from '@angular/forms';
   styleUrls: ['./catalogo.component.scss'],
 })
 export class CatalogoComponent implements OnInit {
-  public produtos: ProductsModel[] = [];
+  public produtos: ProdutosModel[] = [];
   public arrayCategorias: string[] = [];
   public categoriasFormGroup: UntypedFormGroup;
   public filtroAtivo = false;
-  public produtosFiltrados: ProductsModel[] = [];
-  public produtosCarrinho: ProductsModel[] = [];
+  public produtosFiltrados: ProdutosModel[] = [];
+  public produtosCarrinho: ProdutosModel[] = [];
 
   constructor(fb: FormBuilder) {
     this.categoriasFormGroup = fb.group({
@@ -31,7 +31,7 @@ export class CatalogoComponent implements OnInit {
   }
 
   adicionarProdutoNoCarrinho(id: number) {
-    const index = this.produtos.findIndex((el) => el.id === id);
+    const index = this.produtos.findIndex((el) => el.idProdutos === id);
     if (!produtosCarrinhoMock.includes(this.produtos[index])) {
       produtosCarrinhoMock.push(this.produtos[index]);
     }

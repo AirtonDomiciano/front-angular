@@ -1,5 +1,5 @@
-export class ProductsModel {
-  id?: number;
+export class ProdutosModel {
+  idProdutos?: number;
   nome: string;
   categoria: string;
   preco: number;

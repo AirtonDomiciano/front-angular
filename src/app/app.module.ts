@@ -12,10 +12,14 @@ import { firebaseConfig } from './core/firebase/config/config';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { UserModule } from './pages/user/user.module';
-import { ProductModule } from './pages/product/product.module';
+import { ProdutosModule } from './pages/produtos/produtos.module';
 import { UsersModule } from './pages/users/users.module';
 import { EditUserModule } from './pages/edit-user/edit-user.module';
+<<<<<<< HEAD
 import { ProductRegisterModule } from './pages/product-register/product-register.module';
+=======
+import { ProdutoModule } from './pages/produto/produto.module';
+>>>>>>> c283bf7 (subindo alteracoes de nome nos produtos)
 import { HomeModule } from './pages/home/home.module';
 import { CatalogoModule } from './pages/catalogo/catalogo.module';
 import { CarrinhoModule } from './pages/carrinho/carrinho.module';

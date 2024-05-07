@@ -3,18 +3,13 @@
     <form
       class="was-validated"
       (ngSubmit)="onSubmit()"
-      [formGroup]="productRegisterFormGroup"
+      [formGroup]="formGroup"
       #formDir="ngForm"
     >
       <h1 class="text-center mb-4">Cadastrar Produto</h1>
       <div class="row px-4 py-2">
         <div class="col-sm-9">
-          <app-input
-            type="text"
-            placeholder="Nome"
-            frmName="nome"
-            [form]="productRegisterFormGroup"
-          >
+          <app-input placeholder="Nome" frmName="nome" [form]="formGroup">
           </app-input>
         </div>
         <div class="col-sm-3">
@@ -36,10 +31,9 @@
       <div class="row px-4 py-2">
         <div class="col-sm-9">
           <app-input
-            type="text"
             placeholder="Descrição"
             frmName="descricao"
-            [form]="productRegisterFormGroup"
+            [form]="formGroup"
           >
           </app-input>
         </div>
@@ -48,18 +42,13 @@
             type="number"
             placeholder="Preço"
             frmName="preco"
-            [form]="productRegisterFormGroup"
+            [form]="formGroup"
           >
           </app-input>
         </div>
       </div>
       <div class="px-4 py-2">
-        <app-input
-          type="text"
-          placeholder="Imagem"
-          frmName="imagem"
-          [form]="productRegisterFormGroup"
-        >
+        <app-input placeholder="Imagem" frmName="imagem" [form]="formGroup">
         </app-input>
       </div>
       <div>
