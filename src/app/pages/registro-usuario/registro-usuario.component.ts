@@ -1,20 +1,20 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { CadastroInterface } from './cadastro.interface';
+import { RegistroUsuarioInterface } from './registro-usuario.interface';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
-  templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.scss'],
+  templateUrl: './registro-usuario.component.html',
+  styleUrls: ['./registro-usuario.component.scss'],
 })
-export class CadastroComponent {
-  public cadastroForm: UntypedFormGroup;
+export class RegistroUsuarioComponent {
+  public formGroup: UntypedFormGroup;
   public senhasSaoIguais: boolean = true;
   @Output() emitterLogin: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private fb: FormBuilder, private router: Router) {
-    this.cadastroForm = this.fb.group({
+    this.formGroup = this.fb.group({
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
       email: ['', Validators.required, Validators.email],
@@ -24,7 +24,7 @@ export class CadastroComponent {
   }
 
   onSubmit() {
-    const dadosCadastro: any = this.cadastroForm.value;
+    const dadosCadastro: any = this.formGroup.value;
 
     const verificao = this.validacaoSalvar(dadosCadastro);
 
@@ -34,7 +34,7 @@ export class CadastroComponent {
     }
   }
 
-  validacaoSalvar(dadosCadastro: CadastroInterface): boolean {
+  validacaoSalvar(dadosCadastro: RegistroUsuarioInterface): boolean {
     this.senhasSaoIguais = true;
 
     let verificao: boolean = true;
