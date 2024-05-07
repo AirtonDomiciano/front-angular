@@ -3,16 +3,32 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IBaseService } from '../core/base/base.interface';
 
+const options = {
+  headers: {
+    'Content-Type': 'application/json',
+    'User-Agent': 'insomnia/9.1.0',
+  },
+};
+
 const headers = new HttpHeaders({
   'Cache-Control':
     'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
   Pragma: 'no-cache',
   Expires: '0',
 });
-export abstract class BaseService implements IBaseService {
-  url = environment.apiUrl;
 
-  constructor(protected http: HttpClient) {}
+export abstract class BaseService implements IBaseService {
+  private url = environment.apiUrl;
+
+  constructor(public http: HttpClient) {
+    if (!this.url?.length) {
+      this.url = 'http://localhost:3000';
+    }
+  }
+
+  public getUrl(): string {
+    return this.url;
+  }
 
   get<T>(endpoint: string): Observable<T> {
     return this.http.get<T>(`${this.url}${endpoint}`, { headers });
@@ -21,4 +37,22 @@ export abstract class BaseService implements IBaseService {
   post<T>(endpoint: string, body: T): Observable<any> {
     return this.http.post<T>(`${this.url}${endpoint}`, body, { headers });
   }
+
+  // const options = {
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'User-Agent': 'insomnia/9.1.0'
+  //   }
+  // };
+
+  // const postData = { email: 'airton@xpert.com.br', password: 'asd123' };
+
+  // this.http.post('http://localhost:3000/auth/login', postData, options).subscribe(
+  //   (response) => {
+  //     console.log(response);
+  //   },
+  //   (error) => {
+  //     console.error(error);
+  //   }
+  // );
 }

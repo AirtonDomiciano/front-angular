@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthLayoutComponent } from './core/components/auth-layout/auth-layout.component';
 import { BaseLayoutComponent } from './core/components/base-layout/base-layout.component';
+import { AuthGuardService as AuthGuard } from './core/guards/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
             (m) => m.CadastroModule
           ),
       },
+      { path: '**', redirectTo: 'login' },
     ],
   },
   // ROTA DASHBOARD.
@@ -30,13 +32,14 @@ const routes: Routes = [
   {
     data: { title: '' },
     path: '',
-    // canActivate: [AuthGuard],
     component: BaseLayoutComponent,
     children: [
+      { path: '**', redirectTo: 'home' },
       {
         path: 'home',
         loadChildren: () =>
           import('./pages/home/home.module').then((m) => m.HomeModule),
+        canActivate: [AuthGuard],
       },
       {
         path: 'edit-api',
@@ -44,13 +47,13 @@ const routes: Routes = [
           import('./pages/edit-api/edit-api.module').then(
             (m) => m.EditApiModule
           ),
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'products',
         loadChildren: () =>
           import('./pages/product/product.module').then((m) => m.ProductModule),
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       // { path: 'products', component: ProductComponent },
       // { path: 'user', component: UserComponent },

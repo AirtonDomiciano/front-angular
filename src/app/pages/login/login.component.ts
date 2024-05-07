@@ -6,8 +6,8 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -15,17 +15,12 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  @Output() emitterLoggedIn: EventEmitter<boolean> =
-    new EventEmitter<boolean>();
-  @Output() emitterCadastro: EventEmitter<boolean> =
-    new EventEmitter<boolean>();
-
   public wrongLogin: boolean = false;
   public loginForm!: FormGroup;
 
   constructor(
     public fb: FormBuilder,
-    public auth: AuthService,
+    public loginService: LoginService,
     private router: Router,
     private LocalStorageService: LocalStorageService
   ) {}
@@ -45,20 +40,17 @@ export class LoginComponent implements OnInit {
         return;
       }
 
-      this.LocalStorageService.saveLogin(email, password);
-
-      const res: any = await this.auth.login(email, password);
+      const res: any = await this.loginService.SignIn(email, password);
 
       if (res) {
-        this.wrongLogin = false;
-        this.emitterLoggedIn.emit();
-        this.router.navigate([`home/`]);
+        const user = this.LocalStorageService.getLogin();
+        console.log(user);
+        this.router.navigate(['home']);
       }
     }
   }
 
   cadastro() {
-    this.router.navigate([`cadastro`]);
-    this.emitterCadastro.emit();
+    this.router.navigate(['cadastro']);
   }
 }
