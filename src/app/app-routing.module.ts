@@ -49,73 +49,52 @@ const routes: Routes = [
         path: '**',
         redirectTo: '',
       },
-
       {
-        path: 'user',
+        path: 'usuario',
         loadChildren: () =>
-          import('./pages/user/user.module').then((m) => m.UserModule),
+          import('./pages/usuario/usuario.module').then((m) => m.UsuarioModule),
       },
-
       {
-        path: 'users',
+        path: 'usuarios',
         loadChildren: () =>
-          import('./pages/users/users.module').then((m) => m.UsersModule),
-      },
-
-      {
-        path: 'edit-user',
-        loadChildren: () =>
-          import('./pages/edit-user/edit-user.module').then(
-            (m) => m.EditUserModule
+          import('./pages/usuarios/usuarios.module').then(
+            (m) => m.UsuariosModule
           ),
       },
-
       {
-        path: 'edit-product',
+        path: 'produto',
         loadChildren: () =>
-          import('./pages/edit-product/edit-product.module').then(
-            (m) => m.EditProductModule
-          ),
+          import('./pages/produto/produto.module').then((m) => m.ProdutoModule),
       },
-
       {
-        path: 'catalog',
+        path: 'catalogo',
         loadChildren: () =>
           import('./pages/catalogo/catalogo.module').then(
             (m) => m.CatalogoModule
           ),
       },
-
       {
-        path: 'cart',
+        path: 'carrinho',
         loadChildren: () =>
           import('./pages/carrinho/carrinho.module').then(
             (m) => m.CarrinhoModule
           ),
       },
-
       {
         path: 'shopping',
         loadChildren: () =>
-          import('./pages/shopping/shopping.module').then(
-            (m) => m.ShoppingModule
-          ),
+          import('./pages/compras/compras.module').then((m) => m.ComprasModule),
       },
-
       {
-        path: 'view-order',
+        path: 'pedidos',
         loadChildren: () =>
-          import('./pages/view-order/view-order.module').then(
-            (m) => m.ViewOrderModule
-          ),
+          import('./pages/pedidos/pedidos.module').then((m) => m.PedidosModule),
       },
-
       {
         path: 'apis',
         loadChildren: () =>
           import('./pages/apis/apis.module').then((m) => m.ApisModule),
       },
-
       {
         path: 'api',
         loadChildren: () =>
