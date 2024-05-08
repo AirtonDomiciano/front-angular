@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageService } from '../../services/local-storage.service';
+import { LocalService } from '../../services/local.service';
 
 @Component({
   selector: 'base-layout',
@@ -12,7 +12,7 @@ export default class BaseLayoutComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private LocalStorageService: LocalStorageService
+    private LocalStorageService: LocalService
   ) {}
 
   ngOnInit(): void {

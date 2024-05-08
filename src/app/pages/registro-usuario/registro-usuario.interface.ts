@@ -1,4 +1,4 @@
-export interface RegistroUsuarioInterface {
+export interface RegistroUsuarioInterfaceInput {
   nome: string;
   sobrenome: string;
   email: string;

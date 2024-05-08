@@ -1,4 +1,4 @@
-<!-- <div
+<div
   class="container d-flex justify-content-center bg-primary align-items-center"
 >
   <img
@@ -7,17 +7,17 @@
   />
   <div class="box bg-light rounded-right">
     <p class="message text-center mt-5 h4 mb-4">Criar conta!</p>
-    <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
       <div class="row px-3 py-2">
         <div class="col-sm-6">
-          <app-input placeholder="Nome" frmName="nome" [form]="cadastroForm">
+          <app-input placeholder="Nome" frmName="nome" [form]="formGroup">
           </app-input>
         </div>
         <div class="col-sm-6">
           <app-input
             placeholder="Sobrenome"
             frmName="sobrenome"
-            [form]="cadastroForm"
+            [form]="formGroup"
           ></app-input>
         </div>
       </div>
@@ -27,7 +27,7 @@
             type="email"
             placeholder="E-mail"
             frmName="email"
-            [form]="cadastroForm"
+            [form]="formGroup"
           ></app-input>
         </div>
       </div>
@@ -37,7 +37,7 @@
             type="password"
             placeholder="Senha"
             frmName="senha"
-            [form]="cadastroForm"
+            [form]="formGroup"
           ></app-input>
         </div>
         <div class="col-sm-6">
@@ -45,7 +45,7 @@
             type="password"
             placeholder="Confirmar Senha"
             frmName="confirmarSenha"
-            [form]="cadastroForm"
+            [form]="formGroup"
           ></app-input>
         </div>
         <div class="text-danger text-center mt-3" *ngIf="!senhasSaoIguais">
@@ -73,4 +73,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>

@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AuthService } from 'src/app/core/guards/auth.service';
+import { LocalService } from 'src/app/core/services/local.service';
 
 @Component({
   selector: 'app-top-nav',
@@ -7,9 +9,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class TopNavComponent {
   @Input() isExpanded = false;
-  @Output() emitterSignOut: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  constructor(public auth: AuthService) {}
 
   signOut() {
-    this.emitterSignOut.emit(false);
+    this.auth.logout();
   }
 }

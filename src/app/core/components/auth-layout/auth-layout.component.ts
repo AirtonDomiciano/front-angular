@@ -19,8 +19,7 @@ export class AuthLayoutComponent implements OnInit {
   ngOnInit(): void {
     const token = (localStorage.getItem('access_token') as string) || '';
     if (token?.length > 0) {
-      this, this.authService.setAuthenticationStatus(token);
-      // this.router.navigate(['/private/home']);
+      this.authService.setAuthenticationStatus(token);
     }
   }
 }

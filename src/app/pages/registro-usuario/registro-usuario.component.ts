@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { RegistroUsuarioInterface } from './registro-usuario.interface';
+import { RegistroUsuarioInterfaceInput } from './registro-usuario.interface';
 import { Router } from '@angular/router';
+import RegistroUsuarioModel from './model/registro-usuario.model';
 
 @Component({
   selector: 'app-cadastro',
@@ -11,16 +12,9 @@ import { Router } from '@angular/router';
 export class RegistroUsuarioComponent {
   public formGroup: UntypedFormGroup;
   public senhasSaoIguais: boolean = true;
-  @Output() emitterLogin: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private fb: FormBuilder, private router: Router) {
-    this.formGroup = this.fb.group({
-      nome: ['', Validators.required],
-      sobrenome: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      senha: ['', Validators.required],
-      confirmarSenha: ['', Validators.required],
-    });
+    this.formGroup = this.fb.group(new RegistroUsuarioModel());
   }
 
   onSubmit() {
@@ -29,12 +23,11 @@ export class RegistroUsuarioComponent {
     const verificao = this.validacaoSalvar(dadosCadastro);
 
     if (verificao) {
-      this.router.navigate([`login`]);
       this.login();
     }
   }
 
-  validacaoSalvar(dadosCadastro: RegistroUsuarioInterface): boolean {
+  validacaoSalvar(dadosCadastro: RegistroUsuarioInterfaceInput): boolean {
     this.senhasSaoIguais = true;
 
     let verificao: boolean = true;
@@ -71,7 +64,6 @@ export class RegistroUsuarioComponent {
   }
 
   login() {
-    this.emitterLogin.emit();
-    this.router.navigate([`login`]);
+    this.router.navigate([`auth/login`]);
   }
 }

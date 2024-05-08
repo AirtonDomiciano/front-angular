@@ -4,21 +4,32 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LocalService {
+  private readonly STORAGE_KEY = 'user';
+
   constructor() {}
 
-  public saveData(key: string, value: string) {
-    localStorage.setItem(key, value);
+  setUser(user: any): void {
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
   }
 
-  public getData(key: string) {
-    return localStorage.getItem(key);
+  getUser(): any {
+    const user = localStorage.getItem(this.STORAGE_KEY);
+    return user ? JSON.parse(user) : null;
   }
 
-  public removeData(key: string) {
-    localStorage.removeItem(key);
+  setToken(token: string): void {
+    localStorage.setItem('access_token', token);
   }
 
-  public clearData() {
-    localStorage.clear();
+  getToken(): string | null {
+    return localStorage.getItem('access_token');
+  }
+
+  removeUser(): void {
+    localStorage.removeItem(this.STORAGE_KEY);
+  }
+
+  removeToken(): void {
+    localStorage.removeItem('access_token');
   }
 }

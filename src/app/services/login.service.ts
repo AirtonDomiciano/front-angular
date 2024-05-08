@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
-import { LocalStorageService } from '../core/services/local-storage.service';
+import { LocalService } from '../core/services/local.service';
 import { AuthService } from '../core/guards/auth.service';
 
 @Injectable({
@@ -11,9 +11,9 @@ import { AuthService } from '../core/guards/auth.service';
 export class LoginService extends BaseService {
   constructor(
     public router: Router,
-    public local: LocalStorageService,
     public override http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    public local: LocalService
   ) {
     super(http);
   }
@@ -29,8 +29,8 @@ export class LoginService extends BaseService {
       this.post('/auth/login', login).subscribe((res: any) => {
         if (res?.success) {
           const { data } = res;
-          this.setUser(data);
-          this.setToken(res.data.token);
+          this.local.setUser(data);
+          this.local.setToken(res.data.token);
           this.authService.setAuthenticationStatus(res.data.token);
           resolve({ status: res?.success, message: res.message });
         }
@@ -39,32 +39,5 @@ export class LoginService extends BaseService {
         resolve({ status: res?.success, message: res.message });
       });
     });
-  }
-
-  private readonly STORAGE_KEY = 'user';
-
-  setUser(user: any): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
-  }
-
-  getUser(): any {
-    const user = localStorage.getItem(this.STORAGE_KEY);
-    return user ? JSON.parse(user) : null;
-  }
-
-  setToken(token: string): void {
-    localStorage.setItem('access_token', token);
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('access_token');
-  }
-
-  removeUser(): void {
-    localStorage.removeItem(this.STORAGE_KEY);
-  }
-
-  removeToken(): void {
-    localStorage.removeItem('access_token');
   }
 }

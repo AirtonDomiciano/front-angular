@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthGuardService } from './auth-guard.service';
+import { LocalService } from '../services/local.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private router: Router, private authGuard: AuthGuardService) {}
+  constructor(
+    private router: Router,
+    private authGuard: AuthGuardService,
+    private local: LocalService
+  ) {}
 
   // Function to set authentication status
   setAuthenticationStatus(accessToken: string) {
@@ -20,6 +25,8 @@ export class AuthService {
 
   // Function to logout the user
   logout() {
+    this.local.removeToken();
+    this.local.removeUser();
     this.setAuthenticationStatus('');
   }
 
