@@ -15,8 +15,9 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public wrongLogin: boolean = false;
   public loginForm!: FormGroup;
+  public wrongLogin: boolean = false;
+  public isInvalid: boolean = false;
 
   constructor(
     public fb: FormBuilder,
@@ -40,13 +41,16 @@ export class LoginComponent implements OnInit {
         return;
       }
 
-      const res: any = await this.loginService.SignIn(email, password);
+      const res = await this.loginService.SignIn(email, password);
 
-      if (res) {
-        const user = this.LocalStorageService.getLogin();
-        console.log(user);
-        this.router.navigate(['home']);
+      if (!res.status) {
+        this.isInvalid = !res.status;
+        throw new Error(res.message);
       }
+
+      const user = this.LocalStorageService.getLogin();
+      console.log(user);
+      // this.router.navigate(['home']);
     }
   }
 

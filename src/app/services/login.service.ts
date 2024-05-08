@@ -30,17 +30,22 @@ export class LoginService extends BaseService {
   }
 
   // Sign in with email/password
-  async SignIn(email: string, password: string): Promise<boolean> {
+  async SignIn(
+    email: string,
+    password: string
+  ): Promise<{ status: boolean; message: string }> {
     const login = { email, password };
 
-    return new Promise<boolean>((resolve) => {
+    return new Promise<{ status: boolean; message: string }>((resolve) => {
       this.post('/auth/login', login).subscribe((res: any) => {
         if (res?.success) {
           const { data } = res;
           this.local.saveLogin(data);
+          resolve({ status: res?.success, message: res.message });
         }
 
-        resolve(res?.success);
+        // Caso o usuário não tenha permissão;
+        resolve({ status: res?.success, message: res.message });
       });
     });
   }
