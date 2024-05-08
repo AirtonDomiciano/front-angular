@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { PedidosComponent } from './pedidos.component';
+import { CommonModule } from '@angular/common';
+import { PedidosRoutingModule } from './pedidos-routing.module';
 
 @NgModule({
   declarations: [PedidosComponent],
-  imports: [BrowserModule, RouterModule],
+  imports: [CommonModule, PedidosRoutingModule],
   exports: [PedidosComponent],
 })
 export class PedidosModule {}
