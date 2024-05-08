@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { ProdutoComponent } from './produto.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputModule } from 'src/app/shared/components/input/input.module';
+import { CommonModule } from '@angular/common';
+import { ProdutoRoutingModule } from './produto-routing.module';
 
 @NgModule({
   declarations: [ProdutoComponent],
-  imports: [BrowserModule, ReactiveFormsModule, InputModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    InputModule,
+    ProdutoRoutingModule,
+  ],
   exports: [ProdutoComponent],
 })
 export class ProdutoModule {}
