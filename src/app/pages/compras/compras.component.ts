@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsCarrinhoInterface } from '../carrinho/carrinho.interface';
-import { ShoppingMock } from './models/shopping.mock';
-import { ShoppingInterface } from './models/shopping-interface';
 import { Router } from '@angular/router';
+import { ComprasInterface } from './models/compras-interface';
+import { ComprasMock } from './models/compras.mock';
 
 @Component({
-  selector: 'app-shopping',
-  templateUrl: './shopping.component.html',
-  styleUrls: ['./shopping.component.scss'],
+  selector: 'app-compras',
+  templateUrl: './compras.component.html',
+  styleUrls: ['./compras.component.scss'],
 })
-export class ShoppingComponent implements OnInit {
-  public produtosComprados: ShoppingInterface[] = [];
+export class ComprasComponent implements OnInit {
+  public produtosComprados: ComprasInterface[] = [];
   public idCompra = 1;
   public temProdutos: boolean = false;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.produtosComprados = ShoppingMock;
+    this.produtosComprados = ComprasMock;
     this.gerarId();
     this.temProduto();
   }
