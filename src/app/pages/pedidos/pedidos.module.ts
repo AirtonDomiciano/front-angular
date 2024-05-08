@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { ViewOrderComponent } from './view-order.component';
+import { PedidosComponent } from './pedidos.component';
 
 @NgModule({
-  declarations: [ViewOrderComponent],
+  declarations: [PedidosComponent],
   imports: [BrowserModule, RouterModule],
-  exports: [ViewOrderComponent],
+  exports: [PedidosComponent],
 })
-export class ViewOrderModule {}
+export class PedidosModule {}
