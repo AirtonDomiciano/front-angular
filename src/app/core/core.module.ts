@@ -19,8 +19,6 @@ import { TopNavComponent } from './components/top-nav/model/top-nav.component';
     FormsModule,
     BrowserAnimationsModule,
     IconModule,
-    // NgbModule,
-    // MatToolbarModule
   ],
   exports: [SideNavComponent, TopNavComponent, FooterComponent],
 })

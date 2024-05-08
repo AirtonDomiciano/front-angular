@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../guards/auth.service';
 
 @Component({
   selector: 'auth-layout',
@@ -11,4 +13,14 @@ import { Component } from '@angular/core';
     </div>
   </div>`,
 })
-export class AuthLayoutComponent {}
+export class AuthLayoutComponent implements OnInit {
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    const token = (localStorage.getItem('access_token') as string) || '';
+    if (token?.length > 0) {
+      this, this.authService.setAuthenticationStatus(token);
+      // this.router.navigate(['/private/home']);
+    }
+  }
+}

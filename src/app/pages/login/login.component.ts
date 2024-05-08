@@ -6,7 +6,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { AuthService } from 'src/app/core/guards/auth.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -22,8 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     public loginService: LoginService,
-    private router: Router,
-    private LocalStorageService: LocalStorageService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,10 +46,6 @@ export class LoginComponent implements OnInit {
         this.isInvalid = !res.status;
         throw new Error(res.message);
       }
-
-      const user = this.LocalStorageService.getLogin();
-      console.log(user);
-      // this.router.navigate(['home']);
     }
   }
 

@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { InputModule } from 'src/app/shared/components/input/input.module';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -13,6 +14,15 @@ import { InputModule } from 'src/app/shared/components/input/input.module';
     FormsModule,
     ReactiveFormsModule,
     InputModule,
+    // JwtModule.forRoot({
+    //   config: {
+    //     tokenGetter: () => {
+    //       return localStorage.getItem('token');
+    //     },
+    //     allowedDomains: ['http://localhost:4200'],
+    //     disallowedRoutes: ['http://localhost:4200/unauthorized'],
+    //   },
+    // }),
   ],
   exports: [LoginComponent],
 })

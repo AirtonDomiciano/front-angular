@@ -6,30 +6,30 @@ import { Injectable } from '@angular/core';
 export class LocalStorageService {
   constructor() {}
 
-  saveLogin(user: any): void {
-    localStorage.setItem('user', JSON.stringify(user));
+  private readonly STORAGE_KEY = 'user';
 
-    localStorage.setItem('name', user.name);
-    localStorage.setItem('token', user.token);
+  setUser(user: any): void {
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
   }
 
-  getLogin(): { user: any } | null {
-    const storedUser = localStorage.getItem('user');
-
-    if (!storedUser) {
-      return null;
-    }
-
-    const user = JSON.parse(storedUser);
-
-    if (user.token) {
-      return { user };
-    } else {
-      return null;
-    }
+  getUser(): any {
+    const user = localStorage.getItem(this.STORAGE_KEY);
+    return user ? JSON.parse(user) : null;
   }
 
-  clearLogin() {
-    localStorage.clear();
+  setToken(token: string): void {
+    localStorage.setItem('access_token', token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('access_token');
+  }
+
+  removeUser(): void {
+    localStorage.removeItem(this.STORAGE_KEY);
+  }
+
+  removeToken(): void {
+    localStorage.removeItem('access_token');
   }
 }

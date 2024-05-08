@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthLayoutComponent } from './core/components/auth-layout/auth-layout.component';
 import BaseLayoutComponent from './core/components/base-layout/base-layout.component';
+import { AuthService } from './core/guards/auth.service';
 
 @NgModule({
   declarations: [AppComponent, AuthLayoutComponent, BaseLayoutComponent],
@@ -20,7 +21,7 @@ import BaseLayoutComponent from './core/components/base-layout/base-layout.compo
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
