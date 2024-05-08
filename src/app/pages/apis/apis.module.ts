@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { ApisComponent } from './apis.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ApisRoutingModule } from './apis-routing.module';
 
 @NgModule({
   declarations: [ApisComponent],
-  imports: [BrowserModule, ReactiveFormsModule],
+  imports: [CommonModule, ApisRoutingModule],
   exports: [ApisComponent],
 })
 export class ApisModule {}

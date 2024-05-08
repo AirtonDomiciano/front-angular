@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { produtosCarrinhoMock } from './carrinho.mock';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ProductsCarrinhoInterface } from './carrinho.interface';
-import { ShoppingMock } from '../shopping/models/shopping.mock';
 import { Router } from '@angular/router';
-import { ShoppingInterface } from '../shopping/models/shopping-interface';
+import { ComprasInterface } from '../compras/models/compras-interface';
+import { ComprasMock } from '../compras/models/compras.mock';
 
 @Component({
   selector: 'app-carrinho',
@@ -109,15 +109,16 @@ export class CarrinhoComponent implements OnInit {
   }
 
   comprarProduto() {
-    console.log(this.produtosCarrinho);
-    let input: ShoppingInterface = {
+    let input: ComprasInterface = {
       preco: this.precoTotal,
       produtos: [],
     };
+
     for (var i = 0; i < this.produtosCarrinho.length; i++) {
       input.produtos.push(this.produtosCarrinho[i]);
     }
-    ShoppingMock.push(input);
+
+    ComprasMock.push(input);
     produtosCarrinhoMock.splice(0, produtosCarrinhoMock.length);
     this.router.navigate(['/shopping']);
   }

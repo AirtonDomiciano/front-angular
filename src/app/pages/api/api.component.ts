@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { apisMock } from '../apis/apis.mock';
 import { Router } from '@angular/router';
-import { ApisModel } from '../apis/api.model';
+import { ApisModel } from '../apis/model/apis.model';
 
 @Component({
   selector: 'app-api',

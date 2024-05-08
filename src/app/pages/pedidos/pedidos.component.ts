@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ShoppingInterface } from '../shopping/models/shopping-interface';
-import { ShoppingMock } from '../shopping/models/shopping.mock';
 import { ActivatedRoute } from '@angular/router';
+import { ComprasInterface } from '../compras/models/compras-interface';
+import { ComprasMock } from '../compras/models/compras.mock';
 
 @Component({
   selector: 'app-pedidos',
@@ -9,14 +9,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./pedidos.component.scss'],
 })
 export class PedidosComponent implements OnInit {
-  public produtosComprados!: ShoppingInterface;
+  public produtosComprados!: ComprasInterface;
   public id = Number(this.route.snapshot.paramMap.get('id'));
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const index = ShoppingMock.findIndex((el) => el.id === this.id);
-    this.produtosComprados = ShoppingMock[index];
+    const index = ComprasMock.findIndex((el: any) => el.id === this.id);
+    this.produtosComprados = ComprasMock[index];
     console.log(this.produtosComprados);
   }
 }
