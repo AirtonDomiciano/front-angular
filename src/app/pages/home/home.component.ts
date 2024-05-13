@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProdutosModel } from '../produtos/model/produtos.model';
 import { produtosMock } from '../produtos/produtos.mock';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,8 @@ export class HomeComponent implements OnInit {
   public novoProduto: ProdutosModel[] = [];
   public length: number = produtosMock.length;
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
     this.produtosRecentes();
   }
@@ -18,5 +21,9 @@ export class HomeComponent implements OnInit {
   produtosRecentes() {
     this.novoProduto = produtosMock.slice(this.length - 5, this.length);
     this.novoProduto.reverse();
+  }
+
+  redirecionarParaCatalogo() {
+    this.router.navigate([`private/catalogo`]);
   }
 }

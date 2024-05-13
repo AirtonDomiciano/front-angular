@@ -21,7 +21,7 @@ export class ApisComponent implements OnInit {
   }
 
   adicionarAPI() {
-    this.router.navigate([`api`]);
+    this.router.navigate([`private/api`]);
   }
 
   alterouAtivo(id: number) {

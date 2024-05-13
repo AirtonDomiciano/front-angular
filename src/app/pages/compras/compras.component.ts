@@ -22,7 +22,7 @@ export class ComprasComponent implements OnInit {
   }
 
   verDetalhes(id: number) {
-    this.router.navigate([`view-order/${id}`]);
+    this.router.navigate([`private/pedidos/${id}`]);
   }
 
   gerarId() {
@@ -38,5 +38,9 @@ export class ComprasComponent implements OnInit {
     } else {
       this.temProdutos = true;
     }
+  }
+
+  redirecionarParaCatalogo() {
+    this.router.navigate([`private/catalogo`]);
   }
 }

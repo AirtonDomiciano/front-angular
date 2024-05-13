@@ -18,11 +18,11 @@ export class ProdutosComponent implements OnInit {
   }
 
   addProduto() {
-    this.router.navigate([`produto`]);
+    this.router.navigate([`private/produto`]);
   }
 
   editarProduto(id: number) {
-    this.router.navigate([`produto/${id}`]);
+    this.router.navigate([`private/produto/${id}`]);
   }
 
   excluirProduto(id: number) {
