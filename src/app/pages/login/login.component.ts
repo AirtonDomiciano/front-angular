@@ -48,8 +48,4 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-
-  cadastro() {
-    this.router.navigate(['cadastro']);
-  }
 }

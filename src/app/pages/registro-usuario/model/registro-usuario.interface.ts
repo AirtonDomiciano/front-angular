@@ -3,5 +3,4 @@ export interface RegistroUsuarioInterfaceInput {
   sobrenome: string;
   email: string;
   senha: string;
-  confirmarSenha: string;
 }

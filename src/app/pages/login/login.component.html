@@ -23,7 +23,7 @@
       <div class="row px-3 py-1">
         <div class="col-sm-12">
           <app-input
-            type="password"
+            frmType="password"
             placeholder="Senha"
             frmName="password"
             [form]="loginForm"
@@ -67,7 +67,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <a (click)="cadastro()"
+        <a routerLink="/auth/cadastro"
           ><p class="h6 text-center">Criar uma conta!</p></a
         >
       </div>
