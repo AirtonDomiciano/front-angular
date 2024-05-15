@@ -10,14 +10,15 @@ export class EntidadesComponent implements OnInit {
   public listaEntidades: any = [];
 
   constructor(public entidadesService: EntidadesService) {}
-  ngOnInit(): void {
-    const res = this.buscarTodasEntidades();
-    this.listaEntidades = res;
+  async ngOnInit(): Promise<void> {
+    this.buscarTodasEntidades();
   }
 
   async buscarTodasEntidades() {
     const res = await this.entidadesService.BuscarTodasEntidades();
-
+    if (res) {
+      this.listaEntidades = res;
+    }
     return res;
   }
 }
