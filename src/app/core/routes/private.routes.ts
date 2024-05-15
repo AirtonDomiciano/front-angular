@@ -11,7 +11,9 @@ export const privateRoutes: Routes = [
       {
         path: 'home',
         loadChildren: () =>
-          import('../../pages/home/home.module').then((m) => m.HomeModule),
+          import('../../pages/entidades/entidades.module').then(
+            (m) => m.EntidadesModule
+          ),
         canActivate: [AuthGuardService],
       },
       //... other private routes...
