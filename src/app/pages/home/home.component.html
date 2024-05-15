@@ -12,7 +12,9 @@
             </p>
             <a [routerLink]="['/user']">cadastre-se em nosso site</a>
             <h1></h1>
-            <a [routerLink]="['/catalog']">veja os nossos produtos</a>
+            <a class="link" (click)="redirecionarParaCatalogo()"
+              >veja os nossos produtos</a
+            >
           </div>
         </div>
       </div>
