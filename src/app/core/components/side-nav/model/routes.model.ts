@@ -3,6 +3,7 @@ export const RoutesArray: Routes[] = [
   { title: 'Apis', route: 'apis', icon: '', childs: [] },
   { title: 'Carrinho', route: 'carrinho', icon: '', childs: [] },
   { title: 'Catálogo', route: 'catalogo', icon: '', childs: [] },
+  { title: 'Entidades', route: 'entidades', icon: '', childs: [] },
   { title: 'Produtos', route: 'produtos', icon: '', childs: [] },
   { title: 'Usuários', route: 'usuarios', icon: '', childs: [] },
 ];

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EntidadesService } from 'src/app/services/entidades.service';
+import EntidadesInterface from './model/entidades.interface';
 
 @Component({
   selector: 'app-entidades',
@@ -7,17 +8,22 @@ import { EntidadesService } from 'src/app/services/entidades.service';
   styleUrls: ['./entidades.component.scss'],
 })
 export class EntidadesComponent implements OnInit {
-  public listaEntidades: any = [];
+  public listaEntidades: EntidadesInterface[] = [];
 
   constructor(public entidadesService: EntidadesService) {}
-  ngOnInit(): void {
-    const res = this.buscarTodasEntidades();
-    this.listaEntidades = res;
+
+  async ngOnInit(): Promise<void> {
+    this.buscarEntidades();
   }
 
-  async buscarTodasEntidades() {
+  async buscarEntidades() {
     const res = await this.entidadesService.BuscarTodasEntidades();
 
-    return res;
+    if (!res) {
+      alert('DEU Errado');
+      return;
+    }
+
+    this.listaEntidades = res;
   }
 }

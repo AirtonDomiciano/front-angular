@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
+import EntidadesInterface from '../pages/entidades/model/entidades.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +17,11 @@ export class EntidadesService extends BaseService {
     super(http);
   }
 
-  async BuscarTodasEntidades(): Promise<{ status: boolean; message: string }> {
-    return new Promise<{ status: boolean; message: string }>((resolve) => {
-      this.get('/auth/entidades').subscribe((res: any) => {
-        if (res?.success) {
-          resolve({ status: res?.success, message: res.message });
+  async BuscarTodasEntidades(): Promise<Array<EntidadesInterface>> {
+    return new Promise((resolve) => {
+      this.get('/entidades').subscribe((res: any) => {
+        if (res?.length) {
+          resolve(res);
         }
       });
     });
