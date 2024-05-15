@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { InputModule } from 'src/app/shared/components/input/input.module';
 import { JwtModule } from '@auth0/angular-jwt';
+import { InputSenhaModule } from 'src/app/shared/components/input-senha/input-senha.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -14,6 +15,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     FormsModule,
     ReactiveFormsModule,
     InputModule,
+    InputSenhaModule,
     // JwtModule.forRoot({
     //   config: {
     //     tokenGetter: () => {
