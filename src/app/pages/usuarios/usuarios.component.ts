@@ -24,11 +24,11 @@ export class UsuariosComponent implements OnInit {
   }
 
   adicionarUsuario() {
-    this.router.navigate([`usuario`]);
+    this.router.navigate([`private/usuario`]);
   }
 
   editarUsuario(id: number) {
-    this.router.navigate([`usuario/${id}`]);
+    this.router.navigate([`private/usuario/${id}`]);
   }
 
   removerUsuario(id: number): void {

@@ -11,7 +11,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class ApisComponent implements OnInit {
   public listagemApis: ApisModel[] = [];
-  public ativoFormGroup: FormGroup = new FormGroup({});
+  public formGroup: FormGroup = new FormGroup({});
 
   constructor(private router: Router) {}
 
@@ -21,11 +21,11 @@ export class ApisComponent implements OnInit {
   }
 
   adicionarAPI() {
-    this.router.navigate([`api`]);
+    this.router.navigate([`private/api`]);
   }
 
   alterouAtivo(id: number) {
-    const ativo = this.ativoFormGroup.get(id.toString())?.value;
+    const ativo = this.formGroup.get(id.toString())?.value;
     const index = this.listagemApis.findIndex((el) => el.id === id);
     this.listagemApis[index].ativo = ativo;
     apisMock[index].ativo = this.listagemApis[index].ativo;
@@ -37,7 +37,7 @@ export class ApisComponent implements OnInit {
     this.listagemApis.forEach((api) => {
       group[api.id!.toString()] = new FormControl(api.ativo === true);
     });
-    this.ativoFormGroup = new FormGroup(group);
+    this.formGroup = new FormGroup(group);
   }
 
   excluirApi(id: number) {
@@ -48,6 +48,6 @@ export class ApisComponent implements OnInit {
   }
 
   editarApi(id: number) {
-    this.router.navigate([`edit-api/${id}`]);
+    this.router.navigate([`private/api/${id}`]);
   }
 }

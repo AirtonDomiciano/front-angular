@@ -120,6 +120,10 @@ export class CarrinhoComponent implements OnInit {
 
     ComprasMock.push(input);
     produtosCarrinhoMock.splice(0, produtosCarrinhoMock.length);
-    this.router.navigate(['/shopping']);
+    this.router.navigate([`private/compras`]);
+  }
+
+  redirecionarParaCatalogo() {
+    this.router.navigate([`private/catalogo`]);
   }
 }
