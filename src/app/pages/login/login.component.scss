@@ -15,3 +15,18 @@ img {
 .rounded-input{
   border-radius: 20px;
 }
+
+.right-rounded{
+  border-top-right-radius: 15px;  
+  border-bottom-right-radius: 15px;  
+}
+
+.straight-left{
+  border-top-left-radius: 0px; 
+  border-bottom-left-radius: 0px; 
+}
+
+.larg{
+  width: 275px;
+  margin-left: 15px;
+}
