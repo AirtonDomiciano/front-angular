@@ -1,4 +1,4 @@
-<table class="table">
+<!-- <table class="table">
   <thead>
     <tr>
       <th scope="col">Id</th>
@@ -52,4 +52,36 @@
     >
     <button class="desfazer" (click)="desfazerAcao()">Desfazer ação</button>
   </div>
-</div>
+</div> -->
+<p-table
+  [value]="listagemFiltrada"
+  [globalFilterFields]="['nome', 'sobrenome', 'email', 'funcao']"
+>
+  <ng-template pTemplate="caption">
+    <p>Filtro:</p>
+    <input
+      type="text"
+      pInputText
+      (input)="filtroGlobal($any($event.target).value)"
+    />
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th>Sobrenome</th>
+      <th>E-mail</th>
+      <th>Função</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-dado>
+    <tr>
+      <td>{{ dado.nome }}</td>
+      <td>{{ dado.sobrenome }}</td>
+      <td>{{ dado.email }}</td>
+      <td>{{ dado.funcao }}</td>
+      <td>Ações</td>
+    </tr>
+  </ng-template>
+</p-table>
