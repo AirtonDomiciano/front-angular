@@ -5,6 +5,9 @@
     id="{{ frmName }}"
     placeholder="{{ placeholder }}"
     formControlName="{{ frmName }}"
+    [ngClass]="{
+      'is-invalid': form.get(frmName)?.invalid
+    }"
     required
   />
   <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div>
