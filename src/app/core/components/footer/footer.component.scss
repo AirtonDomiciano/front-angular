@@ -2,12 +2,13 @@
   height: 50px;
   bottom: 0%;
   left: 0;
-}
 
-p {
-  margin: 0%;
-  font-size: medium;
-  border-radius: 1px solid;
-  padding: 0 8%;
-  border-radius: 20px;
+  transition: 0.3s;
+
+  margin-left: 4%;
+  width: 96%;
+  &.is-expanded {
+    margin-left: 10%;
+    width: 90%;
+  }
 }
