@@ -8,7 +8,12 @@ export const RoutesArray: Routes[] = [
     icon: 'bi bi-journal-text',
     childs: [],
   },
-  { title: 'Entidades', route: 'entidades', icon: '', childs: [] },
+  {
+    title: 'Entidades',
+    route: 'entidades',
+    icon: 'bi bi-person-vcard',
+    childs: [],
+  },
   { title: 'Produtos', route: 'produtos', icon: 'bi bi-basket', childs: [] },
   { title: 'Usuários', route: 'usuarios', icon: 'bi bi-people', childs: [] },
 ];
