@@ -17,7 +17,7 @@ export class ProdutosComponent implements OnInit {
     this.listagemProdutos = produtosMock;
   }
 
-  addProduto() {
+  adicionarProduto() {
     this.router.navigate([`private/produto`]);
   }
 

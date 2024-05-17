@@ -1,39 +1,67 @@
 <div class="container">
-  <table class="table">
-    <thead>
+  <p-table
+    #myTab
+    [value]="listagemProdutos"
+    [globalFilterFields]="['nome', 'categoria', 'preco', 'descricao']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="row">
+        <div class="col-sm-1 px-3">
+          <h5>Filtro:</h5>
+        </div>
+        <div class="col-sm-3">
+          <input
+            type="text"
+            pInputText
+            (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
+          />
+        </div>
+        <div class="d-flex justify-content-end col-sm-8">
+          <button class="btn btn-success" (click)="adicionarProduto()">
+            <span class="bi bi-plus"></span>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
       <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Categoria</th>
-        <th scope="col">Preço</th>
-        <th scope="col">Descrição</th>
-        <th scope="col">Ação</th>
+        <th pSortableColumn="nome">
+          Nome <p-sortIcon field="nome"></p-sortIcon>
+        </th>
+        <th pSortableColumn="categoria">
+          Categoria <p-sortIcon field="categoria"></p-sortIcon>
+        </th>
+        <th pSortableColumn="preco">
+          Preço <p-sortIcon field="preco"></p-sortIcon>
+        </th>
+        <th pSortableColumn="descricao">
+          Descrição <p-sortIcon field="descricao"></p-sortIcon>
+        </th>
+        <th>Ações</th>
       </tr>
-    </thead>
-    <ng-container *ngFor="let produto of listagemProdutos">
-      <tbody>
-        <tr>
-          <th scope="row" class="id">{{ produto.idProdutos }}</th>
-          <td>{{ produto.nome }}</td>
-          <td>{{ produto.categoria }}</td>
-          <td>R$: {{ produto.preco }}</td>
-          <td class="descricao">{{ produto.descricao }}</td>
-          <td class="acao">
-            <button class="editar" (click)="editarProduto(produto.idProdutos!)">
-              Editar
-            </button>
-            <button
-              class="excluir"
-              (click)="excluirProduto(produto.idProdutos!)"
-            >
-              Excluir
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </ng-container>
-  </table>
-  <div class="add-product">
-    <button (click)="addProduto()">Adicionar Produto</button>
-  </div>
+    </ng-template>
+    <ng-template pTemplate="body" let-produto>
+      <tr>
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.categoria }}</td>
+        <td>{{ produto.preco }}</td>
+        <td>{{ produto.descricao }}</td>
+        <td>
+          <button class="btn-editar btn btn-primary btn-sm">
+            <span
+              class="bi bi-pencil"
+              (click)="editarProduto(produto.idProdutos)"
+            ></span>
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="excluirProduto(produto.idProdutos)"
+          >
+            <span class="bi bi-trash"></span>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>

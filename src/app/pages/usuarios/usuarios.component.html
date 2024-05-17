@@ -16,6 +16,11 @@
             (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
           />
         </div>
+        <div class="d-flex justify-content-end col-sm-8">
+          <button class="btn btn-success" (click)="adicionarUsuario()">
+            <span class="bi bi-plus"></span>
+          </button>
+        </div>
       </div>
     </ng-template>
 
@@ -46,12 +51,12 @@
           <button class="btn-editar btn btn-primary btn-sm">
             <span
               class="bi bi-pencil"
-              (click)="editarUsuario(usuario.idUsuarios)"
+              (click)="editarUsuario(usuario.idUsuario)"
             ></span>
           </button>
           <button
             class="btn btn-danger btn-sm"
-            (click)="removerUsuario(usuario.idUsuarios)"
+            (click)="removerUsuario(usuario.idUsuario)"
           >
             <span class="bi bi-trash"></span>
           </button>
