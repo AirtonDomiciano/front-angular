@@ -14,8 +14,8 @@ import { RoutesArray } from './model/routes.model';
   styleUrls: ['side-nav.component.scss'],
 })
 export class SideNavComponent {
-  @Input() isExpanded = false;
-  @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() isExpanded = true;
+  @Output() toggleSidebar = new EventEmitter<boolean>();
 
   public routes = RoutesArray;
 

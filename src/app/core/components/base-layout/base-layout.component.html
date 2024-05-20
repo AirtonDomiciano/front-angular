@@ -1,4 +1,5 @@
 <app-top-nav
+  [isExpanded]="sidebarExpanded"
   class="top-nav d-flex justify-content-end align-items-end"
 ></app-top-nav>
 <app-side-nav
@@ -6,7 +7,14 @@
   [isExpanded]="sidebarExpanded"
   (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
 ></app-side-nav>
-<div class="content bg-light" [ngClass]="{ sidebarExpanded: sidebarExpanded }">
+<div
+  class="body"
+  [ngClass]="{
+    'is-expanded': sidebarExpanded
+  }"
+>
   <router-outlet></router-outlet>
-  <app-footer></app-footer>
+</div>
+<div>
+  <app-footer [isExpanded]="sidebarExpanded"></app-footer>
 </div>
