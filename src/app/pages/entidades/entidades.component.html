@@ -1,25 +1,62 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Nome</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let entidade of listaEntidades">
-    <tr>
-      <th scope="row" class="id">{{ entidade.idEntidades }}</th>
-      <th>{{ entidade.nomeEntidade }}</th>
-      <td class="acao">
-        <!-- <button (click)="editarUsuario(usuario.idUsuario!)" class="editar">
-            Editar
+<div class="container">
+  <p-table
+    #myTab
+    [value]="listaEntidades"
+    [globalFilterFields]="['nomeEntidade', 'fone', 'email', 'dtaNascimento']"
+  >
+    <ng-template pTemplate="caption">
+      <h2 class="text-center">Entidades</h2>
+      <div class="row">
+        <div class="col-sm-1 px-3">
+          <h5>Filtro:</h5>
+        </div>
+        <div class="col-sm-3">
+          <input
+            type="text"
+            pInputText
+            (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
+          />
+        </div>
+        <div class="d-flex justify-content-end col-sm-8">
+          <button class="btn btn-success">
+            <span class="bi bi-plus"></span>
           </button>
-          <button (click)="removerUsuario(usuario.idUsuario!)" class="excluir">
-            Remover
-          </button> -->
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div class="adicionar-usuario">
-  <!-- <button (click)="adicionarUsuario()">Adicionar Usuário</button> -->
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="nomeEntidade">
+          Nome <p-sortIcon field="nomeEntidade"></p-sortIcon>
+        </th>
+        <th pSortableColumn="email">
+          E-mail <p-sortIcon field="email"></p-sortIcon>
+        </th>
+        <th pSortableColumn="fone">
+          Fone <p-sortIcon field="fone"></p-sortIcon>
+        </th>
+        <th pSortableColumn="dtaNascimento">
+          Data Nascimento <p-sortIcon field="dtaNascimento"></p-sortIcon>
+        </th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-entidade>
+      <tr>
+        <td>{{ entidade.nomeEntidade }}</td>
+        <td>{{ entidade.email }}</td>
+        <td>{{ entidade.fone }}</td>
+        <td>{{ entidade.dtaNascimento | date : "dd/MM/yyyy" }}</td>
+        <td>
+          <button class="btn-editar btn btn-primary btn-sm">
+            <span class="bi bi-pencil"></span>
+          </button>
+          <button class="btn btn-danger btn-sm">
+            <span class="bi bi-trash"></span>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>

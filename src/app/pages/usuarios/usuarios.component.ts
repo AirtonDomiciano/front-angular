@@ -1,27 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosMock } from './usuarios.mock';
-import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
 import { UsuarioModel } from '../usuario/model/usuario.model';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss'],
 })
 export class UsuariosComponent implements OnInit {
-  public listagemUsuarios: UsuarioModel[] = [];
+  listagemUsuarios: UsuarioModel[] = [];
   public contUsuariosRemovidos: number = 0;
-  public ativoFormGroup: FormGroup = new FormGroup({});
-
-  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.listagemUsuarios = UsuariosMock;
-    this.inicializandoAtivos();
     this.contadorUsuariosRemovidos();
-    console.log(this.listagemUsuarios);
   }
+  constructor(private router: Router) {}
 
   adicionarUsuario() {
     this.router.navigate([`private/usuario`]);
@@ -52,13 +46,5 @@ export class UsuariosComponent implements OnInit {
         this.contUsuariosRemovidos++;
       }
     }
-  }
-
-  inicializandoAtivos(): void {
-    const group: any = {};
-    this.listagemUsuarios.forEach((api) => {
-      group[api.idUsuario!.toString()] = new FormControl(api.ativo === true);
-    });
-    this.ativoFormGroup = new FormGroup(group);
   }
 }

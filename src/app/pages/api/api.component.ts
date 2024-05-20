@@ -16,7 +16,7 @@ export class ApiComponent implements OnInit {
   public semUrl: boolean = false;
   public semRapidApiHost: boolean = false;
 
-  public index = apisMock.findIndex((el) => el.id === this.id);
+  public index = apisMock.findIndex((el) => el.idApi === this.id);
 
   constructor(
     private fb: FormBuilder,
@@ -49,9 +49,9 @@ export class ApiComponent implements OnInit {
     const verificacao = this.validacaoSave(newApi);
 
     if (verificacao) {
-      let newId = apisMock[apisMock.length - 1].id! + 1;
+      let newId = apisMock[apisMock.length - 1].idApi! + 1;
       apisMock.push(newApi);
-      apisMock[apisMock.length - 1].id = newId;
+      apisMock[apisMock.length - 1].idApi = newId;
       this.router.navigate([`private/apis`]);
     }
   }

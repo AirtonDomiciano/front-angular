@@ -10,7 +10,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ProdutoRoutingModule {
-  public id = Number(this.route.snapshot.paramMap.get('id'));
-  constructor(private route: ActivatedRoute) {}
-}
+export class ProdutoRoutingModule {}

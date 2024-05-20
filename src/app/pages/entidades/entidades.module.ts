@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { EntidadesComponent } from './entidades.component';
 import { EntidadesRoutingModule } from './entidades-routing.module';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [EntidadesComponent],
-  imports: [CommonModule, EntidadesRoutingModule],
+  imports: [CommonModule, EntidadesRoutingModule, TableModule, DatePipe],
   exports: [EntidadesComponent],
 })
 export class EntidadesModule {}

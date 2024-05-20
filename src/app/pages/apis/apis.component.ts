@@ -17,6 +17,7 @@ export class ApisComponent implements OnInit {
 
   ngOnInit(): void {
     this.listagemApis = apisMock;
+    console.log(this.listagemApis);
     this.inicializandoAtivos();
   }
 
@@ -26,7 +27,7 @@ export class ApisComponent implements OnInit {
 
   alterouAtivo(id: number) {
     const ativo = this.formGroup.get(id.toString())?.value;
-    const index = this.listagemApis.findIndex((el) => el.id === id);
+    const index = this.listagemApis.findIndex((el) => el.idApi === id);
     this.listagemApis[index].ativo = ativo;
     apisMock[index].ativo = this.listagemApis[index].ativo;
     console.log(apisMock);
@@ -35,13 +36,13 @@ export class ApisComponent implements OnInit {
   inicializandoAtivos(): void {
     const group: any = {};
     this.listagemApis.forEach((api) => {
-      group[api.id!.toString()] = new FormControl(api.ativo === true);
+      group[api.idApi!.toString()] = new FormControl(api.ativo === true);
     });
     this.formGroup = new FormGroup(group);
   }
 
   excluirApi(id: number) {
-    const index = this.listagemApis.findIndex((el) => el.id === id);
+    const index = this.listagemApis.findIndex((el) => el.idApi === id);
     if (index !== -1) {
       apisMock.splice(index, 1);
     }
