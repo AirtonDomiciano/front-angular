@@ -12,6 +12,7 @@ import RegistroUsuarioModel from './model/registro-usuario.model';
 export class RegistroUsuarioComponent {
   public formGroup: UntypedFormGroup;
   public senhasSaoIguais: boolean = true;
+  public ocultar: boolean = true;
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.formGroup = this.fb.group(new RegistroUsuarioModel());
@@ -65,5 +66,9 @@ export class RegistroUsuarioComponent {
 
   login() {
     this.router.navigate([`auth/login`]);
+  }
+
+  mostrarSenha() {
+    this.ocultar = !this.ocultar;
   }
 }

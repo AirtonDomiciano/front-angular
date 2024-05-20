@@ -20,8 +20,8 @@
         </div>
       </div>
 
-      <div class="input-group justify-content-center">
-        <div class="col-sm-9">
+      <div class="input-group justify-content-center px-0">
+        <div class="larg w-90">
           <app-input-senha
             type="password"
             placeholder="Senha"
@@ -30,7 +30,6 @@
             *ngIf="oculto"
           >
           </app-input-senha>
-
           <app-input-senha
             placeholder="Senha"
             frmName="password"
@@ -42,7 +41,7 @@
           <div class="input-group-append">
             <button
               (click)="mostrarSenha()"
-              class="btn btn-primary rounded-right"
+              class="btn btn-primary right-rounded straight-left"
             >
               <i class="bi bi-eye-slash-fill" *ngIf="oculto">
                 <svg

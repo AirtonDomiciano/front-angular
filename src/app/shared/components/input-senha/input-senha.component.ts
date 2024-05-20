@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class InputSenhaComponent implements OnInit {
   @Input() form!: FormGroup;
   @Input() type: string = 'text';
-  @Input() class = 'form-control rounded-left mt-2';
+  @Input() class = 'form-control left-rounded straight-left mt-2';
   @Input() id = '';
   @Input() frmName = '';
   @Input() placeholder = '';
