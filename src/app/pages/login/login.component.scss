@@ -1,6 +1,11 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 .container {
-  height: 100vh;
   width: 100vw;
+  height: 100vh;
 }
 
 .box {
@@ -12,21 +17,21 @@ img {
   height: 500px;
 }
 
-.rounded-input{
+.rounded-input {
   border-radius: 20px;
 }
 
-.right-rounded{
-  border-top-right-radius: 15px;  
-  border-bottom-right-radius: 15px;  
+.right-rounded {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
-.straight-left{
-  border-top-left-radius: 0px; 
-  border-bottom-left-radius: 0px; 
+.straight-left {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
-.larg{
+.larg {
   width: 275px;
   margin-left: 15px;
 }
