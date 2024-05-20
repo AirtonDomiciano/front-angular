@@ -1,11 +1,11 @@
 <div class="container">
   <p-table
     #myTab
-    [value]="listaEntidades"
-    [globalFilterFields]="['nomeEntidade', 'fone', 'email', 'dtaNascimento']"
+    [value]="listaClientes"
+    [globalFilterFields]="['nomeClientes', 'fone', 'email', 'dtaNascimento']"
   >
     <ng-template pTemplate="caption">
-      <h2 class="text-center">Entidades</h2>
+      <h2 class="text-center">Clientes</h2>
       <div class="row">
         <div class="col-sm-1 px-3">
           <h5>Filtro:</h5>
@@ -27,8 +27,8 @@
 
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="nomeEntidade">
-          Nome <p-sortIcon field="nomeEntidade"></p-sortIcon>
+        <th pSortableColumn="nomeClientes">
+          Nome <p-sortIcon field="nomeClientes"></p-sortIcon>
         </th>
         <th pSortableColumn="email">
           E-mail <p-sortIcon field="email"></p-sortIcon>
@@ -42,12 +42,12 @@
         <th>Ações</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-entidade>
+    <ng-template pTemplate="body" let-clientes>
       <tr>
-        <td>{{ entidade.nomeEntidade }}</td>
-        <td>{{ entidade.email }}</td>
-        <td>{{ entidade.fone }}</td>
-        <td>{{ entidade.dtaNascimento | date : "dd/MM/yyyy" }}</td>
+        <td>{{ clientes.nomeClientes }}</td>
+        <td>{{ clientes.email }}</td>
+        <td>{{ clientes.fone }}</td>
+        <td>{{ clientes.dtaNascimento | date : "dd/MM/yyyy" }}</td>
         <td>
           <button class="btn-editar btn btn-primary btn-sm">
             <span class="bi bi-pencil"></span>

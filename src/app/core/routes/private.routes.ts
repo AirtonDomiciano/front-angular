@@ -93,8 +93,8 @@ export const privateRoutes: Routes = [
       {
         path: 'entidades',
         loadChildren: () =>
-          import('../../pages/entidades/entidades.module').then(
-            (m) => m.EntidadesModule
+          import('../../pages/clientes/clientes.module').then(
+            (m) => m.ClientesModule
           ),
         canActivate: [AuthGuardService],
       },

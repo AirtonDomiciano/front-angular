@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import EntidadesInterface from '../pages/entidades/model/entidades.interface';
+import ClientesInterface from '../pages/clientes/model/clientes.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EntidadesService extends BaseService {
+export class ClientesService extends BaseService {
   constructor(
     public router: Router,
     public override http: HttpClient,
@@ -17,9 +17,9 @@ export class EntidadesService extends BaseService {
     super(http);
   }
 
-  async BuscarTodasEntidades(): Promise<Array<EntidadesInterface>> {
+  async BuscarTodosClientes(): Promise<Array<ClientesInterface>> {
     return new Promise((resolve) => {
-      this.get('/entidades').subscribe((res: any) => {
+      this.get('/clientes').subscribe((res: any) => {
         if (res?.length) {
           resolve(res);
         }
