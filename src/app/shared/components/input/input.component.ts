@@ -1,5 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import {
+  AfterViewChecked,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -7,14 +13,24 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
-  @Input() form!: FormGroup;
-  @Input() type: string = 'text';
-  @Input() class = 'form-control rounded-input mt-2';
+  @Input() form!: UntypedFormGroup;
+  @Input() frmType: string = 'text';
+  @Input() frmClass = 'form-control rounded-pill mt-2';
   @Input() id = '';
   @Input() frmName = '';
   @Input() placeholder = '';
 
+  public isFrmError = false;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.frmError();
+  }
+
+  frmError() {
+    if (this.form.controls[this.frmName].invalid) {
+      this.isFrmError = true;
+    }
+  }
 }

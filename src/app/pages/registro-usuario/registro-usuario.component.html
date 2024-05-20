@@ -24,7 +24,6 @@
       <div class="row px-3 py-2">
         <div class="col-sm-12">
           <app-input
-            type="email"
             placeholder="E-mail"
             frmName="email"
             [form]="formGroup"
@@ -32,15 +31,15 @@
         </div>
       </div>
       <div class="row px-3 py-2">
+
         <div class="col-sm-5">
           <app-input
-            type="password"
+            frmType="password"
             placeholder="Senha"
             frmName="senha"
             [form]="formGroup"
           ></app-input>
         </div>
-
         <div class="col-sm-5 px-0">
           <app-input-senha
             type="password"
@@ -103,7 +102,7 @@
       </div>
       <div class="row px-3 py-2">
         <div class="col-sm-12">
-          <button class="btn btn-primary rounded-pill w-100">
+          <button class="btn btn-primary rounded-pill w-100" type="submit">
             Registrar Conta
           </button>
         </div>
@@ -116,7 +115,7 @@
     </form>
     <div class="row">
       <div class="col-sm-12">
-        <a (click)="login()"
+        <a routerLink="/auth/login"
           ><p class="h6 text-center">Já tem uma conta? Login!</p></a
         >
       </div>
