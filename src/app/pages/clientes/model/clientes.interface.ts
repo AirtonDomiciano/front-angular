@@ -1,6 +1,6 @@
-export default class EntidadesInterface {
-  idEntidades: number;
-  nomeEntidade: string;
+export default class ClientesInterface {
+  idClientes: number;
+  nomeClientes: string;
   pessoa: boolean;
   endereco: string;
   bairro: string;
@@ -15,8 +15,8 @@ export default class EntidadesInterface {
   ativo: boolean;
 
   constructor() {
-    this.idEntidades = 0;
-    this.nomeEntidade = '';
+    this.idClientes = 0;
+    this.nomeClientes = '';
     this.pessoa = false;
     this.endereco = '';
     this.bairro = '';
