@@ -1,7 +1,16 @@
 <div class="sidebar bg-primary" [ngClass]="{ expanded: isExpanded }">
   <div class="bg-gradient-primary">
-    <div class="toggle">
-      <h2 class="text-white text-center py-1 mt-2">Aulas</h2>
+    <div
+      class="content d-flex justify-content-center text-center align-items-center mt-3"
+    >
+      <div>
+        <h2 class="titulo text-white text-center">Aulas</h2>
+      </div>
+      <div>
+        <button class="btn btn-primary" (click)="handleSidebarToggle()">
+          <div class="chevron text-white pt-2"></div>
+        </button>
+      </div>
     </div>
   </div>
   <hr class="sidebar-divided mt-3" />
@@ -9,10 +18,19 @@
     <div class="link">
       <div
         class="content"
-        [routerLink]="['/', route.route]"
+        [routerLink]="['/private/', route.route]"
         [routerLinkActive]="'active'"
       >
-        <div class="a.text-white">{{ route.title }}</div>
+        <div class="d-flex justify-content-center">
+          <div>
+            <i
+              class="{{ route.icon }}"
+              [ngClass]="{ 'pe-2': isExpanded, h5: !isExpanded }"
+            >
+            </i>
+          </div>
+          <div class="title a.text-white">{{ route.title }}</div>
+        </div>
       </div>
       <hr class="sidebar-divided" />
     </div>

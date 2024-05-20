@@ -8,7 +8,7 @@ import { LocalService } from 'src/app/core/services/local.service';
   styleUrls: ['./top-nav.component.scss'],
 })
 export class TopNavComponent {
-  @Input() isExpanded = false;
+  @Input() isExpanded = true;
 
   constructor(public auth: AuthService) {}
 

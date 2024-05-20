@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   public wrongLogin: boolean = false;
   public isInvalid: boolean = false;
+  public oculto: boolean = true;
 
   constructor(
     public fb: FormBuilder,
@@ -47,5 +48,13 @@ export class LoginComponent implements OnInit {
         throw new Error(res.message);
       }
     }
+  }
+
+  cadastro() {
+    this.router.navigate(['cadastro']);
+  }
+
+  mostrarSenha() {
+    this.oculto = !this.oculto;
   }
 }

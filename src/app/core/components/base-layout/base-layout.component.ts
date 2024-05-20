@@ -15,12 +15,7 @@ export default class BaseLayoutComponent implements OnInit {
     private LocalStorageService: LocalService
   ) {}
 
-  ngOnInit(): void {
-    // const user: any = this.LocalStorageService.getLogin();
-    // if (!user?.token) {
-    //   this.LocalStorageService.clearLogin();
-    // }
-  }
+  ngOnInit(): void {}
 
   receiveEmitSignOut(answear: boolean) {}
 }

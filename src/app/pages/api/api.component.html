@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card">
-    <form (ngSubmit)="onSubmit()" [formGroup]="apiFormGroup" #formDir="ngForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
       <h1>Cadastro</h1>
       <div class="label">
         <span for="">Nome:</span>
@@ -25,7 +25,7 @@
         <input
           type="text"
           class="input"
-          formControlName="rapidApi-Host"
+          formControlName="rapidApiHost"
           required
         />
         <div class="obrigatorio" *ngIf="semRapidApiHost">

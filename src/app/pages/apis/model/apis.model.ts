@@ -1,5 +1,5 @@
 export class ApisModel {
-  id?: number;
+  idApi?: number;
   nome: string;
   url: string;
   rapidApiHost: string;

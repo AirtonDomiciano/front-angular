@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -13,8 +7,5 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  @Input() footerExpaned = true;
-  @Output() toggleFooter: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  handleFooterToggle = () => this.toggleFooter.emit(!this.footerExpaned);
+  @Input() isExpanded = true;
 }

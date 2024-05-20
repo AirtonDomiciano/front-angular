@@ -12,12 +12,15 @@ import { RegistroUsuarioInterfaceInput } from './model/registro-usuario.interfac
 })
 export class RegistroUsuarioComponent implements OnInit {
   public formGroup!: UntypedFormGroup;
+  public senhasSaoIguais: boolean = true;
+  public ocultar: boolean = true;
   public model: RegistroUsuarioModel = new RegistroUsuarioModel();
   constructor(
     private fb: FormBuilder,
     private router: Router,
     public registroUsuarioService: RegistroUsuarioService
   ) {}
+
 
   ngOnInit(): void {
     this.formGroup = this.fb.group(this.model);
@@ -89,5 +92,9 @@ export class RegistroUsuarioComponent implements OnInit {
 
   login() {
     this.router.navigate([`/auth/login`]);
+  }
+
+  mostrarSenha() {
+    this.ocultar = !this.ocultar;
   }
 }

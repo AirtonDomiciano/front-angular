@@ -1,10 +1,21 @@
 export const RoutesArray: Routes[] = [
-  { title: 'Home', route: 'home', icon: '' },
-  { title: 'Apis', route: 'apis', icon: '', childs: [] },
-  { title: 'Carrinho', route: 'cart', icon: '', childs: [] },
-  { title: 'Catálogo', route: 'catalog', icon: '', childs: [] },
-  { title: 'Produtos', route: 'products', icon: '', childs: [] },
-  { title: 'Usuários', route: 'users', icon: '', childs: [] },
+  { title: 'Home', route: 'home', icon: 'bi bi-house' },
+  { title: 'Apis', route: 'apis', icon: 'bi bi-gear', childs: [] },
+  { title: 'Carrinho', route: 'carrinho', icon: 'bi bi-cart', childs: [] },
+  {
+    title: 'Catálogo',
+    route: 'catalogo',
+    icon: 'bi bi-journal-text',
+    childs: [],
+  },
+  {
+    title: 'Entidades',
+    route: 'entidades',
+    icon: 'bi bi-person-vcard',
+    childs: [],
+  },
+  { title: 'Produtos', route: 'produtos', icon: 'bi bi-basket', childs: [] },
+  { title: 'Usuários', route: 'usuarios', icon: 'bi bi-people', childs: [] },
 ];
 
 export class Routes {

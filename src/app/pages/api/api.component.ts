@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { apisMock } from '../apis/apis.mock';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApisModel } from '../apis/model/apis.model';
 
 @Component({
@@ -9,29 +9,50 @@ import { ApisModel } from '../apis/model/apis.model';
   templateUrl: './api.component.html',
   styleUrls: ['./api.component.scss'],
 })
-export class ApiComponent {
-  public apiFormGroup: UntypedFormGroup;
+export class ApiComponent implements OnInit {
+  public formGroup: UntypedFormGroup;
+  public id = Number(this.route.snapshot.paramMap.get('id'));
   public semNome: boolean = false;
   public semUrl: boolean = false;
   public semRapidApiHost: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.apiFormGroup = fb.group({
+  public index = apisMock.findIndex((el) => el.idApi === this.id);
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.formGroup = fb.group({
       nome: ['', Validators.required],
       url: ['', Validators.required],
       rapidApiHost: ['', Validators.required],
     });
   }
 
+  ngOnInit() {
+    if (this.id) {
+      const api: ApisModel = apisMock[this.index];
+
+      this.formGroup = this.fb.group(api);
+    }
+  }
+
   onSubmit() {
-    let newApi = this.apiFormGroup.value;
+    if (this.id) {
+      let input: ApisModel = this.formGroup.value;
+      apisMock[this.index] = input;
+      this.router.navigate([`private/apis`]);
+      return;
+    }
+    let newApi = this.formGroup.value;
     const verificacao = this.validacaoSave(newApi);
 
     if (verificacao) {
-      let newId = apisMock[apisMock.length - 1].id! + 1;
+      let newId = apisMock[apisMock.length - 1].idApi! + 1;
       apisMock.push(newApi);
-      apisMock[apisMock.length - 1].id = newId;
-      this.router.navigate([`apis`]);
+      apisMock[apisMock.length - 1].idApi = newId;
+      this.router.navigate([`private/apis`]);
     }
   }
 

@@ -17,12 +17,12 @@ export class ProdutosComponent implements OnInit {
     this.listagemProdutos = produtosMock;
   }
 
-  addProduto() {
-    this.router.navigate([`produto`]);
+  adicionarProduto() {
+    this.router.navigate([`private/produto`]);
   }
 
   editarProduto(id: number) {
-    this.router.navigate([`produto/${id}`]);
+    this.router.navigate([`private/produto/${id}`]);
   }
 
   excluirProduto(id: number) {
