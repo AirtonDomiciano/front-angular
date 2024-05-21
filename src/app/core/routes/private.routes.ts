@@ -91,7 +91,7 @@ export const privateRoutes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'entidades',
+        path: 'clientes',
         loadChildren: () =>
           import('../../pages/clientes/clientes.module').then(
             (m) => m.ClientesModule
