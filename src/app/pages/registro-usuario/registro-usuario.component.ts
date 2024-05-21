@@ -21,14 +21,19 @@ export class RegistroUsuarioComponent implements OnInit {
     public registroUsuarioService: RegistroUsuarioService
   ) {}
 
-
   ngOnInit(): void {
     this.formGroup = this.fb.group(this.model);
 
     this.formGroup.controls['nome'].setValidators([Validators.required]);
     this.formGroup.controls['sobrenome'].setValidators([Validators.required]);
-    this.formGroup.controls['email'].setValidators([Validators.required]);
+    this.formGroup.controls['email'].setValidators([
+      Validators.required,
+      Validators.email,
+    ]);
     this.formGroup.controls['senha'].setValidators([Validators.required]);
+    this.formGroup.controls['confirmarSenha'].setValidators([
+      Validators.required,
+    ]);
   }
 
   async onSubmit() {
@@ -36,56 +41,45 @@ export class RegistroUsuarioComponent implements OnInit {
 
     const verificao = this.validacaoSalvar(dadosCadastro);
 
-    if (this.formGroup.valid) {
-      const { nome, sobrenome, email, senha } = this.formGroup.value;
-
-      if (
-        !email?.length &&
-        !nome?.length &&
-        !sobrenome?.length &&
-        !senha?.length
-      ) {
-        return;
-      }
-
-      const res = await this.registroUsuarioService.RegistroUsuario(
-        nome,
-        sobrenome,
-        email,
-        senha
-      );
-
-      if (!res.status) {
-        throw new Error(res.message);
-      }
-    }
-
     if (verificao) {
-      this.login();
+      try {
+        const { nome, sobrenome, email, senha } = this.formGroup.value;
+
+        const res = await this.registroUsuarioService.RegistroUsuario(
+          nome,
+          sobrenome,
+          email,
+          senha
+        );
+
+        if (res.status) {
+          this.login();
+        } else {
+          throw new Error(res.message);
+        }
+      } catch (error) {
+        console.error('Erro durante o registro de usuário!', error);
+      }
     }
   }
 
   validacaoSalvar(dadosCadastro: RegistroUsuarioInterfaceInput): boolean {
     let verificao: boolean = true;
+    this.senhasSaoIguais = true;
 
-    if (dadosCadastro.nome.length === 0 || dadosCadastro.nome === null) {
-      verificao = false;
-    } else if (
-      dadosCadastro.sobrenome.length === 0 ||
-      dadosCadastro.sobrenome === null
+    if (
+      !dadosCadastro.email ||
+      !dadosCadastro.nome ||
+      !dadosCadastro.sobrenome ||
+      !dadosCadastro.senha ||
+      !dadosCadastro.confirmarSenha
     ) {
       verificao = false;
-    } else if (
-      dadosCadastro.email.length === 0 ||
-      dadosCadastro.email === null ||
-      !dadosCadastro.email.includes('@')
-    ) {
+    }
+
+    if (dadosCadastro.senha !== dadosCadastro.confirmarSenha) {
       verificao = false;
-    } else if (
-      dadosCadastro.senha.length === 0 ||
-      dadosCadastro.senha === null
-    ) {
-      verificao = false;
+      this.senhasSaoIguais = false;
     }
     return verificao;
   }

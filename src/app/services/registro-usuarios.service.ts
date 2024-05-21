@@ -28,7 +28,11 @@ export class RegistroUsuarioService extends BaseService {
       this.post('/auth/createUser', registro).subscribe((res: any) => {
         if (res?.success) {
           resolve({ status: res?.success, message: res.message });
-          this.router.navigate([`auth/login`]);
+        } else {
+          resolve({
+            status: false,
+            message: res.message || 'Falha ao registrar o usuário!',
+          });
         }
       });
     });
