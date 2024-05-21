@@ -9,8 +9,8 @@
     <div class="box bg-light rounded-right">
       <p class="message text-center mt-5 h4 mb-5">Login</p>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="row px-2 py-1 me-3">
-          <div class="col-sm-12">
+        <div class="px-2 py-1">
+          <div class="row col-sm-12">
             <app-input
               type="email"
               placeholder="E-mail"
@@ -19,35 +19,13 @@
             >
             </app-input>
           </div>
-        </div>
-
-        <div class="input-group justify-content-center px-2 py-1">
-          <div class="col-sm-9">
+          <div class="row py-3 col-sm-12">
             <app-input-senha
-              type="password"
-              placeholder="Senha"
+              frmPlaceholder="Senha"
               frmName="password"
               [form]="loginForm"
-              *ngIf="oculto"
             >
             </app-input-senha>
-            <app-input-senha
-              placeholder="Senha"
-              frmName="password"
-              [form]="loginForm"
-              *ngIf="!oculto"
-            ></app-input-senha>
-          </div>
-          <div class="col-sm-2 mt-2">
-            <div class="input-group-append">
-              <button
-                (click)="mostrarSenha()"
-                class="btn btn-primary right-rounded straight-left"
-              >
-                <i class="bi bi-eye-slash-fill" *ngIf="oculto"> </i>
-                <i class="bi bi-eye-fill" *ngIf="!oculto"> </i>
-              </button>
-            </div>
           </div>
         </div>
 
