@@ -9,8 +9,8 @@ export const RoutesArray: Routes[] = [
     childs: [],
   },
   {
-    title: 'Entidades',
-    route: 'entidades',
+    title: 'Clientes',
+    route: 'clientes',
     icon: 'bi bi-person-vcard',
     childs: [],
   },
