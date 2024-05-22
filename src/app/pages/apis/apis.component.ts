@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApisModel } from './model/apis.model';
-import { apisMock } from './apis.mock';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { ApisService } from 'src/app/services/apis.service';
+import { ApisModel } from './model/apis.model';
 
 @Component({
   selector: 'app-apis',
@@ -10,21 +10,35 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./apis.component.scss'],
 })
 export class ApisComponent implements OnInit {
-  public listagemApis: ApisModel[] = [];
+  public listaApis: ApisModel[] = [];
+
   public formGroup: FormGroup = new FormGroup({});
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public apisService: ApisService) {}
 
+<<<<<<< HEAD
   ngOnInit(): void {
     this.listagemApis = apisMock;
     console.log(this.listagemApis);
     this.inicializandoAtivos();
+=======
+  async ngOnInit(): Promise<void> {
+    this.buscarTodasApis();
+>>>>>>> 3b15f55 (subindo-listagem-apis)
   }
 
-  adicionarAPI() {
-    this.router.navigate([`private/api`]);
+  async buscarTodasApis() {
+    const apis = await this.apisService.buscarTodasApis();
+
+    if (!apis) {
+      alert('Deu erro');
+      return;
+    }
+
+    this.listaApis = apis;
   }
 
+<<<<<<< HEAD
   alterouAtivo(id: number) {
     const ativo = this.formGroup.get(id.toString())?.value;
     const index = this.listagemApis.findIndex((el) => el.idApi === id);
@@ -46,9 +60,18 @@ export class ApisComponent implements OnInit {
     if (index !== -1) {
       apisMock.splice(index, 1);
     }
+=======
+  adicionarApi() {
+    this.router.navigate([`/private/api`]);
+  }
+
+  excluirApi(id: number) {
+    this.apisService.deletarApi(id);
+    window.location.reload();
+>>>>>>> 3b15f55 (subindo-listagem-apis)
   }
 
   editarApi(id: number) {
-    this.router.navigate([`private/api/${id}`]);
+    this.router.navigate([`/private/api/${id}`]);
   }
 }

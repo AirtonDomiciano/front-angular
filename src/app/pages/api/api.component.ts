@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { apisMock } from '../apis/apis.mock';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApisModel } from '../apis/model/apis.model';
+import { ApisService } from 'src/app/services/apis.service';
 
 @Component({
   selector: 'app-api',
@@ -15,13 +15,13 @@ export class ApiComponent implements OnInit {
   public semNome: boolean = false;
   public semUrl: boolean = false;
   public semRapidApiHost: boolean = false;
-
-  public index = apisMock.findIndex((el) => el.idApi === this.id);
+  public listaApis: ApisModel[] = [];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public apisService: ApisService
   ) {
     this.formGroup = fb.group({
       nome: ['', Validators.required],
@@ -30,10 +30,13 @@ export class ApiComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.id) {
-      const api: ApisModel = apisMock[this.index];
+      const apis = await this.apisService.buscarTodasApis();
+      this.listaApis = apis;
+      const index = this.listaApis.findIndex((el) => el.idApis === this.id);
 
+      const api: ApisModel = this.listaApis[index];
       this.formGroup = this.fb.group(api);
     }
   }
@@ -41,35 +44,33 @@ export class ApiComponent implements OnInit {
   onSubmit() {
     if (this.id) {
       let input: ApisModel = this.formGroup.value;
-      apisMock[this.index] = input;
-      this.router.navigate([`private/apis`]);
+      this.apisService.editarApi(this.id, input);
+      window.location.reload();
       return;
     }
     let newApi = this.formGroup.value;
     const verificacao = this.validacaoSave(newApi);
 
     if (verificacao) {
-      let newId = apisMock[apisMock.length - 1].idApi! + 1;
-      apisMock.push(newApi);
-      apisMock[apisMock.length - 1].idApi = newId;
-      this.router.navigate([`private/apis`]);
+      this.apisService.criarApi(newApi);
+      window.location.reload();
     }
   }
 
   validacaoSave(newApi: ApisModel) {
     let validacao = true;
 
-    if (newApi.nome.length === 0 || newApi.nome === null) {
+    if (!newApi.nome) {
       this.semNome = true;
       validacao = false;
     }
 
-    if (newApi.url.length === 0 || newApi.url === null) {
+    if (!newApi.url) {
       this.semUrl = true;
       validacao = false;
     }
 
-    if (newApi.rapidApiHost.length === 0 || newApi.rapidApiHost === null) {
+    if (!newApi.rapidApiHost) {
       this.semRapidApiHost = true;
       validacao = false;
     }
