@@ -1,5 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { produtosMock } from '../produtos/produtos.mock';
+import { Component, OnInit } from '@angular/core';
 import { ProdutosModel } from '../produtos/model/produtos.model';
 import { produtosCarrinhoMock } from '../carrinho/carrinho.mock';
 import { CategoriasProdutos } from '../produto/array-categorias';
@@ -25,7 +24,7 @@ export class CatalogoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.produtos = produtosMock;
+    // this.produtos = produtosMock;
     this.arrayCategorias = CategoriasProdutos;
     this.produtosCarrinho = produtosCarrinhoMock;
   }
@@ -40,9 +39,9 @@ export class CatalogoComponent implements OnInit {
   filtrarCategoria() {
     let categoria: string = this.categoriasFormGroup.get('categoria')?.value;
 
-    this.produtosFiltrados = this.produtos.filter(
-      (el) => el.categoria === categoria
-    );
+    // this.produtosFiltrados = this.produtos.filter(
+    //   (el) => el.categoria === categoria
+    // );
     if (this.produtosFiltrados.length === 0) {
       this.filtroAtivo = false;
     } else {

@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProdutosModel } from '../produtos/model/produtos.model';
-import { produtosMock } from '../produtos/produtos.mock';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   public novoProduto: ProdutosModel[] = [];
-  public length: number = produtosMock.length;
+  // public length: number = produtosMock.length;
 
   constructor(private router: Router) {}
 
@@ -19,7 +18,7 @@ export class HomeComponent implements OnInit {
   }
 
   produtosRecentes() {
-    this.novoProduto = produtosMock.slice(this.length - 5, this.length);
+    // this.novoProduto = produtosMock.slice(this.length - 5, this.length);
     this.novoProduto.reverse();
   }
 

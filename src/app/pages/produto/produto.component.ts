@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProdutosModel } from '../produtos/model/produtos.model';
-import { produtosMock } from '../produtos/produtos.mock';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProdutosService } from 'src/app/services/produtos.service';
+import { ResBuscarPorId } from '../produtos/model/res-buscar-por-id.interface';
+import { ProdutosInterface } from '../produtos/model/produtos.interface';
 
 @Component({
   selector: 'app-produto',
@@ -10,70 +12,59 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./produto.component.scss'],
 })
 export class ProdutoComponent implements OnInit {
-  public formGroup: UntypedFormGroup;
+  public formGroup: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
-  public precoIsWrong: boolean = false;
-  public semCategoria: boolean = false;
-  public semNome: boolean = false;
-  public semDescricao: boolean = false;
-  public semPreco: boolean = false;
-  public semImagem: boolean = false;
-
-  public index = produtosMock.findIndex((el) => el.idProdutos === this.id);
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private produtosService: ProdutosService
   ) {
     this.formGroup = this.fb.group({
-      nome: ['', Validators.required],
-      categoria: ['', Validators.required],
-      preco: ['', Validators.required],
-      descricao: ['', Validators.required],
+      nomeProduto: ['', Validators.required],
+      qtdeTotal: ['', Validators.required],
       imagem: ['', Validators.required],
+      valor: ['', Validators.required],
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if (this.id) {
-      const produto: ProdutosModel = produtosMock[this.index];
+      this.formGroup.controls['nomeProduto'].setValidators([
+        Validators.required,
+      ]);
+      this.formGroup.controls['qtdeTotal'].setValidators([Validators.required]);
+      this.formGroup.controls['imagem'].setValidators([Validators.required]);
+      this.formGroup.controls['valor'].setValidators([Validators.required]);
 
-      this.formGroup = this.fb.group(produto);
+      const res: ResBuscarPorId = await this.produtosService.BuscarProdutoPorId(
+        this.id
+      );
 
-      this.formGroup.controls['nome'].setValidators([Validators.required]);
-      this.formGroup.controls['categoria'].setValidators([Validators.required]);
-      this.formGroup.controls['preco'].setValidators([Validators.required]);
-      this.formGroup.controls['descricao'].setValidators([Validators.required]);
+      const produto = res.produto;
+
+      this.formGroup.controls['nomeProduto'].setValue(produto.nomeProduto);
+      this.formGroup.controls['qtdeTotal'].setValue(produto.qtdeTotal);
+      this.formGroup.controls['imagem'].setValue(produto.imagem);
+      this.formGroup.controls['valor'].setValue(produto.valor);
     }
   }
 
   onSubmit() {
-    let input: ProdutosModel = this.formGroup.value;
-    this.precoIsWrong = false;
-    this.semCategoria = false;
-    this.semNome = false;
-    this.semDescricao = false;
-    this.semPreco = false;
-    this.semImagem = false;
+    let input: ProdutosInterface = this.formGroup.value;
     const validation: boolean = this.validationSave(this.formGroup.value);
     if (this.id) {
-      if (this.formGroup.valid) {
-        let input: ProdutosModel = this.formGroup.value;
-
-        produtosMock[this.index] = input;
+      if (validation) {
+        input.ativo = true;
+        this.produtosService.EditarProduto(this.id, input);
         this.router.navigate([`private/produtos`]);
       }
       return;
     }
     if (validation) {
-      if (produtosMock.length < 1) {
-        input.idProdutos = 1;
-      } else {
-        let newId = produtosMock[produtosMock.length - 1].idProdutos! + 1;
-        input.idProdutos = newId;
-      }
-      produtosMock.push(input);
+      input.ativo = true;
+      this.produtosService.CriarProduto(input);
       this.router.navigate([`private/produtos`]);
     }
   }
@@ -81,33 +72,12 @@ export class ProdutoComponent implements OnInit {
   validationSave(input: ProdutosModel): boolean {
     let validation = true;
 
-    if (input.categoria === '') {
-      this.semCategoria = true;
-      validation = false;
-    }
-
-    if (input.preco <= 0) {
-      this.precoIsWrong = true;
-      validation = false;
-    }
-
-    if (input.nome.length === 0) {
-      this.semNome = true;
-      validation = false;
-    }
-
-    if (input.preco === undefined) {
-      this.semPreco = true;
-      validation = false;
-    }
-
-    if (input.descricao.length === 0) {
-      this.semDescricao = true;
-      validation = false;
-    }
-
-    if (input.imagem.length === 0) {
-      this.semImagem = true;
+    if (
+      !input.qtdeTotal ||
+      !input.imagem ||
+      !input.nomeProduto ||
+      !input.valor
+    ) {
       validation = false;
     }
 
