@@ -1,0 +1,65 @@
+<div class="container d-flex justify-content-center align-items-center py-2">
+  <div class="card bg-white w-100 p-3">
+    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
+      <h1 class="text-center mb-4" *ngIf="!id">Cadastrar Cliente</h1>
+      <h1 class="text-center mb-4" *ngIf="id">Editar Cliente: {{ id }}</h1>
+      <div class="row px-4 py-2">
+        <div class="col-sm-10">
+          <p class="m-0 p-0 text-end me-3"><strong>Data Nascimento:</strong></p>
+        </div>
+        <div class="col-sm-8">
+          <app-input
+            placeholder="Nome"
+            frmName="nomeClientes"
+            [form]="formGroup"
+          >
+          </app-input>
+        </div>
+        <div class="col-sm-4 mt-2">
+          <input
+            class="form-control rounded-pill"
+            type="date"
+            placeholder="Data
+          Nascimento"
+            frmName="dtaNascimento"
+          />
+        </div>
+      </div>
+      <div class="row px-4 py-2">
+        <div class="col-sm-8">
+          <app-input placeholder="E-mail" frmName="email" [form]="formGroup">
+          </app-input>
+        </div>
+        <div class="col-sm-4">
+          <app-input placeholder="Telefone" frmName="fone" [form]="formGroup">
+          </app-input>
+        </div>
+      </div>
+      <div class="row px-4 py-2">
+        <div class="col-sm-6">
+          <app-input
+            placeholder="CPF/CPNJ"
+            frmName="cpfCnpj"
+            [form]="formGroup"
+          >
+          </app-input>
+        </div>
+        <div class="col-sm-6">
+          <app-input placeholder="CEP" frmName="cep" [form]="formGroup">
+          </app-input>
+        </div>
+      </div>
+      <div class="px-4 py-2">
+        <app-input placeholder="Endereço" frmName="endereco" [form]="formGroup">
+        </app-input>
+      </div>
+      <div class="row px-4 py-2">
+        <div class="col-sm-12">
+          <button class="btn btn-primary rounded-pill mt-2 w-100" type="submit">
+            Enviar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

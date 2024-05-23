@@ -1,4 +1,4 @@
-export default class ClientesInterface {
+export default class ClientesModel {
   idClientes: number;
   nomeClientes: string;
   endereco: string;
@@ -23,7 +23,7 @@ export default class ClientesInterface {
     this.ierg = '';
     this.fone = '';
     this.email = '';
-    this.dtaNascimento = new Date('');
+    this.dtaNascimento = new Date();
     this.limite = 0;
     this.listaNegra = false;
     this.ativo = true;

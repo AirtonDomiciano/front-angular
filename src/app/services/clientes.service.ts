@@ -26,4 +26,14 @@ export class ClientesService extends BaseService {
       });
     });
   }
+
+  async DeletarCliente(id: number): Promise<Array<ClientesInterface>> {
+    return new Promise((resolve) => {
+      this.delete('/clientes', id).subscribe((res: any) => {
+        if (res?.length) {
+          resolve(res);
+        }
+      });
+    });
+  }
 }

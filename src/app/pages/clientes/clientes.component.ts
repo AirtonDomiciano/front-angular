@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from 'src/app/services/clientes.service';
 import ClientesInterface from './model/clientes.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clientes',
@@ -10,10 +11,17 @@ import ClientesInterface from './model/clientes.interface';
 export class ClientesComponent implements OnInit {
   public listaClientes: ClientesInterface[] = [];
 
-  constructor(public clientesService: ClientesService) {}
+  constructor(
+    public clientesService: ClientesService,
+    private router: Router
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.buscarClientes();
+  }
+
+  adicionarCliente() {
+    this.router.navigate([`private/cliente`]);
   }
 
   async buscarClientes() {
@@ -25,5 +33,14 @@ export class ClientesComponent implements OnInit {
     }
 
     this.listaClientes = res;
+  }
+
+  async deletarCliente(id: number) {
+    const res = await this.clientesService.DeletarCliente(id);
+
+    if (!res) {
+      alert('Deu ruim');
+      return;
+    }
   }
 }
