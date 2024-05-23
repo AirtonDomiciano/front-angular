@@ -16,6 +16,7 @@ export const RoutesArray: Routes[] = [
   },
   { title: 'Produtos', route: 'produtos', icon: 'bi bi-basket', childs: [] },
   { title: 'Usuários', route: 'usuarios', icon: 'bi bi-people', childs: [] },
+  { title: 'Animais', route: 'animais', icon: 'bi bi-heart-fill', childs: [] },
 ];
 
 export class Routes {
