@@ -30,14 +30,12 @@ export class ProdutoComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    if (this.id) {
-      this.formGroup.controls['nomeProduto'].setValidators([
-        Validators.required,
-      ]);
-      this.formGroup.controls['qtdeTotal'].setValidators([Validators.required]);
-      this.formGroup.controls['imagem'].setValidators([Validators.required]);
-      this.formGroup.controls['valor'].setValidators([Validators.required]);
+    this.formGroup.controls['nomeProduto'].setValidators([Validators.required]);
+    this.formGroup.controls['qtdeTotal'].setValidators([Validators.required]);
+    this.formGroup.controls['imagem'].setValidators([Validators.required]);
+    this.formGroup.controls['valor'].setValidators([Validators.required]);
 
+    if (this.id) {
       const res: ResBuscarPorId = await this.produtosService.BuscarProdutoPorId(
         this.id
       );
