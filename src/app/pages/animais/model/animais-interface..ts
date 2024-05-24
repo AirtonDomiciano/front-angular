@@ -1,19 +1,14 @@
-export default class AnimaisInterface {
-  idAnimal: number;
-  idCliente: string;
-  nomeAnimal: string;
-  divisaoAnimal: string;
-  especieAnimal: string;
-  racaAnimal: string;
-  idadeAnimal: number;
+import { Animais } from 'src/app/shared/models/animais';
 
+export default class AnimaisModel extends Animais {
   constructor() {
+    super();
     this.idAnimal = 0;
-    this.idCliente = '';
-    this.nomeAnimal = '';
-    this.especieAnimal = '';
-    this.racaAnimal = '';
-    this.idadeAnimal = 0;
-    this.divisaoAnimal = '';
+    this.idCliente = 0;
+    this.nome = '';
+    this.divisao = '';
+    this.especie = '';
+    this.raca = '';
+    this.idade = 0;
   }
 }
