@@ -86,13 +86,13 @@ export class UsuarioComponent implements OnInit {
       input.ativo = true;
       input.removido = false;
 
-      this.usuariosService.EditarUsuario(this.id, input);
+      this.usuariosService.editarUsuario(this.id, input);
 
       this.router.navigate([`private/usuarios`]);
       return;
     }
 
-    this.usuariosService.CriarUsuario(input);
+    this.usuariosService.criarUsuario(input);
 
     if (res()) {
       this.router.navigate([`private/usuarios`]);
