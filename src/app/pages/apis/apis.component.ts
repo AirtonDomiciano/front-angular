@@ -17,7 +17,7 @@ export class ApisComponent implements OnInit {
   constructor(private router: Router, public apisService: ApisService) {}
 
   async ngOnInit(): Promise<void> {
-    this.buscarTodasApis();
+    await this.buscarTodasApis();
   }
 
   async buscarTodasApis() {
@@ -35,9 +35,12 @@ export class ApisComponent implements OnInit {
     this.router.navigate([`/private/api`]);
   }
 
-  excluirApi(id: number) {
-    this.apisService.deletarApi(id);
-    window.location.reload();
+  async excluirApi(id: number) {
+    const res = await this.apisService.deletarApi(id);
+
+    if (res) {
+      await this.buscarTodasApis();
+    }
   }
 
   editarApi(id: number) {
