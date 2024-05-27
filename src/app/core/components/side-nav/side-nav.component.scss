@@ -4,12 +4,10 @@
   content: "";
   display: inline-block;
   height: 0.6em;
-  // left: 0.15em;
   position: relative;
   top: 0.15em;
   vertical-align: top;
   width: 0.6em;
-  // left: 0;
   transform: rotate(45deg);
   transition: 0.3s;
 }
@@ -18,9 +16,9 @@
   position: fixed;
   left: 0;
   top: 0px;
-
   height: 100vh;
   transition: 0.3s;
+  overflow-y: auto;
 
   width: 4%;
 
@@ -145,4 +143,8 @@
       }
     }
   }
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; 
 }

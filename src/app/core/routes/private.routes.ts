@@ -98,6 +98,14 @@ export const privateRoutes: Routes = [
           ),
         canActivate: [AuthGuardService],
       },
+      {
+        path: 'animais',
+        loadChildren: () =>
+          import('../../pages/animais/animais.module').then(
+            (m) => m.ClientesModule
+          ),
+        canActivate: [AuthGuardService],
+      },
     ],
   },
 ];
