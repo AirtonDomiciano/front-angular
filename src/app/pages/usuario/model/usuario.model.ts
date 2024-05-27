@@ -4,6 +4,7 @@ export class UsuarioModel {
   sobrenome: string;
   idade: number;
   email: string;
+  senha: string;
   cep: string;
   funcao: string;
   removido: boolean;
@@ -20,6 +21,7 @@ export class UsuarioModel {
     this.cep = '';
     this.nome = '';
     this.email = '';
+    this.senha = '';
     this.funcao = '';
     this.sobrenome = '';
     this.localidade = '';

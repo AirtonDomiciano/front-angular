@@ -28,7 +28,15 @@
           >
           </app-input>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
+          <app-input-senha
+            frmPlaceholder="Senha"
+            frmName="senha"
+            [form]="formGroup"
+          >
+          </app-input-senha>
+        </div>
+        <div class="col-sm-3">
           <app-input-cep
             placeholder="CEP"
             (onEvent)="onLoadCep($event)"

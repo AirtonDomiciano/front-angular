@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { UsuarioModel } from './model/usuario.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EnderecoInterface } from 'src/app/shared/components/input-cep/endereco.interface';
-import { UsuariosMock } from '../usuarios/usuarios.mock';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { UsuariosInterface } from '../usuarios/model/usuarios.interface';
 
 @Component({
   selector: 'app-usuario',
@@ -11,33 +11,54 @@ import { UsuariosMock } from '../usuarios/usuarios.mock';
   styleUrls: ['./usuario.component.scss'],
 })
 export class UsuarioComponent implements OnInit {
-  public formGroup!: UntypedFormGroup;
+  public formGroup: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
-
-  public index = UsuariosMock.findIndex((el) => el.idUsuario === this.id);
-
-  public model: UsuarioModel = new UsuarioModel();
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private usuariosService: UsuariosService
   ) {
-    this.formGroup = fb.group(this.model);
+    this.formGroup = fb.group({
+      nome: ['', Validators.required],
+      sobrenome: ['', Validators.required],
+      email: ['', Validators.required],
+      senha: ['', Validators.required],
+      cep: ['', Validators.required],
+      funcao: ['', Validators.required],
+      idade: ['', Validators.required],
+      localidade: ['', Validators.required],
+      uf: ['', Validators.required],
+      bairro: ['', Validators.required],
+      logradouro: ['', Validators.required],
+    });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if (this.id) {
-      this.model = UsuariosMock[this.index];
-      this.formGroup = this.fb.group(this.model);
+      this.requiredForm();
+      const usuario = await this.usuariosService.buscarUsuarioPorId(this.id);
+
+      this.formGroup.controls['nome'].setValue(usuario.nome);
+      this.formGroup.controls['sobrenome'].setValue(usuario.sobrenome);
+      this.formGroup.controls['email'].setValue(usuario.email);
+      this.formGroup.controls['senha'].setValue(usuario.senha);
+      this.formGroup.controls['cep'].setValue(usuario.cep);
+      this.formGroup.controls['funcao'].setValue(usuario.funcao);
+      this.formGroup.controls['idade'].setValue(usuario.idade);
+      this.formGroup.controls['localidade'].setValue(usuario.localidade);
+      this.formGroup.controls['uf'].setValue(usuario.uf);
+      this.formGroup.controls['bairro'].setValue(usuario.bairro);
+      this.formGroup.controls['logradouro'].setValue(usuario.logradouro);
     }
-    this.requiredForm();
   }
 
   requiredForm(): void {
     this.formGroup.controls['nome'].setValidators([Validators.required]);
     this.formGroup.controls['sobrenome'].setValidators([Validators.required]);
     this.formGroup.controls['email'].setValidators([Validators.required]);
+    this.formGroup.controls['senha'].setValidators([Validators.required]);
     this.formGroup.controls['cep'].setValidators([Validators.required]);
     this.formGroup.controls['funcao'].setValidators([Validators.required]);
     this.formGroup.controls['idade'].setValidators([Validators.required]);
@@ -52,26 +73,27 @@ export class UsuarioComponent implements OnInit {
       return;
     }
 
-    const input: UsuarioModel = this.formGroup.value;
-
-    if (UsuariosMock.length < 1) {
-      input.idUsuario = 1;
-    } else {
-      let newId = UsuariosMock[UsuariosMock.length - 1].idUsuario! + 1;
-      input.idUsuario = newId;
-    }
+    const input: UsuariosInterface = this.formGroup.value;
 
     input.email = input.email.toLocaleLowerCase();
+    input.ativo = true;
+    input.removido = false;
+    input.cep = input.cep.replace('-', '');
 
     const res = () => true;
 
     if (this.id) {
-      UsuariosMock[this.index] = input;
+      input.ativo = true;
+      input.removido = false;
+
+      this.usuariosService.EditarUsuario(this.id, input);
+
       this.router.navigate([`private/usuarios`]);
       return;
     }
 
-    UsuariosMock.push(input);
+    this.usuariosService.CriarUsuario(input);
+
     if (res()) {
       this.router.navigate([`private/usuarios`]);
     }

@@ -28,6 +28,10 @@ export abstract class BaseService implements IBaseService {
     return this.http.get<T>(`${this.url}${endpoint}`, { headers });
   }
 
+  getById<T>(endpoint: string, id: number): Observable<T> {
+    return this.http.get<T>(`${this.url}${endpoint}/${id}`, { headers });
+  }
+
   post<T>(endpoint: string, body: T): Observable<any> {
     return this.http.post<T>(`${this.url}${endpoint}`, body, { headers });
   }
