@@ -61,7 +61,6 @@ export class ClienteComponent {
       if (this.formGroup.valid) {
         input.ativo = true;
         input.listaNegra = false;
-        input.cep.replace('-', '');
         await this.clientesService.editarCliente(this.id, input);
         this.router.navigate([`private/clientes`]);
       }
@@ -70,7 +69,6 @@ export class ClienteComponent {
     if (validation) {
       input.ativo = true;
       input.listaNegra = false;
-      input.cep = input.cep.replace('-', '');
       const res = await this.clientesService.criarCliente(input);
       if (res) {
         this.router.navigate([`private/clientes`]);

@@ -58,12 +58,4 @@ export class InputCepComponent implements OnInit {
       this.onEvent.emit(value);
     });
   }
-
-  cepIsValid(cep: string): boolean {
-    if (cep.length <= 9) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }
