@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import ClientesInterface from '../clientes/model/clientes.interface';
-import ClientesModel from '../clientes/model/clientes.model';
+import ClientesModel from 'src/app/shared/models/clientes.model';
+import ClientesInterface from 'src/app/shared/models/clientes.interface';
+import { ClientesService } from 'src/app/services/clientes.service';
 
 @Component({
   selector: 'app-cliente',
@@ -10,7 +11,7 @@ import ClientesModel from '../clientes/model/clientes.model';
   styleUrls: ['./cliente.component.scss'],
 })
 export class ClienteComponent {
-  public formGroup: FormGroup;
+  public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
   public model: ClientesModel = new ClientesModel();
   public cliente!: ClientesInterface;
@@ -18,12 +19,13 @@ export class ClienteComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private clientesService: ClientesService
   ) {
     this.formGroup = this.fb.group(this.model);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.formGroup.controls['nomeClientes'].setValidators([
       Validators.required,
     ]);
@@ -31,26 +33,48 @@ export class ClienteComponent {
     this.formGroup.controls['cep'].setValidators([Validators.required]);
     this.formGroup.controls['cpfCnpj'].setValidators([Validators.required]);
     this.formGroup.controls['fone'].setValidators([Validators.required]);
-    this.formGroup.controls['email'].setValidators([Validators.required]);
-    this.formGroup.controls['dtaNascimento'].setValidators([
+    this.formGroup.controls['email'].setValidators([
       Validators.required,
+      Validators.email,
     ]);
+
     if (this.id) {
-      this.formGroup = this.fb.group(this.cliente);
+      const res = await this.clientesService.buscarClientePorId(this.id);
+      if (res) {
+        this.cliente = res;
+        this.formGroup.controls['nomeClientes'].setValue(
+          this.cliente.nomeClientes
+        );
+        this.formGroup.controls['endereco'].setValue(this.cliente.endereco);
+        this.formGroup.controls['cep'].setValue(this.cliente.cep);
+        this.formGroup.controls['cpfCnpj'].setValue(this.cliente.cpfCnpj);
+        this.formGroup.controls['fone'].setValue(this.cliente.fone);
+        this.formGroup.controls['email'].setValue(this.cliente.email);
+      }
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     let input: ClientesInterface = this.formGroup.value;
     const validation: boolean = this.validationSave(input);
-    if (this.id) {
+    if (this.id && validation) {
       if (this.formGroup.valid) {
-        this.router.navigate([`private/produtos`]);
+        input.ativo = true;
+        input.listaNegra = false;
+        input.cep.replace('-', '');
+        await this.clientesService.editarCliente(this.id, input);
+        this.router.navigate([`private/clientes`]);
       }
       return;
     }
     if (validation) {
-      this.router.navigate([`private/produtos`]);
+      input.ativo = true;
+      input.listaNegra = false;
+      input.cep = input.cep.replace('-', '');
+      const res = await this.clientesService.criarCliente(input);
+      if (res) {
+        this.router.navigate([`private/clientes`]);
+      }
     }
   }
 
@@ -61,10 +85,11 @@ export class ClienteComponent {
       !input.nomeClientes ||
       !input.endereco ||
       !input.cep ||
+      input.cep.length !== 8 ||
       !input.cpfCnpj ||
       !input.email ||
-      !input.fone ||
-      !input.dtaNascimento
+      !input.fone
+      // !input.dtaNascimento
     ) {
       validation = false;
     }

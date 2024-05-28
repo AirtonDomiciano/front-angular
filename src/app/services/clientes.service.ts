@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import ClientesInterface from '../pages/clientes/model/clientes.interface';
+import ClientesInterface from '../shared/models/clientes.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,22 +17,51 @@ export class ClientesService extends BaseService {
     super(http);
   }
 
-  async BuscarTodosClientes(): Promise<Array<ClientesInterface>> {
+  async buscarTodosClientes(): Promise<Array<ClientesInterface>> {
     return new Promise((resolve) => {
       this.get('/clientes').subscribe((res: any) => {
-        if (res?.length) {
+        if (res) {
           resolve(res);
         }
       });
     });
   }
 
-  async DeletarCliente(id: number): Promise<Array<ClientesInterface>> {
+  async deletarCliente(id: number): Promise<boolean> {
     return new Promise((resolve) => {
-      this.delete('/clientes', id).subscribe((res: any) => {
-        if (res?.length) {
+      this.delete(`/clientes/${id}`).subscribe((res: any) => {
+        resolve(res);
+      });
+    });
+  }
+
+  async criarCliente(cliente: ClientesInterface): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.post('/clientes', cliente).subscribe((res: any) => {
+        resolve(res);
+      });
+    });
+  }
+
+  async buscarClientePorId(id: number): Promise<ClientesInterface> {
+    return new Promise((resolve) => {
+      this.get(`/clientes/${id}`).subscribe((res: any) => {
+        if (res) {
           resolve(res);
+        } else {
+          console.error('Cliente não encontrado!');
         }
+      });
+    });
+  }
+
+  async editarCliente(
+    id: number,
+    cliente: ClientesInterface
+  ): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.put(`/clientes/${id}`, cliente).subscribe((res: any) => {
+        resolve(res);
       });
     });
   }

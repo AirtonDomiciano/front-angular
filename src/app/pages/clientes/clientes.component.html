@@ -49,7 +49,10 @@
         <td>{{ clientes.fone }}</td>
         <td>{{ clientes.dtaNascimento | date : "dd/MM/yyyy" }}</td>
         <td>
-          <button class="btn-editar btn btn-primary btn-sm">
+          <button
+            class="btn-editar btn btn-primary btn-sm"
+            (click)="editarCliente(clientes.idClientes)"
+          >
             <span class="bi bi-pencil"></span>
           </button>
           <button

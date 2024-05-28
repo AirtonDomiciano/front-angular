@@ -1,5 +1,5 @@
 export default class ClientesModel {
-  idClientes: number;
+  idClientes?: number;
   nomeClientes: string;
   endereco: string;
   bairro: string;
@@ -14,7 +14,6 @@ export default class ClientesModel {
   ativo: boolean;
 
   constructor() {
-    this.idClientes = 0;
     this.nomeClientes = '';
     this.endereco = '';
     this.bairro = '';
@@ -23,7 +22,7 @@ export default class ClientesModel {
     this.ierg = '';
     this.fone = '';
     this.email = '';
-    this.dtaNascimento = new Date();
+    this.dtaNascimento = new Date('');
     this.limite = 0;
     this.listaNegra = false;
     this.ativo = true;

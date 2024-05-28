@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from 'src/app/services/clientes.service';
-import ClientesInterface from './model/clientes.interface';
 import { Router } from '@angular/router';
+import ClientesInterface from 'src/app/shared/models/clientes.interface';
 
 @Component({
   selector: 'app-clientes',
@@ -24,8 +24,12 @@ export class ClientesComponent implements OnInit {
     this.router.navigate([`private/cliente`]);
   }
 
+  editarCliente(id: number) {
+    this.router.navigate([`private/cliente/${id}`]);
+  }
+
   async buscarClientes() {
-    const res = await this.clientesService.BuscarTodosClientes();
+    const res = await this.clientesService.buscarTodosClientes();
 
     if (!res) {
       alert('DEU Errado');
@@ -36,11 +40,13 @@ export class ClientesComponent implements OnInit {
   }
 
   async deletarCliente(id: number) {
-    const res = await this.clientesService.DeletarCliente(id);
+    const res = await this.clientesService.deletarCliente(id);
 
     if (!res) {
       alert('Deu ruim');
       return;
     }
+
+    await this.buscarClientes();
   }
 }

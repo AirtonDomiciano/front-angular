@@ -36,11 +36,11 @@ export abstract class BaseService implements IBaseService {
     return this.http.post<T>(`${this.url}${endpoint}`, body, { headers });
   }
 
-  delete<T>(endpoint: string, id: number): Observable<any> {
-    return this.http.delete<T>(`${this.url}${endpoint}/${id}`, { headers });
+  delete<T>(endpoint: string): Observable<any> {
+    return this.http.delete<T>(`${this.url}${endpoint}`, { headers });
   }
 
-  put<T>(endpoint: string, id: number, body: T): Observable<any> {
-    return this.http.put<T>(`${this.url}${endpoint}/${id}`, body, { headers });
+  put<T>(endpoint: string, body: T): Observable<any> {
+    return this.http.put<T>(`${this.url}${endpoint}`, body, { headers });
   }
 }

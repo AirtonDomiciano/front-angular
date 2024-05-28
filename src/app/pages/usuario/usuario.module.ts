@@ -16,9 +16,9 @@ import { InputSenhaModule } from 'src/app/shared/components/input-senha/input-se
     RouterModule,
     ReactiveFormsModule,
     InputModule,
-    InputCepModule,
     InputSenhaModule,
     UsuarioRoutingModule,
+    InputCepModule,
   ],
   exports: [UsuarioComponent],
 })
