@@ -20,6 +20,7 @@ export class InputCepComponent implements OnInit {
   @Input() placeholder = '';
 
   public cepSoTemNumeros = true;
+  public verificaoTamanhoInicial: boolean = false;
 
   constructor(private inputCepService: InputCepService) {}
 
@@ -27,7 +28,6 @@ export class InputCepComponent implements OnInit {
 
   onLoadCep() {
     let cep = this.form.controls['cep'].value;
-    cep = cep.replace('-', '');
     const cepValid = this.validCep(cep);
     if (cepValid) {
       this.getCep(cep);
@@ -57,41 +57,5 @@ export class InputCepComponent implements OnInit {
       const value: EnderecoInterface = endereco;
       this.onEvent.emit(value);
     });
-  }
-
-  formatadorCep(event: Event) {
-    const cep = this.form.get('cep')?.value;
-    const isValid: boolean = this.cepIsValid(cep);
-
-    if (isValid) {
-      const formatedCep: string = this.formatedCep(cep);
-      this.form.controls['cep'].setValue(formatedCep);
-      if (
-        cep.length === 6 &&
-        event instanceof InputEvent &&
-        event.inputType === 'deleteContentBackward'
-      ) {
-        let newCep = cep.slice(0, -1);
-        this.form.controls['cep'].setValue(newCep);
-      }
-    } else {
-      let newCep = cep.slice(0, -1);
-      this.form.controls['cep'].setValue(newCep);
-    }
-  }
-
-  cepIsValid(cep: string): boolean {
-    if (cep.length <= 9) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  formatedCep(cep: string): string {
-    if (cep.length === 5) {
-      cep += '-';
-    }
-    return cep;
   }
 }

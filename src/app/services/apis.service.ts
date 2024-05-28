@@ -37,16 +37,20 @@ export class ApisService extends BaseService {
 
   async deletarApi(id: number): Promise<boolean> {
     return new Promise((resolve) => {
-      this.delete('/apis', id).subscribe((res: any) => {
-        resolve(res);
+      this.delete(`/apis/${id}`).subscribe((res: any) => {
+        if (res?.length) {
+          resolve(res);
+        }
       });
     });
   }
 
   async editarApi(id: number, api: ApisInterface): Promise<boolean> {
     return new Promise((resolve) => {
-      this.put('/apis', id, api).subscribe((res: any) => {
-        resolve(res);
+      this.put(`/apis/${id}`, api).subscribe((res: any) => {
+        if (res?.length) {
+          resolve(res);
+        }
       });
     });
   }

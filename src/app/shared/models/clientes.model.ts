@@ -1,7 +1,6 @@
-export default class ClientesInterface {
-  idClientes: number;
+export default class ClientesModel {
+  idClientes?: number;
   nomeClientes: string;
-  pessoa: boolean;
   endereco: string;
   bairro: string;
   cep: string;
@@ -15,9 +14,7 @@ export default class ClientesInterface {
   ativo: boolean;
 
   constructor() {
-    this.idClientes = 0;
     this.nomeClientes = '';
-    this.pessoa = false;
     this.endereco = '';
     this.bairro = '';
     this.cep = '';

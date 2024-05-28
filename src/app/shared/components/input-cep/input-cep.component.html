@@ -8,7 +8,7 @@
     [ngClass]="{
       'is-invalid': form.get(frmName)?.invalid
     }"
-    (input)="formatadorCep($event)"
+    mask="00000-000"
     (focusout)="onLoadCep()"
     required
   />

@@ -1,14 +1,7 @@
-export class UsuariosModel {
-  idUsuario?: number;
-  nome: any;
-  sobrenome: any;
-  idade: any;
-  email: any;
-  cep: any;
-  funcao: any;
-  ativo: boolean;
-
+import Usuarios from '../../../shared/interface/usuarios.interface';
+export class UsuariosModel extends Usuarios {
   constructor() {
+    super();
     this.idade = 0;
     this.cep = '';
     this.nome = '';
