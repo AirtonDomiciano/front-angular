@@ -37,12 +37,10 @@ export class ApisService extends BaseService {
     });
   }
 
-  async deletarApi(id: number): Promise<void> {
+  async deletarApi(id: number): Promise<boolean> {
     return new Promise((resolve) => {
       this.delete('/apis', id).subscribe((res: any) => {
-        if (res?.length) {
           resolve(res);
-        }
       });
     });
   }

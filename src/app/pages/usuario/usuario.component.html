@@ -1,117 +1,102 @@
-<div
-  class="container d-flex justify-content-center align-items-center mt-5 py-5"
->
-  <div class="card bg-white w-100">
-    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
-      <h1 class="text-center">Cadastro</h1>
-      <div class="row px-4 py-2">
-        <div class="col-sm-6">
-          <app-input placeholder="Nome" frmName="nome" [form]="formGroup">
-          </app-input>
-        </div>
-        <div class="col-sm-6">
-          <app-input
-            frmName="sobrenome"
-            placeholder="Sobrenome"
-            [form]="formGroup"
-          >
-          </app-input>
-        </div>
-      </div>
-      <div class="row px-4 py-2">
-        <div class="col-sm-6">
-          <app-input
-            type="email"
-            placeholder="E-mail"
-            frmName="email"
-            [form]="formGroup"
-          >
-          </app-input>
-        </div>
-        <div class="col-sm-3">
-          <app-input-senha
-            frmPlaceholder="Senha"
-            frmName="senha"
-            [form]="formGroup"
-          >
-          </app-input-senha>
-        </div>
-        <div class="col-sm-3">
-          <app-input-cep
-            placeholder="CEP"
-            (onEvent)="onLoadCep($event)"
-            frmName="cep"
-            [form]="formGroup"
-          >
-          </app-input-cep>
-        </div>
-      </div>
-      <div class="row px-4 py-2">
-        <div class="col-sm-9">
-          <app-input placeholder="Função" frmName="funcao" [form]="formGroup">
-          </app-input>
-        </div>
-        <div class="col-sm-3">
-          <app-input
-            type="number"
-            placeholder="Idade"
-            frmName="idade"
-            [form]="formGroup"
-          >
-          </app-input>
-        </div>
-      </div>
-      <div class="row px-4 py-2">
-        <div class="col-sm-9">
-          <app-input
-            type="text"
-            placeholder="Cidade"
-            frmName="localidade"
-            [form]="formGroup"
-          >
-          </app-input>
-        </div>
-        <div class="col-sm-3">
-          <app-input
-            type="text"
-            placeholder="UF"
-            frmName="uf"
-            [form]="formGroup"
-          >
-          </app-input>
-        </div>
-      </div>
-      <div class="row px-4 py-2">
-        <div class="col-sm-6">
-          <app-input
-            type="text"
-            placeholder="Rua"
-            frmName="logradouro"
-            [form]="formGroup"
-          >
-          </app-input>
-        </div>
-        <div class="col-sm-6">
-          <app-input
-            type="text"
-            placeholder="Bairro"
-            frmName="bairro"
-            [form]="formGroup"
-          >
-          </app-input>
-        </div>
-      </div>
-      <div class="row px-4 py-2 mt-3">
-        <div class="col-sm-12">
-          <button
-            [disabled]="this.formGroup.invalid"
-            class="btn btn-primary rounded-pill w-100"
-            type="submit"
-          >
-            Salvar
-          </button>
-        </div>
-      </div>
-    </form>
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
+  <h1 class="text-center">Cadastro</h1>
+  <div class="row px-4 py-2">
+    <div class="col-sm-6">
+      <app-input placeholder="Nome" frmName="nome" [form]="formGroup">
+      </app-input>
+    </div>
+    <div class="col-sm-6">
+      <app-input frmName="sobrenome" placeholder="Sobrenome" [form]="formGroup">
+      </app-input>
+    </div>
   </div>
-</div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-6">
+      <app-input
+        type="email"
+        placeholder="E-mail"
+        frmName="email"
+        [form]="formGroup"
+      >
+      </app-input>
+    </div>
+    <div class="col-sm-3">
+      <app-input-senha
+        frmPlaceholder="Senha"
+        frmName="senha"
+        [form]="formGroup"
+      >
+      </app-input-senha>
+    </div>
+    <div class="col-sm-3">
+      <app-input-cep
+        placeholder="CEP"
+        (onEvent)="onLoadCep($event)"
+        frmName="cep"
+        [form]="formGroup"
+      >
+      </app-input-cep>
+    </div>
+  </div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-9">
+      <app-input placeholder="Função" frmName="funcao" [form]="formGroup">
+      </app-input>
+    </div>
+    <div class="col-sm-3">
+      <app-input
+        type="number"
+        placeholder="Idade"
+        frmName="idade"
+        [form]="formGroup"
+      >
+      </app-input>
+    </div>
+  </div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-9">
+      <app-input
+        type="text"
+        placeholder="Cidade"
+        frmName="localidade"
+        [form]="formGroup"
+      >
+      </app-input>
+    </div>
+    <div class="col-sm-3">
+      <app-input type="text" placeholder="UF" frmName="uf" [form]="formGroup">
+      </app-input>
+    </div>
+  </div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-6">
+      <app-input
+        type="text"
+        placeholder="Rua"
+        frmName="logradouro"
+        [form]="formGroup"
+      >
+      </app-input>
+    </div>
+    <div class="col-sm-6">
+      <app-input
+        type="text"
+        placeholder="Bairro"
+        frmName="bairro"
+        [form]="formGroup"
+      >
+      </app-input>
+    </div>
+  </div>
+  <div class="row px-4 py-2 mt-3">
+    <div class="col-sm-12">
+      <button
+        [disabled]="this.formGroup.invalid"
+        class="btn btn-primary rounded-pill w-100"
+        type="submit"
+      >
+        Salvar
+      </button>
+    </div>
+  </div>
+</form>

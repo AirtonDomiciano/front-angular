@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import { UsuariosInterface } from '../pages/usuarios/model/usuarios.interface';
+import { Usuario } from '../shared/models/usuario';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class UsuariosService extends BaseService {
     super(http);
   }
 
-  async buscarTodosUsuarios(): Promise<Array<UsuariosInterface>> {
+  async buscarTodosUsuarios(): Promise<Array<Usuario>> {
     return new Promise((resolve) => {
       this.get('/usuarios').subscribe((res: any) => {
         if (res?.length) {
@@ -35,15 +35,7 @@ export class UsuariosService extends BaseService {
     });
   }
 
-  async criarUsuario(usuario: UsuariosInterface): Promise<boolean> {
-    return new Promise((resolve) => {
-      this.post('/usuarios', usuario).subscribe((res: any) => {
-        resolve(res);
-      });
-    });
-  }
-
-  async buscarUsuarioPorId(id: number): Promise<UsuariosInterface> {
+  async buscarUsuarioPorId(id: number): Promise<Usuario> {
     return new Promise((resolve) => {
       this.getById('/usuarios', id).subscribe((res: any) => {
         resolve(res);
@@ -51,12 +43,9 @@ export class UsuariosService extends BaseService {
     });
   }
 
-  async editarUsuario(
-    id: number,
-    usuario: UsuariosInterface
-  ): Promise<boolean> {
+  async salvar(usuario: Usuario): Promise<boolean> {
     return new Promise((resolve) => {
-      this.put('/usuarios', id, usuario).subscribe((res: any) => {
+      this.post('/usuarios', usuario).subscribe((res: any) => {
         resolve(res);
       });
     });

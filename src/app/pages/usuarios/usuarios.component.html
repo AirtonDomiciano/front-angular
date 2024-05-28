@@ -1,68 +1,66 @@
-<div class="container">
-  <p-table
-    #myTab
-    [value]="listagemUsuarios"
-    [globalFilterFields]="['nome', 'sobrenome', 'email', 'funcao']"
-  >
-    <ng-template pTemplate="caption">
-      <h2 class="text-center">Usuários</h2>
-      <div class="row">
-        <div class="col-sm-1 px-3">
-          <h5>Filtro:</h5>
-        </div>
-        <div class="col-sm-3">
-          <input
-            type="text"
-            pInputText
-            (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
-          />
-        </div>
-        <div class="d-flex justify-content-end col-sm-8">
-          <button class="btn btn-success" (click)="adicionarUsuario()">
-            <span class="bi bi-plus"></span>
-          </button>
-        </div>
+<p-table
+  #myTab
+  [value]="listagemUsuarios"
+  [globalFilterFields]="['nome', 'sobrenome', 'email', 'funcao']"
+>
+  <ng-template pTemplate="caption">
+    <h2 class="text-center">Usuários</h2>
+    <div class="row">
+      <div class="col-sm-1 px-3">
+        <h5>Filtro:</h5>
       </div>
-    </ng-template>
+      <div class="col-sm-3">
+        <input
+          type="text"
+          pInputText
+          (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
+        />
+      </div>
+      <div class="d-flex justify-content-end col-sm-8">
+        <button class="btn btn-success" (click)="adicionarUsuario()">
+          <span class="bi bi-plus"></span>
+        </button>
+      </div>
+    </div>
+  </ng-template>
 
-    <ng-template pTemplate="header">
-      <tr>
-        <th pSortableColumn="nome">
-          Nome <p-sortIcon field="nome"></p-sortIcon>
-        </th>
-        <th pSortableColumn="sobrenome">
-          Sobrenome <p-sortIcon field="sobrenome"></p-sortIcon>
-        </th>
-        <th pSortableColumn="email">
-          E-mail <p-sortIcon field="email"></p-sortIcon>
-        </th>
-        <th pSortableColumn="funcao">
-          Função <p-sortIcon field="funcao"></p-sortIcon>
-        </th>
-        <th>Ações</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-usuario>
-      <tr>
-        <td>{{ usuario.nome }}</td>
-        <td>{{ usuario.sobrenome }}</td>
-        <td>{{ usuario.email }}</td>
-        <td>{{ usuario.funcao }}</td>
-        <td>
-          <button class="btn-editar btn btn-primary btn-sm">
-            <span
-              class="bi bi-pencil"
-              (click)="editarUsuario(usuario.idUsuarios)"
-            ></span>
-          </button>
-          <button
-            class="btn btn-danger btn-sm"
-            (click)="removerUsuario(usuario.idUsuarios)"
-          >
-            <span class="bi bi-trash"></span>
-          </button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="nome">
+        Nome <p-sortIcon field="nome"></p-sortIcon>
+      </th>
+      <th pSortableColumn="sobrenome">
+        Sobrenome <p-sortIcon field="sobrenome"></p-sortIcon>
+      </th>
+      <th pSortableColumn="email">
+        E-mail <p-sortIcon field="email"></p-sortIcon>
+      </th>
+      <th pSortableColumn="funcao">
+        Função <p-sortIcon field="funcao"></p-sortIcon>
+      </th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-usuario>
+    <tr>
+      <td>{{ usuario.nome }}</td>
+      <td>{{ usuario.sobrenome }}</td>
+      <td>{{ usuario.email }}</td>
+      <td>{{ usuario.funcao }}</td>
+      <td>
+        <button
+          (click)="editarUsuario(usuario.idUsuarios)"
+          class="btn-editar btn btn-primary btn-sm"
+        >
+          <span class="bi bi-pencil"></span>
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="removerUsuario(usuario.idUsuarios)"
+        >
+          <span class="bi bi-trash"></span>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

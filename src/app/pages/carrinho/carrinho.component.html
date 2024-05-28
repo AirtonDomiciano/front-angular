@@ -56,7 +56,7 @@
   <button class="checkout" (click)="comprarProduto()">Checkout</button>
 </div>
 
-<div class="container" *ngIf="!temProdutos">
+<div *ngIf="!temProdutos">
   <h1>Não há nada por aqui ainda ...</h1>
   <p>Vamos adicionar itens ao carrinho?</p>
   <a (click)="redirecionarParaCatalogo()" class="btn">Ir ao catálogo</a>
