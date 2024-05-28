@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProdutosModel } from '../produtos/model/produtos.model';
+import { ProdutosModel } from 'src/app/shared/models/produtos.model';
 import { Router } from '@angular/router';
 
 @Component({

@@ -3,10 +3,7 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import { ProdutosModel } from '../pages/produtos/model/produtos.model';
-import { ProdutosInterface } from '../pages/produtos/model/produtos.interface';
-import { ResBuscarPorId } from '../pages/produtos/model/res-buscar-por-id.interface';
-
+import { ProdutosInterface } from '../shared/models/produtos.interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,39 +19,33 @@ export class ProdutosService extends BaseService {
   async BuscarTodosProdutos(): Promise<Array<ProdutosInterface>> {
     return new Promise((resolve) => {
       this.get('/produtos').subscribe((res: any) => {
-        if (res?.length) {
+        if (res) {
           resolve(res);
         }
       });
     });
   }
 
-  async DeletarProduto(id: number): Promise<Array<ProdutosModel>> {
+  async DeletarProduto(id: number): Promise<boolean> {
     return new Promise((resolve) => {
-      this.delete('/produtos', id).subscribe((res: any) => {
-        if (res?.length) {
-          resolve(res);
-        }
+      this.delete(`/produtos/${id}`).subscribe((res: any) => {
+        resolve(res);
       });
     });
   }
 
-  async CriarProduto(
-    produto: ProdutosInterface
-  ): Promise<Array<ProdutosModel>> {
+  async CriarProduto(produto: ProdutosInterface): Promise<boolean> {
     return new Promise((resolve) => {
       this.post('/produtos', produto).subscribe((res: any) => {
-        if (res?.length) {
-          resolve(res);
-        }
+        resolve(res);
       });
     });
   }
 
-  async BuscarProdutoPorId(id: number): Promise<ResBuscarPorId> {
+  async BuscarProdutoPorId(id: number): Promise<ProdutosInterface> {
     return new Promise((resolve) => {
-      this.getById('/produtos', id).subscribe((res: any) => {
-        if (res?.success) {
+      this.get(`/produtos/${id}`).subscribe((res: any) => {
+        if (res) {
           resolve(res);
         }
       });
@@ -64,12 +55,10 @@ export class ProdutosService extends BaseService {
   async EditarProduto(
     id: number,
     produto: ProdutosInterface
-  ): Promise<ProdutosInterface> {
+  ): Promise<boolean> {
     return new Promise((resolve) => {
-      this.put('/produtos', id, produto).subscribe((res: any) => {
-        if (res?.success) {
-          resolve(res);
-        }
+      this.put(`/produtos/${id}`, produto).subscribe((res: any) => {
+        resolve(res);
       });
     });
   }

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProdutosModel } from '../produtos/model/produtos.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
-import { ResBuscarPorId } from '../produtos/model/res-buscar-por-id.interface';
-import { ProdutosInterface } from '../produtos/model/produtos.interface';
+import { ProdutosInterface } from 'src/app/shared/models/produtos.interface';
+import { ProdutosModel } from 'src/app/shared/models/produtos.model';
 
 @Component({
   selector: 'app-produto',
@@ -36,11 +35,9 @@ export class ProdutoComponent implements OnInit {
     this.formGroup.controls['valor'].setValidators([Validators.required]);
 
     if (this.id) {
-      const res: ResBuscarPorId = await this.produtosService.BuscarProdutoPorId(
-        this.id
-      );
+      const res = await this.produtosService.BuscarProdutoPorId(this.id);
 
-      const produto = res.produto;
+      const produto = res;
 
       this.formGroup.controls['nomeProduto'].setValue(produto.nomeProduto);
       this.formGroup.controls['qtdeTotal'].setValue(produto.qtdeTotal);
