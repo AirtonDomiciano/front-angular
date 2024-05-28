@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuariosMock } from './usuarios.mock';
 import { UsuarioModel } from '../usuario/model/usuario.model';
 import { Router } from '@angular/router';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -11,11 +11,25 @@ export class UsuariosComponent implements OnInit {
   listagemUsuarios: UsuarioModel[] = [];
   public contUsuariosRemovidos: number = 0;
 
+  constructor(
+    private router: Router,
+    public usuariosService: UsuariosService
+  ) {}
+
   ngOnInit(): void {
-    this.listagemUsuarios = UsuariosMock;
-    this.contadorUsuariosRemovidos();
+    this.buscarTodosUsuarios();
   }
-  constructor(private router: Router) {}
+
+  async buscarTodosUsuarios() {
+    const res = await this.usuariosService.buscarTodosUsuarios();
+
+    if (!res) {
+      alert('Deu ruim!');
+      return;
+    }
+
+    this.listagemUsuarios = res;
+  }
 
   adicionarUsuario() {
     this.router.navigate([`private/usuario`]);
@@ -25,26 +39,12 @@ export class UsuariosComponent implements OnInit {
     this.router.navigate([`private/usuario/${id}`]);
   }
 
-  removerUsuario(id: number): void {
-    const index = this.listagemUsuarios.findIndex((el) => el.idUsuario === id);
-    if (index !== -1) {
-      this.contUsuariosRemovidos++;
-      UsuariosMock[index].removido = true;
-    }
-  }
+  async removerUsuario(id: number): Promise<void> {
+    const res = await this.usuariosService.deletarUsuario(id);
 
-  desfazerAcao() {
-    this.contUsuariosRemovidos = 0;
-    for (var i = 0; i < this.listagemUsuarios.length; i++) {
-      this.listagemUsuarios[i].removido = false;
-    }
-  }
-
-  contadorUsuariosRemovidos() {
-    for (var i = 0; i < this.listagemUsuarios.length; i++) {
-      if (this.listagemUsuarios[i].removido) {
-        this.contUsuariosRemovidos++;
-      }
+    if (res) {
+      // DELETADO COM SUCESSO;
+      await this.buscarTodosUsuarios();
     }
   }
 }
