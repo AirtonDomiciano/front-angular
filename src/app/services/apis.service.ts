@@ -27,12 +27,10 @@ export class ApisService extends BaseService {
     });
   }
 
-  async criarApi(api: ApisInterface): Promise<ApisInterface> {
+  async criarApi(api: ApisInterface): Promise<boolean> {
     return new Promise((resolve) => {
       this.post('/apis', api).subscribe((res: any) => {
-        if (res?.length) {
-          resolve(res);
-        }
+        resolve(res);
       });
     });
   }
@@ -40,17 +38,15 @@ export class ApisService extends BaseService {
   async deletarApi(id: number): Promise<boolean> {
     return new Promise((resolve) => {
       this.delete('/apis', id).subscribe((res: any) => {
-          resolve(res);
+        resolve(res);
       });
     });
   }
 
-  async editarApi(id: number, api: ApisInterface): Promise<ApisInterface> {
+  async editarApi(id: number, api: ApisInterface): Promise<boolean> {
     return new Promise((resolve) => {
       this.put('/apis', id, api).subscribe((res: any) => {
-        if (res?.length) {
-          resolve(res);
-        }
+        resolve(res);
       });
     });
   }
