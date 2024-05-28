@@ -45,7 +45,7 @@ export class ApiComponent implements OnInit {
     if (this.id) {
       let input: ApisModel = this.formGroup.value;
       this.apisService.editarApi(this.id, input);
-      window.location.reload();
+      this.router.navigate([`private/apis`]);
       return;
     }
     let newApi = this.formGroup.value;
@@ -53,7 +53,7 @@ export class ApiComponent implements OnInit {
 
     if (verificacao) {
       this.apisService.criarApi(newApi);
-      window.location.reload();
+      this.router.navigate([`private/apis`]);
     }
   }
 
