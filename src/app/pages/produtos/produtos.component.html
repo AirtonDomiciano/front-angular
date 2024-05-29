@@ -2,7 +2,7 @@
   <p-table
     #myTab
     [value]="listagemProdutos"
-    [globalFilterFields]="['nome', 'categoria', 'preco', 'descricao']"
+    [globalFilterFields]="['nomeProduto', 'qtdeTotal', 'valor']"
   >
     <ng-template pTemplate="caption">
       <h2 class="text-center">Produtos</h2>
@@ -27,27 +27,23 @@
 
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="nome">
-          Nome <p-sortIcon field="nome"></p-sortIcon>
+        <th pSortableColumn="nomeProduto">
+          Nome <p-sortIcon field="nomeProduto"></p-sortIcon>
         </th>
-        <th pSortableColumn="categoria">
-          Categoria <p-sortIcon field="categoria"></p-sortIcon>
+        <th pSortableColumn="qtdeTotal">
+          Estoque <p-sortIcon field="qtdeTotal"></p-sortIcon>
         </th>
-        <th pSortableColumn="preco">
-          Preço <p-sortIcon field="preco"></p-sortIcon>
-        </th>
-        <th pSortableColumn="descricao">
-          Descrição <p-sortIcon field="descricao"></p-sortIcon>
+        <th pSortableColumn="valor">
+          Valor <p-sortIcon field="valor"></p-sortIcon>
         </th>
         <th>Ações</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-produto>
       <tr>
-        <td>{{ produto.nome }}</td>
-        <td>{{ produto.categoria }}</td>
-        <td>{{ produto.preco }}</td>
-        <td>{{ produto.descricao }}</td>
+        <td>{{ produto.nomeProduto }}</td>
+        <td>{{ produto.qtdeTotal }}</td>
+        <td>{{ produto.valor }}</td>
         <td>
           <button class="btn-editar btn btn-primary btn-sm">
             <span

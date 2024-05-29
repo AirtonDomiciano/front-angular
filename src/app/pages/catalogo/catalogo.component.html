@@ -6,7 +6,6 @@
   </div>
   <div [formGroup]="categoriasFormGroup" #formDir="ngForm">
     <select
-      (change)="filtrarCategoria()"
       class="custom-select"
       id="inputGroupSelect01"
       formControlName="categoria"
@@ -25,9 +24,9 @@
         <img src="{{ produto.imagem }}" />
       </div>
       <div class="nome">
-        {{ produto.nome }}
+        <!-- {{ produto.nome }} -->
       </div>
-      <div class="preco">R${{ produto.preco }}</div>
+      <!-- <div class="preco">R${{ produto.preco }}</div> -->
       <button
         type="button"
         class="btn btn-success"
@@ -45,9 +44,9 @@
         <img src="{{ produto.imagem }}" />
       </div>
       <div class="nome">
-        {{ produto.nome }}
+        <!-- {{ produto.nome }} -->
       </div>
-      <div class="preco">R${{ produto.preco }}</div>
+      <!-- <div class="preco">R${{ produto.preco }}</div> -->
       <button
         type="button"
         class="btn btn-success"
@@ -59,5 +58,5 @@
   </ng-container>
 </div>
 <div *ngFor="let produto of produtosCarrinho" class="adicionadoCarrinho">
-  {{ produto.nome }} adicionado ao carrinho
+  <!-- {{ produto.nome }} adicionado ao carrinho -->
 </div>

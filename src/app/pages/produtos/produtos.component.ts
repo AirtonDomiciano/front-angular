@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProdutosModel } from './model/produtos.model';
-import { produtosMock } from './produtos.mock';
+import { ProdutosModel } from 'src/app/shared/models/produtos.model';
 import { Router } from '@angular/router';
+import { ProdutosService } from 'src/app/services/produtos.service';
 
 @Component({
   selector: 'app-produtos',
@@ -11,10 +11,24 @@ import { Router } from '@angular/router';
 export class ProdutosComponent implements OnInit {
   public listagemProdutos: ProdutosModel[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private produtosService: ProdutosService
+  ) {}
 
-  ngOnInit(): void {
-    this.listagemProdutos = produtosMock;
+  async ngOnInit(): Promise<void> {
+    this.buscarTodosProdutos();
+  }
+
+  async buscarTodosProdutos() {
+    const res = await this.produtosService.BuscarTodosProdutos();
+
+    if (!res) {
+      alert('Deu ruim!');
+      return;
+    }
+
+    this.listagemProdutos = res;
   }
 
   adicionarProduto() {
@@ -25,13 +39,14 @@ export class ProdutosComponent implements OnInit {
     this.router.navigate([`private/produto/${id}`]);
   }
 
-  excluirProduto(id: number) {
-    let produtoExcluir = this.listagemProdutos.findIndex(
-      (el) => el.idProdutos === id
-    );
+  async excluirProduto(id: number) {
+    const res = await this.produtosService.DeletarProduto(id);
 
-    if (produtoExcluir !== -1) {
-      produtosMock.splice(produtoExcluir, 1);
+    if (!res) {
+      alert('Deu ruim!');
+      return;
     }
+
+    await this.buscarTodosProdutos();
   }
 }

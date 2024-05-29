@@ -29,7 +29,7 @@ export class UsuariosService extends BaseService {
 
   async deletarUsuario(id: number): Promise<boolean> {
     return new Promise((resolve) => {
-      this.delete('/usuarios', id).subscribe((res: any) => {
+      this.delete(`/usuarios/${id}`).subscribe((res: any) => {
         resolve(res);
       });
     });
@@ -37,7 +37,7 @@ export class UsuariosService extends BaseService {
 
   async buscarUsuarioPorId(id: number): Promise<Usuario> {
     return new Promise((resolve) => {
-      this.getById('/usuarios', id).subscribe((res: any) => {
+      this.get(`/usuarios/${id}`).subscribe((res: any) => {
         resolve(res);
       });
     });
