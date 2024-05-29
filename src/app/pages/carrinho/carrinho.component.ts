@@ -27,7 +27,6 @@ export class CarrinhoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.produtosCarrinho = produtosCarrinhoMock;
     this.calcularPrecoInicial();
     this.lastQtd = 0;
     this.lastId = 0;

@@ -24,7 +24,6 @@ export class CatalogoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.produtos = produtosMock;
     this.arrayCategorias = CategoriasProdutos;
     this.produtosCarrinho = produtosCarrinhoMock;
   }
@@ -33,19 +32,6 @@ export class CatalogoComponent implements OnInit {
     const index = this.produtos.findIndex((el) => el.idProdutos === id);
     if (!produtosCarrinhoMock.includes(this.produtos[index])) {
       produtosCarrinhoMock.push(this.produtos[index]);
-    }
-  }
-
-  filtrarCategoria() {
-    let categoria: string = this.categoriasFormGroup.get('categoria')?.value;
-
-    // this.produtosFiltrados = this.produtos.filter(
-    //   (el) => el.categoria === categoria
-    // );
-    if (this.produtosFiltrados.length === 0) {
-      this.filtroAtivo = false;
-    } else {
-      this.filtroAtivo = true;
     }
   }
 }
