@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import AnimaisModel from '../animais/model/animais-interface.';
+import { Animais } from 'src/app/shared/models/animais';
 
 @Component({
   selector: 'app-animal',
@@ -9,12 +10,10 @@ import AnimaisModel from '../animais/model/animais-interface.';
   styleUrls: ['./animal.component.scss'],
 })
 export class AnimalComponent implements OnInit {
-  public formGroup!: UntypedFormGroup;
+  public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
-  public semNome: boolean = false;
-  public semDivisao: boolean = false;
-  public semEspecie: boolean = false;
-  public semRaca: boolean = false;
+  public model: AnimaisModel = new AnimaisModel();
+  public animal!: Animais;
 
   constructor(
     private fb: FormBuilder,
@@ -29,14 +28,14 @@ export class AnimalComponent implements OnInit {
     });
   }
 
-  onSubmit() {}
-
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.formGroup.controls['nome'].setValidators([Validators.required]);
+    this.formGroup.controls['divisao'].setValidators([Validators.required]);
+    this.formGroup.controls['especie'].setValidators([Validators.required]);
+    this.formGroup.controls['raca'].setValidators([Validators.required]);
     if (this.id) {
-      this.formGroup.controls['nome'].setValidators([Validators.required]);
-      this.formGroup.controls['divisao'].setValidators([Validators.required]);
-      this.formGroup.controls['especie'].setValidators([Validators.required]);
-      this.formGroup.controls['raca'].setValidators([Validators.required]);
     }
   }
+
+  async onSubmit() {}
 }
