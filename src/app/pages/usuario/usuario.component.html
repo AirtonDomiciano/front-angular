@@ -55,13 +55,10 @@
   </div>
   <div class="row px-4 py-2">
     <div class="col-sm-9">
-      <app-input
-        type="text"
-        placeholder="Cidade"
+      <app-select-cidades
         frmName="localidade"
         [form]="formGroup"
-      >
-      </app-input>
+      ></app-select-cidades>
     </div>
     <div class="col-sm-3">
       <app-input type="text" placeholder="UF" frmName="uf" [form]="formGroup">

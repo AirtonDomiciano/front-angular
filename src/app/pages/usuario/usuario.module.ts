@@ -7,6 +7,7 @@ import { InputCepModule } from 'src/app/shared/components/input-cep/input-cep.mo
 import { CommonModule } from '@angular/common';
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { InputSenhaModule } from 'src/app/shared/components/input-senha/input-senha.module';
+import { SelectCidadesModule } from 'src/app/shared/components/select-cidades/select-cidades.module';
 
 @NgModule({
   declarations: [UsuarioComponent],
@@ -19,6 +20,7 @@ import { InputSenhaModule } from 'src/app/shared/components/input-senha/input-se
     InputSenhaModule,
     UsuarioRoutingModule,
     InputCepModule,
+    SelectCidadesModule,
   ],
   exports: [UsuarioComponent],
 })
