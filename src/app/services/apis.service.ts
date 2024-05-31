@@ -3,7 +3,7 @@ import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
 import { Router } from '@angular/router';
-import { ApisInterface } from '../pages/apis/model/apis.interface';
+import { Api } from '../shared/models/api';
 
 @Injectable({
   providedIn: 'root',
@@ -17,19 +17,19 @@ export class ApisService extends BaseService {
     super(http);
   }
 
-  async buscarTodasApis(): Promise<Array<ApisInterface>> {
+  async buscarTodasApis(): Promise<Array<Api>> {
     return new Promise((resolve) => {
       this.get('/apis').subscribe((res: any) => {
-        if (res?.length) {
+        if (res) {
           resolve(res);
         }
       });
     });
   }
 
-  async criarApi(api: ApisInterface): Promise<boolean> {
+  async buscarApiPorId(id: number): Promise<Api> {
     return new Promise((resolve) => {
-      this.post('/apis', api).subscribe((res: any) => {
+      this.get(`/apis/${id}`).subscribe((res: any) => {
         resolve(res);
       });
     });
@@ -38,19 +38,15 @@ export class ApisService extends BaseService {
   async deletarApi(id: number): Promise<boolean> {
     return new Promise((resolve) => {
       this.delete(`/apis/${id}`).subscribe((res: any) => {
-        if (res?.length) {
-          resolve(res);
-        }
+        resolve(res);
       });
     });
   }
 
-  async editarApi(id: number, api: ApisInterface): Promise<boolean> {
+  async salvar(api: Api): Promise<boolean> {
     return new Promise((resolve) => {
-      this.put(`/apis/${id}`, api).subscribe((res: any) => {
-        if (res?.length) {
-          resolve(res);
-        }
+      this.post('/apis', api).subscribe((res: any) => {
+        resolve(res);
       });
     });
   }

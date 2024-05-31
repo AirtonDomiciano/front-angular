@@ -1,52 +1,52 @@
-<div class="container">
-  <p-table #myTab [value]="listaApis" [globalFilterFields]="['nome', 'url']">
-    <ng-template pTemplate="caption">
-      <h2 class="text-center">Apis</h2>
-      <div class="row">
-        <div class="col-sm-1 px-3">
-          <h5>Filtro:</h5>
-        </div>
-        <div class="col-sm-3">
-          <input
-            type="text"
-            pInputText
-            (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
-          />
-        </div>
-        <div class="d-flex justify-content-end col-sm-8">
-          <button class="btn btn-success" (click)="adicionarApi()">
-            <span class="bi bi-plus"></span>
-          </button>
-        </div>
+<p-table #myTab [value]="listaApis" [globalFilterFields]="['nome', 'url']">
+  <ng-template pTemplate="caption">
+    <h2 class="text-center">Apis</h2>
+    <div class="row">
+      <div class="col-sm-1 px-3">
+        <h5>Filtro:</h5>
       </div>
-    </ng-template>
+      <div class="col-sm-3">
+        <input
+          type="text"
+          pInputText
+          (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
+        />
+      </div>
+      <div class="d-flex justify-content-end col-sm-8">
+        <button class="btn btn-success" (click)="adicionarApi()">
+          <span class="bi bi-plus"></span>
+        </button>
+      </div>
+    </div>
+  </ng-template>
 
-    <ng-template pTemplate="header">
-      <tr>
-        <th pSortableColumn="nome">
-          Nome <p-sortIcon field="nome"></p-sortIcon>
-        </th>
-        <th pSortableColumn="url">URL <p-sortIcon field="url"></p-sortIcon></th>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="nome" style="width: 30%">
+        Nome <p-sortIcon field="nome"></p-sortIcon>
+      </th>
+      <th pSortableColumn="url" style="width: 60%">
+        URL <p-sortIcon field="url"></p-sortIcon>
+      </th>
 
-        <th>Ações</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-api>
-      <tr>
-        <td>{{ api.nome }}</td>
-        <td>{{ api.url }}</td>
-        <td>
-          <button class="btn-editar btn btn-primary btn-sm">
-            <span class="bi bi-pencil" (click)="editarApi(api.idApis)"></span>
-          </button>
-          <button
-            class="btn btn-danger btn-sm"
-            (click)="excluirApi(api.idApis)"
-          >
-            <span class="bi bi-trash"></span>
-          </button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
+      <th style="width: 10%">Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-api>
+    <tr>
+      <td>{{ api.nome }}</td>
+      <td>{{ api.url }}</td>
+      <td>
+        <button
+          class="btn-editar btn btn-primary btn-sm"
+          (click)="editarApi(api.idApis)"
+        >
+          <span class="bi bi-pencil"></span>
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="excluirApi(api.idApis)">
+          <span class="bi bi-trash"></span>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

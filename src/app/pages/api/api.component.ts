@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApisModel } from '../apis/model/apis.model';
 import { ApisService } from 'src/app/services/apis.service';
+import { ApiModel } from './model/api.model';
 
 @Component({
   selector: 'app-api',
@@ -10,71 +10,51 @@ import { ApisService } from 'src/app/services/apis.service';
   styleUrls: ['./api.component.scss'],
 })
 export class ApiComponent implements OnInit {
-  public formGroup: UntypedFormGroup;
+  public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
-  public semNome: boolean = false;
-  public semUrl: boolean = false;
-  public semRapidApiHost: boolean = false;
-  public listaApis: ApisModel[] = [];
 
+  public model: ApiModel = new ApiModel();
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    public apisService: ApisService
-  ) {
-    this.formGroup = fb.group({
-      nome: ['', Validators.required],
-      url: ['', Validators.required],
-      rapidApiHost: ['', Validators.required],
-    });
-  }
+    private apisService: ApisService
+  ) {}
 
-  async ngOnInit() {
-    if (this.id) {
-      const apis = await this.apisService.buscarTodasApis();
-      this.listaApis = apis;
-      const index = this.listaApis.findIndex((el) => el.idApis === this.id);
+  async ngOnInit(): Promise<void> {
+    this.formGroup = this.fb.group(this.model);
+    this.requiredForm();
 
-      const api: ApisModel = this.listaApis[index];
-      this.formGroup = this.fb.group(api);
+    if (this.id > 0) {
+      this.editarApi();
     }
   }
 
-  onSubmit() {
-    if (this.id) {
-      let input: ApisModel = this.formGroup.value;
-      this.apisService.editarApi(this.id, input);
-      this.router.navigate([`private/apis`]);
+  async editarApi(): Promise<void> {
+    const api = await this.apisService.buscarApiPorId(this.id);
+
+    this.formGroup.setValue(api);
+  }
+
+  requiredForm() {
+    this.formGroup.controls['nome'].setValidators([Validators.required]);
+    this.formGroup.controls['url'].setValidators([Validators.required]);
+    this.formGroup.controls['rapidApiHost'].setValidators([
+      Validators.required,
+    ]);
+  }
+
+  async onSubmit() {
+    if (this.formGroup.invalid) {
       return;
     }
-    let newApi = this.formGroup.value;
-    const verificacao = this.validacaoSave(newApi);
 
-    if (verificacao) {
-      this.apisService.criarApi(newApi);
+    const input = this.formGroup.value;
+
+    const res = await this.apisService.salvar(input);
+
+    if (res) {
       this.router.navigate([`private/apis`]);
     }
-  }
-
-  validacaoSave(newApi: ApisModel) {
-    let validacao = true;
-
-    if (!newApi.nome) {
-      this.semNome = true;
-      validacao = false;
-    }
-
-    if (!newApi.url) {
-      this.semUrl = true;
-      validacao = false;
-    }
-
-    if (!newApi.rapidApiHost) {
-      this.semRapidApiHost = true;
-      validacao = false;
-    }
-
-    return validacao;
   }
 }
