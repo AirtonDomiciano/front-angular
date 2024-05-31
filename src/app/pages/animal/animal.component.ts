@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import AnimaisModel from '../animais/model/animais-interface.';
 import { Animais } from 'src/app/shared/models/animais';
+import { AnimaisService } from 'src/app/services/animais.service';
 
 @Component({
   selector: 'app-animal',
@@ -18,7 +19,8 @@ export class AnimalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private animalService: AnimaisService
   ) {
     this.formGroup = this.fb.group({
       nome: ['', Validators.required],
@@ -33,7 +35,13 @@ export class AnimalComponent implements OnInit {
     this.formGroup.controls['divisao'].setValidators([Validators.required]);
     this.formGroup.controls['especie'].setValidators([Validators.required]);
     this.formGroup.controls['raca'].setValidators([Validators.required]);
+
     if (this.id) {
+      const res = await this.animalService.buscarAnimalPorId(this.id);
+      if (res) {
+        this.animal = res;
+        this.formGroup.controls['nome'].setValue(this.animal.nome);
+      }
     }
   }
 
