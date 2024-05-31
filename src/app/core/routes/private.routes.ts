@@ -122,6 +122,13 @@ export const privateRoutes: Routes = [
           ),
         canActivate: [AuthGuardService],
       },
+      {
+        path: 'animal',
+        loadChildren: () =>
+          import('../../pages/animal/animal.module').then(
+            (m) => m.AnimalModule
+          ),
+      },
       { path: '**', redirectTo: 'home' },
     ],
   },
