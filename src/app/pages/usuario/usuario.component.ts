@@ -33,8 +33,8 @@ export class UsuarioComponent implements OnInit {
 
   async editarUsuario(): Promise<void> {
     const usuario = await this.usuariosService.buscarUsuarioPorId(this.id);
-
-    this.formGroup.setValue(usuario);
+    const { idUsuarios, ...input } = usuario;
+    this.formGroup.setValue(input);
   }
 
   requiredForm(): void {
