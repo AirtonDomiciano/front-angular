@@ -32,18 +32,22 @@
           </app-input>
         </div>
         <div class="col-sm-4">
-          <app-input placeholder="Telefone" frmName="fone" [form]="formGroup">
-          </app-input>
+          <app-input-telefone
+            placeholder="Telefone"
+            frmName="fone"
+            [form]="formGroup"
+          >
+          </app-input-telefone>
         </div>
       </div>
       <div class="row px-4 py-2">
         <div class="col-sm-6">
-          <app-input
+          <app-input-cpf-cnpj
             placeholder="CPF/CPNJ"
             frmName="cpfCnpj"
             [form]="formGroup"
           >
-          </app-input>
+          </app-input-cpf-cnpj>
         </div>
         <div class="col-sm-6">
           <app-input-cep placeholder="CEP" frmName="cep" [form]="formGroup">
