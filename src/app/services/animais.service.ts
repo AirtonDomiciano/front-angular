@@ -27,7 +27,7 @@ export class AnimaisService extends BaseService {
     });
   }
 
-  async buscarAnimalPorId(id: number): Promise<Array<AnimaisModel>> {
+  async buscarAnimalPorId(id: number): Promise<AnimaisModel> {
     return new Promise((resolve) => {
       this.get(`/animais/${id}`).subscribe((res: any) => {
         if (res?.length) {
