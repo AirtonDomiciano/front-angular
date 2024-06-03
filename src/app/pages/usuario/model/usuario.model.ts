@@ -3,7 +3,6 @@ import { Usuario } from 'src/app/shared/models/usuario';
 export class UsuarioModel extends Usuario {
   constructor() {
     super();
-    this.idUsuarios = 0;
     this.idade = 0;
     this.uf = '';
     this.cep = '';

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EnderecoInterface } from 'src/app/shared/components/input-cep/endereco.interface';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { UsuarioModel } from './model/usuario.model';
+import { Usuario } from 'src/app/shared/models/usuario';
 
 @Component({
   selector: 'app-usuario',
@@ -32,9 +33,11 @@ export class UsuarioComponent implements OnInit {
   }
 
   async editarUsuario(): Promise<void> {
-    const usuario = await this.usuariosService.buscarUsuarioPorId(this.id);
+    this.model = await this.usuariosService.buscarUsuarioPorId(this.id);
 
-    this.formGroup.setValue(usuario);
+    delete this.model.idUsuarios;
+
+    this.formGroup.setValue(this.model);
   }
 
   requiredForm(): void {
@@ -56,30 +59,18 @@ export class UsuarioComponent implements OnInit {
       return;
     }
 
-    const input = this.formGroup.value;
+    const input: Usuario = this.formGroup.value;
     input.email = input.email.toLocaleLowerCase();
+
+    if (this.id) {
+      input.idUsuarios = this.id;
+    }
 
     const res = await this.usuariosService.salvar(input);
 
     if (res) {
       this.router.navigate([`private/usuarios`]);
     }
-
-    // if (this.id) {
-    //   input.ativo = true;
-    //   input.removido = false;
-
-    //   this.usuariosService.editarUsuario(this.id, input);
-
-    //   this.router.navigate([`private/usuarios`]);
-    //   return;
-    // }
-
-    // this.usuariosService.criarUsuario(input);
-
-    // if (res()) {
-    //   this.router.navigate([`private/usuarios`]);
-    // }
   }
 
   onLoadCep(event: EnderecoInterface) {
