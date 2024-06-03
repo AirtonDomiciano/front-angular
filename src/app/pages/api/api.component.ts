@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApisService } from 'src/app/services/apis.service';
 import { ApiModel } from './model/api.model';
+import { ApisModel } from '../apis/model/apis.model';
 
 @Component({
   selector: 'app-api',
@@ -31,9 +32,10 @@ export class ApiComponent implements OnInit {
   }
 
   async editarApi(): Promise<void> {
-    const api = await this.apisService.buscarApiPorId(this.id);
+    this.model = await this.apisService.buscarApiPorId(this.id);
+    delete this.model.idApis;
 
-    this.formGroup.setValue(api);
+    this.formGroup.setValue(this.model);
   }
 
   requiredForm() {
@@ -48,8 +50,11 @@ export class ApiComponent implements OnInit {
     if (this.formGroup.invalid) {
       return;
     }
+    const input: ApisModel = this.formGroup.value;
 
-    const input = this.formGroup.value;
+    if (this.id) {
+      input.idApis = this.id;
+    }
 
     const res = await this.apisService.salvar(input);
 
