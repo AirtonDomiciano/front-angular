@@ -37,12 +37,33 @@ export class AnimalComponent implements OnInit {
 
     if (this.id) {
       const res = await this.animalService.buscarAnimalPorId(this.id);
+      const animal = res;
       if (res) {
-        this.animal = res;
-        this.formGroup.controls['nome'].setValue(this.animal.nome);
+        this.formGroup.controls['nome'].setValue(animal.nome);
+        this.formGroup.controls['divisao'].setValue(animal.divisao);
+        this.formGroup.controls['especie'].setValue(animal.especie);
+        this.formGroup.controls['raca'].setValue(animal.raca);
       }
     }
   }
 
-  async onSubmit() {}
+  validationSave(input: Animais): boolean {
+    let validation: boolean = true;
+    if (!input.nome || !input.divisao || !input.especie || !input.raca) {
+      validation = false;
+    }
+    return validation;
+  }
+
+  async onSubmit(): Promise<void> {
+    let input: Animais = this.formGroup.value;
+    const validation: boolean = this.validationSave(input);
+    if (validation) {
+      this.animalService.adicionarAnimal(input);
+    }
+
+    if (validation && this.id) {
+      this.animalService.editarAnimal(this.id, input);
+    }
+  }
 }
