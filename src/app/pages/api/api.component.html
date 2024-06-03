@@ -1,40 +1,37 @@
-<div class="container">
-  <div class="card">
-    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
-      <h1>Cadastro</h1>
-      <div class="label">
-        <span for="">Nome:</span>
-      </div>
-      <div>
-        <input type="text" class="input" formControlName="nome" required />
-        <div class="obrigatorio" *ngIf="semNome">
-          O campo Nome é obrigatório!
-        </div>
-      </div>
-      <div class="label">
-        <span for="sobrenome">URL:</span>
-      </div>
-      <div>
-        <input type="text" class="input" formControlName="url" required />
-        <div class="obrigatorio" *ngIf="semUrl">O campo URL é obrigatório!</div>
-      </div>
-      <div class="label">
-        <span for="rapidApi-Host">RapidApi-Host:</span>
-      </div>
-      <div>
-        <input
-          type="text"
-          class="input"
-          formControlName="rapidApiHost"
-          required
-        />
-        <div class="obrigatorio" *ngIf="semRapidApiHost">
-          O campo RapidApi-Host é obrigatório!
-        </div>
-      </div>
-      <div>
-        <button class="botao" type="submit">Enviar</button>
-      </div>
-    </form>
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
+  <h1 class="text-center">Cadastro</h1>
+  <div class="row px-4 py-2">
+    <div class="col-sm-12">
+      <app-input placeholder="Nome" frmName="nome" [form]="formGroup">
+      </app-input>
+    </div>
   </div>
-</div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-12">
+      <app-input placeholder="Url" frmName="url" [form]="formGroup">
+      </app-input>
+    </div>
+  </div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-12">
+      <app-input
+        placeholder="RapidApi-Host"
+        frmName="rapidApiHost"
+        [form]="formGroup"
+      >
+      </app-input>
+    </div>
+  </div>
+
+  <div class="row px-4 py-2 mt-3 mb-3">
+    <div class="col-sm-12">
+      <button
+        [disabled]="this.formGroup.invalid"
+        class="btn btn-primary rounded-pill w-100"
+        type="submit"
+      >
+        Salvar
+      </button>
+    </div>
+  </div>
+</form>
