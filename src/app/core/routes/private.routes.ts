@@ -47,34 +47,10 @@ export const privateRoutes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'catalogo',
+        path: 'atendimento',
         loadChildren: () =>
-          import('../../pages/catalogo/catalogo.module').then(
-            (m) => m.CatalogoModule
-          ),
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'carrinho',
-        loadChildren: () =>
-          import('../../pages/carrinho/carrinho.module').then(
-            (m) => m.CarrinhoModule
-          ),
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'compras',
-        loadChildren: () =>
-          import('../../pages/compras/compras.module').then(
-            (m) => m.ComprasModule
-          ),
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'pedidos',
-        loadChildren: () =>
-          import('../../pages/pedidos/pedidos.module').then(
-            (m) => m.PedidosModule
+          import('../../pages/atendimento/atendimento.module').then(
+            (m) => m.AtendimentoModule
           ),
         canActivate: [AuthGuardService],
       },
