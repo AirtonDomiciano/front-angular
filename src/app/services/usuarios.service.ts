@@ -36,7 +36,7 @@ export class UsuariosService extends BaseService {
   }
 
   async buscarUsuarioPorId(id: number): Promise<Usuario> {
-    return new Promise((resolve) => {
+    return new Promise<Usuario>((resolve) => {
       this.get(`/usuarios/${id}`).subscribe((res: any) => {
         resolve(res);
       });
