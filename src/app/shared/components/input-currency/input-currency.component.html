@@ -1,0 +1,18 @@
+<form [formGroup]="form" action="" method="get">
+  <input
+    type="{{ type }}"
+    class="{{ class }}"
+    id="{{ frmName }}"
+    placeholder="{{ placeholder }}"
+    formControlName="{{ frmName }}"
+    [ngClass]="{
+      'is-invalid': form.get(frmName)?.invalid
+    }"
+    required
+    prefix="R$"
+    mask="separator.2"
+    [thousandSeparator]="'.'"
+    [decimalMarker]="','"
+  />
+  <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div>
+</form>

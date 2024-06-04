@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InputModule } from 'src/app/shared/components/input/input.module';
 import { CommonModule } from '@angular/common';
 import { ProdutoRoutingModule } from './produto-routing.module';
+import { InputCurrencyModule } from 'src/app/shared/components/input-currency/input-currency.module';
 
 @NgModule({
   declarations: [ProdutoComponent],
@@ -12,6 +13,7 @@ import { ProdutoRoutingModule } from './produto-routing.module';
     ReactiveFormsModule,
     InputModule,
     ProdutoRoutingModule,
+    InputCurrencyModule,
   ],
   exports: [ProdutoComponent],
 })
