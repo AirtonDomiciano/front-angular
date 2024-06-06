@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { ProdutosModel } from '../produtos/model/produtos.model';
-// import { produtosCarrinhoMock } from '../carrinho/carrinho.mock';
-// import { ProdutosService } from 'src/app/services/produtos.service';
+import { AtendimentoService } from 'src/app/services/atendimento.service';
+import { AtendimentoModel } from './model/atendimento.model';
+import { Atendimentos } from 'src/app/shared/interface/atendimento.interface';
+import { ClientesService } from 'src/app/services/clientes.service';
+import { Servicoservice } from 'src/app/services/servicos.service';
 
 @Component({
   selector: 'app-atendimento',
@@ -9,18 +11,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./atendimento.component.scss'],
 })
 export class AtendimentoComponent implements OnInit {
-  // public produtos!: ProdutosModel[];
+  constructor(
+    private atendimentoService: AtendimentoService,
+    private clientesService: ClientesService,
+    private servicosService: Servicoservice
+  ) {}
 
-  constructor() {}
+  public listaAtendimentos: AtendimentoModel[] = [];
+  public listaReceberAtendimentos: Atendimentos[] = [];
 
   async ngOnInit(): Promise<void> {
-    // this.produtos = await this.produtosService.BuscarTodosProdutos();
+    this.listaAtendimentos =
+      await this.atendimentoService.buscarTodosAtendimentos();
+    this.buscaDadosPorId();
   }
 
-  // adicionarProdutoNoCarrinho(id: number) {
-  //   const index = this.produtos.findIndex((el) => el.idProdutos === id);
-  //   if (!produtosCarrinhoMock.includes(this.produtos[index])) {
-  //     produtosCarrinhoMock.push(this.produtos[index]);
-  //   }
-  // }
+  async buscaDadosPorId() {
+    for (let atendimento of this.listaAtendimentos) {
+      const cliente = await this.clientesService.buscarClientePorId(
+        atendimento.idClientes
+      );
+      const servico = await this.servicosService.buscarServicoPorId(
+        atendimento.idServicos
+      );
+
+      const input: Atendimentos = {
+        nomeCliente: cliente.nomeClientes,
+        nomeAnimal: '',
+        nomeServico: servico.nomeServico,
+      };
+      this.listaReceberAtendimentos.push(input);
+    }
+  }
 }
