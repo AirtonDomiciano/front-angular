@@ -8,12 +8,9 @@
     }"
     required
   >
-    <option selected="0">Selecione uma cidade:</option>
-
-    <ng-container *ngFor="let cidade of cidades">
-      <option value="{{ cidade.idCidades }}">
-        {{ cidade.nomeCidade }}
-      </option>
+    <option selected>Selecione um estado:</option>
+    <ng-container *ngFor="let uf of ufs">
+      <option value="{{ uf.idUf }}">{{ uf.sigla }}</option>
     </ng-container>
   </select>
   <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div>

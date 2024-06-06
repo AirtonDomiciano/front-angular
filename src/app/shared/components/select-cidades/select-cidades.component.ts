@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Cidades } from '../../interface/cidades.interface';
 import { FormGroup } from '@angular/forms';
 import { SelectCidadesService } from '../../services/select-cidades.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-select-cidades',
@@ -13,14 +14,26 @@ export class SelectCidadesComponent implements OnInit {
   @Input() class = 'form-control rounded-pill mt-2';
   @Input() id = '';
   @Input() frmName = '';
+  @Input() frmNameCep = '';
+  @Input() cidade = '';
   @Input() placeholder = '';
 
   public cidades!: Cidades[];
-
+  public subscripe!: Subscription;
   constructor(private selectCidadesService: SelectCidadesService) {}
+
+  ngOnDestroy(): void {}
 
   async ngOnInit(): Promise<void> {
     await this.buscarCidades();
+    this.listeners();
+  }
+
+  listeners(): void {
+    this.form.controls[this.cidade].valueChanges.subscribe((evt) => {
+      const res = this.cidades.filter((el) => el.nomeCidade === evt);
+      console.log(res);
+    });
   }
 
   async buscarCidades() {
@@ -32,5 +45,9 @@ export class SelectCidadesComponent implements OnInit {
     }
 
     this.cidades = res;
+  }
+
+  onSelect(cidade: Cidades) {
+    console.log(cidade);
   }
 }
