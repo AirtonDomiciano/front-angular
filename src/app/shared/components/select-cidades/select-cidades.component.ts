@@ -14,10 +14,10 @@ export class SelectCidadesComponent implements OnInit {
   @Input() class = 'form-control rounded-pill mt-2';
   @Input() id = '';
   @Input() frmName = '';
-  @Input() frmNameCep = '';
   @Input() cidade = '';
   @Input() placeholder = '';
 
+  public idCidade!: number;
   public cidades!: Cidades[];
   public subscripe!: Subscription;
   constructor(private selectCidadesService: SelectCidadesService) {}
@@ -31,8 +31,8 @@ export class SelectCidadesComponent implements OnInit {
 
   listeners(): void {
     this.form.controls[this.cidade].valueChanges.subscribe((evt) => {
-      const res = this.cidades.filter((el) => el.nomeCidade === evt);
-      console.log(res);
+      const res = this.cidades.find((el) => el.nomeCidade === evt);
+      this.form.controls[this.frmName].setValue(res?.idCidades);
     });
   }
 

@@ -5,6 +5,7 @@ import ClientesInterface from 'src/app/shared/models/clientes.interface';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { EnderecoInterface } from 'src/app/shared/components/input-cep/endereco.interface';
 import { ClienteModel } from './model/cliente.model';
+import { SelectCidadesService } from 'src/app/shared/services/select-cidades.service';
 
 @Component({
   selector: 'app-cliente',
@@ -75,9 +76,9 @@ export class ClienteComponent {
     this.formGroup.controls['idUf'].setValidators([Validators.required]);
   }
 
-  onLoadCep(event: EnderecoInterface) {
-    this.formGroup.controls['idCidades'].setValue(event.localidade);
-    // this.formGroup.controls['idUf'].setValue(event.uf);
+  async onLoadCep(event: EnderecoInterface) {
+    this.formGroup.controls['localidade'].setValue(event.localidade);
+    this.formGroup.controls['uf'].setValue(event.uf);
     this.formGroup.controls['logradouro'].setValue(event.logradouro);
     this.formGroup.controls['bairro'].setValue(event.bairro);
   }

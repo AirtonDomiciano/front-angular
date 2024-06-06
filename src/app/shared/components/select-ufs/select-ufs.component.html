@@ -8,7 +8,7 @@
     }"
     required
   >
-    <option selected>Selecione um estado:</option>
+    <option value="0">Selecione um estado:</option>
     <ng-container *ngFor="let uf of ufs">
       <option value="{{ uf.idUf }}">{{ uf.sigla }}</option>
     </ng-container>
