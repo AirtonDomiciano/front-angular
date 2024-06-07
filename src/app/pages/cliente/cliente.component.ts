@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import ClientesModel from 'src/app/shared/models/clientes.model';
 import ClientesInterface from 'src/app/shared/models/clientes.interface';
 import { ClientesService } from 'src/app/services/clientes.service';
+import { EnderecoInterface } from 'src/app/shared/components/input-cep/endereco.interface';
+import { ClienteModel } from './model/cliente.model';
+import { SelectCidadesService } from 'src/app/shared/services/select-cidades.service';
 
 @Component({
   selector: 'app-cliente',
@@ -13,8 +15,9 @@ import { ClientesService } from 'src/app/services/clientes.service';
 export class ClienteComponent {
   public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
-  public model: ClientesModel = new ClientesModel();
+  public model: ClienteModel = new ClienteModel();
   public cliente!: ClientesInterface;
+  public titulo: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -26,10 +29,40 @@ export class ClienteComponent {
   }
 
   async ngOnInit(): Promise<void> {
+    this.requiredForm();
+    this.iniciarTitulo();
+    if (this.id) {
+      const res = await this.clientesService.buscarClientePorId(this.id);
+      delete res.idClientes;
+      if (res) {
+        this.formGroup.setValue(res);
+      }
+    }
+  }
+
+  async onSubmit() {
+    const input: ClienteModel = this.formGroup.value;
+    if (this.formGroup.invalid || input.idCidades! <= 0 || input.idUf! <= 0) {
+      return;
+    }
+
+    input.email = input.email.toLocaleLowerCase();
+
+    if (this.id) {
+      input.idClientes = this.id;
+    }
+
+    const res = await this.clientesService.salvar(input);
+
+    if (res) {
+      this.router.navigate([`private/clientes`]);
+    }
+  }
+
+  requiredForm() {
     this.formGroup.controls['nomeClientes'].setValidators([
       Validators.required,
     ]);
-    this.formGroup.controls['endereco'].setValidators([Validators.required]);
     this.formGroup.controls['cep'].setValidators([Validators.required]);
     this.formGroup.controls['cpfCnpj'].setValidators([Validators.required]);
     this.formGroup.controls['fone'].setValidators([Validators.required]);
@@ -37,60 +70,20 @@ export class ClienteComponent {
       Validators.required,
       Validators.email,
     ]);
-
-    if (this.id) {
-      const res = await this.clientesService.buscarClientePorId(this.id);
-      if (res) {
-        this.cliente = res;
-        this.formGroup.controls['nomeClientes'].setValue(
-          this.cliente.nomeClientes
-        );
-        this.formGroup.controls['endereco'].setValue(this.cliente.endereco);
-        this.formGroup.controls['cep'].setValue(this.cliente.cep);
-        this.formGroup.controls['cpfCnpj'].setValue(this.cliente.cpfCnpj);
-        this.formGroup.controls['fone'].setValue(this.cliente.fone);
-        this.formGroup.controls['email'].setValue(this.cliente.email);
-      }
-    }
+    this.formGroup.controls['logradouro'].setValidators([Validators.required]);
+    this.formGroup.controls['bairro'].setValidators([Validators.required]);
+    this.formGroup.controls['idCidades'].setValidators([Validators.required]);
+    this.formGroup.controls['idUf'].setValidators([Validators.required]);
   }
 
-  async onSubmit() {
-    let input: ClientesInterface = this.formGroup.value;
-    const validation: boolean = this.validationSave(input);
-    if (this.id && validation) {
-      if (this.formGroup.valid) {
-        input.ativo = true;
-        input.listaNegra = false;
-        await this.clientesService.editarCliente(this.id, input);
-        this.router.navigate([`private/clientes`]);
-      }
-      return;
-    }
-    if (validation) {
-      input.ativo = true;
-      input.listaNegra = false;
-      const res = await this.clientesService.criarCliente(input);
-      if (res) {
-        this.router.navigate([`private/clientes`]);
-      }
-    }
+  async onLoadCep(event: EnderecoInterface) {
+    this.formGroup.controls['localidade'].setValue(event.localidade);
+    this.formGroup.controls['uf'].setValue(event.uf);
+    this.formGroup.controls['logradouro'].setValue(event.logradouro);
+    this.formGroup.controls['bairro'].setValue(event.bairro);
   }
 
-  validationSave(input: ClientesInterface): boolean {
-    let validation = true;
-
-    if (
-      !input.nomeClientes ||
-      !input.endereco ||
-      !input.cep ||
-      input.cep.length !== 8 ||
-      !input.cpfCnpj ||
-      !input.email ||
-      !input.fone
-      // !input.dtaNascimento
-    ) {
-      validation = false;
-    }
-    return validation;
+  iniciarTitulo() {
+    this.titulo = this.id ? 'Editar Cliente: ' + this.id : 'Cadastro Cliente';
   }
 }

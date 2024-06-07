@@ -1,29 +1,27 @@
 export default class ClientesModel {
   idClientes?: number;
+  idCidades?: number;
+  idUf?: number;
   nomeClientes: string;
-  endereco: string;
   bairro: string;
+  logradouro: string;
   cep: string;
   cpfCnpj: string;
-  ierg: string;
   fone: string;
   email: string;
   dtaNascimento: Date;
-  limite: number;
   listaNegra: boolean;
   ativo: boolean;
 
   constructor() {
     this.nomeClientes = '';
-    this.endereco = '';
     this.bairro = '';
     this.cep = '';
+    this.logradouro = '';
     this.cpfCnpj = '';
-    this.ierg = '';
     this.fone = '';
     this.email = '';
     this.dtaNascimento = new Date('');
-    this.limite = 0;
     this.listaNegra = false;
     this.ativo = true;
   }

@@ -7,6 +7,8 @@ import { InputModule } from 'src/app/shared/components/input/input.module';
 import { InputCepModule } from 'src/app/shared/components/input-cep/input-cep.module';
 import { InputTelefoneModule } from 'src/app/shared/components/input-telefone/input-telefone.module';
 import { InputCpfCnpjModule } from 'src/app/shared/components/input-cpf-cnpj/input-cpf-cnpj.module';
+import { SelectUfsModule } from 'src/app/shared/components/select-ufs/select-ufs.module';
+import { SelectCidadesModule } from 'src/app/shared/components/select-cidades/select-cidades.module';
 
 @NgModule({
   declarations: [ClienteComponent],
@@ -18,6 +20,8 @@ import { InputCpfCnpjModule } from 'src/app/shared/components/input-cpf-cnpj/inp
     InputCepModule,
     InputTelefoneModule,
     InputCpfCnpjModule,
+    SelectUfsModule,
+    SelectCidadesModule,
   ],
   exports: [ClienteComponent],
 })

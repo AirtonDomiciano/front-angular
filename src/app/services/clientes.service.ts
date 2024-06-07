@@ -4,6 +4,7 @@ import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
 import ClientesInterface from '../shared/models/clientes.interface';
+import ClientesModel from '../shared/models/clientes.model';
 
 @Injectable({
   providedIn: 'root',
@@ -35,14 +36,6 @@ export class ClientesService extends BaseService {
     });
   }
 
-  async criarCliente(cliente: ClientesInterface): Promise<boolean> {
-    return new Promise((resolve) => {
-      this.post('/clientes', cliente).subscribe((res: any) => {
-        resolve(res);
-      });
-    });
-  }
-
   async buscarClientePorId(id: number): Promise<ClientesInterface> {
     return new Promise((resolve) => {
       this.get(`/clientes/${id}`).subscribe((res: any) => {
@@ -55,12 +48,9 @@ export class ClientesService extends BaseService {
     });
   }
 
-  async editarCliente(
-    id: number,
-    cliente: ClientesInterface
-  ): Promise<boolean> {
+  async salvar(cliente: ClientesModel): Promise<boolean> {
     return new Promise((resolve) => {
-      this.put(`/clientes/${id}`, cliente).subscribe((res: any) => {
+      this.post('/clientes', cliente).subscribe((res: any) => {
         resolve(res);
       });
     });
