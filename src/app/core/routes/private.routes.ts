@@ -122,6 +122,7 @@ export const privateRoutes: Routes = [
           ),
         canActivate: [AuthGuardService],
       },
+      { path: '**', redirectTo: 'home' },
     ],
   },
 ];
