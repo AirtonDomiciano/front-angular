@@ -16,6 +16,7 @@ export class ClienteComponent {
   public id = Number(this.route.snapshot.paramMap.get('id'));
   public model: ClienteModel = new ClienteModel();
   public cliente!: ClientesInterface;
+  public titulo: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -28,7 +29,7 @@ export class ClienteComponent {
 
   async ngOnInit(): Promise<void> {
     this.requiredForm();
-
+    this.iniciarTitulo();
     if (this.id) {
       const res = await this.clientesService.buscarClientePorId(this.id);
       delete res.idClientes;
@@ -79,5 +80,9 @@ export class ClienteComponent {
     // this.formGroup.controls['idUf'].setValue(event.uf);
     this.formGroup.controls['logradouro'].setValue(event.logradouro);
     this.formGroup.controls['bairro'].setValue(event.bairro);
+  }
+
+  iniciarTitulo() {
+    this.titulo = this.id ? 'Editar Cliente: ' + this.id : 'Cadastro Cliente';
   }
 }
