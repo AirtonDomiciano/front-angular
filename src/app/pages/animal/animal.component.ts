@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import AnimaisModel from '../animais/model/animais-interface.';
+import AnimaisModel from '../animais/model/animais.model';
 import { Animais } from 'src/app/shared/models/animais';
 import { AnimaisService } from 'src/app/services/animais.service';
 
@@ -20,31 +20,36 @@ export class AnimalComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private animalService: AnimaisService
-  ) {
-    this.formGroup = this.fb.group({
-      nome: ['', Validators.required],
-      divisao: ['', Validators.required],
-      especie: ['', Validators.required],
-      raca: ['', Validators.required],
-    });
-  }
+  ) {}
 
   async ngOnInit(): Promise<void> {
+    this.formGroup = this.fb.group(this.model);
+    this.onSubmit();
+    if (this.id > 0) {
+      this.editarAnimal();
+    }
+    this.requiredForm();
+
+    if (this.id) {
+      let res = this.animalService.buscarAnimalPorId(this.id);
+      if (!res) {
+        this.formGroup.controls.setValue();
+      }
+    }
+  }
+
+  requiredForm() {
     this.formGroup.controls['nome'].setValidators([Validators.required]);
+    this.formGroup.controls['idClientes'].setValidators([Validators.required]);
     this.formGroup.controls['divisao'].setValidators([Validators.required]);
     this.formGroup.controls['especie'].setValidators([Validators.required]);
     this.formGroup.controls['raca'].setValidators([Validators.required]);
+  }
 
-    if (this.id) {
-      const res = await this.animalService.buscarAnimalPorId(this.id);
-      const animal = res;
-      if (res) {
-        this.formGroup.controls['nome'].setValue(animal.nome);
-        this.formGroup.controls['divisao'].setValue(animal.divisao);
-        this.formGroup.controls['especie'].setValue(animal.especie);
-        this.formGroup.controls['raca'].setValue(animal.raca);
-      }
-    }
+  async editarAnimal(): Promise<void> {
+    this.model = await this.animalService.buscarAnimalPorId(this.id);
+    delete this.model.idAnimal;
+    this.formGroup.setValue(this.model);
   }
 
   validationSave(input: Animais): boolean {
@@ -56,14 +61,16 @@ export class AnimalComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    let input: Animais = this.formGroup.value;
-    const validation: boolean = this.validationSave(input);
-    if (validation) {
-      this.animalService.adicionarAnimal(input);
+    if (this.formGroup.invalid) {
+      return;
     }
-
-    if (validation && this.id) {
-      this.animalService.editarAnimal(this.id, input);
+    const input: AnimaisModel = this.formGroup.value;
+    if (this.id) {
+      input.idAnimal = this.id;
+    }
+    const res = await this.animalService.salvar(input);
+    if (res) {
+      this.router.navigate([`private/animais`]);
     }
   }
 }

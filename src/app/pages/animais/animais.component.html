@@ -2,7 +2,13 @@
   <p-table
     #myTab
     [value]="listarAnimais"
-    [globalFilterFields]="['nome', 'divisao', 'especie', 'raca']"
+    [globalFilterFields]="[
+      'nomeClientes',
+      'nome',
+      'divisao',
+      'especie',
+      'raca'
+    ]"
   >
     <ng-template pTemplate="caption">
       <h2 class="text-center">Animais</h2>
@@ -27,6 +33,9 @@
 
     <ng-template pTemplate="header">
       <tr>
+        <th pSortableColumn="nomeClientes'">
+          Cliente: <p-sortIcon field="nomeClientes'"></p-sortIcon>
+        </th>
         <th pSortableColumn="nome">
           Nome: <p-sortIcon field="nome"></p-sortIcon>
         </th>
@@ -45,6 +54,7 @@
 
     <ng-template pTemplate="body" let-animal>
       <tr>
+        <td>{{ animal.nomeClientes }}</td>
         <td>{{ animal.nome }}</td>
         <td>{{ animal.divisao }}</td>
         <td>{{ animal.especie }}</td>

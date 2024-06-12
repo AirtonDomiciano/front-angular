@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AnimaisService } from 'src/app/services/animais.service';
+import { ClientesService } from 'src/app/services/clientes.service';
 import { Animais } from 'src/app/shared/models/animais';
+import { AnimaisInterface } from './model/animais.interface';
 
 @Component({
   selector: 'app-animais',
@@ -10,13 +12,19 @@ import { Animais } from 'src/app/shared/models/animais';
   styleUrls: ['./animais.component.scss'],
 })
 export class AnimaisComponent implements OnInit {
-  public listarAnimais: Animais[] = [];
+  public listaAnimais: Animais[] = [];
   public formAnimais: FormGroup = new FormGroup({});
+  public listarAnimais: AnimaisInterface[] = [];
 
-  constructor(private router: Router, public animaisService: AnimaisService) {}
+  constructor(
+    private router: Router,
+    private animaisService: AnimaisService,
+    private clientesService: ClientesService
+  ) {}
 
   async ngOnInit(): Promise<void> {
-    this.buscarAnimais();
+    await this.buscarAnimais();
+    await this.buscarNomeClientePorId();
   }
 
   async buscarAnimais() {
@@ -27,7 +35,7 @@ export class AnimaisComponent implements OnInit {
       return;
     }
 
-    this.listarAnimais = animais;
+    this.listaAnimais = animais;
   }
 
   adicionarAnimal() {
@@ -41,5 +49,20 @@ export class AnimaisComponent implements OnInit {
 
   editarAnimal(id: number) {
     this.router.navigate([`/private/animal/${id}`]);
+  }
+
+  async buscarNomeClientePorId(): Promise<void> {
+    for (let el of this.listaAnimais) {
+      let res = await this.clientesService.buscarClientePorId(el.idClientes);
+      const input: AnimaisInterface = {
+        idAnimal: el.idAnimal,
+        nomeClientes: res.nomeClientes,
+        nome: el.nome,
+        divisao: el.divisao,
+        especie: el.especie,
+        raca: el.raca,
+      };
+      this.listarAnimais.push(input);
+    }
   }
 }

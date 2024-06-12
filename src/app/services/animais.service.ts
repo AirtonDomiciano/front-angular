@@ -3,7 +3,8 @@ import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
 import { Router } from '@angular/router';
-import AnimaisModel from '../pages/animais/model/animais-interface.';
+import AnimaisModel from '../pages/animais/model/animais.model';
+import { Animais } from '../shared/models/animais';
 
 @Injectable({
   providedIn: 'root',
@@ -37,32 +38,18 @@ export class AnimaisService extends BaseService {
     });
   }
 
-  async adicionarAnimal(animal: AnimaisModel): Promise<AnimaisModel> {
-    return new Promise((resolve) => {
-      this.post('/animais', animal).subscribe((res: any) => {
-        if (res?.length) {
-          resolve(res);
-        }
-      });
-    });
-  }
-
-  async deletarAnimal(id: number): Promise<void> {
+  async deletarAnimal(id: number): Promise<Boolean> {
     return new Promise((resolve) => {
       this.delete(`/animais/${id}`).subscribe((res: any) => {
-        if (res?.length) {
-          resolve(res);
-        }
+        resolve(res);
       });
     });
   }
 
-  async editarAnimal(id: number, animal: AnimaisModel): Promise<AnimaisModel> {
+  async salvar(animal: Animais): Promise<boolean> {
     return new Promise((resolve) => {
-      this.put(`/animais/${id}`, animal).subscribe((res: any) => {
-        if (res?.length) {
-          resolve(res);
-        }
+      this.post('/animais', animal).subscribe((res: any) => {
+        resolve(res);
       });
     });
   }

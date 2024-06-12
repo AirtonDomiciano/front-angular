@@ -1,6 +1,6 @@
 export class Animais {
-  idAnimal!: number;
-  idCliente!: number;
+  idAnimal?: number;
+  idClientes!: number;
   nome!: string;
   divisao!: string;
   especie!: string;

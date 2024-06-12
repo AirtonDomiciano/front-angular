@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AnimalComponent } from './animal.component';
 
-const routes: Routes = [{ path: '', component: AnimalComponent }];
+const routes: Routes = [
+  { path: '', component: AnimalComponent },
+  { path: ':id', component: AnimalComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
