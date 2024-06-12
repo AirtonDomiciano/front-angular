@@ -25,10 +25,14 @@ export class AnimalComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.formGroup = this.fb.group(this.model);
     this.onSubmit();
-    if (this.id > 0) {
-      this.editarAnimal();
-    }
     this.requiredForm();
+    if (this.id) {
+      let res = this.animalService.buscarAnimalPorId(this.id);
+      delete (await res).idAnimal;
+      if (!res) {
+        this.formGroup.controls.setValue(res);
+      }
+    }
   }
 
   requiredForm() {
@@ -39,13 +43,13 @@ export class AnimalComponent implements OnInit {
     this.formGroup.controls['raca'].setValidators([Validators.required]);
   }
 
-  async editarAnimal(): Promise<void> {
-    this.model = await this.animalService.buscarAnimalPorId(this.id);
-    delete this.model.idAnimal;
-    if (!this.model) {
-      this.formGroup.setValue(this.model);
-    }
-  }
+  // async editarAnimal(): Promise<void> {
+  //   this.model = await this.animalService.buscarAnimalPorId(this.id);
+  //   delete this.model.idAnimal;
+  //   if (!this.model) {
+  //     this.formGroup.setValue(this.model);
+  //   }
+  // }
 
   validationSave(input: Animais): boolean {
     let validation: boolean = true;
