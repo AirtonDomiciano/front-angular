@@ -31,10 +31,9 @@ export class AnimalComponent implements OnInit {
     this.requiredForm();
 
     if (this.id) {
-      let res = this.animalService.buscarAnimalPorId(this.id);
-      if (!res) {
-        this.formGroup.controls.setValue();
-      }
+      this.model = this.animalService.buscarAnimalPorId(this.id);
+      delete this.model.idAnimal;
+      this.formGroup.controls.setValue(mode);
     }
   }
 
