@@ -29,12 +29,6 @@ export class AnimalComponent implements OnInit {
       this.editarAnimal();
     }
     this.requiredForm();
-
-    if (this.id) {
-      this.model = this.animalService.buscarAnimalPorId(this.id);
-      delete this.model.idAnimal;
-      this.formGroup.controls.setValue(mode);
-    }
   }
 
   requiredForm() {
@@ -48,7 +42,9 @@ export class AnimalComponent implements OnInit {
   async editarAnimal(): Promise<void> {
     this.model = await this.animalService.buscarAnimalPorId(this.id);
     delete this.model.idAnimal;
-    this.formGroup.setValue(this.model);
+    if (!this.model) {
+      this.formGroup.setValue(this.model);
+    }
   }
 
   validationSave(input: Animais): boolean {
