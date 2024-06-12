@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import AnimaisModel from '../animais/model/animais.model';
 import { Animais } from 'src/app/shared/models/animais';
 import { AnimaisService } from 'src/app/services/animais.service';
+import { AnimaisInterface } from '../animais/model/animais.interface';
 
 @Component({
   selector: 'app-animal',
@@ -27,10 +28,11 @@ export class AnimalComponent implements OnInit {
     this.onSubmit();
     this.requiredForm();
     if (this.id) {
-      let res = this.animalService.buscarAnimalPorId(this.id);
-      delete (await res).idAnimal;
-      if (!res) {
-        this.formGroup.controls.setValue(res);
+      let res = await this.animalService.buscarAnimalPorId(this.id);
+      delete res.idAnimal;
+      if (res) {
+        this.model = res;
+        this.formGroup.setValue(res);
       }
     }
   }
@@ -51,7 +53,7 @@ export class AnimalComponent implements OnInit {
   //   }
   // }
 
-  validationSave(input: Animais): boolean {
+  validationSave(input: AnimaisInterface): boolean {
     let validation: boolean = true;
     if (!input.nome || !input.divisao || !input.especie || !input.raca) {
       validation = false;
@@ -60,6 +62,8 @@ export class AnimalComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
+    // let inputEdit: AnimaisInterface = this.formGroup.value;
+    // const validation: boolean = this.validationSave(inputEdit);
     if (this.formGroup.invalid) {
       return;
     }
