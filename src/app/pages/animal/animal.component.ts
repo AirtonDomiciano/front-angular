@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import AnimaisModel from '../animais/model/animais.model';
-import { Animais } from 'src/app/shared/models/animais';
 import { AnimaisService } from 'src/app/services/animais.service';
-import { AnimaisInterface } from '../animais/model/animais.interface';
 
 @Component({
   selector: 'app-animal',
@@ -25,19 +23,14 @@ export class AnimalComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.formGroup = this.fb.group(this.model);
-    this.onSubmit();
-    this.requiredForm();
-    if (this.id) {
-      let res = await this.animalService.buscarAnimalPorId(this.id);
-      delete res.idAnimal;
-      if (res) {
-        this.model = res;
-        this.formGroup.setValue(res);
-      }
+    this.validaCamposRequiridos();
+
+    if (this.id > 0) {
+      this.editarAnimal();
     }
   }
 
-  requiredForm() {
+  validaCamposRequiridos() {
     this.formGroup.controls['nome'].setValidators([Validators.required]);
     this.formGroup.controls['idClientes'].setValidators([Validators.required]);
     this.formGroup.controls['divisao'].setValidators([Validators.required]);
@@ -45,33 +38,24 @@ export class AnimalComponent implements OnInit {
     this.formGroup.controls['raca'].setValidators([Validators.required]);
   }
 
-  // async editarAnimal(): Promise<void> {
-  //   this.model = await this.animalService.buscarAnimalPorId(this.id);
-  //   delete this.model.idAnimal;
-  //   if (!this.model) {
-  //     this.formGroup.setValue(this.model);
-  //   }
-  // }
+  async editarAnimal(): Promise<void> {
+    this.model = await this.animalService.buscarAnimalPorId(this.id);
+    delete this.model.idAnimal;
 
-  validationSave(input: AnimaisInterface): boolean {
-    let validation: boolean = true;
-    if (!input.nome || !input.divisao || !input.especie || !input.raca) {
-      validation = false;
-    }
-    return validation;
+    this.formGroup.setValue(this.model);
   }
 
   async onSubmit(): Promise<void> {
-    // let inputEdit: AnimaisInterface = this.formGroup.value;
-    // const validation: boolean = this.validationSave(inputEdit);
     if (this.formGroup.invalid) {
       return;
     }
+
     const input: AnimaisModel = this.formGroup.value;
-    if (this.id) {
-      input.idAnimal = this.id;
-    }
+
+    if (this.id) input.idAnimal = this.id;
+
     const res = await this.animalService.salvar(input);
+
     if (res) {
       this.router.navigate([`private/animais`]);
     }

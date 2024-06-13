@@ -5,5 +5,4 @@ export class Animais {
   divisao!: string;
   especie!: string;
   raca!: string;
-  idade!: number;
 }
