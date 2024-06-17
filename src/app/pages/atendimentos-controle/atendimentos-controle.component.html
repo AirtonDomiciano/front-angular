@@ -1,0 +1,105 @@
+<!-- <p-table
+  #myTab
+  [value]="listaAtendimentos"
+  [globalFilterFields]="[
+    'nomeCliente',
+    'nomeAnimal',
+    'especieAnimal',
+    'nomeServico',
+    'valor',
+    'status'
+  ]"
+>
+  <ng-template pTemplate="caption">
+    <h2 class="text-center">Atendimentos</h2>
+    <div class="row">
+      <div class="col-sm-1 px-3">
+        <h5>Filtro:</h5>
+      </div>
+      <div class="col-sm-3">
+        <input
+          type="text"
+          pInputText
+          (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
+        />
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="nomeCliente">
+        Nome do Cliente <p-sortIcon field="nomeCliente"></p-sortIcon>
+      </th>
+      <th pSortableColumn="nomeAnimal">
+        Nome do animal <p-sortIcon field="nomeAnimal"></p-sortIcon>
+      </th>
+      <th pSortableColumn="especieAnimal">
+        Espécie <p-sortIcon field="especieAnimal"></p-sortIcon>
+      </th>
+      <th pSortableColumn="nomeServico">
+        Serviço <p-sortIcon field="nomeServico"></p-sortIcon>
+      </th>
+      <th pSortableColumn="valor">
+        Valor <p-sortIcon field="valor"></p-sortIcon>
+      </th>
+      <th pSortableColumn="status">
+        Status <p-sortIcon field="status"></p-sortIcon>
+      </th>
+      <th class="text-center">Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-atendimento>
+    <tr>
+      <td>{{ atendimento.nomeCliente }}</td>
+      <td>{{ atendimento.nomeAnimal }}</td>
+      <td>{{ atendimento.especieAnimal }}</td>
+      <td>{{ atendimento.nomeServico }}</td>
+      <td>
+        {{ atendimento.valor | currency : "BRL" }}
+      </td>
+      <td>
+        <span class="badge {{ inicializarBadges(atendimento).classeBadge }}">{{
+          inicializarBadges(atendimento).nomeBadge
+        }}</span>
+      </td>
+      <td class="d-flex justify-content-center">
+        <div class="flex-column">
+          <div>
+            <button
+              *ngIf="atendimento.status === 1"
+              class="btn-iniciar btn btn-primary btn-sm mb-2"
+              (click)="iniciarServico(atendimento)"
+            >
+              <p class="">Iniciar Atendimento</p>
+            </button>
+
+            <button
+              *ngIf="atendimento.status === 2"
+              class="btn-iniciar btn btn-secondary btn-sm mb-2"
+              (click)="finalizarServico(atendimento)"
+            >
+              <p>Finalizar Atendimento</p>
+            </button>
+          </div>
+          <div>
+            <button
+              (click)="cancelarAtendimento(atendimento)"
+              *ngIf="atendimento.status !== 0 && atendimento.status !== 3"
+              class="btn btn-danger btn-sm"
+            >
+              <p>Cancelar Atendimento</p>
+            </button>
+            <button
+              (click)="restaurarAtendimento(atendimento)"
+              class="btn btn-secondary btn-sm"
+              *ngIf="atendimento.status === 0 || atendimento.status === 3"
+            >
+              <p>Restaurar Atendimento</p>
+            </button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table> -->

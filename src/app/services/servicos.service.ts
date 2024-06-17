@@ -3,12 +3,11 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import { Servico } from '../shared/models/servicos';
-
+import { Servicos } from '../shared/models/servicos.model';
 @Injectable({
   providedIn: 'root',
 })
-export class Servicoservice extends BaseService {
+export class ServicosService extends BaseService {
   constructor(
     public router: Router,
     public override http: HttpClient,
@@ -17,7 +16,7 @@ export class Servicoservice extends BaseService {
     super(http);
   }
 
-  async buscarTodosServicos(): Promise<Array<Servico>> {
+  async buscarTodosServicos(): Promise<Array<Servicos>> {
     return new Promise((resolve) => {
       this.get('/atendimento').subscribe((res: any) => {
         if (res?.length) {
@@ -35,7 +34,7 @@ export class Servicoservice extends BaseService {
     });
   }
 
-  async buscarServicoPorId(id: number): Promise<Servico> {
+  async buscarServicoPorId(id: number): Promise<Servicos> {
     return new Promise((resolve) => {
       this.get(`/servicos/${id}`).subscribe((res: any) => {
         resolve(res);
@@ -43,7 +42,7 @@ export class Servicoservice extends BaseService {
     });
   }
 
-  async salvar(servico: Servico): Promise<boolean> {
+  async salvar(servico: Servicos): Promise<boolean> {
     return new Promise((resolve) => {
       this.post('/servicos', servico).subscribe((res: any) => {
         resolve(res);

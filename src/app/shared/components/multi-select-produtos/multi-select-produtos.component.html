@@ -1,0 +1,13 @@
+<form [formGroup]="form" action="" method="get">
+  <ng-container *ngIf="listaProdutos && listaProdutos.length > 0">
+    <p-multiSelect
+      [options]="listaProdutos"
+      [(ngModel)]="produtosSelecionados"
+      optionLabel="nomeProduto"
+      formControlName="{{ frmName }}"
+      id="{{ frmName }}"
+      placeholder="{{ frmPlaceholder }}"
+      [style]="{ width: '100%' }"
+    ></p-multiSelect>
+  </ng-container>
+</form>

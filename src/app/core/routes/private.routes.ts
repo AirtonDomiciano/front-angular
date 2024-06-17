@@ -47,11 +47,27 @@ export const privateRoutes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
+        path: 'atendimentos',
+        loadChildren: () =>
+          import('../../pages/atendimentos/atendimentos.module').then(
+            (m) => m.AtendimentosModule
+          ),
+        canActivate: [AuthGuardService],
+      },
+      {
         path: 'atendimento',
         loadChildren: () =>
           import('../../pages/atendimento/atendimento.module').then(
             (m) => m.AtendimentoModule
           ),
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'atendimentos-controle',
+        loadChildren: () =>
+          import(
+            '../../pages/atendimentos-controle/atendimentos-controle.module'
+          ).then((m) => m.AtendimentosControleModule),
         canActivate: [AuthGuardService],
       },
       {
@@ -95,6 +111,22 @@ export const privateRoutes: Routes = [
         loadChildren: () =>
           import('../../pages/cliente/cliente.module').then(
             (m) => m.ClienteModule
+          ),
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'kitprodutos',
+        loadChildren: () =>
+          import('../../pages/kit-produtos/kit-produtos.module').then(
+            (m) => m.KitProdutosModule
+          ),
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'servico/:id',
+        loadChildren: () =>
+          import('../../pages/servico/servico.module').then(
+            (m) => m.ServicoModule
           ),
         canActivate: [AuthGuardService],
       },

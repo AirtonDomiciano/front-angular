@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AtendimentoComponent } from './atendimento.component';
 import { CommonModule } from '@angular/common';
+import { AtendimentoComponent } from './atendimento.component';
 import { AtendimentoRoutingModule } from './atendimento-routing.module';
-import { TableModule } from 'primeng/table';
+import { InputModule } from 'src/app/shared/components/input/input.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { MultiSelectProdutosModule } from 'src/app/shared/components/multi-select-produtos/multi-select-produtos.module';
 
 @NgModule({
   declarations: [AtendimentoComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     AtendimentoRoutingModule,
-    TableModule,
+    InputModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MultiSelectModule,
+    MultiSelectProdutosModule,
   ],
   exports: [AtendimentoComponent],
 })

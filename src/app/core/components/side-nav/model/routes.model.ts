@@ -2,9 +2,15 @@ export const RoutesArray: Routes[] = [
   { title: 'Home', route: 'home', icon: 'bi bi-house' },
   { title: 'Apis', route: 'apis', icon: 'bi bi-gear', childs: [] },
   {
-    title: 'Atendimento',
-    route: 'atendimento',
+    title: 'Atendimentos',
+    route: 'atendimentos',
     icon: 'bi bi-journal-text',
+    childs: [],
+  },
+  {
+    title: 'Controle',
+    route: 'atendimentos-controle',
+    icon: 'bi bi-ui-checks-grid',
     childs: [],
   },
   {
@@ -14,6 +20,12 @@ export const RoutesArray: Routes[] = [
     childs: [],
   },
   { title: 'Produtos', route: 'produtos', icon: 'bi bi-basket', childs: [] },
+  {
+    title: 'Kit Produtos',
+    route: 'kitprodutos',
+    icon: 'bi bi-basket',
+    childs: [],
+  },
   { title: 'Usuários', route: 'usuarios', icon: 'bi bi-people', childs: [] },
   { title: 'Animais', route: 'animais', icon: 'bi bi-heart-fill', childs: [] },
 ];
