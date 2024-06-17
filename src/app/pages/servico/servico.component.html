@@ -1,0 +1,35 @@
+<h2 class="text-center mt-2">Serviço</h2>
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
+  <div class="row px-4 py-2">
+    <div class="col-sm-6">
+      <app-input placeholder="Animal" frmName="idAnimal" [form]="formGroup">
+      </app-input>
+    </div>
+    <div class="col-sm-6">
+      <app-input placeholder="Cliente" frmName="idClientes" [form]="formGroup">
+      </app-input>
+    </div>
+  </div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-6">
+      <app-select-servicos-animal
+        [form]="formGroup"
+        frmName="servicoAnimal"
+      ></app-select-servicos-animal>
+    </div>
+    <div class="col-sm-6">
+      <app-multi-select-produtos
+        frmPlaceholder="Selecione os Produtos"
+        [form]="formGroup"
+        frmName="produtos"
+      ></app-multi-select-produtos>
+    </div>
+  </div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-12">
+      <button class="btn btn-primary rounded-pill mt-2 w-100" type="submit">
+        Salvar
+      </button>
+    </div>
+  </div>
+</form>

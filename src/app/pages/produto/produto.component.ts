@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProdutosService } from 'src/app/services/produtos.service';
+import { ProdutosService } from 'src/app/pages/produtos.service';
 import { ProdutosInterface } from 'src/app/shared/models/produtos.interface';
 import { ProdutosModel } from '../produtos/model/produtos.model';
 

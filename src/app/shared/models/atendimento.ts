@@ -1,6 +1,6 @@
 export class Atendimento {
   idAtendimento?: number;
-  idClientes!: number;
-  idAnimais!: number;
-  idServicos!: number;
+  data!: Date;
+  hora!: Date;
+  descricao!: string;
 }

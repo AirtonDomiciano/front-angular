@@ -20,7 +20,7 @@ export class AtendimentoService extends BaseService {
   async buscarTodosAtendimentos(): Promise<Array<Atendimento>> {
     return new Promise((resolve) => {
       this.get('/atendimento').subscribe((res: any) => {
-        if (res?.length) {
+        if (res) {
           resolve(res);
         }
       });
