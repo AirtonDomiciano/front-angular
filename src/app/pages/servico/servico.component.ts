@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicoModel } from './model/servico.model';
 import { ServicosService } from 'src/app/services/servicos.service';
+import { ServicosModel } from '../atendimentos-controle/model/servicos-model';
 
 @Component({
   selector: 'app-servico',
@@ -23,8 +24,14 @@ export class ServicoComponent implements OnInit {
     this.formGroup = this.fb.group(this.model);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.setarCamposRequiridos();
+    await this.iniciallizarServico();
+  }
+
+  async iniciallizarServico() {
+    const res = await this.servicosService.buscarPorIdAtendimento(this.id);
+    this.formGroup.setValue(res);
   }
 
   setarCamposRequiridos() {
@@ -40,8 +47,8 @@ export class ServicoComponent implements OnInit {
     }
 
     const input: ServicoModel = this.formGroup.value;
-    input.idServicosAnimal = input.servicoAnimal.idServicosAnimal;
-    input.valorServico = input.servicoAnimal.valor;
+    input.idServicosAnimal = input.servicoAnimal!.idServicosAnimal;
+    input.valorServico = input.servicoAnimal!.valor;
     for (let produto of input.produtos!) {
       input.valorServico += produto.valor;
     }

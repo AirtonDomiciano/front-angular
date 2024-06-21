@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AtendimentoModel } from './model/atendimento-model';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
+import { ServicosService } from 'src/app/services/servicos.service';
 
 @Component({
   selector: 'app-atendimento',
@@ -20,7 +21,8 @@ export class AtendimentoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private atendimentoService: AtendimentoService
+    private atendimentoService: AtendimentoService,
+    private servicosService: ServicosService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -60,14 +62,18 @@ export class AtendimentoComponent implements OnInit {
 
     const res = await this.atendimentoService.salvar(input);
 
-    const atendimentos =
-      await this.atendimentoService.buscarTodosAtendimentos();
-
-    const index = atendimentos.length - 1;
-    const idAtendimento = atendimentos[index].idAtendimento;
-
     if (res) {
-      this.router.navigate([`private/servico/${idAtendimento}`]);
+      if (this.id) {
+        this.router.navigate([`private/servico/${this.id}`]);
+      } else {
+        const atendimentos =
+          await this.atendimentoService.buscarTodosAtendimentos();
+
+        const index = atendimentos.length - 1;
+        const idAtendimento = atendimentos[index].idAtendimento;
+
+        this.router.navigate([`private/servico/${idAtendimento}`]);
+      }
     }
   }
 }

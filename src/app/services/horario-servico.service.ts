@@ -35,7 +35,7 @@ export class HorarioService extends BaseService {
     });
   }
 
-  async buscarHorarioPorIdAtendimento(id: number): Promise<HorarioInterface> {
+  async buscarHorarioPorIdServico(id: number): Promise<HorarioInterface> {
     return new Promise((resolve) => {
       this.get(`/horario-servico/${id}`).subscribe((res: any) => {
         if (res) {

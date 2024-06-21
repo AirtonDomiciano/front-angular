@@ -26,4 +26,14 @@ export class ServicosAnimalService extends BaseService {
       });
     });
   }
+
+  async buscarServicoPorId(id: number): Promise<ServicosAnimalInterface> {
+    return new Promise((resolve) => {
+      this.get(`/servicos-animal/${id}`).subscribe((res: any) => {
+        if (res) {
+          resolve(res);
+        }
+      });
+    });
+  }
 }

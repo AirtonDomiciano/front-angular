@@ -135,6 +135,14 @@ export const privateRoutes: Routes = [
           ),
         canActivate: [AuthGuardService],
       },
+      {
+        path: 'servico',
+        loadChildren: () =>
+          import('../../pages/servico/servico.module').then(
+            (m) => m.ServicoModule
+          ),
+        canActivate: [AuthGuardService],
+      },
       { path: '**', redirectTo: 'home' },
     ],
   },

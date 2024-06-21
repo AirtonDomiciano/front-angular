@@ -1,6 +1,6 @@
 export interface HorarioInterface {
   idHorario?: number;
-  idAtendimento: number;
+  idServicos: number;
   horarioInicio?: Date;
   horarioTermino?: Date;
 }

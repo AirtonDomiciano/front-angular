@@ -1,16 +1,15 @@
 <p-table
   #myTab
-  [value]="listaAtendimentos"
+  [value]="lista"
   [globalFilterFields]="[
-    'nomeCliente',
-    'nomeAnimal',
-    'especieAnimal',
+    'nomeClientes',
+    'nome',
+    'especie',
     'nomeServico',
-    'status'
+    'status',
+    'valorServico'
   ]"
 >
-  <!-- 'valor' -->
-  <!-- 'tempo' -->
   <ng-template pTemplate="caption">
     <h2 class="text-center">Atendimentos</h2>
     <div class="row">
@@ -34,40 +33,40 @@
 
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="nomeCliente">
-        Nome do Cliente <p-sortIcon field="nomeCliente"></p-sortIcon>
+      <th pSortableColumn="nomeClientes">
+        Nome do Cliente <p-sortIcon field="nomeClientes"></p-sortIcon>
       </th>
-      <th pSortableColumn="nomeAnimal">
-        Nome do animal <p-sortIcon field="nomeAnimal"></p-sortIcon>
+      <th pSortableColumn="nome">
+        Nome do animal <p-sortIcon field="nome"></p-sortIcon>
       </th>
-      <th pSortableColumn="especieAnimal">
-        Espécie <p-sortIcon field="especieAnimal"></p-sortIcon>
+      <th pSortableColumn="especie">
+        Espécie <p-sortIcon field="especie"></p-sortIcon>
       </th>
-      <th pSortableColumn="nomeServico">
+      <th pSortableColumn="servico">
         Serviço <p-sortIcon field="nomeServico"></p-sortIcon>
+      </th>
+      <th pSortableColumn="valorServico">
+        Valor <p-sortIcon field="valorServico"></p-sortIcon>
       </th>
       <th pSortableColumn="status">
         Status <p-sortIcon field="status"></p-sortIcon>
       </th>
       <th>Ações</th>
-      <!-- <th pSortableColumn="valor">
-        Valor <p-sortIcon field="valor"></p-sortIcon>
-      </th> -->
-      <!-- <th pSortableColumn="tempo">
-        Tempo <p-sortIcon field="tempo"></p-sortIcon>
-      </th> -->
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-atendimento>
     <tr>
-      <td>{{ atendimento.nomeCliente }}</td>
-      <td>{{ atendimento.nomeAnimal }}</td>
-      <td>{{ atendimento.especieAnimal }}</td>
+      <td>{{ atendimento.nomeClientes }}</td>
+      <td>{{ atendimento.nome }}</td>
+      <td>{{ atendimento.especie }}</td>
       <td>{{ atendimento.nomeServico }}</td>
       <td>
-        <!-- <span class="badge {{ inicializarBadges(atendimento).classeBadge }}">{{
+        <p>{{ atendimento.valorServico | currency : "BRL" }}</p>
+      </td>
+      <td>
+        <span class="badge {{ inicializarBadges(atendimento).classeBadge }}">{{
           inicializarBadges(atendimento).nomeBadge
-        }}</span> -->
+        }}</span>
       </td>
       <td>
         <button
@@ -78,15 +77,11 @@
         </button>
         <button
           class="btn btn-danger btn-sm"
-          (click)="deletarAtendimento(atendimento.idAtendimento)"
+          (click)="deletarAtendimento(atendimento.idServicos)"
         >
           <span class="bi bi-trash"></span>
         </button>
       </td>
-      <!-- <td>
-        <p>{{ atendimento.valor | currency : "BRL" }}</p>
-      </td> -->
-      <!-- <td>{{ atendimento.tempo }}</td> -->
     </tr>
   </ng-template>
 </p-table>

@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AtendimentoService } from 'src/app/services/atendimento.service';
-import { Atendimentos } from 'src/app/shared/interface/atendimento.interface';
-import { ClientesService } from 'src/app/services/clientes.service';
 import { ServicosService } from 'src/app/services/servicos.service';
-import { AtendimentosModel } from '../atendimentos/model/atendimentos.model';
 import { HorarioService } from 'src/app/services/horario-servico.service';
-import { HorarioInterface } from 'src/app/shared/interface/horario-servico';
-import { Atendimento } from 'src/app/shared/models/atendimento';
 import { TempoInterface } from 'src/app/shared/interface/tempo.interface';
+import { ServicosDto } from 'src/app/shared/dtos/servicos.dto';
+import { ServicosModel } from './model/servicos-model';
+import { HorarioInterface } from 'src/app/shared/interface/horario-servico';
 
 @Component({
   selector: 'app-atendimento',
@@ -16,143 +13,117 @@ import { TempoInterface } from 'src/app/shared/interface/tempo.interface';
 })
 export class AtendimentosControleComponent implements OnInit {
   constructor(
-    private atendimentoService: AtendimentoService,
-    private clientesService: ClientesService,
     private servicosService: ServicosService,
     private horarioService: HorarioService
   ) {}
 
-  public lista: AtendimentosModel[] = [];
-  public listaAtendimentos: Atendimentos[] = [];
+  public lista: ServicosDto[] = [];
 
   async ngOnInit(): Promise<void> {
     await this.inicializarListaAtendimentos();
   }
 
   async inicializarListaAtendimentos() {
-    this.lista = [];
-    this.listaAtendimentos = [];
-    this.lista = await this.atendimentoService.buscarTodosAtendimentos();
-
-    // for (let atendimento of this.lista) {
-    //   const cliente = await this.clientesService.buscarClientePorId(
-    //     atendimento.idClientes
-    //   );
-    //   const servico = await this.servicosService.buscarServicoPorId(
-    //     atendimento.idServicos
-    //   );
-
-    //   const input: Atendimentos = {
-    //     idAtendimento: atendimento.idAtendimento,
-    //     nomeCliente: cliente.nomeClientes,
-    //     nomeAnimal: 'Rodolfo',
-    //     especieAnimal: 'Porco',
-    //     nomeServico: servico.nomeServico,
-    //     status: atendimento.status,
-    //     valor: servico.valor,
-    //     tempo: atendimento.tempo,
-    //   };
-    //   this.listaAtendimentos.push(input);
-    // }
+    this.lista = await this.servicosService.listandoServicosClientesAnimais();
   }
 
-  // inicializarBadges(atendimento: AtendimentosModel) {
-  //   let nomeBadge = '';
-  //   let classeBadge = '';
-  //   switch (atendimento.status) {
-  //     case 0:
-  //       classeBadge = 'badge-danger';
-  //       nomeBadge = 'Cancelado';
-  //       break;
+  inicializarBadges(servico: ServicosDto) {
+    let nomeBadge = '';
+    let classeBadge = '';
+    switch (servico.status) {
+      case 0:
+        classeBadge = 'badge-danger';
+        nomeBadge = 'Cancelado';
+        break;
 
-  //     case 1:
-  //       classeBadge = 'badge-warning';
-  //       nomeBadge = 'Em espera';
-  //       break;
+      case 1:
+        classeBadge = 'badge-warning';
+        nomeBadge = 'Em espera';
+        break;
 
-  //     case 2:
-  //       classeBadge = 'badge-primary';
-  //       nomeBadge = 'Em andamento';
-  //       break;
+      case 2:
+        classeBadge = 'badge-primary';
+        nomeBadge = 'Em andamento';
+        break;
 
-  //     case 3:
-  //       classeBadge = 'badge-success';
-  //       nomeBadge = 'Concluído';
-  //       break;
-  //   }
-  //   return { classeBadge, nomeBadge };
-  // }
+      case 3:
+        classeBadge = 'badge-success';
+        nomeBadge = 'Concluído';
+        break;
+    }
+    return { classeBadge, nomeBadge };
+  }
 
-  // async iniciarServico(atendimento: Atendimentos): Promise<void> {
-  //   const res = await this.atendimentoService.buscarAtendimentoPorId(
-  //     atendimento.idAtendimento!
-  //   );
+  async iniciarServico(servico: ServicosModel): Promise<void> {
+    const res = await this.servicosService.buscarServicoPorId(
+      servico.idServicos!
+    );
 
-  //   res.status = 2;
-  //   await this.atendimentoService.salvar(res);
+    res.status = 2;
+    await this.servicosService.salvar(res);
 
-  //   const input: HorarioInterface = {
-  //     idAtendimento: res.idAtendimento!,
-  //     horarioInicio: new Date(),
-  //   };
+    const input: HorarioInterface = {
+      idServicos: res.idServicos!,
+      horarioInicio: new Date(),
+    };
 
-  //   await this.horarioService.salvar(input);
+    await this.horarioService.salvar(input);
 
-  //   await this.inicializarListaAtendimentos();
-  // }
+    await this.inicializarListaAtendimentos();
+  }
 
-  // async finalizarServico(atendimento: Atendimento): Promise<void> {
-  //   const res = await this.atendimentoService.buscarAtendimentoPorId(
-  //     atendimento.idAtendimento!
-  //   );
+  async finalizarServico(servico: ServicosModel): Promise<void> {
+    const res = await this.servicosService.buscarServicoPorId(
+      servico.idServicos!
+    );
 
-  //   const input = await this.horarioService.buscarHorarioPorIdAtendimento(
-  //     res.idAtendimento!
-  //   );
+    const input = await this.horarioService.buscarHorarioPorIdServico(
+      res.idServicos!
+    );
 
-  //   input.horarioTermino = new Date();
-  //   input.horarioInicio = new Date(input.horarioInicio!);
+    input.horarioTermino = new Date();
+    input.horarioInicio = new Date(input.horarioInicio!);
 
-  //   const tempoServicoMilisegundos =
-  //     input.horarioTermino.getTime() - input.horarioInicio!.getTime();
+    const tempoServicoMilisegundos =
+      input.horarioTermino.getTime() - input.horarioInicio!.getTime();
 
-  //   const tempoServico = this.conversaoMilisegundos(tempoServicoMilisegundos);
+    const tempoServico = this.conversaoMilisegundos(tempoServicoMilisegundos);
 
-  //   res.tempo = tempoServico;
-  //   res.status = 3;
+    res.tempo = tempoServico;
+    res.status = 3;
 
-  //   await this.horarioService.salvar(input);
-  //   await this.atendimentoService.salvar(res);
+    await this.horarioService.salvar(input);
+    await this.servicosService.salvar(res);
 
-  //   await this.inicializarListaAtendimentos();
-  // }
+    await this.inicializarListaAtendimentos();
+  }
 
-  // async cancelarAtendimento(atendimento: Atendimento) {
-  //   const res = await this.atendimentoService.buscarAtendimentoPorId(
-  //     atendimento.idAtendimento!
-  //   );
+  async cancelarAtendimento(servico: ServicosModel) {
+    const res = await this.servicosService.buscarServicoPorId(
+      servico.idServicos!
+    );
 
-  //   res.status = 0;
-  //   await this.atendimentoService.salvar(res);
+    res.status = 0;
+    await this.servicosService.salvar(res);
 
-  //   await this.inicializarListaAtendimentos();
-  // }
+    await this.inicializarListaAtendimentos();
+  }
 
-  // async restaurarAtendimento(atendimento: Atendimento) {
-  //   const res = await this.atendimentoService.buscarAtendimentoPorId(
-  //     atendimento.idAtendimento!
-  //   );
+  async restaurarAtendimento(servico: ServicosModel) {
+    const res = await this.servicosService.buscarServicoPorId(
+      servico.idServicos!
+    );
 
-  //   res.status = 1;
-  //   await this.atendimentoService.salvar(res);
+    res.status = 1;
+    await this.servicosService.salvar(res);
 
-  //   await this.inicializarListaAtendimentos();
+    await this.inicializarListaAtendimentos();
 
-  //   const input = await this.horarioService.buscarHorarioPorIdAtendimento(
-  //     res.idAtendimento!
-  //   );
-  //   await this.horarioService.deletarHorario(input.idHorario!);
-  // }
+    const input = await this.horarioService.buscarHorarioPorIdServico(
+      res.idServicos!
+    );
+    await this.horarioService.deletarHorario(input.idHorario!);
+  }
 
   conversaoMilisegundos(tempo: number): any {
     let tempoServico: TempoInterface = { horas: 0, minutos: 0, segundos: 0 };
