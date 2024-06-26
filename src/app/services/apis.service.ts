@@ -50,14 +50,4 @@ export class ApisService extends BaseService {
       });
     });
   }
-
-  // async editarApi(id: number, api: ApisInterface): Promise<ApisInterface> {
-  //   return new Promise((resolve) => {
-  //     this.put(`/apis/${id}`, api).subscribe((res: any) => {
-  //       if (res?.length) {
-  //         resolve(res);
-  //       }
-  //     });
-  //   });
-  // }
 }
