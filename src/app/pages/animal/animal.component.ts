@@ -41,7 +41,6 @@ export class AnimalComponent implements OnInit {
   async editarAnimal(): Promise<void> {
     this.model = await this.animalService.buscarAnimalPorId(this.id);
     delete this.model.idAnimal;
-
     this.formGroup.setValue(this.model);
   }
 

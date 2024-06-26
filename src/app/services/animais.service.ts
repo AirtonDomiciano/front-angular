@@ -5,6 +5,8 @@ import { LocalService } from '../core/services/local.service';
 import { Router } from '@angular/router';
 import AnimaisModel from '../pages/animais/model/animais.model';
 import { Animais } from '../shared/models/animais';
+import { AnimaisInterface } from '../pages/animais/model/animais.interface';
+import { AnimaisDto } from '../shared/dtos/animais.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +51,14 @@ export class AnimaisService extends BaseService {
   async salvar(animal: Animais): Promise<boolean> {
     return new Promise((resolve) => {
       this.post('/animais', animal).subscribe((res: any) => {
+        resolve(res);
+      });
+    });
+  }
+
+  async colocarNomeClienteNaTabela(): Promise<Array<AnimaisDto>> {
+    return new Promise((resolve) => {
+      this.get('/animais/clientedoanimal').subscribe((res: any) => {
         resolve(res);
       });
     });
