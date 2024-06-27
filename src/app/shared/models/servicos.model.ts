@@ -1,6 +1,6 @@
 export class Servicos {
   idServicos?: number;
-  idAtendimento!: number;
+  idAtendimento?: number;
   idProdutos!: number;
   idAnimal!: number;
   idServicosAnimal!: number;

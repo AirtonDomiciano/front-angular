@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Produto } from '../../models/produtos.model';
 import { FormGroup } from '@angular/forms';
-import { ProdutosService } from 'src/app/pages/produtos.service';
+import { ProdutosService } from 'src/app/services/produtos.service';
 
 @Component({
   selector: 'app-multi-select-produtos',
@@ -15,6 +15,7 @@ export class MultiSelectProdutosComponent implements OnInit {
   @Input() frmPlaceholder = '';
   public listaProdutos: Produto[] = [];
   public produtosSelecionados: Produto[] = [];
+  public servicoSelecionado: number = 0;
 
   constructor(private produtosService: ProdutosService) {}
 

@@ -1,5 +1,5 @@
-export interface ProdutosAtendimentoInterface {
-  idProdutosAtendimentos?: number;
-  idAtendimento: number;
+export interface ProdutosServicoInterface {
+  idProdutosServico?: number;
+  idServicos: number;
   idProdutos: number;
 }

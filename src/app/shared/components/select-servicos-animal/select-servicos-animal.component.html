@@ -8,6 +8,8 @@
       optionLabel="nomeServico"
       id="{{ frmName }}"
       placeholder="Selecione o Serviço"
+      (onChange)="carregarProdutosServico()"
+      (onChange)="carregarServico()"
     ></p-dropdown>
   </ng-container>
 </form>

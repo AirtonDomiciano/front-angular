@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AtendimentoModel } from './model/atendimento-model';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
-import { ServicosService } from 'src/app/services/servicos.service';
 
 @Component({
   selector: 'app-atendimento',
@@ -21,8 +20,7 @@ export class AtendimentoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private atendimentoService: AtendimentoService,
-    private servicosService: ServicosService
+    private atendimentoService: AtendimentoService
   ) {}
 
   async ngOnInit(): Promise<void> {

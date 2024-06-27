@@ -1,0 +1,74 @@
+<!-- <div class="dropdown">
+  <button
+    class="btn dropdown-toggle-no-caret"
+    type="button"
+    id="acao-dropdown"
+    data-bs-toggle="dropdown"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <span class="bi bi-three-dots-vertical"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="acao-dropdown">
+    <li>
+      <a class="dropdown-item" role="button" (click)="editarAtendimento()"
+        >Editar Serviço</a
+      >
+    </li>
+    <hr class="dropdown-divider" />
+    <h2 class="dropdown-header">Controle</h2>
+    <li>
+      <a class="dropdown-item" role="button" (click)="iniciarServico()">
+        Iniciar Serviço
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item" role="button" (click)="finalizarServico()">
+        [appDisable]="setarOpcoesDropdown[2].disabled"
+        Finalizar Serviço
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item" role="button" (click)="cancelarServico()">
+        [appDisable]="setarOpcoesDropdown[0].disabled"
+        Cancelar Serviço
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item" role="button" (click)="restaurarServico()">
+        [appDisable]="setarOpcoesDropdown[3].disabled"
+        Restaurar Serviço
+      </a>
+    </li>
+  </ul>
+</div> -->
+
+<div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+  <button
+    type="button"
+    class="btn me-2"
+    id="dropdownManual"
+    ngbDropdownAnchor
+    (focus)="myDrop.open()"
+  >
+    <span class="bi bi-three-dots-vertical"></span>
+  </button>
+  <div ngbDropdownMenu aria-labelledby="dropdownManual">
+    <button ngbDropdownItem (click)="editarAtendimento()">
+      Editar Serviço
+    </button>
+    <div class="dropdown-divider"></div>
+    <h2 class="dropdown-header">Controle</h2>
+    <button ngbDropdownItem (click)="iniciarServico()">Iniciar Serviço</button>
+    <button ngbDropdownItem (click)="finalizarServico()">
+      Finalizar Serviço
+    </button>
+    <button ngbDropdownItem (click)="cancelarServico()">
+      Cancelar Serviço
+    </button>
+    <button ngbDropdownItem (click)="restaurarServico()">
+      Restaurar Serviço
+    </button>
+  </div>
+</div>

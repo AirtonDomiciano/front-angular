@@ -64,23 +64,19 @@
         <p>{{ atendimento.valorServico | currency : "BRL" }}</p>
       </td>
       <td>
-        <span class="badge {{ inicializarBadges(atendimento).classeBadge }}">{{
-          inicializarBadges(atendimento).nomeBadge
-        }}</span>
+        <span appDirectiveBadge [status]="atendimento.status" class="badge">
+        </span>
       </td>
       <td>
-        <button
-          class="btn-editar btn btn-primary btn-sm"
-          (click)="editarAtendimento(atendimento.idAtendimento)"
-        >
-          <span class="bi bi-pencil"></span>
-        </button>
-        <button
-          class="btn btn-danger btn-sm"
-          (click)="deletarAtendimento(atendimento.idServicos)"
-        >
-          <span class="bi bi-trash"></span>
-        </button>
+        <app-dropdown-acoes
+          (emitterEditarAtendimento)="
+            editarAtendimento(atendimento.idAtendimento)
+          "
+          (emitterCancelarServico)="cancelarServico(atendimento)"
+          (emitterIniciarServico)="iniciarServico(atendimento)"
+          (emitterFinalizarServico)="finalizarServico(atendimento)"
+          (emitterRestaurarServico)="restaurarServico(atendimento)"
+        ></app-dropdown-acoes>
       </td>
     </tr>
   </ng-template>
