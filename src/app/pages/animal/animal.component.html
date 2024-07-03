@@ -3,9 +3,8 @@
 >
   <div class="card bg-white w-100 p-5">
     <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
-      <h1 class="text-center mb-4" *ngIf="id">Editar Animal</h1>
-      <h1 class="text-center mb-4" *ngIf="!id">Cadastrar Animal</h1>
-      <div class="row px-4 py-2">
+      <h1 class="text-center mb-4">{{ titulo }}</h1>
+      <div class="row px-4">
         <div class="col-sm-6">
           <app-select-clientes
             placeholder="Cliente"
@@ -14,7 +13,7 @@
           ></app-select-clientes>
         </div>
       </div>
-      <div class="row px-4 py-2">
+      <div class="row px-4 py-4">
         <div class="col-sm-6">
           <app-input
             placeholder="Nome"
@@ -30,7 +29,7 @@
           ></app-input>
         </div>
       </div>
-      <div class="row px-4 py-2">
+      <div class="row px-4 py-1">
         <div class="col-sm-6">
           <app-input
             placeholder="Espécie"

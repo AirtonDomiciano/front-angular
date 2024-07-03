@@ -20,17 +20,7 @@ export class AnimaisService extends BaseService {
     super(http);
   }
 
-  async buscarTodosAnimais(): Promise<Array<AnimaisModel>> {
-    return new Promise((resolve) => {
-      this.get('/animais').subscribe((res: any) => {
-        if (res?.length) {
-          resolve(res);
-        }
-      });
-    });
-  }
-
-  async buscarAnimalPorId(id: number): Promise<AnimaisModel> {
+  async buscarPorId(id: number): Promise<AnimaisModel> {
     return new Promise((resolve) => {
       this.get(`/animais/${id}`).subscribe((res: any) => {
         if (res) {
@@ -40,7 +30,7 @@ export class AnimaisService extends BaseService {
     });
   }
 
-  async deletarAnimal(id: number): Promise<Boolean> {
+  async deletar(id: number): Promise<Boolean> {
     return new Promise((resolve) => {
       this.delete(`/animais/${id}`).subscribe((res: any) => {
         resolve(res);
@@ -56,9 +46,9 @@ export class AnimaisService extends BaseService {
     });
   }
 
-  async colocarNomeClienteNaTabela(): Promise<Array<AnimaisDto>> {
+  async buscarTodos(): Promise<Array<AnimaisDto>> {
     return new Promise((resolve) => {
-      this.get('/animais/clientedoanimal').subscribe((res: any) => {
+      this.get('/animais/animaisclientes').subscribe((res: any) => {
         resolve(res);
       });
     });

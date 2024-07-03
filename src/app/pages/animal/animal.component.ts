@@ -13,6 +13,7 @@ export class AnimalComponent implements OnInit {
   public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
   public model: AnimaisModel = new AnimaisModel();
+  public titulo = '';
 
   constructor(
     private fb: FormBuilder,
@@ -24,9 +25,9 @@ export class AnimalComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.formGroup = this.fb.group(this.model);
     this.validaCamposRequiridos();
-
-    if (this.id > 0) {
-      this.editarAnimal();
+    this.titulo = this.id > 0 ? 'Editar Animal' : 'Cadastrar Animal';
+    if (this.id) {
+      this.editar();
     }
   }
 
@@ -38,8 +39,8 @@ export class AnimalComponent implements OnInit {
     this.formGroup.controls['raca'].setValidators([Validators.required]);
   }
 
-  async editarAnimal(): Promise<void> {
-    this.model = await this.animalService.buscarAnimalPorId(this.id);
+  async editar(): Promise<void> {
+    this.model = await this.animalService.buscarPorId(this.id);
     delete this.model.idAnimal;
     this.formGroup.setValue(this.model);
   }

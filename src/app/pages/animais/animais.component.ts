@@ -14,24 +14,23 @@ export class AnimaisComponent implements OnInit {
   constructor(private router: Router, private animaisService: AnimaisService) {}
 
   async ngOnInit(): Promise<void> {
-    await this.pegarDadosTabelaAnimais();
+    await this.pegarDadosTabela();
   }
 
-  adicionarAnimal() {
+  adicionar() {
     this.router.navigate([`/private/animal`]);
   }
 
-  excluirAnimal(id: number) {
-    this.animaisService.deletarAnimal(id);
-    window.location.reload();
+  excluir(id: number) {
+    this.animaisService.deletar(id);
   }
 
-  editarAnimal(id: number) {
+  editar(id: number) {
     this.router.navigate([`/private/animal/${id}`]);
   }
 
-  async pegarDadosTabelaAnimais(): Promise<void> {
-    const input = await this.animaisService.colocarNomeClienteNaTabela();
+  async pegarDadosTabela(): Promise<void> {
+    const input = await this.animaisService.buscarTodos();
     this.listarAnimais = input;
   }
 }
