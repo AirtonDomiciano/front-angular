@@ -102,7 +102,7 @@ export const privateRoutes: Routes = [
         path: 'animais',
         loadChildren: () =>
           import('../../pages/animais/animais.module').then(
-            (m) => m.ClientesModule
+            (m) => m.AnimaisModule
           ),
         canActivate: [AuthGuardService],
       },
@@ -121,6 +121,13 @@ export const privateRoutes: Routes = [
             (m) => m.ClienteModule
           ),
         canActivate: [AuthGuardService],
+      },
+      {
+        path: 'animal',
+        loadChildren: () =>
+          import('../../pages/animal/animal.module').then(
+            (m) => m.AnimalModule
+          ),
       },
       { path: '**', redirectTo: 'home' },
     ],

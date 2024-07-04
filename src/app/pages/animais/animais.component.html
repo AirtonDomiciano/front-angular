@@ -1,1 +1,76 @@
-<p>animais works!</p>
+<div class="container">
+  <p-table
+    #myTab
+    [value]="listarAnimais"
+    [globalFilterFields]="[
+      'nomeClientes',
+      'nome',
+      'divisao',
+      'especie',
+      'raca'
+    ]"
+  >
+    <ng-template pTemplate="caption">
+      <h2 class="text-center">Animais</h2>
+      <div class="row">
+        <div class="col-sm-1 px-3">
+          <h5>Filtro:</h5>
+        </div>
+        <div class="col-sm-3">
+          <input
+            type="text"
+            pInputText
+            (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
+          />
+        </div>
+        <div class="d-flex justify-content-end col-sm-8">
+          <button class="btn btn-success" (click)="adicionar()">
+            <span class="bi bi-plus"></span>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="nomeClientes'">
+          Cliente: <p-sortIcon field="nomeClientes'"></p-sortIcon>
+        </th>
+        <th pSortableColumn="nome">
+          Nome: <p-sortIcon field="nome"></p-sortIcon>
+        </th>
+        <th pSortableColumn="divisao">
+          Divisão: <p-sortIcon field="divisao"></p-sortIcon>
+        </th>
+        <th pSortableColumn="especie">
+          Espécie: <p-sortIcon field="especie"></p-sortIcon>
+        </th>
+        <th pSortableColumn="raca">
+          Raça: <p-sortIcon field="raca"></p-sortIcon>
+        </th>
+        <th>Ações</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-animal>
+      <tr>
+        <td>{{ animal.nomeClientes }}</td>
+        <td>{{ animal.nome }}</td>
+        <td>{{ animal.divisao }}</td>
+        <td>{{ animal.especie }}</td>
+        <td>{{ animal.raca }}</td>
+        <td>
+          <button class="btn-editar btn btn-primary btn-sm">
+            <span class="bi bi-pencil" (click)="editar(animal.idAnimal)"></span>
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="excluir(animal.idAnimal)"
+          >
+            <span class="bi bi-trash"></span>
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

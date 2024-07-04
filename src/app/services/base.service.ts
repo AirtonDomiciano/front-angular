@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IBaseService } from '../core/base/base.interface';
+import { IBaseService } from '../pages/base/base.interface';
 
 const headers = new HttpHeaders({
   'Cache-Control':

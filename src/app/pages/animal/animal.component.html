@@ -1,0 +1,55 @@
+<div
+  class="container d-flex justify-content-center align-items-center mt-5 py-5"
+>
+  <div class="card bg-white w-100 p-5">
+    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
+      <h1 class="text-center mb-4">{{ titulo }}</h1>
+      <div class="row px-4">
+        <div class="col-sm-6">
+          <app-select-clientes
+            placeholder="Cliente"
+            frmName="idClientes"
+            [form]="formGroup"
+          ></app-select-clientes>
+        </div>
+      </div>
+      <div class="row px-4 py-4">
+        <div class="col-sm-6">
+          <app-input
+            placeholder="Nome"
+            frmName="nome"
+            [form]="formGroup"
+          ></app-input>
+        </div>
+        <div class="col-sm-6">
+          <app-input
+            placeholder="Divisão"
+            frmName="divisao"
+            [form]="formGroup"
+          ></app-input>
+        </div>
+      </div>
+      <div class="row px-4 py-1">
+        <div class="col-sm-6">
+          <app-input
+            placeholder="Espécie"
+            frmName="especie"
+            [form]="formGroup"
+          ></app-input>
+        </div>
+        <div class="col-sm-6">
+          <app-input
+            placeholder="Raça"
+            frmName="raca"
+            [form]="formGroup"
+          ></app-input>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-primary rounded-pill mt-2 w-100" type="submit">
+          Enviar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

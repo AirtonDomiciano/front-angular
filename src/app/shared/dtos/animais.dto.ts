@@ -1,6 +1,6 @@
-export class Animais {
+export class AnimaisDto {
   idAnimal?: number;
-  idClientes!: number;
+  nomeClientes!: string;
   nome!: string;
   divisao!: string;
   especie!: string;

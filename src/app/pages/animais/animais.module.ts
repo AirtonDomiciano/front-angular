@@ -9,4 +9,4 @@ import { TableModule } from 'primeng/table';
   imports: [CommonModule, AnimaisRoutingModule, TableModule, DatePipe],
   exports: [AnimaisComponent],
 })
-export class ClientesModule {}
+export class AnimaisModule {}
