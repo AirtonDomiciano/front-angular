@@ -10,7 +10,7 @@ import { Icons } from './consts/icons.const';
 export class InputSenhaComponent implements OnInit {
   @Input() form!: FormGroup;
   @Input() frmType: string = 'password';
-  @Input() frmClass = 'form-control rounded-pill mt-2';
+  @Input() frmClass = 'form-control rounded-pill';
   @Input() id = '';
   @Input() frmName = '';
   @Input() frmPlaceholder = '';
