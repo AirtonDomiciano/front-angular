@@ -112,6 +112,9 @@ export const privateRoutes: Routes = [
           import('../../pages/animal/animal.module').then(
             (m) => m.AnimalModule
           ),
+        canActivate: [AuthGuardService],
+      },
+      {
         path: 'kitprodutos',
         loadChildren: () =>
           import('../../pages/kit-produtos/kit-produtos.module').then(
