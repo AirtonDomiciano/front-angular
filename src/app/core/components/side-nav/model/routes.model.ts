@@ -8,12 +8,6 @@ export const RoutesArray: Routes[] = [
     childs: [],
   },
   {
-    title: 'Controle',
-    route: 'atendimentos-controle',
-    icon: 'bi bi-ui-checks-grid',
-    childs: [],
-  },
-  {
     title: 'Clientes',
     route: 'clientes',
     icon: 'bi bi-person-vcard',

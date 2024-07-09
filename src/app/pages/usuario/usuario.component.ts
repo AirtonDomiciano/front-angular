@@ -14,6 +14,7 @@ import { Usuario } from 'src/app/shared/models/usuario';
 export class UsuarioComponent implements OnInit {
   public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
+  public titulo: string = 'Cadastrar';
 
   public model: UsuarioModel = new UsuarioModel();
   constructor(
@@ -28,6 +29,7 @@ export class UsuarioComponent implements OnInit {
     this.requiredForm();
 
     if (this.id > 0) {
+      this.titulo = 'Editar';
       this.editarUsuario();
     }
   }

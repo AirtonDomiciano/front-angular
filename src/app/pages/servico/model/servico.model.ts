@@ -1,20 +1,19 @@
-import { ServicosAnimalInterface } from 'src/app/shared/interface/servicos-animal.interface';
+import { TipoServicoInterface } from 'src/app/shared/interface/tipo-servico.interface';
 import { Produto } from 'src/app/shared/models/produtos.model';
 import { Servicos } from 'src/app/shared/models/servicos.model';
 
 export class ServicoModel extends Servicos {
   public produtos?: Produto[];
-  public servicoAnimal?: ServicosAnimalInterface;
+  public tipoServico?: TipoServicoInterface;
   constructor() {
     super();
+    this.idServicos = 0;
     this.idAtendimento = 0;
     this.idClientes = 0;
     this.idAnimal = 0;
-    this.idServicosAnimal = 0;
-    this.idProdutos = 0;
+    this.idTipoServico = 0;
     this.status = 1;
-    this.valorServico = 0;
     this.produtos = [];
-    this.servicoAnimal = { idServicosAnimal: 0, nomeServico: '', valor: 0 };
+    this.tipoServico = { idTipoServico: 0, nomeServico: '', valor: 0 };
   }
 }

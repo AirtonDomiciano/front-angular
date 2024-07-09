@@ -20,24 +20,20 @@
       </div>
       <div class="col-lg-6 col-12">
         <div class="products bg-light shadow">
-          <h3 class="titulo text-primary">
-            Produtos adicionados Recentemente:
-          </h3>
+          <h3 class="titulo text-primary">Produtos sem estoque:</h3>
           <hr class="sidebar-divided" />
-          <ng-container *ngFor="let produto of novoProduto">
-            <table class="table bg-white">
+
+          <table class="table bg-white">
+            <ng-container *ngFor="let produto of produtosSemEstoque">
               <thead>
                 <tr>
-                  <td scope="row" class="nome text-left w-50 text-muted">
-                    <!-- {{ produto.nome }} -->
-                  </td>
-                  <td scope="row" class="preco text-right w-50 text-muted">
-                    <!-- R${{ produto.preco }} -->
+                  <td scope="row" class="nome text-left w-50 text-muted m-0">
+                    <h6 class="text-danger m-0">{{ produto.nomeProduto }}</h6>
                   </td>
                 </tr>
               </thead>
-            </table>
-          </ng-container>
+            </ng-container>
+          </table>
         </div>
       </div>
     </div>

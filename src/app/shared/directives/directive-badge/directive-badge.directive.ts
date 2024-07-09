@@ -28,9 +28,12 @@ export class DirectiveBadgeDirective implements OnInit {
         this.elRef.nativeElement.innerHTML = 'Em andamento';
         break;
       case 3:
-        this.elRef.nativeElement.style.backgroundColor = '#28a745';
+        this.elRef.nativeElement.style.backgroundColor = '#17a2b8';
         this.elRef.nativeElement.innerHTML = 'Concluído';
         break;
+      case 4:
+        this.elRef.nativeElement.style.backgroundColor = '#28a745';
+        this.elRef.nativeElement.innerHTML = 'Finalizado';
     }
   }
 }

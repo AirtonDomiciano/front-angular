@@ -63,14 +63,6 @@ export const privateRoutes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'atendimentos-controle',
-        loadChildren: () =>
-          import(
-            '../../pages/atendimentos-controle/atendimentos-controle.module'
-          ).then((m) => m.AtendimentosControleModule),
-        canActivate: [AuthGuardService],
-      },
-      {
         path: 'apis',
         loadChildren: () =>
           import('../../pages/apis/apis.module').then((m) => m.ApisModule),
@@ -140,6 +132,22 @@ export const privateRoutes: Routes = [
         loadChildren: () =>
           import('../../pages/servico/servico.module').then(
             (m) => m.ServicoModule
+          ),
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'configuracoes',
+        loadChildren: () =>
+          import('../../pages/configuracoes/configuracoes.module').then(
+            (m) => m.ConfiguracoesModule
+          ),
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'pagamento',
+        loadChildren: () =>
+          import('../../pages/pagamento/pagamento.module').then(
+            (m) => m.PagamentoModule
           ),
         canActivate: [AuthGuardService],
       },

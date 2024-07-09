@@ -1,10 +1,9 @@
 export class Servicos {
   idServicos?: number;
   idAtendimento?: number;
-  idProdutos!: number;
+  idUsuarios!: number;
   idAnimal!: number;
-  idServicosAnimal!: number;
-  valorServico!: number;
+  idTipoServico!: number;
   idClientes!: number;
   status!: number;
   tempo?: Date;

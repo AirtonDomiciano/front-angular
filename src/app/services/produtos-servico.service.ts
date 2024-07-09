@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import { ProdutosServicoInterface } from '../shared/interface/produtos-atendimento.interface';
+import ProdutosServico from '../shared/interface/produtos-servico.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class ProdutosServicoService extends BaseService {
     super(http);
   }
 
-  async buscarTodosProdutosServico(): Promise<Array<ProdutosServicoInterface>> {
+  async buscarTodosProdutosServico(): Promise<Array<ProdutosServico>> {
     return new Promise((resolve) => {
       this.get('/produtos-servico').subscribe((res: any) => {
         if (res) {
@@ -35,9 +35,17 @@ export class ProdutosServicoService extends BaseService {
     });
   }
 
-  async buscarProdutoServicoPorId(
-    id: number
-  ): Promise<ProdutosServicoInterface> {
+  async deletarPorIdTipoServico(id: number): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.delete(`/produtos-servico/deletarPorIdTipoServico/${id}`).subscribe(
+        (res: any) => {
+          resolve(res);
+        }
+      );
+    });
+  }
+
+  async buscarProdutoServicoPorId(id: number): Promise<ProdutosServico> {
     return new Promise((resolve) => {
       this.get(`/produtos-servico/${id}`).subscribe((res: any) => {
         if (res) {
@@ -50,11 +58,11 @@ export class ProdutosServicoService extends BaseService {
   }
 
   async buscarProdutosPorIdServicosAnimal(
-    idServicosAnimal: number
-  ): Promise<Array<ProdutosServicoInterface>> {
+    id: number
+  ): Promise<Array<ProdutosServico>> {
     return new Promise((resolve) => {
       this.get(
-        `/produtos-servico/buscarProdutosPorIdServicosAnimal/${idServicosAnimal}`
+        `/produtos-servico/buscarProdutosPorIdServicosAnimal/${id}`
       ).subscribe((res: any) => {
         if (res) {
           resolve(res);
@@ -65,9 +73,17 @@ export class ProdutosServicoService extends BaseService {
     });
   }
 
-  async salvar(produtoServico: ProdutosServicoInterface): Promise<boolean> {
+  async salvar(produtoServico: ProdutosServico): Promise<boolean> {
     return new Promise((resolve) => {
-      this.post('/produtos-atendimento', produtoServico).subscribe(
+      this.post('/produtos-servico', produtoServico).subscribe((res: any) => {
+        resolve(res);
+      });
+    });
+  }
+
+  async salvarLista(produtoServico: ProdutosServico[]): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.post('/produtos-servico/salvarLista', produtoServico).subscribe(
         (res: any) => {
           resolve(res);
         }

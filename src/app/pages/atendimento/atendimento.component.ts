@@ -39,6 +39,7 @@ export class AtendimentoComponent implements OnInit {
     );
 
     delete atendimento.idAtendimento;
+    delete atendimento.valor;
 
     this.formGroup.setValue(atendimento);
   }

@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import { ServicosAnimalInterface } from '../shared/interface/servicos-animal.interface';
+import { TipoServicoInterface } from '../shared/interface/tipo-servico.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ServicosAnimalService extends BaseService {
+export class TipoServicoService extends BaseService {
   constructor(
     public router: Router,
     public override http: HttpClient,
@@ -17,9 +17,9 @@ export class ServicosAnimalService extends BaseService {
     super(http);
   }
 
-  async buscarTodosServicos(): Promise<Array<ServicosAnimalInterface>> {
+  async buscarTodosServicos(): Promise<Array<TipoServicoInterface>> {
     return new Promise((resolve) => {
-      this.get('/servicos-animal').subscribe((res: any) => {
+      this.get('/tipo-servico').subscribe((res: any) => {
         if (res) {
           resolve(res);
         }
@@ -27,9 +27,9 @@ export class ServicosAnimalService extends BaseService {
     });
   }
 
-  async buscarServicoPorId(id: number): Promise<ServicosAnimalInterface> {
+  async buscarServicoPorId(id: number): Promise<TipoServicoInterface> {
     return new Promise((resolve) => {
-      this.get(`/servicos-animal/${id}`).subscribe((res: any) => {
+      this.get(`/tipo-servico/${id}`).subscribe((res: any) => {
         if (res) {
           resolve(res);
         }

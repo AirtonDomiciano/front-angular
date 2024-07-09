@@ -1,21 +1,18 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Directive({
   selector: '[appDisable]',
 })
 export class AcoesDropdownDirective implements OnInit {
-  @Input() appDisable: boolean = false;
-
-  constructor(private el: ElementRef) {}
+  @Input() status!: number;
+  @Output() emitterArrayDisabled: EventEmitter<Array<boolean>> =
+    new EventEmitter<Array<boolean>>();
 
   ngOnInit(): void {
     this.setDisabledState();
   }
 
   private setDisabledState(): void {
-    this.el.nativeElement.disabled = this.appDisable;
-    this.appDisable
-      ? this.el.nativeElement.classList.add('disabled')
-      : this.el.nativeElement.classList.remove('disabled');
+    this.emitterArrayDisabled.emit();
   }
 }

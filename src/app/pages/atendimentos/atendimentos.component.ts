@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicosService } from 'src/app/services/servicos.service';
 import { Router } from '@angular/router';
-import { ServicosDto } from 'src/app/shared/dtos/servicos.dto';
 import { TempoInterface } from 'src/app/shared/interface/tempo.interface';
-import { ServicosModel } from './model/servicos-model';
 import { HorarioService } from 'src/app/services/horario-servico.service';
 import { HorarioInterface } from 'src/app/shared/interface/horario-servico';
 import { OpcoesDropdownInterface } from './interface/opcoes-dropdown.interface';
+import ServicosInterface from 'src/app/shared/interface/servicos.interface';
 
 @Component({
   selector: 'app-atendimento',
@@ -15,8 +14,9 @@ import { OpcoesDropdownInterface } from './interface/opcoes-dropdown.interface';
 })
 export class AtendimentosComponent implements OnInit {
   public setarOpcoesDropdown: OpcoesDropdownInterface[] = [];
-  public lista: ServicosDto[] = [];
+  public lista: ServicosInterface[] = [];
   public status: number = 0;
+  public mostrar: boolean = false;
 
   constructor(
     private servicosService: ServicosService,
@@ -36,6 +36,33 @@ export class AtendimentosComponent implements OnInit {
     this.lista = await this.servicosService.listandoServicosClientesAnimais();
   }
 
+  emitterDropDownClick($event: any) {
+    const id = this.lista[$event.idx]?.idAtendimento || 0;
+
+    switch ($event.id) {
+      case 'id-edit-atendimento':
+        this.editarAtendimento(id);
+        break;
+      case 'id-init-atendimento':
+        this.iniciar(id);
+        break;
+      case 'id-finalizar-atendimento':
+        this.finalizar(id);
+        break;
+      case 'id-cancelar-atendimento':
+        this.cancelar(id);
+        break;
+      case 'id-restaurar-atendimento':
+        this.restaurar(id);
+        break;
+      case 'id-pagar-atendimento':
+        this.mostrarPagamento();
+        break;
+      default:
+        break;
+    }
+  }
+
   adicionarAtendimento() {
     this.router.navigate([`private/atendimento`]);
   }
@@ -44,98 +71,65 @@ export class AtendimentosComponent implements OnInit {
     this.router.navigate([`private/atendimento/${id}`]);
   }
 
-  async iniciarServico(servico: ServicosModel): Promise<void> {
-    for (let opcao of this.setarOpcoesDropdown) {
-      opcao.nomeOpcao === 'Finalizar Serviço' ? true : false;
-    }
+  async iniciar(id: number): Promise<void> {
+    const res = await this.servicosService.buscarPorIdAtendimento(id);
+    res.status = 2;
+    await this.servicosService.salvar(res);
 
-    const res = await this.servicosService.buscarPorIdAtendimento(
-      servico.idAtendimento!
-    );
-    for (let servico of res) {
-      servico.status = 2;
-      await this.servicosService.salvar(servico);
+    const input: HorarioInterface = {
+      idServicos: res.idServicos!,
+      horarioInicio: new Date(),
+    };
 
-      const input: HorarioInterface = {
-        idServicos: servico.idServicos!,
-        horarioInicio: new Date(),
-      };
-
-      await this.horarioService.salvar(input);
-    }
+    await this.horarioService.salvar(input);
 
     await this.inicializarListaAtendimentos();
   }
 
-  async finalizarServico(servico: ServicosModel): Promise<void> {
-    const res = await this.servicosService.buscarPorIdAtendimento(
-      servico.idAtendimento!
+  async finalizar(id: number): Promise<void> {
+    const res = await this.servicosService.buscarPorIdAtendimento(id);
+
+    const input = await this.horarioService.buscarHorarioPorIdServico(
+      res.idServicos!
     );
 
-    for (let servico of res) {
-      const input = await this.horarioService.buscarHorarioPorIdServico(
-        servico.idServicos!
-      );
+    input.horarioTermino = new Date();
+    input.horarioInicio = new Date(input.horarioInicio!);
 
-      input.horarioTermino = new Date();
-      input.horarioInicio = new Date(input.horarioInicio!);
+    const tempoServicoMilisegundos =
+      input.horarioTermino.getTime() - input.horarioInicio!.getTime();
 
-      const tempoServicoMilisegundos =
-        input.horarioTermino.getTime() - input.horarioInicio!.getTime();
+    const tempoServico = this.conversaoMilisegundos(tempoServicoMilisegundos);
 
-      const tempoServico = this.conversaoMilisegundos(tempoServicoMilisegundos);
+    res.tempo = tempoServico;
+    res.status = 3;
 
-      servico.tempo = tempoServico;
-      servico.status = 3;
-
-      await this.horarioService.salvar(input);
-      await this.servicosService.salvar(servico);
-    }
+    await this.horarioService.salvar(input);
+    await this.servicosService.salvar(res);
 
     await this.inicializarListaAtendimentos();
   }
 
-  async cancelarServico(servico: ServicosModel) {
-    for (let opcao of this.setarOpcoesDropdown) {
-      opcao.nomeOpcao === 'Restaurar Serviço' ? true : false;
-    }
-    for (let opcao of this.setarOpcoesDropdown) {
-      opcao.nomeOpcao === 'Restaurar Serviço' ? true : false;
-    }
-
-    const res = await this.servicosService.buscarPorIdAtendimento(
-      servico.idAtendimento!
-    );
-    for (let servico of res) {
-      servico.status = 0;
-      await this.servicosService.salvar(servico);
-    }
+  async cancelar(id: number) {
+    const res = await this.servicosService.buscarPorIdAtendimento(id);
+    res.status = 0;
+    await this.servicosService.salvar(res);
 
     await this.inicializarListaAtendimentos();
   }
 
-  async restaurarServico(servico: ServicosModel) {
-    for (let opcao of this.setarOpcoesDropdown) {
-      opcao.nomeOpcao === 'Iniciar Serviço' ||
-      opcao.nomeOpcao === 'Cancelar Serviço'
-        ? true
-        : false;
-    }
-    const res = await this.servicosService.buscarPorIdAtendimento(
-      servico.idAtendimento!
+  async restaurar(id: number) {
+    const res = await this.servicosService.buscarPorIdAtendimento(id);
+
+    res.status = 1;
+    await this.servicosService.salvar(res);
+
+    await this.inicializarListaAtendimentos();
+
+    const input = await this.horarioService.buscarHorarioPorIdServico(
+      res.idServicos!
     );
-
-    for (let servico of res) {
-      servico.status = 1;
-      await this.servicosService.salvar(servico);
-
-      await this.inicializarListaAtendimentos();
-
-      const input = await this.horarioService.buscarHorarioPorIdServico(
-        servico.idServicos!
-      );
-      await this.horarioService.deletarHorario(input.idHorario!);
-    }
+    await this.horarioService.deletarHorario(input.idHorario!);
   }
 
   conversaoMilisegundos(tempo: number): any {
@@ -157,5 +151,9 @@ export class AtendimentosComponent implements OnInit {
     const tempoFormatado: any = `${tempoServico.horas}:${tempoServico.minutos}:${tempoServico.segundos}`;
 
     return tempoFormatado;
+  }
+
+  mostrarPagamento() {
+    this.mostrar = true;
   }
 }

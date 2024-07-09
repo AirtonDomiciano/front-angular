@@ -1,0 +1,9 @@
+<h2 class="text-center">Configurações</h2>
+<p-tabView>
+  <p-tabPanel header="Serviço">
+    <app-configuracao-servico
+      (emitterToast)="mostrarToast($event)"
+    ></app-configuracao-servico>
+  </p-tabPanel>
+</p-tabView>
+<p-toast></p-toast>

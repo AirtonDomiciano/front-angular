@@ -12,13 +12,13 @@
   </div>
   <div class="row px-4 py-2">
     <div class="col-sm-6">
-      <app-select-servicos-animal
+      <app-select-tipo-servico
         [form]="formGroup"
-        frmName="servicoAnimal"
-        servicoAnimal="servicoAnimal"
-        (emitterProdutosServicosAnimal)="setarProdutos($event)"
-        (emitterServicoAnimal)="setarServicoSelecionado($event)"
-      ></app-select-servicos-animal>
+        frmName="tipoServico"
+        tipoServico="tipoServico"
+        (emitterProdutosTipoServico)="setarProdutos($event)"
+        (emitterTipoServico)="setarServicoSelecionado($event)"
+      ></app-select-tipo-servico>
     </div>
     <div class="col-sm-6">
       <app-multi-select-produtos

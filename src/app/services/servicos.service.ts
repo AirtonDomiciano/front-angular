@@ -4,8 +4,9 @@ import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
 import { Servicos } from '../shared/models/servicos.model';
-import { ServicosDto } from '../shared/dtos/servicos.dto';
-import { EditarServicoDto } from '../shared/dtos/editar-servico.dto';
+import ServicosInterface from '../shared/interface/servicos.interface';
+import EditarServico from '../shared/interface/editar-servico.interface';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -36,7 +37,7 @@ export class ServicosService extends BaseService {
     });
   }
 
-  async listandoServicosClientesAnimais(): Promise<Array<ServicosDto>> {
+  async listandoServicosClientesAnimais(): Promise<Array<ServicosInterface>> {
     return new Promise((resolve) => {
       this.get('/servicos/listando').subscribe((res: any) => {
         if (res.length) {
@@ -54,7 +55,7 @@ export class ServicosService extends BaseService {
     });
   }
 
-  async buscarPorIdAtendimento(id: number): Promise<Array<Servicos>> {
+  async buscarPorIdAtendimento(id: number): Promise<Servicos> {
     return new Promise((resolve) => {
       this.get(`/servicos/buscarPorIdAtendimento/${id}`).subscribe(
         (res: any) => {
@@ -64,9 +65,7 @@ export class ServicosService extends BaseService {
     });
   }
 
-  async buscarCamposEditarServico(
-    id: number
-  ): Promise<Array<EditarServicoDto>> {
+  async buscarCamposEditarServico(id: number): Promise<Array<EditarServico>> {
     return new Promise((resolve) => {
       this.get(`/servicos/camposEditar/${id}`).subscribe((res: any) => {
         resolve(res);

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelectServicosAnimalComponent } from './select-servicos-animal.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SelectTipoServicoComponent } from './select-tipo-servico.component';
 
 @NgModule({
-  declarations: [SelectServicosAnimalComponent],
+  declarations: [SelectTipoServicoComponent],
   imports: [CommonModule, DropdownModule, ReactiveFormsModule],
-  exports: [SelectServicosAnimalComponent],
+  exports: [SelectTipoServicoComponent],
 })
-export class SelectServicosAnimalModule {}
+export class SelectTipoServicoModule {}

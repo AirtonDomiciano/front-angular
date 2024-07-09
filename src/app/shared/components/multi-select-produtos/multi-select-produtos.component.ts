@@ -24,7 +24,7 @@ export class MultiSelectProdutosComponent implements OnInit {
   }
 
   async inicializarListaProdutos(): Promise<void> {
-    const res = await this.produtosService.BuscarTodosProdutos();
+    const res = await this.produtosService.BuscarTodosComEstoque();
     this.listaProdutos = res;
   }
 }

@@ -3,4 +3,6 @@ export class Atendimento {
   data!: Date;
   hora!: Date;
   descricao!: string;
+  valor?: number;
+  idFormasDePagamento?: number;
 }

@@ -8,7 +8,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import { IconModule } from '../shared/components/icon/icon.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DropdownPerfilModule } from '../shared/components/dropdown-perfil/dropdown-perfil.module';
+import { ConfiguracaoServicoModule } from '../pages/configuracao-servico/configuracao-servico.module';
 
 @NgModule({
   declarations: [SideNavComponent, TopNavComponent, FooterComponent],
@@ -19,6 +20,7 @@ import { TopNavComponent } from './components/top-nav/top-nav.component';
     FormsModule,
     BrowserAnimationsModule,
     IconModule,
+    DropdownPerfilModule,
   ],
   exports: [SideNavComponent, TopNavComponent, FooterComponent],
 })

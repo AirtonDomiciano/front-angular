@@ -11,6 +11,9 @@ import { TableModule } from 'primeng/table';
 import ptBr from '@angular/common/locales/pt';
 import { DirectiveBadgeDirective } from 'src/app/shared/directives/directive-badge/directive-badge.directive';
 import { DropdownAcoesModule } from 'src/app/shared/components/dropdown-acoes/dropdown-acoes.module';
+import { AcoesDropdownModule } from 'src/app/shared/directives/acoes-dropdown.module';
+import { DialogModule } from 'primeng/dialog';
+import { PagamentoModule } from '../pagamento/pagamento.module';
 
 registerLocaleData(ptBr);
 @NgModule({
@@ -22,6 +25,9 @@ registerLocaleData(ptBr);
     TableModule,
     CurrencyPipe,
     DropdownAcoesModule,
+    AcoesDropdownModule,
+    DialogModule,
+    PagamentoModule,
   ],
   exports: [AtendimentosComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
