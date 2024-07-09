@@ -1,0 +1,15 @@
+<form [formGroup]="form">
+  <ng-container *ngIf="listaServicos.length > 0">
+    <p-dropdown
+      [style]="{ width: '100%' }"
+      class="{{ frmClass }}"
+      formControlName="{{ frmName }}"
+      [options]="listaServicos"
+      optionLabel="nomeServico"
+      id="{{ frmName }}"
+      placeholder="Selecione o Serviço"
+      (onChange)="carregarProdutosServico()"
+      (onChange)="carregarServico()"
+    ></p-dropdown>
+  </ng-container>
+</form>

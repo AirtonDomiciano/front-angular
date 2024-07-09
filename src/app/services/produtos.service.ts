@@ -4,6 +4,7 @@ import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
 import { ProdutosInterface } from '../shared/models/produtos.interface';
+import { Produto } from '../shared/models/produtos.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,9 +17,19 @@ export class ProdutosService extends BaseService {
     super(http);
   }
 
-  async BuscarTodosProdutos(): Promise<Array<ProdutosInterface>> {
+  async BuscarTodosProdutos(): Promise<Array<Produto>> {
     return new Promise((resolve) => {
       this.get('/produtos').subscribe((res: any) => {
+        if (res) {
+          resolve(res);
+        }
+      });
+    });
+  }
+
+  async BuscarTodosComEstoque(): Promise<Array<Produto>> {
+    return new Promise((resolve) => {
+      this.get('/produtos/buscarTodosComEstoque').subscribe((res: any) => {
         if (res) {
           resolve(res);
         }
@@ -34,14 +45,6 @@ export class ProdutosService extends BaseService {
     });
   }
 
-  async CriarProduto(produto: ProdutosInterface): Promise<boolean> {
-    return new Promise((resolve) => {
-      this.post('/produtos', produto).subscribe((res: any) => {
-        resolve(res);
-      });
-    });
-  }
-
   async BuscarProdutoPorId(id: number): Promise<ProdutosInterface> {
     return new Promise((resolve) => {
       this.get(`/produtos/${id}`).subscribe((res: any) => {
@@ -51,13 +54,9 @@ export class ProdutosService extends BaseService {
       });
     });
   }
-
-  async EditarProduto(
-    id: number,
-    produto: ProdutosInterface
-  ): Promise<boolean> {
+  async salvar(produto: Produto): Promise<boolean> {
     return new Promise((resolve) => {
-      this.put(`/produtos/${id}`, produto).subscribe((res: any) => {
+      this.post('/produtos', produto).subscribe((res: any) => {
         resolve(res);
       });
     });

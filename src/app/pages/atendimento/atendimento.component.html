@@ -1,0 +1,36 @@
+<h2 class="text-center mt-2">{{ titulo }}</h2>
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
+  <div class="row px-4 py-2">
+    <div class="col-sm-6">
+      <app-input
+        frmType="date"
+        placeholder="Data"
+        frmName="data"
+        [form]="formGroup"
+      >
+      </app-input>
+    </div>
+    <div class="col-sm-6">
+      <app-input
+        frmType="time"
+        placeholder="Horário"
+        frmName="hora"
+        [form]="formGroup"
+      >
+      </app-input>
+    </div>
+  </div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-12">
+      <app-input placeholder="Descrição" frmName="descricao" [form]="formGroup">
+      </app-input>
+    </div>
+  </div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-12">
+      <button class="btn btn-primary rounded-pill mt-2 w-100" type="submit">
+        Próximo
+      </button>
+    </div>
+  </div>
+</form>

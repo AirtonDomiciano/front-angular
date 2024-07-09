@@ -1,0 +1,26 @@
+<div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown" appDisable>
+  <button
+    type="button"
+    class="btn me-2"
+    id="dropdownManual"
+    ngbDropdownAnchor
+    (focus)="myDrop.open()"
+  >
+    <span class="bi bi-three-dots-vertical"></span>
+  </button>
+  <div ngbDropdownMenu aria-labelledby="dropdownManual">
+    <ng-container *ngFor="let obj of botoesDropDown">
+      <button
+        [disabled]="obj.disabled === true"
+        ngbDropdownItem
+        (click)="btnEmitter(obj)"
+      >
+        <i
+          [ngClass]="obj.disabled === true ? 'bi bi-slash-circle' : obj.icone"
+          class="pe-2 fs-6"
+        ></i>
+        {{ obj.nome }}
+      </button>
+    </ng-container>
+  </div>
+</div>

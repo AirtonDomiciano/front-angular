@@ -1,0 +1,22 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form" #formDir="ngForm">
+  <div class="row px-4 py-2">
+    <div class="col-sm-6">
+      <app-select-tipo-servico
+        [form]="form"
+        frmName="tipoServico"
+        tipoServico="tipoServico"
+      ></app-select-tipo-servico>
+    </div>
+    <div class="col-sm-6">
+      <app-multi-select-produtos
+        frmPlaceholder="Selecione os Produtos"
+        frmName="produtos"
+        [form]="form"
+        frmProdutos="produtos"
+      ></app-multi-select-produtos>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end pe-4 pt-2">
+    <button class="btn btn-primary" type="submit">Aplicar</button>
+  </div>
+</form>

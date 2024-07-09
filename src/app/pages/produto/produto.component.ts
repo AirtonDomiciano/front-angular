@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
 import { ProdutosInterface } from 'src/app/shared/models/produtos.interface';
-import { ProdutosModel } from 'src/app/shared/models/produtos.model';
+import { ProdutosModel } from '../produtos/model/produtos.model';
 
 @Component({
   selector: 'app-produto',
@@ -52,14 +52,14 @@ export class ProdutoComponent implements OnInit {
     if (this.id) {
       if (validation) {
         input.ativo = true;
-        this.produtosService.EditarProduto(this.id, input);
+        this.produtosService.salvar(input);
         this.router.navigate([`private/produtos`]);
       }
       return;
     }
     if (validation) {
       input.ativo = true;
-      this.produtosService.CriarProduto(input);
+      this.produtosService.salvar(input);
       this.router.navigate([`private/produtos`]);
     }
   }
