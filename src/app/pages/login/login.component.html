@@ -9,7 +9,7 @@
     <div class="box bg-light rounded-right">
       <p class="message text-center mt-5 h4 mb-5">Login</p>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="px-2 py-1">
+        <div class="px-2 py-4">
           <div class="row col-sm-12">
             <app-input
               type="email"
@@ -19,16 +19,15 @@
             >
             </app-input>
           </div>
-          <div class="row py-3 col-sm-12">
-            <app-input-senha
-              frmPlaceholder="Senha"
-              frmName="password"
-              [form]="loginForm"
-            >
-            </app-input-senha>
-          </div>
         </div>
-
+        <div class="row py-2 col-sm-12 px-2">
+          <app-input-senha
+            frmPlaceholder="Senha"
+            frmName="password"
+            [form]="loginForm"
+          >
+          </app-input-senha>
+        </div>
         <div class="row px-3 py-2">
           <div class="col-sm-12">
             <div
@@ -40,7 +39,7 @@
             </div>
           </div>
         </div>
-        <div class="row px-3 py-2">
+        <div class="row px-3 py-4">
           <div class="col-sm-12">
             <button class="btn btn-primary rounded-pill w-100">Login</button>
           </div>

@@ -1,16 +1,20 @@
-<form [formGroup]="form" action="" method="get">
-  <input
-    type="{{ type }}"
-    class="{{ class }}"
-    id="{{ frmName }}"
-    placeholder="{{ placeholder }}"
-    formControlName="{{ frmName }}"
-    [ngClass]="{
-      'is-invalid': form.get(frmName)?.invalid
-    }"
-    mask="00000-000"
-    (focusout)="onLoadCep()"
-    required
-  />
-  <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div>
+<form [formGroup]="form" method="get">
+  <span class="p-float-label">
+    <input
+      pInputText
+      type="{{ type }}"
+      class="{{ class }}"
+      id="{{ frmName }}"
+      formControlName="{{ frmName }}"
+      [ngClass]="{
+        'is-invalid': form.get(frmName)?.invalid,
+        'is-valid': form.get(frmName)?.valid
+      }"
+      mask="00000-000"
+      (focusout)="onLoadCep()"
+      required
+    />
+    <label [htmlFor]="frmName">{{ placeholder }}</label>
+    <!-- <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div> -->
+  </span>
 </form>

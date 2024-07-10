@@ -1,10 +1,4 @@
-import {
-  AfterViewChecked,
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
@@ -15,22 +9,22 @@ import { UntypedFormGroup } from '@angular/forms';
 export class InputComponent implements OnInit {
   @Input() form!: UntypedFormGroup;
   @Input() frmType: string = 'text';
-  @Input() frmClass = 'form-control rounded-pill mt-2';
-  @Input() id = '';
-  @Input() frmName = '';
-  @Input() placeholder = '';
+  @Input() id: string = '';
+  @Input() frmName: string = '';
+  @Input() placeholder: string = '';
+  @Input() frmClass: string = 'form-control rounded-pill';
 
-  public isFrmError = false;
+  // public isFrmError = false;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.frmError();
+    // this.frmError();
   }
 
-  frmError() {
-    if (this.form.controls[this.frmName].invalid) {
-      this.isFrmError = true;
-    }
-  }
+  // frmError() {
+  //   if (this.form.controls[this.frmName].invalid) {
+  //     this.isFrmError = true;
+  //   }
+  // }
 }

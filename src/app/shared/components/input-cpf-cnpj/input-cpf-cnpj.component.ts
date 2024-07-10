@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class InputCpfCnpjComponent implements OnInit {
   @Input() form!: FormGroup;
   @Input() type: string = 'text';
-  @Input() class = 'form-control rounded-pill mt-2';
+  @Input() class = 'form-control rounded-pill';
   @Input() id = '';
   @Input() frmName = '';
   @Input() placeholder = '';

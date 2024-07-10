@@ -1,25 +1,14 @@
 <nav
-  class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow p-3 w-100"
+  class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow p-3"
   [ngClass]="{ 'is-expanded': isExpanded }"
 >
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="row d-flex align-items-center flex-grow-1">
-        <div class="input-group d-flex px-5">
-          <input
-            type="text"
-            class="col-sm-3 justify-content-start bg-light border-0 small"
-            placeholder="Procurar..."
-            aria-label="Search"
-            aria-describedby="basic-addon2"
-          />
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="bi bi-binoculars"></i>
-            </button>
-          </div>
+      <div class="row d-flex flex-grow-1">
+        <div class="d-flex">
+          <h1 class="text-primary px-3">PetXpert</h1>
         </div>
-      </form>
+      </div>
       <app-dropdown-perfil></app-dropdown-perfil>
     </div>
   </div>

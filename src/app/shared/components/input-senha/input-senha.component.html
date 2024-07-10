@@ -1,16 +1,21 @@
 <form [formGroup]="form" action="" method="get">
   <div class="input-wrapper" style="position: relative">
-    <input
-      type="{{ frmType }}"
-      class="{{ frmClass }}"
-      id="{{ frmName }}"
-      placeholder="{{ frmPlaceholder }}"
-      formControlName="{{ frmName }}"
-      [ngClass]="{ 'is-invalid': form.get(frmName)?.invalid }"
-      required
-    />
-    <i class="{{ icon }}" (click)="alterarEstadoInputSenha()"></i>
+    <span class="p-float-label">
+      <input
+        pInputText
+        type="{{ frmType }}"
+        class="{{ frmClass }}"
+        id="{{ frmName }}"
+        formControlName="{{ frmName }}"
+        [ngClass]="{
+          'is-invalid': form.get(frmName)?.invalid
+        }"
+        required
+      />
+      <i class="{{ icon }}" (click)="alterarEstadoInputSenha()"></i>
+      <label [htmlFor]="frmName">{{ frmPlaceholder }}</label></span
+    >
   </div>
 
-  <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div>
+  <!-- <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div> -->
 </form>
