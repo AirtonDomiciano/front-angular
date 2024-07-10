@@ -17,7 +17,6 @@ export class AtendimentosComponent implements OnInit {
   public lista: ServicosInterface[] = [];
   public status: number = 0;
   public mostrar: boolean = false;
-  public listaPequena: boolean = false;
 
   constructor(
     private servicosService: ServicosService,
@@ -35,9 +34,6 @@ export class AtendimentosComponent implements OnInit {
 
   async inicializarListaAtendimentos() {
     this.lista = await this.servicosService.listandoServicosClientesAnimais();
-    if (this.lista.length < 3) {
-      this.listaPequena = true;
-    }
   }
 
   emitterDropDownClick($event: any) {

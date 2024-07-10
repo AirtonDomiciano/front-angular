@@ -3,16 +3,10 @@ import { NgModule } from '@angular/core';
 import { DropdownAcoesComponent } from './dropdown-acoes.component';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AcoesDropdownModule } from '../../directives/acoes-dropdown.module';
-import { ListboxModule } from 'primeng/listbox';
 
 @NgModule({
   declarations: [DropdownAcoesComponent],
-  imports: [
-    CommonModule,
-    NgbDropdownModule,
-    AcoesDropdownModule,
-    ListboxModule,
-  ],
+  imports: [CommonModule, NgbDropdownModule, AcoesDropdownModule],
   exports: [DropdownAcoesComponent],
 })
 export class DropdownAcoesModule {}
