@@ -6,7 +6,8 @@
     'nome',
     'nomeServico',
     'status',
-    'valor'
+    'valor',
+    'formaPagamento'
   ]"
 >
   <ng-template pTemplate="caption">
@@ -44,6 +45,9 @@
       <th pSortableColumn="valor">
         Valor <p-sortIcon field="valor"></p-sortIcon>
       </th>
+      <th pSortableColumn="formaPagamento">
+        Forma de Pagamento <p-sortIcon field="formaPagamento"></p-sortIcon>
+      </th>
       <th pSortableColumn="status">
         Status <p-sortIcon field="status"></p-sortIcon>
       </th>
@@ -59,6 +63,12 @@
         {{ atendimento.valor | currency : "BRL" }}
       </td>
       <td>
+        <ng-container *ngIf="atendimento.formaPagamento; else nao_selecionado">
+          {{ atendimento.formaPagamento | titlecase }}</ng-container
+        >
+        <ng-template #nao_selecionado>Ainda não Selecionado</ng-template>
+      </td>
+      <td>
         <span appDirectiveBadge [status]="atendimento.status" class="badge">
         </span>
       </td>
@@ -70,31 +80,31 @@
               id: 'id-edit-atendimento',
               nome: 'Editar',
               icone: 'bi bi-pencil',
-              disabled: [0].includes(atendimento.status)
+              disabled: [0, 4].includes(atendimento.status)
             },
             {
               id: 'id-init-atendimento',
               nome: 'Iniciar',
               icone: 'bi bi-play-circle',
-              disabled: [0, 2, 3].includes(atendimento.status)
+              disabled: [0, 2, 3, 4].includes(atendimento.status)
             },
             {
               id: 'id-finalizar-atendimento',
               nome: 'Finalizar',
               icone: 'bi bi-check2-circle',
-              disabled: [0, 1, 3].includes(atendimento.status)
+              disabled: [0, 1, 3, 4].includes(atendimento.status)
             },
             {
               id: 'id-pagar-atendimento',
               nome: 'Pagar',
               icone: 'bi bi-cash-stack',
-              disabled: [0, 1, 2].includes(atendimento.status)
+              disabled: [0, 1, 2, 4].includes(atendimento.status)
             },
             {
               id: 'id-cancelar-atendimento',
               nome: 'Cancelar',
               icone: 'bi bi-x-circle',
-              disabled: [0, 2, 3].includes(atendimento.status)
+              disabled: [0, 2, 3, 4].includes(atendimento.status)
             },
             {
               id: 'id-restaurar-atendimento',
@@ -109,6 +119,5 @@
     </tr>
   </ng-template>
 </p-table>
-<p-dialog header="Pagamento" [(visible)]="mostrar" [style]="{ width: '40vw' }">
-  <app-pagamento></app-pagamento>
-</p-dialog>
+
+<app-pagamento id="pagamento" #pagamento></app-pagamento>
