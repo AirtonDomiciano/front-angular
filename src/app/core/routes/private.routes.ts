@@ -147,10 +147,10 @@ export const privateRoutes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'pagamento',
+        path: 'contas-receber',
         loadChildren: () =>
-          import('../../pages/pagamento/pagamento.module').then(
-            (m) => m.PagamentoModule
+          import('../../pages/contas-receber/contas-receber.module').then(
+            (m) => m.ContasReceberModule
           ),
         canActivate: [AuthGuardService],
       },

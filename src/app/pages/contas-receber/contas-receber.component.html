@@ -1,0 +1,107 @@
+<p-table
+  #myTab
+  [value]="lista"
+  [globalFilterFields]="[
+    'pago',
+    'nomeClientes',
+    'valor',
+    'valorPago',
+    'dataVcto',
+    'formaPagamento'
+  ]"
+>
+  <ng-template pTemplate="caption">
+    <h2 class="text-center">Contas a Receber</h2>
+    <div class="row">
+      <div class="col-sm-1 px-3">
+        <h5>Filtro:</h5>
+      </div>
+      <div class="col-sm-3">
+        <input
+          type="text"
+          pInputText
+          (input)="myTab.filterGlobal($any($event.target).value, 'contains')"
+        />
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="pago">
+        Pago <p-sortIcon field="pago"></p-sortIcon>
+      </th>
+
+      <th pSortableColumn="nomeClientes">
+        Nome do Cliente <p-sortIcon field="nomeClientes"></p-sortIcon>
+      </th>
+      <th pSortableColumn="valor">
+        Valor <p-sortIcon field="valor"></p-sortIcon>
+      </th>
+      <th pSortableColumn="valorRestante">
+        Valor Pago <p-sortIcon field="valor"></p-sortIcon>
+      </th>
+      <th pSortableColumn="dataVcto">
+        Data Vencimento <p-sortIcon field="valor"></p-sortIcon>
+      </th>
+      <th pSortableColumn="formaPagamento">
+        Forma de Pagamento <p-sortIcon field="formaPagamento"></p-sortIcon>
+      </th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-i="rowIndex" let-conta>
+    <tr>
+      <td>
+        <ng-container *ngIf="conta.pago; else nao_pago">
+          <span class="badge badge-success p-1 rounded-circle"
+            ><i class="bi bi-check"></i
+          ></span>
+        </ng-container>
+        <ng-template #nao_pago>
+          <span class="badge badge-danger p-1 rounded-circle">
+            <i class="bi bi-x"></i>
+          </span>
+        </ng-template>
+      </td>
+      <td>{{ conta.nomeClientes }}</td>
+      <td>
+        {{ conta.valor | currency : "BRL" }}
+      </td>
+      <td>
+        <ng-container *ngIf="conta.valorPago; else naoPago">{{
+          conta.valorPago | currency : "BRL"
+        }}</ng-container>
+        <ng-template #naoPago>Ainda não pago</ng-template>
+      </td>
+      <td>
+        {{ conta.dataVcto | date : "dd/MM/yyyy" }}
+      </td>
+      <td>
+        {{ conta.nomeFormaPagamento | titlecase }}
+      </td>
+      <td>
+        <app-dropdown-acoes
+          [idxList]="i"
+          [botoesDropDown]="[
+            {
+              id: 'id-pagar',
+              nome: 'Pagar',
+              icone: 'bi bi-cash-stack',
+              disabled: conta.nomeFormaPagamento === 'CARTÃO DE CRÉDITO'
+            },
+            {
+              id: 'id-pagar-parcela',
+              nome: 'Pagar Parcela',
+              icone: 'bi bi-credit-card',
+              disabled: conta.nomeFormaPagamento === 'FIADO'
+            }
+          ]"
+          (emitterDropDownClick)="emitterDropDownClick($event)"
+        ></app-dropdown-acoes>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<app-pagamento #pagamento></app-pagamento>

@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServicosService } from 'src/app/services/servicos.service';
 import { Router } from '@angular/router';
 import { TempoInterface } from 'src/app/shared/interface/tempo.interface';
 import { HorarioService } from 'src/app/services/horario-servico.service';
-import { OpcoesDropdownInterface } from 'src/app/shared/interface/opcoes-dropdown.interface';
-import HorarioServico from 'src/app/shared/model/horario-servico';
-import ServicosModel from './model/servicos.model';
+import { HorarioInterface } from 'src/app/shared/interface/horario-servico';
+import { OpcoesDropdownInterface } from './interface/opcoes-dropdown.interface';
+import ServicosInterface from 'src/app/shared/interface/servicos.interface';
+import { PagamentoComponent } from '../pagamento/pagamento.component';
 
 @Component({
   selector: 'app-atendimento',
@@ -13,10 +14,14 @@ import ServicosModel from './model/servicos.model';
   styleUrls: ['./atendimentos.component.scss'],
 })
 export class AtendimentosComponent implements OnInit {
+  @ViewChild('pagamento')
+  pagamentoComponent!: PagamentoComponent;
+
   public setarOpcoesDropdown: OpcoesDropdownInterface[] = [];
   public lista: ServicosModel[] = [];
   public status: number = 0;
   public mostrar: boolean = false;
+  public idAtendimento: number = 0;
 
   constructor(
     private servicosService: ServicosService,
@@ -56,7 +61,7 @@ export class AtendimentosComponent implements OnInit {
         this.restaurar(id);
         break;
       case 'id-pagar-atendimento':
-        this.mostrarPagamento();
+        this.mostrarPagamento($event.idx);
         break;
       default:
         break;
@@ -153,7 +158,8 @@ export class AtendimentosComponent implements OnInit {
     return tempoFormatado;
   }
 
-  mostrarPagamento() {
-    this.mostrar = true;
+  mostrarPagamento(idx: number) {
+    const { idAtendimento, valor } = this.lista[idx];
+    this.pagamentoComponent.abrirFormasPagamento({ idAtendimento, valor });
   }
 }

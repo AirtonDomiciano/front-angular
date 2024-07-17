@@ -8,6 +8,12 @@ export const RoutesArray: Routes[] = [
     childs: [],
   },
   {
+    title: 'Contas',
+    route: 'contas-receber',
+    icon: 'bi bi-cash',
+    childs: [],
+  },
+  {
     title: 'Clientes',
     route: 'clientes',
     icon: 'bi bi-person-vcard',
