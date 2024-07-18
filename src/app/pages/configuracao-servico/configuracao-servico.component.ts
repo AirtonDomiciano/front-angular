@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfiguracaoServicoModel } from './model/configuracao-servico.model';
 import { ProdutosServicoService } from 'src/app/services/produtos-servico.service';
-import ProdutosServico from 'src/app/shared/interface/produtos-servico.interface';
+import ProdutosServicoModel from './model/produtos-servico.model';
 
 @Component({
   selector: 'app-configuracao-servico',
@@ -31,7 +31,7 @@ export class ConfiguracaoServicoComponent implements OnInit {
       return;
     }
     const input: ConfiguracaoServicoModel = this.form.value;
-    const obj: ProdutosServico[] = [];
+    const obj: ProdutosServicoModel[] = [];
 
     await this.produtosServicoService.deletarPorIdTipoServico(
       input.tipoServico.idTipoServico

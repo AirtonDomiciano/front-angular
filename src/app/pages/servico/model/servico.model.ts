@@ -1,6 +1,6 @@
 import { TipoServicoInterface } from 'src/app/shared/interface/tipo-servico.interface';
-import { Produto } from 'src/app/shared/models/produtos.model';
-import { Servicos } from 'src/app/shared/models/servicos.model';
+import Produto from 'src/app/shared/model/produtos';
+import Servicos from 'src/app/shared/model/servicos';
 
 export class ServicoModel extends Servicos {
   public produtos?: Produto[];

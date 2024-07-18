@@ -1,9 +1,11 @@
 import Animais from 'src/app/shared/model/animais';
 
-export default class AnimaisModel extends Animais {
+export default class TabelaAnimais extends Animais {
+  nomeClientes: string;
   constructor() {
     super();
-    this.idClientes = 0;
+    this.idAnimal = 0;
+    this.nomeClientes = '';
     this.nome = '';
     this.divisao = '';
     this.especie = '';

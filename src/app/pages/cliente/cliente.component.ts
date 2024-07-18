@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import ClientesInterface from 'src/app/shared/models/clientes.interface';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { EnderecoInterface } from 'src/app/shared/components/input-cep/endereco.interface';
 import { ClienteModel } from './model/cliente.model';
-import { SelectCidadesService } from 'src/app/shared/services/select-cidades.service';
+import Clientes from 'src/app/shared/model/clientes';
 
 @Component({
   selector: 'app-cliente',
@@ -16,7 +15,7 @@ export class ClienteComponent {
   public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
   public model: ClienteModel = new ClienteModel();
-  public cliente!: ClientesInterface;
+  public cliente!: Clientes;
   public titulo: string = '';
 
   constructor(

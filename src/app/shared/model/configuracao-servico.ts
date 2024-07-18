@@ -1,5 +1,5 @@
 import { TipoServicoInterface } from '../interface/tipo-servico.interface';
-import { Produto } from './produtos.model';
+import Produto from './produtos';
 
 export default class ConfiguracoesServico {
   tipoServico!: TipoServicoInterface;

@@ -1,4 +1,4 @@
-export class Usuario {
+export default class Usuario {
   idUsuarios?: number;
   nome!: string;
   sobrenome!: string;
@@ -8,7 +8,6 @@ export class Usuario {
   cep!: string;
   funcao!: string;
   ativo?: boolean;
-  apis!: number[];
   localidade?: string;
   uf?: string;
   bairro?: string;

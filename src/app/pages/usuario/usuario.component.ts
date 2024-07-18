@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EnderecoInterface } from 'src/app/shared/components/input-cep/endereco.interface';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { UsuarioModel } from './model/usuario.model';
-import { Usuario } from 'src/app/shared/models/usuario';
+import Usuario from 'src/app/shared/model/usuario';
 
 @Component({
   selector: 'app-usuario',

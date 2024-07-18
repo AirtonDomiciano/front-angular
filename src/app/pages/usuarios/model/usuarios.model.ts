@@ -1,5 +1,6 @@
-import Usuarios from '../../../shared/interface/usuarios.interface';
-export class UsuariosModel extends Usuarios {
+import { Usuario } from 'src/app/shared/model/usuario';
+
+export class UsuariosModel extends Usuario {
   constructor() {
     super();
     this.idade = 0;

@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import { Servicos } from '../shared/models/servicos.model';
-import ServicosInterface from '../shared/interface/servicos.interface';
 import EditarServico from '../shared/interface/editar-servico.interface';
+import ServicosModel from '../pages/atendimentos/model/servicos.model';
+import Servicos from '../shared/model/servicos';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +37,7 @@ export class ServicosService extends BaseService {
     });
   }
 
-  async listandoServicosClientesAnimais(): Promise<Array<ServicosInterface>> {
+  async listandoServicosClientesAnimais(): Promise<Array<ServicosModel>> {
     return new Promise((resolve) => {
       this.get('/servicos/listando').subscribe((res: any) => {
         if (res.length) {

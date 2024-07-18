@@ -1,4 +1,4 @@
-import ConfiguracoesServico from 'src/app/shared/models/configuracao-servico.model';
+import ConfiguracoesServico from 'src/app/shared/model/configuracao-servico';
 
 export class ConfiguracaoServicoModel extends ConfiguracoesServico {
   constructor() {

@@ -1,4 +1,4 @@
-export class Produto {
+export default class Produto {
   idProdutos?: number;
   codigoProduto!: number;
   nomeProduto!: string;

@@ -1,8 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Cidades } from '../../interface/cidades.interface';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SelectCidadesService } from '../../services/select-cidades.service';
 import { Subscription } from 'rxjs';
+import Cidades from '../../model/cidades';
 
 @Component({
   selector: 'app-select-cidades',

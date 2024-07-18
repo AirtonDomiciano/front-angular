@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimaisService } from 'src/app/services/animais.service';
-import { AnimaisInterface } from './model/animais.interface';
+import TabelaAnimais from './model/tabela-animais.model';
 
 @Component({
   selector: 'app-animais',
@@ -9,7 +9,7 @@ import { AnimaisInterface } from './model/animais.interface';
   styleUrls: ['./animais.component.scss'],
 })
 export class AnimaisComponent implements OnInit {
-  public listarAnimais: AnimaisInterface[] = [];
+  public listarAnimais: TabelaAnimais[] = [];
 
   constructor(private router: Router, private animaisService: AnimaisService) {}
 

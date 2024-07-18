@@ -3,7 +3,6 @@ import { FormGroup } from '@angular/forms';
 import { ProdutosServicoService } from 'src/app/services/produtos-servico.service';
 import { TipoServicoInterface } from '../../interface/tipo-servico.interface';
 import { TipoServicoService } from 'src/app/services/tipo-servico.service';
-import { ProdutosDoServicoInterface } from '../../interface/produtos-atendimento.interface';
 import ProdutosServico from '../../interface/produtos-servico.interface';
 
 @Component({
@@ -49,6 +48,7 @@ export class SelectTipoServicoComponent implements OnInit {
 
     this.emitterProdutosTipoServico.emit(res);
   }
+
   async carregarServico() {
     const res: TipoServicoInterface =
       this.form.controls[this.tipoServico].value;

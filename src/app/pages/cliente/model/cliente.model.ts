@@ -1,4 +1,4 @@
-import ClientesModel from 'src/app/shared/models/clientes.model';
+import ClientesModel from 'src/app/shared/model/clientes';
 
 export class ClienteModel extends ClientesModel {
   public localidade: string;

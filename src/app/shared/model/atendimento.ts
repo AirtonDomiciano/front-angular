@@ -1,4 +1,4 @@
-export class Atendimento {
+export default class Atendimento {
   idAtendimento?: number;
   data!: Date;
   hora!: Date;

@@ -1,4 +1,4 @@
-export class Servicos {
+export default class Servicos {
   idServicos?: number;
   idAtendimento?: number;
   idUsuarios!: number;

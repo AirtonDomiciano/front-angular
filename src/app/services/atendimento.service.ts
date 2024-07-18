@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import { Atendimento } from '../shared/models/atendimento';
+import Atendimento from '../shared/model/atendimento';
 
 @Injectable({
   providedIn: 'root',

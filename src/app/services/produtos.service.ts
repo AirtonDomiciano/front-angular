@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import { ProdutosInterface } from '../shared/models/produtos.interface';
-import { Produto } from '../shared/models/produtos.model';
+import Produto from '../shared/model/produtos';
 @Injectable({
   providedIn: 'root',
 })
@@ -45,7 +44,7 @@ export class ProdutosService extends BaseService {
     });
   }
 
-  async BuscarProdutoPorId(id: number): Promise<ProdutosInterface> {
+  async BuscarProdutoPorId(id: number): Promise<Produto> {
     return new Promise((resolve) => {
       this.get(`/produtos/${id}`).subscribe((res: any) => {
         if (res) {

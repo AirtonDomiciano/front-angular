@@ -4,9 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
 import { Router } from '@angular/router';
 import AnimaisModel from '../pages/animais/model/animais.model';
-import { Animais } from '../shared/models/animais';
-import { AnimaisInterface } from '../pages/animais/model/animais.interface';
-import { AnimaisDto } from '../shared/dtos/animais.dto';
+import TabelaAnimais from '../pages/animais/model/tabela-animais.model';
+import Animais from '../shared/model/animais';
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +45,7 @@ export class AnimaisService extends BaseService {
     });
   }
 
-  async buscarTodos(): Promise<Array<AnimaisDto>> {
+  async buscarTodos(): Promise<Array<TabelaAnimais>> {
     return new Promise((resolve) => {
       this.get('/animais/animaisclientes').subscribe((res: any) => {
         resolve(res);

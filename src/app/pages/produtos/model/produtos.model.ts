@@ -1,4 +1,4 @@
-import { Produto } from 'src/app/shared/models/produtos.model';
+import Produto from 'src/app/shared/model/produtos';
 
 export class ProdutosModel extends Produto {
   constructor() {
