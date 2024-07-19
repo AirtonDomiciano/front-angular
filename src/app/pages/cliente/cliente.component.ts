@@ -5,6 +5,7 @@ import { ClientesService } from 'src/app/services/clientes.service';
 import { EnderecoInterface } from 'src/app/shared/components/input-cep/endereco.interface';
 import { ClienteModel } from './model/cliente.model';
 import Clientes from 'src/app/shared/model/clientes';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 
 @Component({
   selector: 'app-cliente',
@@ -22,7 +23,8 @@ export class ClienteComponent {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private clientesService: ClientesService
+    private clientesService: ClientesService,
+    private toast: ToastMessageService
   ) {
     this.formGroup = this.fb.group(this.model);
   }
@@ -42,6 +44,9 @@ export class ClienteComponent {
   async onSubmit() {
     const input: ClienteModel = this.formGroup.value;
     if (this.formGroup.invalid || input.idCidades! <= 0 || input.idUf! <= 0) {
+      this.toast.mostrarAviso(
+        'É preciso preencher todos os campos para prosseguir.'
+      );
       return;
     }
 
@@ -54,6 +59,11 @@ export class ClienteComponent {
     const res = await this.clientesService.salvar(input);
 
     if (res) {
+      if (this.id) {
+        this.toast.mostrarSucesso('Edição concluída!');
+      } else {
+        this.toast.mostrarSucesso('Cliente adicionado!');
+      }
       this.router.navigate([`private/clientes`]);
     }
   }

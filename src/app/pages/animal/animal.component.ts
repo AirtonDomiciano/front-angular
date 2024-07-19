@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import AnimaisModel from '../animais/model/animais.model';
 import { AnimaisService } from 'src/app/services/animais.service';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 
 @Component({
   selector: 'app-animal',
@@ -19,7 +20,8 @@ export class AnimalComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private animalService: AnimaisService
+    private animalService: AnimaisService,
+    private toast: ToastMessageService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -47,6 +49,9 @@ export class AnimalComponent implements OnInit {
 
   async onSubmit(): Promise<void> {
     if (this.formGroup.invalid) {
+      this.toast.mostrarAviso(
+        'É preciso preencher todos os campos para prosseguir.'
+      );
       return;
     }
 
@@ -57,6 +62,11 @@ export class AnimalComponent implements OnInit {
     const res = await this.animalService.salvar(input);
 
     if (res) {
+      if (this.id) {
+        this.toast.mostrarSucesso('Edição Concluída!');
+      } else {
+        this.toast.mostrarSucesso('Animal Adicionado!');
+      }
       this.router.navigate([`private/animais`]);
     }
   }

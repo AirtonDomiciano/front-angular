@@ -28,27 +28,9 @@
           >
           </app-input-senha>
         </div>
-        <div class="row px-3 py-2">
-          <div class="col-sm-12">
-            <div
-              *ngIf="wrongLogin"
-              class="alert alert-danger p-2 mt-2 mb-2"
-              role="alert"
-            >
-              <strong>E-mail ou senha incorretos!</strong>
-            </div>
-          </div>
-        </div>
         <div class="row px-3 py-4">
           <div class="col-sm-12">
             <button class="btn btn-primary rounded-pill w-100">Login</button>
-          </div>
-        </div>
-        <div *ngIf="isInvalid" class="row px-3 py-2">
-          <div class="col-sm-12">
-            <div class="alert alert-danger" role="alert">
-              Usuário ou senha não conferem.
-            </div>
           </div>
         </div>
         <div class="row px-3 py-2">
@@ -72,3 +54,5 @@
     </div>
   </div>
 </div>
+
+<!-- <app-toast-message #toast></app-toast-message> -->

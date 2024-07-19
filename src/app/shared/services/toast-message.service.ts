@@ -1,13 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Injectable, Input } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import Toast from '../../interface/toast.interface';
+import Toast from '../interface/toast.interface';
 
-@Component({
-  selector: 'app-toast-message',
-  templateUrl: './toast-message.component.html',
-  styleUrls: ['./toast-message.component.scss'],
+@Injectable({
+  providedIn: 'root',
 })
-export class ToastMessageComponent {
+export class ToastMessageService {
   constructor(private messageService: MessageService) {}
 
   mostrar(toast: Toast) {

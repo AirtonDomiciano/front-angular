@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApisService } from 'src/app/services/apis.service';
 import { ApiModel } from './model/api.model';
 import { ApisModel } from '../apis/model/apis.model';
+import { Toast } from 'primeng/toast';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 
 @Component({
   selector: 'app-api',
@@ -19,7 +21,8 @@ export class ApiComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private apisService: ApisService
+    private apisService: ApisService,
+    private toast: ToastMessageService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -48,6 +51,9 @@ export class ApiComponent implements OnInit {
 
   async onSubmit() {
     if (this.formGroup.invalid) {
+      this.toast.mostrarAviso(
+        'É preciso preencher todos os campos para prosseguir.'
+      );
       return;
     }
     const input: ApisModel = this.formGroup.value;
@@ -59,6 +65,11 @@ export class ApiComponent implements OnInit {
     const res = await this.apisService.salvar(input);
 
     if (res) {
+      if (this.id) {
+        this.toast.mostrarSucesso('Edição Concluída!');
+      } else {
+        this.toast.mostrarSucesso('API Adicionada!');
+      }
       this.router.navigate([`private/apis`]);
     }
   }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AtendimentoModel } from './model/atendimento-model';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 
 @Component({
   selector: 'app-atendimento',
@@ -20,7 +21,8 @@ export class AtendimentoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private atendimentoService: AtendimentoService
+    private atendimentoService: AtendimentoService,
+    private toast: ToastMessageService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -51,6 +53,9 @@ export class AtendimentoComponent implements OnInit {
 
   async onSubmit(): Promise<void> {
     if (this.formGroup.invalid) {
+      this.toast.mostrarAviso(
+        'É preciso preencher todos os campos para prosseguir.'
+      );
       return;
     }
     const input: AtendimentoModel = this.formGroup.value;
@@ -63,6 +68,7 @@ export class AtendimentoComponent implements OnInit {
 
     if (res) {
       if (this.id) {
+        this.toast.mostrarSucesso('Atendimento Atualizado!');
         this.router.navigate([`private/servico/${this.id}`]);
       } else {
         const atendimentos =
@@ -70,7 +76,7 @@ export class AtendimentoComponent implements OnInit {
 
         const index = atendimentos.length - 1;
         const idAtendimento = atendimentos[index].idAtendimento;
-
+        this.toast.mostrarSucesso('Novo atendimento!');
         this.router.navigate([`private/servico/${idAtendimento}`]);
       }
     }
