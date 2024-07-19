@@ -6,8 +6,7 @@
     'nome',
     'nomeServico',
     'status',
-    'valor',
-    'formaPagamento'
+    'valor'
   ]"
 >
   <ng-template pTemplate="caption">
@@ -45,9 +44,6 @@
       <th pSortableColumn="valor">
         Valor <p-sortIcon field="valor"></p-sortIcon>
       </th>
-      <th pSortableColumn="formaPagamento">
-        Forma de Pagamento <p-sortIcon field="formaPagamento"></p-sortIcon>
-      </th>
       <th pSortableColumn="status">
         Status <p-sortIcon field="status"></p-sortIcon>
       </th>
@@ -61,12 +57,6 @@
       <td>{{ atendimento.nomeServico }}</td>
       <td>
         {{ atendimento.valor | currency : "BRL" }}
-      </td>
-      <td>
-        <ng-container *ngIf="atendimento.formaPagamento; else nao_selecionado">
-          {{ atendimento.formaPagamento | titlecase }}</ng-container
-        >
-        <ng-template #nao_selecionado>Ainda não Selecionado</ng-template>
       </td>
       <td>
         <span appDirectiveBadge [status]="atendimento.status" class="badge">

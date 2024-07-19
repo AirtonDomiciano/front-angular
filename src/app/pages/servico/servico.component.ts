@@ -13,6 +13,8 @@ import ProdutosServico from 'src/app/shared/interface/produtos-servico.interface
 import { LocalService } from 'src/app/core/services/local.service';
 import ProdutosDoServicoModel from './model/produtos-do-servico.model';
 import Produto from 'src/app/shared/model/produtos';
+import { ContasReceberService } from 'src/app/services/contas-receber.service';
+import ContasReceberModel from './model/contas-receber.model';
 
 @Component({
   selector: 'app-servico',
@@ -36,6 +38,7 @@ export class ServicoComponent implements OnInit {
     private atendimentoService: AtendimentoService,
     private produtosDoServicoService: ProdutosDoServicoService,
     private tipoServicoService: TipoServicoService,
+    private contasReceberService: ContasReceberService,
     private localService: LocalService
   ) {
     delete this.model.idServicos;
@@ -147,6 +150,16 @@ export class ServicoComponent implements OnInit {
       const atendimento = await this.atendimentoService.buscarAtendimentoPorId(
         this.id
       );
+
+      const contaReceber: ContasReceberModel = {
+        idAtendimento: this.id,
+        idClientes: this.model.idClientes,
+        valor: valor,
+        valorPago: 0,
+        pago: false,
+      };
+
+      this.contasReceberService.salvar(contaReceber);
 
       atendimento.valor = valor;
 
