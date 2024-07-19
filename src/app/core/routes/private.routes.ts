@@ -146,14 +146,6 @@ export const privateRoutes: Routes = [
           ),
         canActivate: [AuthGuardService],
       },
-      {
-        path: 'contas-receber',
-        loadChildren: () =>
-          import('../../pages/contas-receber/contas-receber.module').then(
-            (m) => m.ContasReceberModule
-          ),
-        canActivate: [AuthGuardService],
-      },
       { path: '**', redirectTo: 'home' },
     ],
   },

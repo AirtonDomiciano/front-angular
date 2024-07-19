@@ -28,18 +28,6 @@ export class ContasReceberService extends BaseService {
     });
   }
 
-  async buscarContasReceber(): Promise<Array<ContasReceber>> {
-    return new Promise((resolve) => {
-      this.get('/contas-receber/listandoContasReceber').subscribe(
-        (res: any) => {
-          if (res) {
-            resolve(res);
-          }
-        }
-      );
-    });
-  }
-
   async deletar(id: number): Promise<boolean> {
     return new Promise((resolve) => {
       this.delete(`/contas-receber/${id}`).subscribe((res: any) => {
@@ -57,6 +45,20 @@ export class ContasReceberService extends BaseService {
           console.error('Não encontrado!');
         }
       });
+    });
+  }
+
+  async buscarPorIdAtendimento(id: number): Promise<ContasReceberInterface> {
+    return new Promise((resolve) => {
+      this.get(`/contas-receber/buscarPorIdAtendimento/${id}`).subscribe(
+        (res: any) => {
+          if (res) {
+            resolve(res);
+          } else {
+            console.error('Não encontrado!');
+          }
+        }
+      );
     });
   }
 
