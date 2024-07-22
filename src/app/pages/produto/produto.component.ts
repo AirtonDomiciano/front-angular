@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
 import { ProdutosModel } from '../produtos/model/produtos.model';
 import Produto from 'src/app/shared/model/produtos';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 
 @Component({
   selector: 'app-produto',
@@ -18,7 +19,8 @@ export class ProdutoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private produtosService: ProdutosService
+    private produtosService: ProdutosService,
+    private toast: ToastMessageService
   ) {
     this.formGroup = this.fb.group({
       nomeProduto: ['', Validators.required],
@@ -46,21 +48,39 @@ export class ProdutoComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  async onSubmit(): Promise<void> {
     let input: Produto = this.formGroup.value;
     const validation: boolean = this.validationSave(this.formGroup.value);
+
+    if (this.formGroup.invalid) {
+      this.toast.mostrarAviso(
+        'É preciso preencher todos os campos para prosseguir.'
+      );
+      return;
+    }
+
     if (this.id) {
       if (validation) {
         input.ativo = true;
-        this.produtosService.salvar(input);
-        this.router.navigate([`private/produtos`]);
+        const res = await this.produtosService.salvar(input);
+        if (res) {
+          this.toast.mostrarSucesso('Edição Concluída!');
+          this.router.navigate([`private/produtos`]);
+        } else {
+          this.toast.mostrarErro('Algo deu errado!');
+        }
       }
       return;
     }
     if (validation) {
       input.ativo = true;
-      this.produtosService.salvar(input);
-      this.router.navigate([`private/produtos`]);
+      const res = await this.produtosService.salvar(input);
+      if (res) {
+        this.toast.mostrarSucesso('Produto adicionado com sucesso!');
+        this.router.navigate([`private/produtos`]);
+      } else {
+        this.toast.mostrarErro('Algo deu errado!');
+      }
     }
   }
 

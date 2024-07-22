@@ -5,6 +5,7 @@ import { EnderecoInterface } from 'src/app/shared/components/input-cep/endereco.
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { UsuarioModel } from './model/usuario.model';
 import Usuario from 'src/app/shared/model/usuario';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 
 @Component({
   selector: 'app-usuario',
@@ -21,7 +22,8 @@ export class UsuarioComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private usuariosService: UsuariosService
+    private usuariosService: UsuariosService,
+    private toast: ToastMessageService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -58,6 +60,9 @@ export class UsuarioComponent implements OnInit {
 
   async onSubmit(): Promise<void> {
     if (this.formGroup.invalid) {
+      this.toast.mostrarAviso(
+        'É preciso preencher todos os campos para prosseguir.'
+      );
       return;
     }
 
@@ -71,6 +76,11 @@ export class UsuarioComponent implements OnInit {
     const res = await this.usuariosService.salvar(input);
 
     if (res) {
+      if (this.id) {
+        this.toast.mostrarSucesso('Edição Concluída!');
+      } else {
+        this.toast.mostrarSucesso('Usuário adicionado com sucesso');
+      }
       this.router.navigate([`private/usuarios`]);
     }
   }

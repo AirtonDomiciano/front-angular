@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -6,8 +6,8 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/guards/auth.service';
 import { LoginService } from 'src/app/services/login.service';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +17,13 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   public wrongLogin: boolean = false;
-  public isInvalid: boolean = false;
   public oculto: boolean = true;
 
   constructor(
     public fb: FormBuilder,
     public loginService: LoginService,
-    private router: Router
+    private router: Router,
+    public toast: ToastMessageService
   ) {}
 
   ngOnInit(): void {
@@ -37,16 +37,17 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
 
-      if (!email?.length && !password?.length) {
-        return;
-      }
-
       const res = await this.loginService.SignIn(email, password);
 
       if (!res.status) {
-        this.isInvalid = !res.status;
-        throw new Error(res.message);
+        this.toast.mostrarErro('Email ou senha inválidos.');
+      } else {
+        this.toast.mostrarSucesso('Successo!');
       }
+    } else {
+      this.toast.mostrarAviso(
+        'É preciso preencher todos os campos para prosseguir.'
+      );
     }
   }
 
