@@ -48,7 +48,7 @@ export class ProdutoComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  async onSubmit(): Promise<void> {
     let input: Produto = this.formGroup.value;
     const validation: boolean = this.validationSave(this.formGroup.value);
 
@@ -62,17 +62,25 @@ export class ProdutoComponent implements OnInit {
     if (this.id) {
       if (validation) {
         input.ativo = true;
-        this.produtosService.salvar(input);
-        this.toast.mostrarSucesso('Edição Concluída!');
-        this.router.navigate([`private/produtos`]);
+        const res = await this.produtosService.salvar(input);
+        if (res) {
+          this.toast.mostrarSucesso('Edição Concluída!');
+          this.router.navigate([`private/produtos`]);
+        } else {
+          this.toast.mostrarErro('Algo deu errado!');
+        }
       }
       return;
     }
     if (validation) {
       input.ativo = true;
-      this.produtosService.salvar(input);
-      this.toast.mostrarSucesso('Produto adicionado com sucesso!');
-      this.router.navigate([`private/produtos`]);
+      const res = await this.produtosService.salvar(input);
+      if (res) {
+        this.toast.mostrarSucesso('Produto adicionado com sucesso!');
+        this.router.navigate([`private/produtos`]);
+      } else {
+        this.toast.mostrarErro('Algo deu errado!');
+      }
     }
   }
 
