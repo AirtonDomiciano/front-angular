@@ -5,6 +5,7 @@ import { ProdutosService } from 'src/app/services/produtos.service';
 import { ProdutosModel } from '../produtos/model/produtos.model';
 import Produto from 'src/app/shared/model/produtos';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
 
 @Component({
   selector: 'app-produto',
@@ -20,7 +21,8 @@ export class ProdutoComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private produtosService: ProdutosService,
-    private toast: ToastMessageService
+    private toast: ToastMessageService,
+    private utilsService: UtilsService
   ) {
     this.formGroup = this.fb.group({
       nomeProduto: ['', Validators.required],
@@ -31,10 +33,7 @@ export class ProdutoComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.formGroup.controls['nomeProduto'].setValidators([Validators.required]);
-    this.formGroup.controls['qtdeTotal'].setValidators([Validators.required]);
-    this.formGroup.controls['imagem'].setValidators([Validators.required]);
-    this.formGroup.controls['valor'].setValidators([Validators.required]);
+    this.setarCamposRequiridos();
 
     if (this.id) {
       const res = await this.produtosService.BuscarProdutoPorId(this.id);
@@ -97,5 +96,16 @@ export class ProdutoComponent implements OnInit {
     }
 
     return validation;
+  }
+
+  setarCamposRequiridos() {
+    const campos: Array<string> = [
+      'nomeProduto',
+      'qtdeTotal',
+      'imagem',
+      'valor',
+    ];
+
+    this.utilsService.setarCamposRequeridos(campos, this.formGroup);
   }
 }
