@@ -5,7 +5,9 @@ import { FormGroup, Validators } from '@angular/forms';
   providedIn: 'root',
 })
 export class UtilsService {
-  setarCamposRequeridos(campos: Array<string>, form: FormGroup) {
+  setarCamposRequeridos<T>(model: T, form: FormGroup) {
+    const campos = Object.keys(model!);
+
     for (let campo of campos) {
       form.controls[campo].setValidators(Validators.required);
     }
