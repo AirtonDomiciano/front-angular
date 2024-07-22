@@ -1,3 +1,7 @@
 .dropdown-toggle::after {
-  display: none !important;
+  display: none;
+}
+.dropdown-acoes {
+  position: static;
+  overflow: visible;
 }
