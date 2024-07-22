@@ -91,14 +91,3 @@ export class RegistroUsuarioComponent implements OnInit {
     );
   }
 }
-
-// this.formGroup.controls['nome'].setValidators([Validators.required]);
-// this.formGroup.controls['sobrenome'].setValidators([Validators.required]);
-// this.formGroup.controls['email'].setValidators([
-//   Validators.required,
-//   Validators.email,
-// ]);
-// this.formGroup.controls['senha'].setValidators([Validators.required]);
-// this.formGroup.controls['confirmarSenha'].setValidators([
-//   Validators.required,
-// ]);
