@@ -1,4 +1,4 @@
-export class Animais {
+export default class Animais {
   idAnimal?: number;
   idClientes!: number;
   nome!: string;

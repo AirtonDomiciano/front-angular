@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BaseService } from 'src/app/services/base.service';
 import { LocalService } from 'src/app/core/services/local.service';
-import { Ufs } from '../interface/ufs.interface';
+import Ufs from '../model/ufs';
 
 @Injectable({
   providedIn: 'root',

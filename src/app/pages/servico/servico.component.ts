@@ -4,15 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ServicoModel } from './model/servico.model';
 import { ServicosService } from 'src/app/services/servicos.service';
 import { ProdutosService } from 'src/app/services/produtos.service';
-import { Produto } from 'src/app/shared/models/produtos.model';
 import { TipoServicoService } from 'src/app/services/tipo-servico.service';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
 import { ProdutosDoServicoService } from 'src/app/services/produtosdoservico.service';
-import { ProdutosDoServico } from 'src/app/shared/interface/produtosdoservico.interface';
 import { calcularValorAtendimento } from 'src/app/shared/interface/calcular-valor-atendimento.interface';
 import { TipoServicoInterface } from 'src/app/shared/interface/tipo-servico.interface';
 import ProdutosServico from 'src/app/shared/interface/produtos-servico.interface';
 import { LocalService } from 'src/app/core/services/local.service';
+import ProdutosDoServicoModel from './model/produtos-do-servico.model';
+import Produto from 'src/app/shared/model/produtos';
 
 @Component({
   selector: 'app-servico',
@@ -94,7 +94,7 @@ export class ServicoComponent implements OnInit {
 
     const input: ServicoModel = this.formGroup.value;
 
-    let produtosDoServico: ProdutosDoServico[] = [];
+    let produtosDoServico: ProdutosDoServicoModel[] = [];
 
     const produtos = input.produtos;
     delete input.produtos;
@@ -131,7 +131,7 @@ export class ServicoComponent implements OnInit {
       const idServico = servico.idServicos;
       this.darBaixaProduto(produtos!, produtosDoServico);
       for (let produto of produtos!) {
-        const obj: ProdutosDoServico = {
+        const obj: ProdutosDoServicoModel = {
           idServicos: idServico!,
           idProdutos: produto.idProdutos!,
         };
@@ -178,10 +178,10 @@ export class ServicoComponent implements OnInit {
 
   async darBaixaProduto(
     produtos: Produto[],
-    produtoDoServico: ProdutosDoServico[]
+    produtoDoServico: ProdutosDoServicoModel[]
   ): Promise<void> {
     let produtosNovos: Produto[] = produtos;
-    let produtosDoServicoRetirados: ProdutosDoServico[] = [];
+    let produtosDoServicoRetirados: ProdutosDoServicoModel[] = [];
     if (this.editar) {
       produtosNovos = produtos.filter(
         (a1) => !produtoDoServico.some((a2) => a1.idProdutos === a2.idProdutos)

@@ -1,11 +1,8 @@
-export default class RegistroUsuarioModel {
-  public nome: string;
-  public sobrenome: string;
-  public email: string;
-  public senha: string;
-  public confirmarSenha: string;
+import RegistroUsuario from './registro-usuario';
 
+export default class RegistroUsuarioModel extends RegistroUsuario {
   constructor() {
+    super();
     this.nome = '';
     this.sobrenome = '';
     this.email = '';

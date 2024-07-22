@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalService } from 'src/app/core/services/local.service';
 import { BaseService } from 'src/app/services/base.service';
-import ClientesInterface from '../models/clientes.interface';
+import Clientes from '../model/clientes';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class SelectClientesService extends BaseService {
     super(http);
   }
 
-  async BuscarTodosClientes(): Promise<Array<ClientesInterface>> {
+  async BuscarTodosClientes(): Promise<Array<Clientes>> {
     return new Promise((resolve) => {
       this.get('/clientes').subscribe((res: any) => {
         if (res) {

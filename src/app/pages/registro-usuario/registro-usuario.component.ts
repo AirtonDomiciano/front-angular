@@ -3,7 +3,7 @@ import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import RegistroUsuarioModel from './model/registro-usuario.model';
 import { RegistroUsuarioService } from 'src/app/services/registro-usuarios.service';
-import { RegistroUsuarioInterfaceInput } from './model/registro-usuario.interface';
+import RegistroUsuario from './model/registro-usuario';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -63,7 +63,7 @@ export class RegistroUsuarioComponent implements OnInit {
     }
   }
 
-  validacaoSalvar(dadosCadastro: RegistroUsuarioInterfaceInput): boolean {
+  validacaoSalvar(dadosCadastro: RegistroUsuario): boolean {
     let verificao: boolean = true;
     this.senhasSaoIguais = true;
 

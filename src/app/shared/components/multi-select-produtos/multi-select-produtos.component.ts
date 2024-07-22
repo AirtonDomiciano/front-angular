@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Produto } from '../../models/produtos.model';
 import { FormGroup } from '@angular/forms';
 import { ProdutosService } from 'src/app/services/produtos.service';
+import Produto from '../../model/produtos';
 
 @Component({
   selector: 'app-multi-select-produtos',

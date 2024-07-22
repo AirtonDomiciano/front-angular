@@ -3,9 +3,9 @@ import { ServicosService } from 'src/app/services/servicos.service';
 import { Router } from '@angular/router';
 import { TempoInterface } from 'src/app/shared/interface/tempo.interface';
 import { HorarioService } from 'src/app/services/horario-servico.service';
-import { HorarioInterface } from 'src/app/shared/interface/horario-servico';
-import { OpcoesDropdownInterface } from './interface/opcoes-dropdown.interface';
-import ServicosInterface from 'src/app/shared/interface/servicos.interface';
+import { OpcoesDropdownInterface } from 'src/app/shared/interface/opcoes-dropdown.interface';
+import HorarioServico from 'src/app/shared/model/horario-servico';
+import ServicosModel from './model/servicos.model';
 
 @Component({
   selector: 'app-atendimento',
@@ -14,7 +14,7 @@ import ServicosInterface from 'src/app/shared/interface/servicos.interface';
 })
 export class AtendimentosComponent implements OnInit {
   public setarOpcoesDropdown: OpcoesDropdownInterface[] = [];
-  public lista: ServicosInterface[] = [];
+  public lista: ServicosModel[] = [];
   public status: number = 0;
   public mostrar: boolean = false;
 
@@ -76,7 +76,7 @@ export class AtendimentosComponent implements OnInit {
     res.status = 2;
     await this.servicosService.salvar(res);
 
-    const input: HorarioInterface = {
+    const input: HorarioServico = {
       idServicos: res.idServicos!,
       horarioInicio: new Date(),
     };

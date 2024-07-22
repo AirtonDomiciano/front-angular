@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { Router } from '@angular/router';
-import ClientesInterface from 'src/app/shared/models/clientes.interface';
+import Clientes from 'src/app/shared/model/clientes';
 
 @Component({
   selector: 'app-clientes',
@@ -9,7 +9,7 @@ import ClientesInterface from 'src/app/shared/models/clientes.interface';
   styleUrls: ['./clientes.component.scss'],
 })
 export class ClientesComponent implements OnInit {
-  public listaClientes: ClientesInterface[] = [];
+  public listaClientes: Clientes[] = [];
 
   constructor(
     public clientesService: ClientesService,

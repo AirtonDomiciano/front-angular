@@ -1,4 +1,4 @@
-export default class ClientesModel {
+export default class Clientes {
   idClientes?: number;
   idCidades?: number;
   idUf?: number;

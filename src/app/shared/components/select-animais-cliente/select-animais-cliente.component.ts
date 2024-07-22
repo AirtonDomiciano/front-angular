@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Animais } from '../../models/animais';
+import { Animais } from '../../model/animais';
 import { SelectAnimaisClienteService } from '../../services/select-animais-cliente.service';
 
 @Component({

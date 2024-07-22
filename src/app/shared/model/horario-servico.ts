@@ -1,6 +1,6 @@
-export interface HorarioInterface {
+export default class HorarioServico {
   idHorario?: number;
-  idServicos: number;
+  idServicos!: number;
   horarioInicio?: Date;
   horarioTermino?: Date;
 }

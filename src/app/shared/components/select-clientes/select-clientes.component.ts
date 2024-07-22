@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import ClientesInterface from '../../models/clientes.interface';
 import { SelectClientesService } from '../../services/select-clientes.service';
+import Clientes from '../../model/clientes';
 
 @Component({
   selector: 'app-select-clientes',
@@ -15,7 +15,7 @@ export class SelectClientesComponent implements OnInit {
   @Input() frmName = '';
   @Input() placeholder = '';
 
-  public clientes!: ClientesInterface[];
+  public clientes!: Clientes[];
 
   constructor(private selectClientesService: SelectClientesService) {}
 

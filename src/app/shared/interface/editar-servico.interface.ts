@@ -3,5 +3,5 @@ export default interface EditarServico {
   idAnimal: number;
   idClientes: number;
   idProdutos?: number;
-  idServicosAnimal: number;
+  idTipoServico: number;
 }

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SelectUfsService } from '../../services/select-ufs.service';
-import { Ufs } from '../../interface/ufs.interface';
+import Ufs from '../../model/ufs';
 
 @Component({
   selector: 'app-select-ufs',

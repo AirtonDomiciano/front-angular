@@ -1,4 +1,4 @@
-export class Api {
+export default class Api {
   idApis?: number;
   nome!: string;
   url!: string;
