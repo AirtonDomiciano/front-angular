@@ -6,6 +6,7 @@ import { ApiModel } from './model/api.model';
 import { ApisModel } from '../apis/model/apis.model';
 import { Toast } from 'primeng/toast';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
 
 @Component({
   selector: 'app-api',
@@ -22,12 +23,13 @@ export class ApiComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private apisService: ApisService,
-    private toast: ToastMessageService
+    private toast: ToastMessageService,
+    private utils: UtilsService
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.formGroup = this.fb.group(this.model);
-    this.requiredForm();
+    this.validarCamposRequeridos();
 
     if (this.id > 0) {
       this.editarApi();
@@ -41,12 +43,11 @@ export class ApiComponent implements OnInit {
     this.formGroup.setValue(this.model);
   }
 
-  requiredForm() {
-    this.formGroup.controls['nome'].setValidators([Validators.required]);
-    this.formGroup.controls['url'].setValidators([Validators.required]);
-    this.formGroup.controls['rapidApiHost'].setValidators([
-      Validators.required,
-    ]);
+  validarCamposRequeridos() {
+    this.utils.setarCamposRequeridos(
+      ['nome', 'url', 'rapidApiHost'],
+      this.formGroup
+    );
   }
 
   async onSubmit() {

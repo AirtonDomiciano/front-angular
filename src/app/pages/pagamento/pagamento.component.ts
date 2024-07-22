@@ -4,6 +4,7 @@ import Pagamento from './model/pagamento.model';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
 import { ActivatedRoute } from '@angular/router';
 import { ListaFormasPagamento } from './const/formas-pagamento.const';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
 
 @Component({
   selector: 'app-pagamento',
@@ -21,7 +22,8 @@ export class PagamentoComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private atendimentoService: AtendimentoService
+    private atendimentoService: AtendimentoService,
+    private utils: UtilsService
   ) {
     this.formGroup = this.fb.group(this.model);
   }
@@ -33,7 +35,7 @@ export class PagamentoComponent implements OnInit {
   onSubmit() {}
 
   setarCamposObrigatorios() {
-    this.formGroup.controls['id'];
+    this.utils.setarCamposRequeridos(['id'], this.formGroup);
   }
 
   async buscarAtendimento() {

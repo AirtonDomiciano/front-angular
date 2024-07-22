@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import AnimaisModel from '../animais/model/animais.model';
 import { AnimaisService } from 'src/app/services/animais.service';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
 
 @Component({
   selector: 'app-animal',
@@ -21,7 +22,8 @@ export class AnimalComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private animalService: AnimaisService,
-    private toast: ToastMessageService
+    private toast: ToastMessageService,
+    private utils: UtilsService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -34,11 +36,10 @@ export class AnimalComponent implements OnInit {
   }
 
   validaCamposRequiridos() {
-    this.formGroup.controls['nome'].setValidators([Validators.required]);
-    this.formGroup.controls['idClientes'].setValidators([Validators.required]);
-    this.formGroup.controls['divisao'].setValidators([Validators.required]);
-    this.formGroup.controls['especie'].setValidators([Validators.required]);
-    this.formGroup.controls['raca'].setValidators([Validators.required]);
+    this.utils.setarCamposRequeridos(
+      ['nome', 'idClientes', 'divisao', 'especie', 'raca'],
+      this.formGroup
+    );
   }
 
   async editar(): Promise<void> {

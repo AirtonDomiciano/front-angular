@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AtendimentoModel } from './model/atendimento-model';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
 
 @Component({
   selector: 'app-atendimento',
@@ -22,7 +23,8 @@ export class AtendimentoComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private atendimentoService: AtendimentoService,
-    private toast: ToastMessageService
+    private toast: ToastMessageService,
+    private utils: UtilsService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -46,9 +48,8 @@ export class AtendimentoComponent implements OnInit {
     this.formGroup.setValue(atendimento);
   }
 
-  setarCamposRequeridos(): void {
-    this.formGroup.controls['data'].setValidators([Validators.required]);
-    this.formGroup.controls['hora'].setValidators([Validators.required]);
+  setarCamposRequeridos() {
+    this.utils.setarCamposRequeridos(['data', 'hora'], this.formGroup);
   }
 
   async onSubmit(): Promise<void> {

@@ -99,13 +99,9 @@ export class ProdutoComponent implements OnInit {
   }
 
   setarCamposRequiridos() {
-    const campos: Array<string> = [
-      'nomeProduto',
-      'qtdeTotal',
-      'imagem',
-      'valor',
-    ];
-
-    this.utilsService.setarCamposRequeridos(campos, this.formGroup);
+    this.utilsService.setarCamposRequeridos(
+      ['nomeProduto', 'qtdeTotal', 'imagem', 'valor'],
+      this.formGroup
+    );
   }
 }

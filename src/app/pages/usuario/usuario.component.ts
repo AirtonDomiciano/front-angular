@@ -6,6 +6,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { UsuarioModel } from './model/usuario.model';
 import Usuario from 'src/app/shared/model/usuario';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
 
 @Component({
   selector: 'app-usuario',
@@ -23,12 +24,13 @@ export class UsuarioComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private usuariosService: UsuariosService,
-    private toast: ToastMessageService
+    private toast: ToastMessageService,
+    private utils: UtilsService
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.formGroup = this.fb.group(this.model);
-    this.requiredForm();
+    this.validarCamposRequeridos();
 
     if (this.id > 0) {
       this.titulo = 'Editar';
@@ -44,18 +46,23 @@ export class UsuarioComponent implements OnInit {
     this.formGroup.setValue(this.model);
   }
 
-  requiredForm(): void {
-    this.formGroup.controls['nome'].setValidators([Validators.required]);
-    this.formGroup.controls['sobrenome'].setValidators([Validators.required]);
-    this.formGroup.controls['email'].setValidators([Validators.required]);
-    this.formGroup.controls['senha'].setValidators([Validators.required]);
-    this.formGroup.controls['cep'].setValidators([Validators.required]);
-    this.formGroup.controls['funcao'].setValidators([Validators.required]);
-    this.formGroup.controls['idade'].setValidators([Validators.required]);
-    this.formGroup.controls['localidade'].setValidators([Validators.required]);
-    this.formGroup.controls['uf'].setValidators([Validators.required]);
-    this.formGroup.controls['bairro'].setValidators([Validators.required]);
-    this.formGroup.controls['logradouro'].setValidators([Validators.required]);
+  validarCamposRequeridos(): void {
+    this.utils.setarCamposRequeridos(
+      [
+        'nome',
+        'sobrenome',
+        'email',
+        'senha',
+        'cep',
+        'funcao',
+        'idade',
+        'localidade',
+        'uf',
+        'bairro',
+        'logradouro',
+      ],
+      this.formGroup
+    );
   }
 
   async onSubmit(): Promise<void> {

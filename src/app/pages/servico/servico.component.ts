@@ -13,6 +13,7 @@ import ProdutosServico from 'src/app/shared/interface/produtos-servico.interface
 import { LocalService } from 'src/app/core/services/local.service';
 import ProdutosDoServicoModel from './model/produtos-do-servico.model';
 import Produto from 'src/app/shared/model/produtos';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
 
 @Component({
   selector: 'app-servico',
@@ -36,7 +37,8 @@ export class ServicoComponent implements OnInit {
     private atendimentoService: AtendimentoService,
     private produtosDoServicoService: ProdutosDoServicoService,
     private tipoServicoService: TipoServicoService,
-    private localService: LocalService
+    private localService: LocalService,
+    private utils: UtilsService
   ) {
     delete this.model.idServicos;
     delete this.model.idAtendimento;
@@ -83,8 +85,10 @@ export class ServicoComponent implements OnInit {
   }
 
   setarCamposRequiridos() {
-    this.formGroup.controls['tipoServico'].setValidators([Validators.required]);
-    this.formGroup.controls['produtos'].setValidators([Validators.required]);
+    this.utils.setarCamposRequeridos(
+      ['tipoServico', 'produtos'],
+      this.formGroup
+    );
   }
 
   async onSubmit(): Promise<void> {

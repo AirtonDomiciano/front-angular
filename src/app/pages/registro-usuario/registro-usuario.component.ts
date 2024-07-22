@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import RegistroUsuarioModel from './model/registro-usuario.model';
 import { RegistroUsuarioService } from 'src/app/services/registro-usuarios.service';
 import RegistroUsuario from './model/registro-usuario';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -11,29 +12,20 @@ import RegistroUsuario from './model/registro-usuario';
   styleUrls: ['./registro-usuario.component.scss'],
 })
 export class RegistroUsuarioComponent implements OnInit {
-  public formGroup!: UntypedFormGroup;
+  public formGroup!: FormGroup;
   public senhasSaoIguais: boolean = true;
   public ocultar: boolean = true;
   public model: RegistroUsuarioModel = new RegistroUsuarioModel();
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public registroUsuarioService: RegistroUsuarioService
+    private registroUsuarioService: RegistroUsuarioService,
+    private utils: UtilsService
   ) {}
 
   ngOnInit(): void {
     this.formGroup = this.fb.group(this.model);
-
-    this.formGroup.controls['nome'].setValidators([Validators.required]);
-    this.formGroup.controls['sobrenome'].setValidators([Validators.required]);
-    this.formGroup.controls['email'].setValidators([
-      Validators.required,
-      Validators.email,
-    ]);
-    this.formGroup.controls['senha'].setValidators([Validators.required]);
-    this.formGroup.controls['confirmarSenha'].setValidators([
-      Validators.required,
-    ]);
   }
 
   async onSubmit() {
@@ -91,4 +83,22 @@ export class RegistroUsuarioComponent implements OnInit {
   mostrarSenha() {
     this.ocultar = !this.ocultar;
   }
+
+  validarCamposRequeridos() {
+    this.utils.setarCamposRequeridos(
+      ['nome', 'sobrenome', 'email', 'senha', 'confirmarSenha'],
+      this.formGroup
+    );
+  }
 }
+
+// this.formGroup.controls['nome'].setValidators([Validators.required]);
+// this.formGroup.controls['sobrenome'].setValidators([Validators.required]);
+// this.formGroup.controls['email'].setValidators([
+//   Validators.required,
+//   Validators.email,
+// ]);
+// this.formGroup.controls['senha'].setValidators([Validators.required]);
+// this.formGroup.controls['confirmarSenha'].setValidators([
+//   Validators.required,
+// ]);
