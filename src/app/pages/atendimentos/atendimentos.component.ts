@@ -7,6 +7,10 @@ import { HorarioInterface } from 'src/app/shared/interface/horario-servico';
 import { OpcoesDropdownInterface } from './interface/opcoes-dropdown.interface';
 import ServicosInterface from 'src/app/shared/interface/servicos.interface';
 import { PagamentoComponent } from '../pagamento/pagamento.component';
+import { ContasReceberService } from 'src/app/services/contas-receber.service';
+import { ParcelasService } from 'src/app/services/parcelas.service';
+import ContasReceberModel from './model/contas-receber.model';
+import { AtendimentoService } from 'src/app/services/atendimento.service';
 
 @Component({
   selector: 'app-atendimento',
@@ -24,8 +28,11 @@ export class AtendimentosComponent implements OnInit {
   public idAtendimento: number = 0;
 
   constructor(
+    private atendimentoService: AtendimentoService,
     private servicosService: ServicosService,
     private horarioService: HorarioService,
+    private contasReceberService: ContasReceberService,
+    private parcelasService: ParcelasService,
     private router: Router
   ) {}
 
@@ -120,11 +127,19 @@ export class AtendimentosComponent implements OnInit {
     res.status = 0;
     await this.servicosService.salvar(res);
 
+    await this.contasReceberService.deletarPorIdAtendimento(id);
+
     await this.inicializarListaAtendimentos();
   }
 
   async restaurar(id: number) {
+    console.log(id);
+
     const res = await this.servicosService.buscarPorIdAtendimento(id);
+
+    const atendimento = await this.atendimentoService.buscarAtendimentoPorId(
+      id
+    );
 
     res.status = 1;
     await this.servicosService.salvar(res);
@@ -135,6 +150,29 @@ export class AtendimentosComponent implements OnInit {
       res.idServicos!
     );
     await this.horarioService.deletarHorario(input.idHorario!);
+
+    let contaReceber;
+
+    if (res.status !== 0) {
+      contaReceber = await this.contasReceberService.buscarPorIdAtendimento(id);
+    }
+
+    if (contaReceber) {
+      await this.contasReceberService.deletarPorIdAtendimento(id);
+      await this.parcelasService.deletarPorIdContasReceber(
+        contaReceber.idContasReceber!
+      );
+    }
+
+    const salvar: ContasReceberModel = {
+      idAtendimento: id,
+      idClientes: res.idClientes,
+      valor: atendimento.valor!,
+      valorPago: 0,
+      pago: false,
+    };
+
+    await this.contasReceberService.salvar(salvar);
   }
 
   conversaoMilisegundos(tempo: number): any {
@@ -158,8 +196,12 @@ export class AtendimentosComponent implements OnInit {
     return tempoFormatado;
   }
 
-  mostrarPagamento(idx: number) {
+  async mostrarPagamento(idx: number) {
     const { idAtendimento, valor } = this.lista[idx];
-    this.pagamentoComponent.abrirFormasPagamento({ idAtendimento, valor });
+
+    this.pagamentoComponent.abrirFormasPagamento({
+      idAtendimento,
+      valor,
+    });
   }
 }

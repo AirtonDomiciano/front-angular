@@ -5,7 +5,7 @@ export default class ParcelasModel extends Parcelas {
     super();
     this.idParcelas = 0;
     this.idContasReceber = 0;
-    this.idFormasPagamento = 0;
+    this.idFormasDePagamento = 0;
     this.valorParcela = 0;
     this.dataPgto = new Date();
   }
