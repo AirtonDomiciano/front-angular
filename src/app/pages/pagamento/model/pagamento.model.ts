@@ -1,3 +1,3 @@
 export default class PagamentoModel {
-  valor = 0;
+  valor: number = 0;
 }

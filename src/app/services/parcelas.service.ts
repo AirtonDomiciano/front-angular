@@ -35,6 +35,16 @@ export class ParcelasService extends BaseService {
     });
   }
 
+  async deletarPorIdContasReceber(id: number): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.delete(`/parcelas/deletarPorIdContasReceber/${id}`).subscribe(
+        (res: any) => {
+          resolve(res);
+        }
+      );
+    });
+  }
+
   async buscarPorId(id: number): Promise<Parcelas> {
     return new Promise((resolve) => {
       this.get(`/parcelas/${id}`).subscribe((res: any) => {
@@ -44,6 +54,20 @@ export class ParcelasService extends BaseService {
           console.error('Ero!');
         }
       });
+    });
+  }
+
+  async buscarPorIdContasReceber(id: number): Promise<Parcelas> {
+    return new Promise((resolve) => {
+      this.get(`/parcelas/buscarPorIdContasReceber/${id}`).subscribe(
+        (res: any) => {
+          if (res) {
+            resolve(res);
+          } else {
+            console.error('Ero!');
+          }
+        }
+      );
     });
   }
 

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import FormaPagamento from 'src/app/shared/interface/formas-pagamento.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ContasReceberService } from 'src/app/services/contas-receber.service';
-import { AtendimentoService } from 'src/app/services/atendimento.service';
 import { ServicosService } from 'src/app/services/servicos.service';
 import { ListaFormasPagamento } from './const/formas-pagamento.const';
 import PagamentoModel from './model/pagamento.model';
@@ -32,6 +31,8 @@ export class PagamentoComponent implements OnInit {
     idFormasDePagamento: 0,
     nomeFormaPagamento: '',
   };
+  public valorValido: boolean = true;
+  public pagarValorRestante: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -44,9 +45,16 @@ export class PagamentoComponent implements OnInit {
     this.formGroup = this.fb.group(this.model);
   }
 
-  abrirFormasPagamento(pagamentos: Pagamentos) {
+  onHide() {
+    this.formaSelecionada = { idFormasDePagamento: 0, nomeFormaPagamento: '' };
+  }
+
+  async abrirFormasPagamento(pagamentos: Pagamentos) {
+    const contaReceber = await this.contasReceberService.buscarPorIdAtendimento(
+      pagamentos.idAtendimento
+    );
     this.idAtendimento = pagamentos.idAtendimento;
-    this.valor = pagamentos.valor;
+    this.valor = pagamentos.valor - contaReceber.valorPago!;
     this.mostrar = true;
   }
 
@@ -59,23 +67,42 @@ export class PagamentoComponent implements OnInit {
       this.idAtendimento
     );
 
-    const parcelas: ParcelasModel = {
+    const parcela: ParcelasModel = {
       idContasReceber: contaReceber.idContasReceber!,
-      idFormasPagamento: this.formaSelecionada.idFormasDePagamento,
+      idFormasDePagamento: this.formaSelecionada.idFormasDePagamento,
       valorParcela: input.valor,
       dataPgto: new Date(),
     };
 
-    servico.status = 4;
+    const valorPago = contaReceber.valorPago! + input.valor;
+    contaReceber.valorPago! = valorPago;
 
-    contaReceber.valorPago! += this.valor;
-    if (contaReceber.valor === contaReceber.valorPago) {
+    if (contaReceber.valor === valorPago) {
       contaReceber.pago = true;
+      contaReceber.dataPgto = new Date();
+      servico.status = 4;
     }
 
     const res = await Promise.all([
-      this.contasReceberService.salvar(contaReceber),
       this.servicosService.salvar(servico),
+      this.contasReceberService.salvar(contaReceber),
+      this.parcelasService.salvar(parcela),
     ]);
+
+    if (res) {
+      alert('Foi');
+    }
+  }
+
+  emitterValorVerificado(event: boolean) {
+    this.valorValido = event;
+  }
+
+  setarValorRestante() {
+    if (this.pagarValorRestante) {
+      this.formGroup.controls['valor'].setValue(this.valor);
+      return;
+    }
+    this.formGroup.controls['valor'].setValue(0);
   }
 }

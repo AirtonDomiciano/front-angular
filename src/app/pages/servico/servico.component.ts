@@ -15,6 +15,7 @@ import ProdutosDoServicoModel from './model/produtos-do-servico.model';
 import Produto from 'src/app/shared/model/produtos';
 import { ContasReceberService } from 'src/app/services/contas-receber.service';
 import ContasReceberModel from './model/contas-receber.model';
+import { ParcelasService } from 'src/app/services/parcelas.service';
 
 @Component({
   selector: 'app-servico',
@@ -39,6 +40,7 @@ export class ServicoComponent implements OnInit {
     private produtosDoServicoService: ProdutosDoServicoService,
     private tipoServicoService: TipoServicoService,
     private contasReceberService: ContasReceberService,
+    private parcelasService: ParcelasService,
     private localService: LocalService
   ) {
     delete this.model.idServicos;
@@ -83,6 +85,18 @@ export class ServicoComponent implements OnInit {
     this.model.produtos = produtosFiltrados;
 
     this.formGroup.setValue(this.model);
+
+    const contaReceber = await this.contasReceberService.buscarPorIdAtendimento(
+      this.id
+    );
+    const parcelas = await this.parcelasService.buscarPorIdContasReceber(
+      contaReceber.idContasReceber!
+    );
+
+    if (parcelas) {
+      await this.parcelasService.deletar(contaReceber.idContasReceber!);
+    }
+    await this.contasReceberService.deletarPorIdAtendimento(this.id);
   }
 
   setarCamposRequiridos() {
@@ -153,17 +167,17 @@ export class ServicoComponent implements OnInit {
 
       const contaReceber: ContasReceberModel = {
         idAtendimento: this.id,
-        idClientes: this.model.idClientes,
+        idClientes: input.idClientes,
         valor: valor,
         valorPago: 0,
         pago: false,
       };
 
-      this.contasReceberService.salvar(contaReceber);
+      await this.contasReceberService.salvar(contaReceber);
 
       atendimento.valor = valor;
 
-      this.atendimentoService.salvar(atendimento);
+      await this.atendimentoService.salvar(atendimento);
 
       this.router.navigate([`private/atendimentos`]);
     }
@@ -240,6 +254,8 @@ export class ServicoComponent implements OnInit {
       valor += produto.valor;
     }
 
-    return valor;
+    const valorArredondado = Number(valor.toFixed(2));
+
+    return valorArredondado;
   }
 }
