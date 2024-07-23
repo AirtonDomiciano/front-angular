@@ -2,13 +2,7 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
   <div class="row px-4 py-2">
     <div class="col-sm-6">
-      <app-input
-        frmType="date"
-        placeholder="Data"
-        frmName="data"
-        [form]="formGroup"
-      >
-      </app-input>
+      <app-input-data frmName="data" [form]="formGroup"> </app-input-data>
     </div>
     <div class="col-sm-6">
       <app-input

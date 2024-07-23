@@ -1,0 +1,15 @@
+<form [formGroup]="form" method="get">
+  <span class="p-float-label">
+    <input
+      pInputText
+      id="{{ frmName }}"
+      class="{{ frmClass }}"
+      type="{{ frmType }}"
+      formControlName="{{ frmName }}"
+      [ngClass]="{
+        'is-invalid': form.get(frmName)?.invalid,
+        'is-valid': form.get(frmName)?.valid
+      }"
+    />
+  </span>
+</form>

@@ -6,6 +6,7 @@ import { InputModule } from 'src/app/shared/components/input/input.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { MultiSelectProdutosModule } from 'src/app/shared/components/multi-select-produtos/multi-select-produtos.module';
+import { InputDataModule } from '../../shared/components/input-data/input-data.module';
 
 @NgModule({
   declarations: [AtendimentoComponent],
@@ -17,6 +18,7 @@ import { MultiSelectProdutosModule } from 'src/app/shared/components/multi-selec
     FormsModule,
     MultiSelectModule,
     MultiSelectProdutosModule,
+    InputDataModule,
   ],
   exports: [AtendimentoComponent],
 })
