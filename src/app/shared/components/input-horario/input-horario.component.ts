@@ -10,7 +10,8 @@ export class InputHorarioComponent {
   @Input() form!: FormGroup;
   @Input() id: string = '';
   @Input() frmName: string = '';
-  @Input() placeholder: string = 'Horário';
+  @Input() frmPlaceholder: string = 'Horário';
   @Input() frmClass: string = 'form-control rounded-pill';
+
   public horario!: Date;
 }

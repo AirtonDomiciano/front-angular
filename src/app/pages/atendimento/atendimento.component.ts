@@ -60,7 +60,6 @@ export class AtendimentoComponent implements OnInit {
     }
     const input: AtendimentoModel = this.formGroup.value;
 
-    console.log(input)
     if (this.id) {
       input.idAtendimento = this.id;
     }
