@@ -2,18 +2,18 @@
   <span class="p-float-label">
     <input
       pInputText
-      [(ngModel)]="date"
+      [(ngModel)]="horario"
       id="{{ frmName }}"
       class="{{ frmClass }}"
       type="text"
-      onfocus="this.type='date'"
-      onblur="if (!this.value) this.type='text'"
       formControlName="{{ frmName }}"
+      onfocus="this.type='time'"
+      onblur="if(!this.horario) this.type='text'"
       [ngClass]="{
         'is-invalid': form.get(frmName)?.invalid,
         'is-valid': form.get(frmName)?.valid
       }"
     />
-    <label [htmlFor]="frmName">{{ frmPlaceholder }}</label>
+    <label [htmlFor]="frmName">{{ placeholder }}</label>
   </span>
 </form>

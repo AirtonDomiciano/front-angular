@@ -1,4 +1,4 @@
-import Atendimento from "src/app/shared/model/atendimento";
+import Atendimento from 'src/app/shared/model/atendimento';
 
 export class AtendimentoModel extends Atendimento {
   constructor() {

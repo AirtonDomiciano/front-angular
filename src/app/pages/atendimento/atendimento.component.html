@@ -1,17 +1,11 @@
-<h2 class="text-center mt-2">{{ titulo }}</h2>
+<h2 class="text-center mt-2 py-2">{{ titulo }}</h2>
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
   <div class="row px-4 py-2">
     <div class="col-sm-6">
       <app-input-data frmName="data" [form]="formGroup"> </app-input-data>
     </div>
     <div class="col-sm-6">
-      <app-input
-        frmType="time"
-        placeholder="Horário"
-        frmName="hora"
-        [form]="formGroup"
-      >
-      </app-input>
+      <app-input-horario frmName="hora" [form]="formGroup"> </app-input-horario>
     </div>
   </div>
   <div class="row px-4 py-3">

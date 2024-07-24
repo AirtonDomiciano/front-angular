@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { MultiSelectProdutosModule } from 'src/app/shared/components/multi-select-produtos/multi-select-produtos.module';
 import { InputDataModule } from '../../shared/components/input-data/input-data.module';
+import { InputHorarioModule } from 'src/app/shared/components/input-horario/input-horario.module';
 
 @NgModule({
   declarations: [AtendimentoComponent],
@@ -19,6 +20,7 @@ import { InputDataModule } from '../../shared/components/input-data/input-data.m
     MultiSelectModule,
     MultiSelectProdutosModule,
     InputDataModule,
+    InputHorarioModule,
   ],
   exports: [AtendimentoComponent],
 })

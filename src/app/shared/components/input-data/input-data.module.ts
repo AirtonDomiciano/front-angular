@@ -1,13 +1,19 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { InputTextModule } from 'primeng/inputtext';
 import { InputDataComponent } from './input-data.component';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [InputDataComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, InputTextModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CalendarModule,
+    InputTextModule,
+  ],
   exports: [InputDataComponent],
 })
 export class InputDataModule {}
