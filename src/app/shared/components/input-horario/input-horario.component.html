@@ -1,0 +1,19 @@
+<form [formGroup]="form" method="get">
+  <span class="p-float-label">
+    <input
+      pInputText
+      [(ngModel)]="horario"
+      id="{{ frmName }}"
+      class="{{ frmClass }}"
+      type="text"
+      formControlName="{{ frmName }}"
+      onfocus="this.type='time'"
+      onblur="if(!this.horario) this.type='text'"
+      [ngClass]="{
+        'is-invalid': form.get(frmName)?.invalid,
+        'is-valid': form.get(frmName)?.valid
+      }"
+    />
+    <label [htmlFor]="frmName">{{ frmPlaceholder }}</label>
+  </span>
+</form>
