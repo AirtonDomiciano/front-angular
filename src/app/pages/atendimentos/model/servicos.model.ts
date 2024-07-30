@@ -5,7 +5,8 @@ export default class ServicosModel extends Servicos {
   nomeAnimal: string;
   especie: string;
   nomeServico: string;
-  valorServico: number;
+  valor: number;
+  valorPago: number;
   constructor() {
     super();
     this.idServicos = 0;
@@ -15,6 +16,7 @@ export default class ServicosModel extends Servicos {
     this.especie = '';
     this.nomeServico = '';
     this.status = 0;
-    this.valorServico = 0;
+    this.valor = 0;
+    this.valorPago = 0;
   }
 }

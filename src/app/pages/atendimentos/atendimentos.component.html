@@ -6,7 +6,8 @@
     'nome',
     'nomeServico',
     'status',
-    'valor'
+    'valor',
+    'valorPago'
   ]"
 >
   <ng-template pTemplate="caption">
@@ -44,6 +45,9 @@
       <th pSortableColumn="valor">
         Valor <p-sortIcon field="valor"></p-sortIcon>
       </th>
+      <th pSortableColumn="valorPago">
+        Valor Pago <p-sortIcon field="valorPago"></p-sortIcon>
+      </th>
       <th pSortableColumn="status">
         Status <p-sortIcon field="status"></p-sortIcon>
       </th>
@@ -59,6 +63,9 @@
         {{ atendimento.valor | currency : "BRL" }}
       </td>
       <td>
+        {{ atendimento.valorPago | currency : "BRL" }}
+      </td>
+      <td>
         <span appDirectiveBadge [status]="atendimento.status" class="badge">
         </span>
       </td>
@@ -70,7 +77,7 @@
               id: 'id-edit-atendimento',
               nome: 'Editar',
               icone: 'bi bi-pencil',
-              disabled: [0, 4].includes(atendimento.status)
+              disabled: [0, 3, 4].includes(atendimento.status)
             },
             {
               id: 'id-init-atendimento',
@@ -88,7 +95,7 @@
               id: 'id-pagar-atendimento',
               nome: 'Pagar',
               icone: 'bi bi-cash-stack',
-              disabled: [0, 1, 2].includes(atendimento.status)
+              disabled: [0, 1, 2, 4].includes(atendimento.status)
             },
             {
               id: 'id-cancelar-atendimento',

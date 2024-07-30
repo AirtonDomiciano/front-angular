@@ -1,5 +1,4 @@
 <p-dialog
-  (onHide)="onHide()"
   [(visible)]="mostrar"
   [style]="{ width: 'auto', 'min-width': '40vw' }"
 >
@@ -8,7 +7,9 @@
       <p class="mb-0 fs-5">Valor a pagar</p>
       <h1>{{ valor | currency : "BRL" }}</h1>
 
-      <div class="text-center mt-4"><p>Selecione a forma de pagamento:</p></div>
+      <div class="text-center mt-4">
+        <p>Selecione a forma de pagamento:</p>
+      </div>
       <div class="d-flex justify-content-center mt-0">
         <p-listbox
           [options]="formasDePagamento"
@@ -28,47 +29,33 @@
     </div>
     <ng-container *ngIf="formaSelecionada.idFormasDePagamento">
       <p-divider layout="vertical"></p-divider>
-      <div class="d-flex flex-column">
-        <h4>Selecione o valor a pagar</h4>
-        <div class="row mt-4">
-          <div class="col-sm-12">
-            <app-input-currency
-              [form]="formGroup"
-              placeholder="Valor"
-              frmName="valor"
-              [valor]="valor"
-              (emitterValorVerificado)="emitterValorVerificado($event)"
-            ></app-input-currency>
+      <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
+        <div class="d-flex flex-column">
+          <h4>Selecione o valor a pagar</h4>
+          <div class="row mt-4">
+            <div class="col-sm-12">
+              <app-input-currency
+                [form]="formGroup"
+                placeholder="Valor"
+                frmName="valor"
+                [valor]="valor"
+                (emitterValorVerificado)="emitterValorVerificado($event)"
+              ></app-input-currency>
+            </div>
           </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-sm-12">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                [(ngModel)]="pagarValorRestante"
-                (change)="setarValorRestante()"
-                id="pagarValorRestante"
-              />
-              <label class="form-check-label" for="pagarValorRestante">
-                Pagar Valor Restante
-              </label>
+          <div class="row">
+            <div class="col-sm-12">
+              <button
+                [ngClass]="{ disabled: !valorValido }"
+                class="btn btn-primary rounded-pill mt-3 w-100"
+                (click)="onSubmit()"
+              >
+                Concluir Pagamento
+              </button>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <button
-              [ngClass]="{ disabled: !valorValido }"
-              class="btn btn-primary rounded-pill mt-3 w-100"
-              (click)="onSubmit()"
-            >
-              Concluir Pagamento
-            </button>
-          </div>
-        </div>
-      </div>
+      </form>
     </ng-container>
   </div>
 </p-dialog>

@@ -89,9 +89,14 @@ export class ServicoComponent implements OnInit {
     const contaReceber = await this.contasReceberService.buscarPorIdAtendimento(
       this.id
     );
-    const parcelas = await this.parcelasService.buscarPorIdContasReceber(
-      contaReceber.idContasReceber!
-    );
+
+    let parcelas;
+
+    if (res.status > 2) {
+      parcelas = await this.parcelasService.buscarPorIdContasReceber(
+        contaReceber.idContasReceber!
+      );
+    }
 
     if (parcelas) {
       await this.parcelasService.deletar(contaReceber.idContasReceber!);

@@ -3,14 +3,15 @@ import { ServicosService } from 'src/app/services/servicos.service';
 import { Router } from '@angular/router';
 import { TempoInterface } from 'src/app/shared/interface/tempo.interface';
 import { HorarioService } from 'src/app/services/horario-servico.service';
-import { HorarioInterface } from 'src/app/shared/interface/horario-servico';
-import { OpcoesDropdownInterface } from './interface/opcoes-dropdown.interface';
-import ServicosInterface from 'src/app/shared/interface/servicos.interface';
+import HorarioServicoModel from './model/horario-servico.model';
+import { OpcoesDropdownInterface } from 'src/app/shared/interface/opcoes-dropdown.interface';
 import { PagamentoComponent } from '../pagamento/pagamento.component';
 import { ContasReceberService } from 'src/app/services/contas-receber.service';
 import { ParcelasService } from 'src/app/services/parcelas.service';
 import ContasReceberModel from './model/contas-receber.model';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
+import ServicosModel from './model/servicos.model';
+import HorarioServico from 'src/app/shared/model/horario-servico';
 
 @Component({
   selector: 'app-atendimento',
@@ -133,35 +134,28 @@ export class AtendimentosComponent implements OnInit {
   }
 
   async restaurar(id: number) {
-    console.log(id);
-
     const res = await this.servicosService.buscarPorIdAtendimento(id);
 
     const atendimento = await this.atendimentoService.buscarAtendimentoPorId(
       id
     );
 
-    res.status = 1;
-    await this.servicosService.salvar(res);
-
-    await this.inicializarListaAtendimentos();
-
-    const input = await this.horarioService.buscarHorarioPorIdServico(
-      res.idServicos!
-    );
-    await this.horarioService.deletarHorario(input.idHorario!);
-
+    let horario;
     let contaReceber;
 
     if (res.status !== 0) {
       contaReceber = await this.contasReceberService.buscarPorIdAtendimento(id);
+      horario = await this.horarioService.buscarHorarioPorIdServico(
+        res.idServicos!
+      );
     }
 
-    if (contaReceber) {
-      await this.contasReceberService.deletarPorIdAtendimento(id);
+    if (contaReceber && horario) {
       await this.parcelasService.deletarPorIdContasReceber(
         contaReceber.idContasReceber!
       );
+      await this.contasReceberService.deletarPorIdAtendimento(id);
+      await this.horarioService.deletarHorario(horario.idHorario!);
     }
 
     const salvar: ContasReceberModel = {
@@ -172,7 +166,11 @@ export class AtendimentosComponent implements OnInit {
       pago: false,
     };
 
+    res.status = 1;
+    await this.servicosService.salvar(res);
     await this.contasReceberService.salvar(salvar);
+
+    await this.inicializarListaAtendimentos();
   }
 
   conversaoMilisegundos(tempo: number): any {
@@ -198,10 +196,16 @@ export class AtendimentosComponent implements OnInit {
 
   async mostrarPagamento(idx: number) {
     const { idAtendimento, valor } = this.lista[idx];
+    const contaReceber = await this.contasReceberService.buscarPorIdAtendimento(
+      idAtendimento!
+    );
+
+    const valorRestante = valor - contaReceber.valorPago!;
+    const valorArredondado = parseFloat(valorRestante.toFixed(2));
 
     this.pagamentoComponent.abrirFormasPagamento({
       idAtendimento,
-      valor,
+      valorRestante: valorArredondado,
     });
   }
 }
