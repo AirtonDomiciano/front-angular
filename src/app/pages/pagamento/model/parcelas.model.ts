@@ -1,4 +1,4 @@
-import Parcelas from 'src/app/shared/models/parcelas';
+import Parcelas from 'src/app/shared/model/parcelas';
 
 export default class ParcelasModel extends Parcelas {
   constructor() {

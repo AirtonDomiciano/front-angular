@@ -11,5 +11,4 @@ export const ListaFormasPagamento = [
   },
   { idFormasDePagamento: 3, nome: 'Dinheiro', icone: 'bi bi-cash-stack' },
   { idFormasDePagamento: 4, nome: 'Pix', icone: 'bi bi-x-diamond' },
-  // { idFormasDePagamento: 5, nome: 'Fiado', icone: 'bi bi-folder-plus' },
 ];

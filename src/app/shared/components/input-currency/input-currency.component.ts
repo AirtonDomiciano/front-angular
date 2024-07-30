@@ -16,17 +16,17 @@ export class InputCurrencyComponent {
   @Input() id = '';
   @Input() frmName: string = '';
   @Input() placeholder = '';
-  @Input() valor!: number;
+  @Input() valor: number = 0;
 
   public valorValido: boolean = true;
 
   verificaValor() {
     let valorInput = this.form.controls[this.frmName].value;
 
-    if (valorInput > this.valor) {
-      this.valorValido = false;
-    } else {
+    if (valorInput <= this.valor) {
       this.valorValido = true;
+    } else {
+      this.valorValido = false;
     }
     this.emitterValorVerificado.emit(this.valorValido);
   }

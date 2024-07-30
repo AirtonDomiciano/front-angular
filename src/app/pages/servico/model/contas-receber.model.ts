@@ -1,4 +1,4 @@
-import ContasReceber from 'src/app/shared/models/contas-receber';
+import ContasReceber from 'src/app/shared/model/contas-receber';
 
 export default class ContasReceberModel extends ContasReceber {
   constructor() {
