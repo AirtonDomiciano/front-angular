@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import FormaPagamento from 'src/app/shared/interface/formas-pagamento.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ContasReceberService } from 'src/app/services/contas-receber.service';
@@ -19,7 +19,7 @@ export interface Pagamentos {
   templateUrl: './pagamento.component.html',
   styleUrls: ['./pagamento.component.scss'],
 })
-export class PagamentoComponent {
+export class PagamentoComponent implements OnInit {
   public formGroup!: FormGroup;
   public model: PagamentoModel = new PagamentoModel();
 
@@ -38,7 +38,9 @@ export class PagamentoComponent {
     private servicosService: ServicosService,
     private contasReceberService: ContasReceberService,
     private parcelasService: ParcelasService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.formGroup = this.fb.group(this.model);
   }
 
