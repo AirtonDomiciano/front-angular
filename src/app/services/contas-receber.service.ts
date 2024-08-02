@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
 import ContasReceberInterface from '../shared/interface/contas-receber.interface';
 import { ContasReceber } from '../shared/interface/contas-receber';
+import FormaPagamento from '../shared/interface/formas-pagamento.interface';
+import SalvarPagamentoInterface from '../shared/interface/salvar-pagamento.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -73,6 +75,19 @@ export class ContasReceberService extends BaseService {
       this.post('/contas-receber', cliente).subscribe((res: any) => {
         resolve(res);
       });
+    });
+  }
+
+  async salvarPagamento(
+    id: number,
+    obj: SalvarPagamentoInterface
+  ): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.post(`/contas-receber/salvarPagamento/${id}`, obj).subscribe(
+        (res: any) => {
+          resolve(res);
+        }
+      );
     });
   }
 }

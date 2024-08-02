@@ -9,12 +9,3 @@ export default interface ServicosInterface {
   valor: number;
   formaPagamento: string;
 }
-
-// idAtendimento
-// idServicos
-// nome
-// nomeClientes
-// nomeServico
-// status
-// tempo
-// valor
