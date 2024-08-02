@@ -1,5 +1,3 @@
-import FormaPagamento from 'src/app/shared/interface/formas-pagamento.interface';
-
-export default class Pagamento {
-  public formaDePagamento!: FormaPagamento;
+export default class PagamentoModel {
+  valor: number = 0;
 }

@@ -4,5 +4,4 @@ export default class Atendimento {
   hora!: Date;
   descricao!: string;
   valor?: number;
-  idFormasDePagamento?: number;
 }
