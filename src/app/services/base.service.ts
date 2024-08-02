@@ -28,7 +28,7 @@ export abstract class BaseService implements IBaseService {
     return this.http.get<T>(`${this.url}${endpoint}`, { headers });
   }
 
-  post<T>(endpoint: string, body: T): Observable<any> {
+  post<T>(endpoint: string, body?: T): Observable<any> {
     return this.http.post<T>(`${this.url}${endpoint}`, body, { headers });
   }
 

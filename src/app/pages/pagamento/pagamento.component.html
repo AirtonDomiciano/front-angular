@@ -1,6 +1,6 @@
 <p-dialog
   [(visible)]="mostrar"
-  [style]="{ width: 'auto', 'min-width': '40vw' }"
+  [style]="{ width: 'auto', 'min-width': '30vw' }"
 >
   <div class="d-flex justify-content-center">
     <div class="d-flex flex-column text-center">
@@ -13,10 +13,13 @@
       <div class="d-flex justify-content-center mt-0">
         <p-listbox
           [options]="formasDePagamento"
-          [(ngModel)]="formaSelecionada"
+          [(ngModel)]="formasSelecionadas"
           optionLabel="name"
           [listStyle]="{ 'max-height': '280px' }"
           [style]="{ width: '100%' }"
+          [multiple]="true"
+          [metaKeySelection]="false"
+          (onClick)="mostra()"
         >
           <ng-template class="text-center" let-formaPagamento pTemplate="item">
             <div class="text-center fs-4">
@@ -27,22 +30,24 @@
         </p-listbox>
       </div>
     </div>
-    <ng-container *ngIf="formaSelecionada.idFormasDePagamento">
+    <ng-container *ngIf="formasSelecionadas.length">
       <p-divider layout="vertical"></p-divider>
       <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
         <div class="d-flex flex-column">
           <h4>Selecione o valor a pagar</h4>
-          <div class="row mt-4">
-            <div class="col-sm-12">
-              <app-input-currency
-                [form]="formGroup"
-                placeholder="Valor"
-                frmName="valor"
-                [valor]="valor"
-                (emitterValorVerificado)="emitterValorVerificado($event)"
-              ></app-input-currency>
-            </div>
-          </div>
+          <ng-container *ngFor="let forma of formasSelecionadas">
+            <div class="row mt-4">
+              <div class="col-sm-12">
+                <app-input-currency
+                  [form]="formGroup"
+                  placeholder="Valor no {{ forma.nome }}"
+                  frmName="valor"
+                  [valor]="valor"
+                  (emitterValorVerificado)="emitterValorVerificado($event)"
+                ></app-input-currency>
+              </div></div
+          ></ng-container>
+
           <div class="row">
             <div class="col-sm-12">
               <button
