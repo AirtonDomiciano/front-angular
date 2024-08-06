@@ -3,7 +3,6 @@ import Produto from 'src/app/shared/model/produtos';
 export class ProdutosModel extends Produto {
   constructor() {
     super();
-    this.idProdutos = 0;
     this.codigoProduto = 0;
     this.nomeProduto = '';
     this.qtdeTotal = 0;

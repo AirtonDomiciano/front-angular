@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthLayoutComponent } from './core/components/auth-layout/auth-layout.component';
-import BaseLayoutComponent from './core/components/base-layout/base-layout.component';
-import { AuthGuardService as AuthGuard } from './core/guards/auth-guard.service';
 import { authRoutes } from './core/routes/auth.routes';
 import { privateRoutes } from './core/routes/private.routes';
 

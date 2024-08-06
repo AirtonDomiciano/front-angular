@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApisService } from 'src/app/services/apis.service';
 import { ApiModel } from './model/api.model';
 import { ApisModel } from '../apis/model/apis.model';
-import { Toast } from 'primeng/toast';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 
 @Component({
@@ -15,8 +14,9 @@ import { ToastMessageService } from 'src/app/shared/services/toast-message.servi
 export class ApiComponent implements OnInit {
   public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
-
+  public titulo: string = '';
   public model: ApiModel = new ApiModel();
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -26,6 +26,7 @@ export class ApiComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.titulo = this.id > 0 ? 'Editar API' : 'Criar Nova API';
     this.formGroup = this.fb.group(this.model);
     this.requiredForm();
 

@@ -37,6 +37,7 @@ export class ClienteComponent {
       delete res.idClientes;
       if (res) {
         this.formGroup.setValue(res);
+        console.log(res);
       }
     }
   }
@@ -93,6 +94,6 @@ export class ClienteComponent {
   }
 
   iniciarTitulo() {
-    this.titulo = this.id ? 'Editar Cliente: ' + this.id : 'Cadastro Cliente';
+    this.titulo = this.id ? 'Editar Cliente' : 'Cadastro Cliente';
   }
 }
