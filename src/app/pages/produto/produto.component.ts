@@ -15,6 +15,8 @@ import { UtilsService } from 'src/app/shared/utils/utils.service';
 export class ProdutoComponent implements OnInit {
   public formGroup: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
+  public titulo: string = '';
+  public model: ProdutosModel = new ProdutosModel();
 
   constructor(
     private fb: FormBuilder,
@@ -24,16 +26,12 @@ export class ProdutoComponent implements OnInit {
     private toast: ToastMessageService,
     private utilsService: UtilsService
   ) {
-    this.formGroup = this.fb.group({
-      nomeProduto: ['', Validators.required],
-      qtdeTotal: ['', Validators.required],
-      imagem: ['', Validators.required],
-      valor: ['', Validators.required],
-    });
+    this.formGroup = this.fb.group(this.model);
   }
 
   async ngOnInit(): Promise<void> {
     this.setarCamposRequiridos();
+    this.titulo = this.id > 0 ? 'Editar Produto' : 'Cadastrar Produto';
 
     if (this.id) {
       const res = await this.produtosService.BuscarProdutoPorId(this.id);
@@ -56,6 +54,10 @@ export class ProdutoComponent implements OnInit {
         'É preciso preencher todos os campos para prosseguir.'
       );
       return;
+    }
+
+    if (this.id) {
+      input.idProdutos = this.id;
     }
 
     if (this.id) {

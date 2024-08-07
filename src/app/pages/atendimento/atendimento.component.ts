@@ -13,10 +13,9 @@ import { ToastMessageService } from 'src/app/shared/services/toast-message.servi
 export class AtendimentoComponent implements OnInit {
   public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
-
   public titulo: string = 'Cadastro Atendimento';
-
   public model: AtendimentoModel = new AtendimentoModel();
+
   constructor(
     private fb: FormBuilder,
     private router: Router,

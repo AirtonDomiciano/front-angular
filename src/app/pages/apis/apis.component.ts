@@ -14,7 +14,7 @@ export class ApisComponent implements OnInit {
 
   public formGroup: FormGroup = new FormGroup({});
 
-  constructor(private router: Router, public apisService: ApisService) {}
+  constructor(private router: Router, private apisService: ApisService) {}
 
   async ngOnInit(): Promise<void> {
     await this.buscarTodasApis();

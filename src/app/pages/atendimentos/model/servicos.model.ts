@@ -8,7 +8,6 @@ export default class ServicosModel extends Servicos {
   valorServico: number;
   constructor() {
     super();
-    this.idServicos = 0;
     this.idAtendimento = 0;
     this.nomeClientes = '';
     this.nomeAnimal = '';

@@ -1,8 +1,7 @@
 <div class="container d-flex justify-content-center align-items-center py-5">
   <div class="card bg-white w-100 p-3">
     <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
-      <h1 class="text-center mb-4" *ngIf="!id">Cadastrar Produto</h1>
-      <h1 class="text-center mb-4" *ngIf="id">Editar Produto {{ id }}</h1>
+      <h1 class="text-center mb-4">{{ titulo }}</h1>
       <div class="row px-4 py-4">
         <div class="col-sm-9">
           <app-input
