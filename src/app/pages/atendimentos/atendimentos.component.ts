@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServicosService } from 'src/app/services/servicos.service';
 import { Router } from '@angular/router';
 import { OpcoesDropdownInterface } from 'src/app/shared/interface/opcoes-dropdown.interface';
-import { PagamentoComponent } from '../pagamento/pagamento.component';
 import { ContasReceberService } from 'src/app/services/contas-receber.service';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
 import ServicosModel from './model/servicos.model';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { ComplementoComponent } from 'src/app/shared/components/complemento/complemento.component';
 
 @Component({
   selector: 'app-atendimento',
@@ -14,8 +14,8 @@ import { ToastMessageService } from 'src/app/shared/services/toast-message.servi
   styleUrls: ['./atendimentos.component.scss'],
 })
 export class AtendimentosComponent implements OnInit {
-  @ViewChild('pagamento')
-  pagamentoComponent!: PagamentoComponent;
+  @ViewChild('recebimento')
+  complementoComponent!: ComplementoComponent;
 
   public setarOpcoesDropdown: OpcoesDropdownInterface[] = [];
   public lista: ServicosModel[] = [];
@@ -123,9 +123,11 @@ export class AtendimentosComponent implements OnInit {
     const valorRestante = valor - contaReceber.valorPago!;
     const valorArredondado = parseFloat(valorRestante.toFixed(2));
 
-    this.pagamentoComponent.abrirFormasPagamento({
+    this.complementoComponent.abrirComplemento({
       idAtendimento,
       valorRestante: valorArredondado,
+      pagamento: false,
+      recebimento: true,
     });
   }
 }

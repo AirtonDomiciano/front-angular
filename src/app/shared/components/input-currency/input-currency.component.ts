@@ -22,7 +22,7 @@ export class InputCurrencyComponent {
 
   verificaValor() {
     let valorInput = this.form.controls[this.frmName].value;
-    this.valorValido = valorInput <= this.valor;
+    this.valorValido = valorInput <= this.valor && valorInput !== 0;
     this.emitterValorVerificado.emit(this.valorValido);
   }
 }

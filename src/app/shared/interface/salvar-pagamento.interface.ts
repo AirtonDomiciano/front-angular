@@ -1,6 +1,6 @@
 import FormaPagamento from './formas-pagamento.interface';
 
-export default interface SalvarPagamentoInterface {
+export default interface SalvarComplementoInterface {
   valor: number;
   formaPagamento: FormaPagamento;
 }

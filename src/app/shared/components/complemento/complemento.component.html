@@ -4,22 +4,18 @@
 >
   <div class="d-flex justify-content-center">
     <div class="d-flex flex-column text-center">
-      <p class="mb-0 fs-5">Valor a pagar</p>
-      <h1>{{ valor | currency : "BRL" }}</h1>
-
+      <p class="mb-0 fs-5">Valor restante</p>
+      <h1>{{ complemento?.valorRestante | currency : "BRL" }}</h1>
       <div class="text-center mt-4">
         <p>Selecione a forma de pagamento:</p>
       </div>
       <div class="d-flex justify-content-center mt-0">
         <p-listbox
           [options]="formasDePagamento"
-          [(ngModel)]="formasSelecionadas"
+          [(ngModel)]="formaSelecionada"
           optionLabel="name"
           [listStyle]="{ 'max-height': '280px' }"
           [style]="{ width: '100%' }"
-          [multiple]="true"
-          [metaKeySelection]="false"
-          (onClick)="mostra()"
         >
           <ng-template class="text-center" let-formaPagamento pTemplate="item">
             <div class="text-center fs-4">
@@ -30,29 +26,27 @@
         </p-listbox>
       </div>
     </div>
-    <ng-container *ngIf="formasSelecionadas.length">
+    <ng-container *ngIf="formaSelecionada">
       <p-divider layout="vertical"></p-divider>
       <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
         <div class="d-flex flex-column">
-          <h4>Selecione o valor a pagar</h4>
-          <ng-container *ngFor="let forma of formasSelecionadas">
-            <div class="row mt-4">
-              <div class="col-sm-12">
-                <app-input-currency
-                  [form]="formGroup"
-                  placeholder="Valor no {{ forma.nome }}"
-                  frmName="valor"
-                  [valor]="valor"
-                  (emitterValorVerificado)="emitterValorVerificado($event)"
-                ></app-input-currency>
-              </div></div
-          ></ng-container>
-
-          <div class="row">
+          <h4>Selecione o valor</h4>
+          <div class="row mt-4">
+            <div class="col-sm-12">
+              <app-input-currency
+                [form]="formGroup"
+                placeholder="Valor no {{ formaSelecionada.nome }}"
+                frmName="valor"
+                [valor]="complemento?.valorRestante!"
+                (emitterValorVerificado)="emitterValorVerificado($event)"
+              ></app-input-currency>
+            </div>
+          </div>
+          <div class="row mt-2">
             <div class="col-sm-12">
               <button
                 [ngClass]="{ disabled: !valorValido }"
-                class="btn btn-primary rounded-pill mt-3 w-100"
+                class="btn btn-primary rounded-pill w-100"
                 type="submit"
               >
                 Concluir Pagamento

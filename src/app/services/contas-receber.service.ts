@@ -4,9 +4,7 @@ import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
 import ContasReceberInterface from '../shared/interface/contas-receber.interface';
-import { ContasReceber } from '../shared/interface/contas-receber';
-import FormaPagamento from '../shared/interface/formas-pagamento.interface';
-import SalvarPagamentoInterface from '../shared/interface/salvar-pagamento.interface';
+import SalvarComplementoInterface from '../shared/interface/salvar-pagamento.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -80,7 +78,7 @@ export class ContasReceberService extends BaseService {
 
   async salvarPagamento(
     id: number,
-    obj: SalvarPagamentoInterface
+    obj: SalvarComplementoInterface
   ): Promise<boolean> {
     return new Promise((resolve) => {
       this.post(`/contas-receber/salvarPagamento/${id}`, obj).subscribe(

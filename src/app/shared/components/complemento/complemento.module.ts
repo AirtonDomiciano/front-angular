@@ -10,14 +10,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputModule } from 'src/app/shared/components/input/input.module';
 import { ListboxModule } from 'primeng/listbox';
 import { DialogModule } from 'primeng/dialog';
-import { PagamentoComponent } from './pagamento.component';
 import { DividerModule } from 'primeng/divider';
 import { InputCurrencyModule } from 'src/app/shared/components/input-currency/input-currency.module';
+import { ComplementoComponent } from './complemento.component';
 
 registerLocaleData(ptBr);
 
 @NgModule({
-  declarations: [PagamentoComponent],
+  declarations: [ComplementoComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -30,7 +30,7 @@ registerLocaleData(ptBr);
     DividerModule,
     InputCurrencyModule,
   ],
-  exports: [PagamentoComponent],
+  exports: [ComplementoComponent],
   providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
 })
-export class PagamentoModule {}
+export class ComplementoModule {}
