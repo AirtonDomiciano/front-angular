@@ -1,0 +1,60 @@
+<p-dialog
+  [(visible)]="mostrar"
+  [style]="{ width: 'auto', 'min-width': '30vw' }"
+>
+  <div class="d-flex justify-content-center">
+    <div class="d-flex flex-column text-center">
+      <p class="mb-0 fs-5">Valor restante</p>
+      <h1>{{ complemento?.valorRestante | currency : "BRL" }}</h1>
+      <div class="text-center mt-4">
+        <p>Selecione a forma de pagamento:</p>
+      </div>
+      <div class="d-flex justify-content-center mt-0">
+        <p-listbox
+          [options]="formasDePagamento"
+          [(ngModel)]="formaSelecionada"
+          optionLabel="name"
+          [listStyle]="{ 'max-height': '280px' }"
+          [style]="{ width: '100%' }"
+        >
+          <ng-template class="text-center" let-formaPagamento pTemplate="item">
+            <div class="text-center fs-4">
+              <i class="{{ formaPagamento.icone }} pe-2"></i>
+              {{ formaPagamento.nome }}
+            </div>
+          </ng-template>
+        </p-listbox>
+      </div>
+    </div>
+    <ng-container *ngIf="formaSelecionada">
+      <p-divider layout="vertical"></p-divider>
+      <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
+        <div class="d-flex flex-column">
+          <h4>Selecione o valor</h4>
+          <div class="row mt-4">
+            <div class="col-sm-12">
+              <app-input-currency
+                [form]="formGroup"
+                placeholder="Valor no {{ formaSelecionada.nome }}"
+                frmName="valor"
+                [valor]="complemento?.valorRestante!"
+                (emitterValorVerificado)="emitterValorVerificado($event)"
+              ></app-input-currency>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-sm-12">
+              <button
+                [ngClass]="{ disabled: !valorValido }"
+                class="btn btn-primary rounded-pill w-100"
+                type="submit"
+              >
+                Concluir Pagamento
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+</p-dialog>

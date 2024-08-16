@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServicosService } from 'src/app/services/servicos.service';
 import { Router } from '@angular/router';
-import { TempoInterface } from 'src/app/shared/interface/tempo.interface';
-import { HorarioService } from 'src/app/services/horario-servico.service';
 import { OpcoesDropdownInterface } from 'src/app/shared/interface/opcoes-dropdown.interface';
-import HorarioServico from 'src/app/shared/model/horario-servico';
+import { ContasReceberService } from 'src/app/services/contas-receber.service';
+import { AtendimentoService } from 'src/app/services/atendimento.service';
 import ServicosModel from './model/servicos.model';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { ComplementoComponent } from 'src/app/shared/components/complemento/complemento.component';
 
 @Component({
   selector: 'app-atendimento',
@@ -13,15 +14,21 @@ import ServicosModel from './model/servicos.model';
   styleUrls: ['./atendimentos.component.scss'],
 })
 export class AtendimentosComponent implements OnInit {
+  @ViewChild('recebimento')
+  complementoComponent!: ComplementoComponent;
+
   public setarOpcoesDropdown: OpcoesDropdownInterface[] = [];
   public lista: ServicosModel[] = [];
   public status: number = 0;
   public mostrar: boolean = false;
+  public idAtendimento: number = 0;
 
   constructor(
+    private atendimentoService: AtendimentoService,
     private servicosService: ServicosService,
-    private horarioService: HorarioService,
-    private router: Router
+    private contasReceberService: ContasReceberService,
+    private router: Router,
+    private toast: ToastMessageService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -44,19 +51,19 @@ export class AtendimentosComponent implements OnInit {
         this.editarAtendimento(id);
         break;
       case 'id-init-atendimento':
-        this.iniciar(id);
+        this.onIniciar(id);
         break;
       case 'id-finalizar-atendimento':
-        this.finalizar(id);
+        this.onFinalizar(id);
         break;
       case 'id-cancelar-atendimento':
-        this.cancelar(id);
+        this.onCancelar(id);
         break;
       case 'id-restaurar-atendimento':
-        this.restaurar(id);
+        this.onRestaurar(id);
         break;
       case 'id-pagar-atendimento':
-        this.mostrarPagamento();
+        this.mostrarPagamento($event.idx);
         break;
       default:
         break;
@@ -71,89 +78,56 @@ export class AtendimentosComponent implements OnInit {
     this.router.navigate([`private/atendimento/${id}`]);
   }
 
-  async iniciar(id: number): Promise<void> {
-    const res = await this.servicosService.buscarPorIdAtendimento(id);
-    res.status = 2;
-    await this.servicosService.salvar(res);
+  async onIniciar(id: number): Promise<void> {
+    const res = await this.atendimentoService.iniciar(id);
 
-    const input: HorarioServico = {
-      idServicos: res.idServicos!,
-      horarioInicio: new Date(),
-    };
-
-    await this.horarioService.salvar(input);
-
+    if (res) {
+      this.toast.mostrarSucesso('Serviço iniciado!');
+    }
     await this.inicializarListaAtendimentos();
   }
 
-  async finalizar(id: number): Promise<void> {
-    const res = await this.servicosService.buscarPorIdAtendimento(id);
+  async onFinalizar(id: number): Promise<void> {
+    const res = await this.atendimentoService.finalizar(id);
 
-    const input = await this.horarioService.buscarHorarioPorIdServico(
-      res.idServicos!
+    if (res) {
+      this.toast.mostrarSucesso('Serviço Finalizado!');
+    }
+    await this.inicializarListaAtendimentos();
+  }
+
+  async onCancelar(id: number) {
+    const res = await this.atendimentoService.cancelar(id);
+
+    if (res) {
+      this.toast.mostrarSucesso('Serviço Cancelado!');
+    }
+    await this.inicializarListaAtendimentos();
+  }
+
+  async onRestaurar(id: number) {
+    const res = await this.atendimentoService.restaurar(id);
+
+    if (res) {
+      this.toast.mostrarSucesso('Serviço Restaurado!');
+    }
+    await this.inicializarListaAtendimentos();
+  }
+
+  async mostrarPagamento(idx: number) {
+    const { idAtendimento, valor } = this.lista[idx];
+    const contaReceber = await this.contasReceberService.buscarPorIdAtendimento(
+      idAtendimento!
     );
 
-    input.horarioTermino = new Date();
-    input.horarioInicio = new Date(input.horarioInicio!);
+    const valorRestante = valor - contaReceber.valorPago!;
+    const valorArredondado = parseFloat(valorRestante.toFixed(2));
 
-    const tempoServicoMilisegundos =
-      input.horarioTermino.getTime() - input.horarioInicio!.getTime();
-
-    const tempoServico = this.conversaoMilisegundos(tempoServicoMilisegundos);
-
-    res.tempo = tempoServico;
-    res.status = 3;
-
-    await this.horarioService.salvar(input);
-    await this.servicosService.salvar(res);
-
-    await this.inicializarListaAtendimentos();
-  }
-
-  async cancelar(id: number) {
-    const res = await this.servicosService.buscarPorIdAtendimento(id);
-    res.status = 0;
-    await this.servicosService.salvar(res);
-
-    await this.inicializarListaAtendimentos();
-  }
-
-  async restaurar(id: number) {
-    const res = await this.servicosService.buscarPorIdAtendimento(id);
-
-    res.status = 1;
-    await this.servicosService.salvar(res);
-
-    await this.inicializarListaAtendimentos();
-
-    const input = await this.horarioService.buscarHorarioPorIdServico(
-      res.idServicos!
-    );
-    await this.horarioService.deletarHorario(input.idHorario!);
-  }
-
-  conversaoMilisegundos(tempo: number): any {
-    let tempoServico: TempoInterface = { horas: 0, minutos: 0, segundos: 0 };
-    while (tempo >= 3600000) {
-      tempo -= 3600000;
-      tempoServico.horas += 1;
-    }
-
-    while (tempo >= 60000) {
-      tempo -= 60000;
-      tempoServico.minutos += 1;
-    }
-
-    while (tempo >= 1000) {
-      tempo -= 1000;
-      tempoServico.segundos += 1;
-    }
-    const tempoFormatado: any = `${tempoServico.horas}:${tempoServico.minutos}:${tempoServico.segundos}`;
-
-    return tempoFormatado;
-  }
-
-  mostrarPagamento() {
-    this.mostrar = true;
+    this.complementoComponent.abrirComplemento({
+      idAtendimento,
+      valorRestante: valorArredondado,
+      pagamento: false,
+      recebimento: true,
+    });
   }
 }

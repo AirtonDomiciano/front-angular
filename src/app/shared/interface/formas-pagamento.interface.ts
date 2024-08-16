@@ -1,4 +1,6 @@
 export default interface FormaPagamento {
   idFormasDePagamento: number;
-  nomeFormaPagamento: string;
+  nome: string;
+  icone?: string;
+  frmName?: string;
 }

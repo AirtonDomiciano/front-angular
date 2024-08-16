@@ -62,7 +62,7 @@ export class ProdutosServicoService extends BaseService {
   ): Promise<Array<ProdutosServico>> {
     return new Promise((resolve) => {
       this.get(
-        `/produtos-servico/buscarProdutosPorIdServicosAnimal/${id}`
+        `/produtos-servico/buscarProdutosPorIdTipoServico/${id}`
       ).subscribe((res: any) => {
         if (res) {
           resolve(res);

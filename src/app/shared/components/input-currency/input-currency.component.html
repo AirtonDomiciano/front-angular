@@ -7,7 +7,7 @@
       id="{{ frmName }}"
       formControlName="{{ frmName }}"
       [ngClass]="{
-        'is-invalid': form.get(frmName)?.invalid,
+        'is-invalid': form.get(frmName)?.invalid || !valorValido,
         'is-valid': form.get(frmName)?.valid
       }"
       required
@@ -15,6 +15,8 @@
       mask="separator.2"
       [thousandSeparator]="'.'"
       [decimalMarker]="','"
+      (focusout)="verificaValor()"
+      placeholder="{{ placeholder }}"
     />
     <label [htmlFor]="frmName">{{ placeholder }}</label>
     <!-- <div class="mt-0 px-2 invalid-feedback">Campo obrigatório!</div> -->

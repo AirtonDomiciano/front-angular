@@ -146,14 +146,6 @@ export const privateRoutes: Routes = [
           ),
         canActivate: [AuthGuardService],
       },
-      {
-        path: 'pagamento',
-        loadChildren: () =>
-          import('../../pages/pagamento/pagamento.module').then(
-            (m) => m.PagamentoModule
-          ),
-        canActivate: [AuthGuardService],
-      },
       { path: '**', redirectTo: 'home' },
     ],
   },
