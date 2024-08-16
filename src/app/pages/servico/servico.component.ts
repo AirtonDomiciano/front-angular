@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicoModel } from './model/servico.model';
@@ -16,6 +16,7 @@ import Produto from 'src/app/shared/model/produtos';
 import { ContasReceberService } from 'src/app/services/contas-receber.service';
 import ContasReceberModel from './model/contas-receber.model';
 import { ParcelasService } from 'src/app/services/parcelas.service';
+import FormularioServicoInterface from 'src/app/shared/interface/formulario-servico.interface';
 
 @Component({
   selector: 'app-servico',
@@ -23,12 +24,15 @@ import { ParcelasService } from 'src/app/services/parcelas.service';
   styleUrls: ['./servico.component.scss'],
 })
 export class ServicoComponent implements OnInit {
+  @Output() emitterFormServico: EventEmitter<FormularioServicoInterface> =
+    new EventEmitter<FormularioServicoInterface>();
+
   public formGroup!: FormGroup;
+  public idAtendimento!: number;
   public id = Number(this.route.snapshot.paramMap.get('id'));
   public model: ServicoModel = new ServicoModel();
   public produtosSelecionados: Produto[] = [];
   public servicoSelecionado: number = 0;
-  public editar: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,15 +54,9 @@ export class ServicoComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.setarCamposRequiridos();
-    this.editar = await this.verificarServico();
-    if (this.editar) {
+    if (this.id > 0) {
       this.editarServico();
     }
-  }
-
-  async verificarServico(): Promise<boolean> {
-    const res = await this.servicosService.buscarPorIdAtendimento(this.id);
-    return res ? true : false;
   }
 
   async editarServico() {
@@ -124,9 +122,9 @@ export class ServicoComponent implements OnInit {
     input.idTipoServico = input.tipoServico?.idTipoServico!;
     delete input.tipoServico;
 
-    if (this.editar) {
+    if (this.id > 0) {
       const servico = await this.servicosService.buscarPorIdAtendimento(
-        this.id
+        this.idAtendimento!
       );
       input.idServicos = servico.idServicos;
       input.status = servico.status;
@@ -142,13 +140,13 @@ export class ServicoComponent implements OnInit {
     const usuario = this.localService.getUser();
 
     input.idUsuarios = usuario.idUser;
-    input.idAtendimento = this.id;
+    input.idAtendimento = this.idAtendimento;
 
     const res = await this.servicosService.salvar(input);
 
     if (res) {
       const servico = await this.servicosService.buscarPorIdAtendimento(
-        this.id
+        this.idAtendimento!
       );
       const idServico = servico.idServicos;
       this.darBaixaProduto(produtos!, produtosDoServico);
@@ -167,7 +165,7 @@ export class ServicoComponent implements OnInit {
       const valor = await this.calcularValorAtendimento(calcularValor);
 
       const atendimento = await this.atendimentoService.buscarAtendimentoPorId(
-        this.id
+        this.idAtendimento!
       );
 
       const contaReceber: ContasReceberModel = {
@@ -214,7 +212,7 @@ export class ServicoComponent implements OnInit {
   ): Promise<void> {
     let produtosNovos: Produto[] = produtos;
     let produtosDoServicoRetirados: ProdutosDoServicoModel[] = [];
-    if (this.editar) {
+    if (this.id > 0) {
       produtosNovos = produtos.filter(
         (a1) => !produtoDoServico.some((a2) => a1.idProdutos === a2.idProdutos)
       );
@@ -262,5 +260,17 @@ export class ServicoComponent implements OnInit {
     const valorArredondado = Number(valor.toFixed(2));
 
     return valorArredondado;
+  }
+
+  formEmitter() {
+    const obj: FormularioServicoInterface = {
+      formServico: this.formGroup.value,
+      formInvalido: this.formGroup.invalid,
+    };
+    this.emitterFormServico.emit(obj);
+  }
+
+  receberIdAtendimento(id: number) {
+    this.idAtendimento = id;
   }
 }
