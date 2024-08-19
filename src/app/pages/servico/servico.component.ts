@@ -169,7 +169,7 @@ export class ServicoComponent implements OnInit {
       );
 
       const contaReceber: ContasReceberModel = {
-        idAtendimento: this.id,
+        idAtendimento: this.idAtendimento,
         idClientes: input.idClientes,
         valor: valor,
         valorPago: 0,

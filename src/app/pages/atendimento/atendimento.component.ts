@@ -72,7 +72,7 @@ export class AtendimentoComponent implements OnInit {
 
     await this.atendimentoService.salvar(input);
     const idAtendimento = await this.pegarIdCriado();
-    this.adicionarIdAtendimento(idAtendimento);
+    this.servicoComponent.receberIdAtendimento(idAtendimento);
     this.salvarServico();
   }
 
@@ -87,10 +87,6 @@ export class AtendimentoComponent implements OnInit {
 
   salvarServico() {
     this.servicoComponent.onSubmit();
-  }
-
-  adicionarIdAtendimento(id: number) {
-    this.servicoComponent.receberIdAtendimento(id);
   }
 
   async pegarIdCriado(): Promise<number> {

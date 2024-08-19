@@ -1,4 +1,4 @@
-export default interface MovLctosInterface {
+export default interface MovimentacoesInterface {
   idMovLctos?: number;
   idContasReceber?: number;
   idContasPagar?: number;

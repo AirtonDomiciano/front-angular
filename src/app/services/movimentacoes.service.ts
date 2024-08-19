@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
-import MovLctos from '../shared/model/mov-lctos';
+import Movimentacoes from '../shared/model/movimentacoes';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MovLctosService extends BaseService {
+export class MovimentacoesService extends BaseService {
   constructor(
     public router: Router,
     public override http: HttpClient,
@@ -17,9 +17,9 @@ export class MovLctosService extends BaseService {
     super(http);
   }
 
-  async buscarTodos(): Promise<Array<MovLctos>> {
+  async buscarTodos(): Promise<Array<Movimentacoes>> {
     return new Promise((resolve) => {
-      this.get('/movlctos').subscribe((res: any) => {
+      this.get('/movimentacoes').subscribe((res: any) => {
         if (res) {
           resolve(res);
         }
@@ -29,15 +29,15 @@ export class MovLctosService extends BaseService {
 
   async deletar(id: number): Promise<boolean> {
     return new Promise((resolve) => {
-      this.delete(`/movlctos/${id}`).subscribe((res: any) => {
+      this.delete(`/movimentacoes/${id}`).subscribe((res: any) => {
         resolve(res);
       });
     });
   }
 
-  async buscarPorId(id: number): Promise<MovLctos> {
+  async buscarPorId(id: number): Promise<Movimentacoes> {
     return new Promise((resolve) => {
-      this.get(`/movlctos/${id}`).subscribe((res: any) => {
+      this.get(`/movimentacoes/${id}`).subscribe((res: any) => {
         if (res) {
           resolve(res);
         }
@@ -45,21 +45,25 @@ export class MovLctosService extends BaseService {
     });
   }
 
-  async salvar(movLctos: MovLctos): Promise<boolean> {
+  async salvar(movimentacoes: Movimentacoes): Promise<boolean> {
     return new Promise((resolve) => {
-      this.post('/movlctos', movLctos).subscribe((res: any) => {
+      this.post('/movimentacoes', movimentacoes).subscribe((res: any) => {
         resolve(res);
       });
     });
   }
 
-  async salvarPagamento(id: number, movLctos: MovLctos): Promise<boolean> {
+  async salvarPagamento(
+    id: number,
+    movimentacoes: Movimentacoes
+  ): Promise<boolean> {
     return new Promise((resolve) => {
-      this.post(`/movlctos/salvarPagamento/${id}`, movLctos).subscribe(
-        (res: any) => {
-          resolve(res);
-        }
-      );
+      this.post(
+        `/movimentacoes/salvarPagamento/${id}`,
+        movimentacoes
+      ).subscribe((res: any) => {
+        resolve(res);
+      });
     });
   }
 }

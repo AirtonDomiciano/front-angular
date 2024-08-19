@@ -1,4 +1,4 @@
-export default class MovLctos {
+export default class Movimentacoes {
   idMovLctos?: number;
   idContasReceber?: number;
   idContasPagar?: number;
