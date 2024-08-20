@@ -10,6 +10,7 @@ import { InputDataModule } from '../../shared/components/input-data/input-data.m
 import { InputHorarioModule } from 'src/app/shared/components/input-horario/input-horario.module';
 import { TabViewModule } from 'primeng/tabview';
 import { ServicoModule } from '../servico/servico.module';
+import { BotaoVoltarModule } from 'src/app/shared/components/botao-voltar/botao-voltar.module';
 
 @NgModule({
   declarations: [AtendimentoComponent],
@@ -25,6 +26,7 @@ import { ServicoModule } from '../servico/servico.module';
     InputHorarioModule,
     TabViewModule,
     ServicoModule,
+    BotaoVoltarModule,
   ],
   exports: [AtendimentoComponent],
 })
