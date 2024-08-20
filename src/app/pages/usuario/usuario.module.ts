@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { InputSenhaModule } from 'src/app/shared/components/input-senha/input-senha.module';
 import { SelectCidadesModule } from 'src/app/shared/components/select-cidades/select-cidades.module';
+import { BotaoVoltarModule } from 'src/app/shared/components/botao-voltar/botao-voltar.module';
 
 @NgModule({
   declarations: [UsuarioComponent],
@@ -21,6 +22,7 @@ import { SelectCidadesModule } from 'src/app/shared/components/select-cidades/se
     UsuarioRoutingModule,
     InputCepModule,
     SelectCidadesModule,
+    BotaoVoltarModule,
   ],
   exports: [UsuarioComponent],
 })
