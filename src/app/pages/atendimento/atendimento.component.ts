@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AtendimentoModel } from './model/atendimento-model';
 import { AtendimentoService } from 'src/app/services/atendimento.service';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import ServicoModel from './model/servico.model';
+import FormularioServicoInterface from 'src/app/shared/interface/formulario-servico.interface';
+import { ServicoComponent } from '../servico/servico.component';
 
 @Component({
   selector: 'app-atendimento',
@@ -11,14 +14,17 @@ import { ToastMessageService } from 'src/app/shared/services/toast-message.servi
   styleUrls: ['./atendimento.component.scss'],
 })
 export class AtendimentoComponent implements OnInit {
+  @ViewChild('servico') servicoComponent!: ServicoComponent;
+
   public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
-  public titulo: string = 'Cadastro Atendimento';
   public model: AtendimentoModel = new AtendimentoModel();
+
+  public formServico!: ServicoModel;
+  public servicoInvalido: boolean = true;
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private route: ActivatedRoute,
     private atendimentoService: AtendimentoService,
     private toast: ToastMessageService
@@ -34,7 +40,6 @@ export class AtendimentoComponent implements OnInit {
   }
 
   async editarAtendimento(): Promise<void> {
-    this.titulo = `Editar atendimento: ${this.id}`;
     const atendimento = await this.atendimentoService.buscarAtendimentoPorId(
       this.id
     );
@@ -51,7 +56,9 @@ export class AtendimentoComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    if (this.formGroup.invalid) {
+    this.trazerDadosFormulario();
+
+    if (this.formGroup.invalid || this.servicoInvalido) {
       this.toast.mostrarAviso(
         'É preciso preencher todos os campos para prosseguir.'
       );
@@ -63,21 +70,29 @@ export class AtendimentoComponent implements OnInit {
       input.idAtendimento = this.id;
     }
 
-    const res = await this.atendimentoService.salvar(input);
+    await this.atendimentoService.salvar(input);
+    const idAtendimento = await this.pegarIdCriado();
+    this.servicoComponent.receberIdAtendimento(idAtendimento);
+    this.salvarServico();
+  }
 
-    if (res) {
-      if (this.id) {
-        this.toast.mostrarSucesso('Atendimento Atualizado!');
-        this.router.navigate([`private/servico/${this.id}`]);
-      } else {
-        const atendimentos =
-          await this.atendimentoService.buscarTodosAtendimentos();
+  pegarValoresFormServico(obj: FormularioServicoInterface) {
+    this.formServico = obj.formServico;
+    this.servicoInvalido = obj.formInvalido;
+  }
 
-        const index = atendimentos.length - 1;
-        const idAtendimento = atendimentos[index].idAtendimento;
-        this.toast.mostrarSucesso('Novo atendimento!');
-        this.router.navigate([`private/servico/${idAtendimento}`]);
-      }
-    }
+  trazerDadosFormulario() {
+    this.servicoComponent.formEmitter();
+  }
+
+  salvarServico() {
+    this.servicoComponent.onSubmit();
+  }
+
+  async pegarIdCriado(): Promise<number> {
+    const atendimentos =
+      await this.atendimentoService.buscarTodosAtendimentos();
+    const atendimento = atendimentos[atendimentos.length - 1];
+    return atendimento.idAtendimento!;
   }
 }

@@ -8,6 +8,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { MultiSelectProdutosModule } from 'src/app/shared/components/multi-select-produtos/multi-select-produtos.module';
 import { InputDataModule } from '../../shared/components/input-data/input-data.module';
 import { InputHorarioModule } from 'src/app/shared/components/input-horario/input-horario.module';
+import { TabViewModule } from 'primeng/tabview';
+import { ServicoModule } from '../servico/servico.module';
 
 @NgModule({
   declarations: [AtendimentoComponent],
@@ -21,6 +23,8 @@ import { InputHorarioModule } from 'src/app/shared/components/input-horario/inpu
     MultiSelectProdutosModule,
     InputDataModule,
     InputHorarioModule,
+    TabViewModule,
+    ServicoModule,
   ],
   exports: [AtendimentoComponent],
 })

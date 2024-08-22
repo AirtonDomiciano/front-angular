@@ -75,6 +75,7 @@ export class AtendimentoService extends BaseService {
       });
     });
   }
+
   async restaurar(id: number): Promise<boolean> {
     return new Promise((resolve) => {
       this.post(`/atendimento/restaurar/${id}`).subscribe((res: any) => {

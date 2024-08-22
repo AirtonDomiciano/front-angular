@@ -3,10 +3,10 @@ import FormaPagamento from 'src/app/shared/interface/formas-pagamento.interface'
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ListaFormasPagamento } from './const/formas-pagamento.const';
 import ComplementoModel from './model/complemento.model';
-import { MovLctosService } from 'src/app/services/mov-lctos.service';
 import { ToastMessageService } from '../../services/toast-message.service';
-import MovLctosInterface from '../../interface/mov-lctos.interface';
 import ComplementosInterface from '../../interface/complementos.interface';
+import { MovimentacoesService } from 'src/app/services/movimentacoes.service';
+import MovimentacoesInterface from '../../interface/movimentacoes.interface';
 
 @Component({
   selector: 'app-pagamento',
@@ -25,7 +25,7 @@ export class ComplementoComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private movLctosService: MovLctosService,
+    private movimentacoesService: MovimentacoesService,
     private toast: ToastMessageService
   ) {}
 
@@ -40,7 +40,7 @@ export class ComplementoComponent implements OnInit {
 
   async onSubmit() {
     const valor = this.formGroup.controls['valor'].value;
-    const movLcto: MovLctosInterface = {
+    const movLcto: MovimentacoesInterface = {
       idFormasDePagamento: this.formaSelecionada!.idFormasDePagamento,
       valorPago: valor,
       pagamento: this.complemento?.pagamento!,
@@ -48,7 +48,7 @@ export class ComplementoComponent implements OnInit {
       data: new Date(),
     };
 
-    const res = await this.movLctosService.salvarPagamento(
+    const res = await this.movimentacoesService.salvarPagamento(
       this.complemento?.idAtendimento!,
       movLcto
     );
