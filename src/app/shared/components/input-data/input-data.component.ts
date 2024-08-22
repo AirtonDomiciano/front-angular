@@ -1,12 +1,12 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-input-data',
   templateUrl: './input-data.component.html',
   styleUrls: ['./input-data.component.scss'],
 })
-export class InputDataComponent {
+export class InputDataComponent implements OnInit {
   @Input() form!: FormGroup;
   @Input() id: string = '';
   @Input() frmName: string = '';
@@ -14,4 +14,15 @@ export class InputDataComponent {
   @Input() frmPlaceholder: string = 'Data';
 
   public date!: Date;
+  public isRequired: boolean = false;
+
+  ngOnInit(): void {
+    this.verificaCampoRequerido();
+  }
+
+  verificaCampoRequerido() {
+    this.isRequired = this.form.controls[this.frmName].hasValidator(
+      Validators.required
+    );
+  }
 }

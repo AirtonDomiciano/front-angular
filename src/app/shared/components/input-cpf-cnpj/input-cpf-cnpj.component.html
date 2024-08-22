@@ -7,8 +7,8 @@
       id="{{ frmName }}"
       formControlName="{{ frmName }}"
       [ngClass]="{
-        'is-invalid': form.get(frmName)?.invalid,
-        'is-valid': form.get(frmName)?.valid
+        'is-invalid': form.get(frmName)?.invalid && isRequired,
+        'is-valid': form.get(frmName)?.valid && isRequired
       }"
       mask="000.000.000-00||00.000.000/0000-0"
       required

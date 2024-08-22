@@ -7,8 +7,9 @@
       id="{{ frmName }}"
       formControlName="{{ frmName }}"
       [ngClass]="{
-        'is-invalid': form.get(frmName)?.invalid || !valorValido,
-        'is-valid': form.get(frmName)?.valid
+        'is-invalid':
+          (form.get(frmName)?.invalid && isRequired) || !valorValido,
+        'is-valid': form.get(frmName)?.valid && isRequired
       }"
       required
       prefix="R$"

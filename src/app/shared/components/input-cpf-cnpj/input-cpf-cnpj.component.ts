@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-input-cpf-cnpj',
@@ -14,5 +14,15 @@ export class InputCpfCnpjComponent implements OnInit {
   @Input() frmName = '';
   @Input() placeholder = '';
 
-  ngOnInit(): void {}
+  public isRequired: boolean = false;
+
+  ngOnInit(): void {
+    this.verificaCampoRequerido();
+  }
+
+  verificaCampoRequerido() {
+    this.isRequired = this.form.controls[this.frmName].hasValidator(
+      Validators.required
+    );
+  }
 }
