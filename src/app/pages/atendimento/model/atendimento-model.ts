@@ -5,6 +5,7 @@ export class AtendimentoModel extends Atendimento {
     super();
     this.hora = new Date();
     this.data = new Date();
+    this.titulo = '';
     this.descricao = '';
   }
 }
