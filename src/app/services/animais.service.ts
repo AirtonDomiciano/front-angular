@@ -29,7 +29,7 @@ export class AnimaisService extends BaseService {
     });
   }
 
-  async deletar(id: number): Promise<Boolean> {
+  async deletar(id: number): Promise<boolean> {
     return new Promise((resolve) => {
       this.delete(`/animais/${id}`).subscribe((res: any) => {
         resolve(res);

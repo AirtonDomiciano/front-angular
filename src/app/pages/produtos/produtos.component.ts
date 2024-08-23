@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProdutosModel } from './model/produtos.model';
 import { Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 
 @Component({
   selector: 'app-produtos',
@@ -10,26 +11,27 @@ import { ProdutosService } from 'src/app/services/produtos.service';
 })
 export class ProdutosComponent implements OnInit {
   public listagemProdutos: ProdutosModel[] = [];
-  public ativos: boolean = false;
+  public mostrarAtivos!: boolean;
 
   constructor(
     private router: Router,
-    private produtosService: ProdutosService
+    private produtosService: ProdutosService,
+    private toast: ToastMessageService
   ) {}
 
   async ngOnInit(): Promise<void> {
     this.buscarProdutos(this.ativos);
   }
 
-  async buscarProdutos(ativo: boolean) {
-    const res = await this.produtosService.buscarAtivosInativos(ativo);
-
+  async buscarTodosProdutos() {
+    const res = await this.produtosService.BuscarTodosProdutos();
     if (!res) {
       alert('Deu ruim!');
       return;
     }
-
-    this.listagemProdutos = res;
+    if (res) {
+      this.listagemProdutos = res.filter((el) => el.ativo === true);
+    }
   }
 
   adicionarProduto() {
@@ -43,11 +45,24 @@ export class ProdutosComponent implements OnInit {
   async excluirProduto(id: number) {
     const res = await this.produtosService.DeletarProduto(id);
 
-    if (!res) {
-      alert('Deu ruim!');
-      return;
+    if (res) {
+      this.toast.mostrarSucesso('Produto removido com sucesso!');
+    } else {
+      this.toast.mostrarErro(
+        'Não foi possivel remover esse produto, pois ele já está vinculado ao serviço.'
+      );
     }
+  }
 
-    await this.buscarProdutos(this.ativos);
+  async filtrar(): Promise<void> {
+    const res = await this.produtosService.BuscarTodosProdutos();
+    if (res) {
+      if (this.mostrarAtivos) {
+        this.listagemProdutos = res.filter((el) => el.ativo === true);
+      } else {
+        this.listagemProdutos = res.filter((el) => el.ativo === false);
+      }
+    }
+    this.mostrarAtivos = !this.mostrarAtivos;
   }
 }

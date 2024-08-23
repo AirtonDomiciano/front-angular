@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
 import { ProdutosModel } from '../produtos/model/produtos.model';
@@ -42,6 +42,7 @@ export class ProdutoComponent implements OnInit {
       this.formGroup.controls['qtdeTotal'].setValue(produto.qtdeTotal);
       this.formGroup.controls['imagem'].setValue(produto.imagem);
       this.formGroup.controls['valor'].setValue(produto.valor);
+      this.formGroup.controls['ativo'].setValue(produto.ativo);
     }
   }
 
@@ -62,7 +63,6 @@ export class ProdutoComponent implements OnInit {
 
     if (this.id) {
       if (validation) {
-        input.ativo = true;
         const res = await this.produtosService.salvar(input);
         if (res) {
           this.toast.mostrarSucesso('Edição Concluída!');
@@ -74,7 +74,6 @@ export class ProdutoComponent implements OnInit {
       return;
     }
     if (validation) {
-      input.ativo = true;
       const res = await this.produtosService.salvar(input);
       if (res) {
         this.toast.mostrarSucesso('Produto adicionado com sucesso!');
@@ -106,6 +105,7 @@ export class ProdutoComponent implements OnInit {
       'qtdeTotal',
       'imagem',
       'valor',
+      'ativo',
     ];
 
     this.utilsService.setarCamposRequeridos(campos, this.formGroup);

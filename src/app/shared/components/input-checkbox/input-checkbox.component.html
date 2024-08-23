@@ -1,0 +1,10 @@
+<form [formGroup]="form">
+  <span>
+    <p-checkbox
+      id="{{ frmName }}"
+      formControlName="{{ frmName }}"
+      [(ngModel)]="checked"
+      [binary]="true"
+    />
+  </span>
+</form>
