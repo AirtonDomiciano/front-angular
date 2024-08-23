@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClienteComponent } from './cliente.component';
 import { ClienteRoutingModule } from './cliente-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputModule } from 'src/app/shared/components/input/input.module';
 import { InputCepModule } from 'src/app/shared/components/input-cep/input-cep.module';
 import { InputTelefoneModule } from 'src/app/shared/components/input-telefone/input-telefone.module';

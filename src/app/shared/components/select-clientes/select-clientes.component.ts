@@ -10,7 +10,7 @@ import Clientes from '../../model/clientes';
 })
 export class SelectClientesComponent implements OnInit {
   @Input() form!: FormGroup;
-  @Input() class = 'form-control rounded-pill';
+  @Input() class = 'container form-control rounded-pill';
   @Input() id = '';
   @Input() frmName = '';
   @Input() placeholder = '';

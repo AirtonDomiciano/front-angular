@@ -14,17 +14,17 @@ export class InputComponent {
   @Input() placeholder: string = '';
   @Input() frmClass: string = 'form-control rounded-pill';
 
-  public isRequired: boolean = false;
+  public isFrmError = false;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.verificaCampoRequerido();
+    this.frmError();
   }
 
-  verificaCampoRequerido() {
-    this.isRequired = this.form.controls[this.frmName].hasValidator(
-      Validators.required
-    );
+  frmError() {
+    if (this.form.controls[this.frmName].invalid) {
+      this.isFrmError = true;
+    }
   }
 }
