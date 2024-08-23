@@ -45,7 +45,6 @@ export class AnimaisComponent implements OnInit {
 
   async pegarDadosTabela(): Promise<void> {
     const res = await this.animaisService.buscarTodos();
-    console.log(res);
     if (res) {
       const input = res.filter((el) => el.ativo === true);
       this.listarAnimais = input;
