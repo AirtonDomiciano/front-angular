@@ -42,6 +42,7 @@ export class ProdutoComponent implements OnInit {
       this.formGroup.controls['qtdeTotal'].setValue(produto.qtdeTotal);
       this.formGroup.controls['imagem'].setValue(produto.imagem);
       this.formGroup.controls['valor'].setValue(produto.valor);
+      this.formGroup.controls['ativo'].setValue(produto.ativo);
     }
   }
 
