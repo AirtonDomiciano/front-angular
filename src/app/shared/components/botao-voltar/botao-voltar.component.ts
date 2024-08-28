@@ -8,14 +8,17 @@ import { ToastMessageService } from '../../services/toast-message.service';
   styleUrls: ['./botao-voltar.component.scss'],
 })
 export class BotaoVoltarComponent {
-  @Input() btnClass: string = '';
-  @Input() btnRoute: string = '';
-  @Input() btnToast: string = '';
+  @Input() class: string = 'btn-danger rounded-pill w-100';
+  @Input() route: string = '';
+  @Input() toast: string = '';
 
-  constructor(private router: Router, private toast: ToastMessageService) {}
+  constructor(
+    private router: Router,
+    private toastMessage: ToastMessageService
+  ) {}
 
   voltar() {
-    this.toast.mostrarInfo(this.btnToast);
-    this.router.navigate([this.btnRoute]);
+    this.toastMessage.mostrarInfo(this.toast);
+    this.router.navigate([`private/${this.route}`]);
   }
 }
