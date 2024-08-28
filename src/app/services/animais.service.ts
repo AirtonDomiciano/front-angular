@@ -52,4 +52,12 @@ export class AnimaisService extends BaseService {
       });
     });
   }
+
+  async buscarPorIdClientes(id: number): Promise<Array<Animais>> {
+    return new Promise((resolve) => {
+      this.get(`/animais/buscarPorIdClientes/${id}`).subscribe((res: any) => {
+        resolve(res);
+      });
+    });
+  }
 }

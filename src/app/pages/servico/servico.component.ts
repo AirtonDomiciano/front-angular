@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicoModel } from './model/servico.model';
@@ -17,6 +23,7 @@ import { ContasReceberService } from 'src/app/services/contas-receber.service';
 import ContasReceberModel from './model/contas-receber.model';
 import { ParcelasService } from 'src/app/services/parcelas.service';
 import FormularioServicoInterface from 'src/app/shared/interface/formulario-servico.interface';
+import { SelectAnimaisClienteComponent } from 'src/app/shared/components/select-animais-cliente/select-animais-cliente.component';
 
 @Component({
   selector: 'app-servico',
@@ -24,6 +31,8 @@ import FormularioServicoInterface from 'src/app/shared/interface/formulario-serv
   styleUrls: ['./servico.component.scss'],
 })
 export class ServicoComponent implements OnInit {
+  @ViewChild('selectAnimaisCliente')
+  selectAnimaisClientesComponent!: SelectAnimaisClienteComponent;
   @Output() emitterFormServico: EventEmitter<FormularioServicoInterface> =
     new EventEmitter<FormularioServicoInterface>();
 
@@ -272,5 +281,9 @@ export class ServicoComponent implements OnInit {
 
   receberIdAtendimento(id: number) {
     this.idAtendimento = id;
+  }
+
+  selecionarAnimaisDoCliente(id: number) {
+    this.selectAnimaisClientesComponent.selecionarAnimaisDoCliente(id);
   }
 }
