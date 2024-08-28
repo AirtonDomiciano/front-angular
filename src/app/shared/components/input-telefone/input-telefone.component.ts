@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-input-telefone',
@@ -14,5 +14,15 @@ export class InputTelefoneComponent implements OnInit {
   @Input() frmName = '';
   @Input() placeholder = '';
 
-  ngOnInit(): void {}
+  public isRequired: boolean = false;
+
+  ngOnInit(): void {
+    this.verificaCampoObrigatorio();
+  }
+
+  verificaCampoObrigatorio() {
+    this.isRequired = this.form.controls[this.frmName].hasValidator(
+      Validators.required
+    );
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -14,17 +14,17 @@ export class InputComponent implements OnInit {
   @Input() placeholder: string = '';
   @Input() frmClass: string = 'form-control rounded-pill';
 
-  // public isFrmError = false;
+  public isRequired: boolean = false;
 
   constructor() {}
 
   ngOnInit(): void {
-    // this.frmError();
+    this.verificaCampoRequerido();
   }
 
-  // frmError() {
-  //   if (this.form.controls[this.frmName].invalid) {
-  //     this.isFrmError = true;
-  //   }
-  // }
+  verificaCampoRequerido() {
+    this.isRequired = this.form.controls[this.frmName].hasValidator(
+      Validators.required
+    );
+  }
 }

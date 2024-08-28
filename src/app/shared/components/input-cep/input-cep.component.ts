@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { InputCepService } from '../../services/input-cep.service';
 import { EnderecoInterface } from './endereco.interface';
 
@@ -21,10 +21,13 @@ export class InputCepComponent implements OnInit {
 
   public cepSoTemNumeros = true;
   public verificaoTamanhoInicial: boolean = false;
+  public isRequired: boolean = false;
 
   constructor(private inputCepService: InputCepService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.verificaCampoRequerido();
+  }
 
   onLoadCep() {
     let cep = this.form.controls['cep'].value;
@@ -57,5 +60,11 @@ export class InputCepComponent implements OnInit {
       const value: EnderecoInterface = endereco;
       this.onEvent.emit(value);
     });
+  }
+
+  verificaCampoRequerido() {
+    this.isRequired = this.form.controls[this.frmName].hasValidator(
+      Validators.required
+    );
   }
 }

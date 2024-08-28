@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { Icons } from './consts/icons.const';
 
 @Component({
@@ -18,9 +18,11 @@ export class InputSenhaComponent implements OnInit {
   public mostrarSenha: boolean = false;
   public listIcons!: string[];
   public icon: string = 'bi bi-eye-slash-fill';
+  public isRequired: boolean = false;
 
   ngOnInit(): void {
     this.listIcons = Icons;
+    this.verificaCampoRequerido();
   }
 
   alterarEstadoInputSenha() {
@@ -32,5 +34,11 @@ export class InputSenhaComponent implements OnInit {
       this.frmType = 'password';
       this.icon = this.listIcons[1];
     }
+  }
+
+  verificaCampoRequerido() {
+    this.isRequired = this.form.controls[this.frmName].hasValidator(
+      Validators.required
+    );
   }
 }
