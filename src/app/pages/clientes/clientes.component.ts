@@ -11,7 +11,7 @@ import { ToastMessageService } from 'src/app/shared/services/toast-message.servi
 })
 export class ClientesComponent implements OnInit {
   public listaClientes: Clientes[] = [];
-  public mostrarAtivos!: boolean;
+  public mostrarAtivos = true;
 
   constructor(
     private clientesService: ClientesService,
@@ -20,7 +20,7 @@ export class ClientesComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.buscarClientes(this.ativos);
+    this.filtrar();
   }
 
   adicionarCliente() {
@@ -31,17 +31,14 @@ export class ClientesComponent implements OnInit {
     this.router.navigate([`private/cliente/${id}`]);
   }
 
-  async buscarClientes() {
+  async filtrar() {
     const res = await this.clientesService.buscarTodosClientes();
-    console.log(res);
     if (!res) {
       alert('DEU Errado');
       return;
     }
-    if (res) {
-      const input = res.filter((el) => el.ativo === true);
-      this.listaClientes = input;
-    }
+    this.listaClientes = res.filter((el) => el.ativo === this.mostrarAtivos);
+    this.mostrarAtivos = !this.mostrarAtivos;
   }
 
   async deletarCliente(id: number) {
@@ -53,18 +50,6 @@ export class ClientesComponent implements OnInit {
       this.toast.mostrarErro(
         'Não foi possivel remover este cliente, pois já está vinculado no atendimento.'
       );
-    }
-  }
-
-  async filtrarAtivos(): Promise<void> {
-    const res = await this.clientesService.buscarTodosClientes();
-    if (res) {
-      if (this.mostrarAtivos) {
-        this.listaClientes = res.filter((el) => el.ativo === true);
-      } else {
-        this.listaClientes = res.filter((el) => el.ativo === false);
-      }
-      this.mostrarAtivos = !this.mostrarAtivos;
     }
   }
 }

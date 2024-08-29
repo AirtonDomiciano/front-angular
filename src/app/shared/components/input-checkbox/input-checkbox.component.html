@@ -1,10 +1,11 @@
 <form [formGroup]="form">
-  <span>
+  <div class="d-flex align-items-center">
+    <h6>{{ frmName | titlecase }}:&nbsp;</h6>
     <p-checkbox
       id="{{ frmName }}"
       formControlName="{{ frmName }}"
       [(ngModel)]="checked"
       [binary]="true"
     />
-  </span>
+  </div>
 </form>

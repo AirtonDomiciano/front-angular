@@ -11,7 +11,7 @@ import { ToastMessageService } from 'src/app/shared/services/toast-message.servi
 })
 export class ProdutosComponent implements OnInit {
   public listagemProdutos: ProdutosModel[] = [];
-  public mostrarAtivos!: boolean;
+  public mostrarAtivos = true;
 
   constructor(
     private router: Router,
@@ -20,18 +20,17 @@ export class ProdutosComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.buscarProdutos(this.ativos);
+    this.filtrar();
   }
 
-  async buscarTodosProdutos() {
+  async filtrar(): Promise<void> {
     const res = await this.produtosService.BuscarTodosProdutos();
     if (!res) {
       alert('Deu ruim!');
       return;
     }
-    if (res) {
-      this.listagemProdutos = res.filter((el) => el.ativo === true);
-    }
+    this.listagemProdutos = res.filter((el) => el.ativo === this.mostrarAtivos);
+    this.mostrarAtivos = !this.mostrarAtivos;
   }
 
   adicionarProduto() {
@@ -52,17 +51,5 @@ export class ProdutosComponent implements OnInit {
         'Não foi possivel remover esse produto, pois ele já está vinculado ao serviço.'
       );
     }
-  }
-
-  async filtrar(): Promise<void> {
-    const res = await this.produtosService.BuscarTodosProdutos();
-    if (res) {
-      if (this.mostrarAtivos) {
-        this.listagemProdutos = res.filter((el) => el.ativo === true);
-      } else {
-        this.listagemProdutos = res.filter((el) => el.ativo === false);
-      }
-    }
-    this.mostrarAtivos = !this.mostrarAtivos;
   }
 }

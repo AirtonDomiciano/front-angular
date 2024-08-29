@@ -11,9 +11,11 @@
             [form]="formGroup"
           ></app-select-clientes>
         </div>
-        <div class="col-sm-5 d-flex ms-5 align-items-center">
-          <strong class="ms-5">Ativo:</strong>
-          <input-checkbox frmName="ativo" [form]="formGroup"></input-checkbox>
+        <div class="col-sm-5 d-flex align-items-center">
+          <app-input-checkbox
+            frmName="ativo"
+            [form]="formGroup"
+          ></app-input-checkbox>
         </div>
       </div>
 

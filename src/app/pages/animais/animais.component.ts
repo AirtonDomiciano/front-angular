@@ -11,7 +11,7 @@ import { ToastMessageService } from 'src/app/shared/services/toast-message.servi
 })
 export class AnimaisComponent implements OnInit {
   public listarAnimais: TabelaAnimais[] = [];
-  public mostrarAtivos!: boolean;
+  public mostrarAtivos = true;
 
   constructor(
     private router: Router,
@@ -20,7 +20,7 @@ export class AnimaisComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    await this.buscarAnimais(true);
+    await this.filtrar();
   }
 
   adicionar() {
@@ -34,7 +34,7 @@ export class AnimaisComponent implements OnInit {
       this.toast.mostrarSucesso('Excluído com sucesso!');
     } else {
       this.toast.mostrarErro(
-        'O Animal não pode ser excluido. Já  foi feito atendimento nesse fidido.'
+        'O Animal não pode ser excluido, pois já foi feito o atendimento.'
       );
     }
   }
@@ -43,23 +43,13 @@ export class AnimaisComponent implements OnInit {
     this.router.navigate([`/private/animal/${id}`]);
   }
 
-  async pegarDadosTabela(): Promise<void> {
-    const res = await this.animaisService.buscarTodos();
-    if (res) {
-      const input = res.filter((el) => el.ativo === true);
-      this.listarAnimais = input;
-    }
-  }
-
   async filtrar(): Promise<void> {
     const res = await this.animaisService.buscarTodos();
-    if (res) {
-      if (this.mostrarAtivos) {
-        this.listarAnimais = res.filter((el) => el.ativo === true);
-      } else {
-        this.listarAnimais = res.filter((el) => el.ativo === false);
-      }
-      this.mostrarAtivos = !this.mostrarAtivos;
+    if (!res) {
+      alert('Deu erro.');
+      return;
     }
+    this.listarAnimais = res.filter((el) => el.ativo === this.mostrarAtivos);
+    this.mostrarAtivos = !this.mostrarAtivos;
   }
 }

@@ -5,6 +5,5 @@ export class ClienteModel extends Clientes {
     super();
     this.idCidades = 0;
     this.idUf = 0;
-    // this.ativo = true;
   }
 }
