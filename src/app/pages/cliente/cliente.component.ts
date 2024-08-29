@@ -43,7 +43,6 @@ export class ClienteComponent {
 
   async onSubmit() {
     const input: ClienteModel = this.formGroup.value;
-    console.log(input);
     if (this.formGroup.invalid || input.idCidades! <= 0 || input.idUf! <= 0) {
       this.toast.mostrarAviso(
         'É preciso preencher todos os campos para prosseguir.'
