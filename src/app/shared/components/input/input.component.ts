@@ -6,7 +6,7 @@ import { UntypedFormGroup, Validators } from '@angular/forms';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class InputComponent {
+export class InputComponent implements OnInit {
   @Input() form!: UntypedFormGroup;
   @Input() frmType: string = 'text';
   @Input() id: string = '';
@@ -14,17 +14,17 @@ export class InputComponent {
   @Input() placeholder: string = '';
   @Input() frmClass: string = 'form-control rounded-pill';
 
-  public isFrmError = false;
+  public isRequired: boolean = false;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.frmError();
+    this.verificaCampoRequerido();
   }
 
-  frmError() {
-    if (this.form.controls[this.frmName].invalid) {
-      this.isFrmError = true;
-    }
+  verificaCampoRequerido() {
+    this.isRequired = this.form.controls[this.frmName].hasValidator(
+      Validators.required
+    );
   }
 }
