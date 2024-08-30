@@ -43,7 +43,6 @@ export class AnimalComponent implements OnInit {
     this.formGroup.controls['divisao'].setValidators([Validators.required]);
     this.formGroup.controls['especie'].setValidators([Validators.required]);
     this.formGroup.controls['raca'].setValidators([Validators.required]);
-    this.formGroup.controls['ativo'].setValidators([Validators.required]);
   }
 
   async editar(): Promise<void> {
