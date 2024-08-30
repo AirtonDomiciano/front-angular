@@ -21,6 +21,5 @@ export default class Clientes {
     this.fone = '';
     this.email = '';
     this.dtaNascimento = new Date('');
-    // this.ativo = true;
   }
 }
