@@ -1,1 +1,16 @@
-<p>select-animais-cliente works!</p>
+<form [formGroup]="form" method="get">
+  <select
+    class="{{ class }}"
+    id="{{ frmName }}"
+    formControlName="{{ frmName }}"
+    [ngClass]="{ 'is-invalid': form.get(frmName)?.invalid }"
+    required
+  >
+    <option value="0">Selecione um animal:</option>
+    <ng-container *ngFor="let animal of animais">
+      <option value="{{ animal.idAnimal }}">
+        {{ animal.nome }}
+      </option></ng-container
+    >
+  </select>
+</form>
