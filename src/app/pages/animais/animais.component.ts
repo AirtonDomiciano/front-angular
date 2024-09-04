@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AnimaisService } from 'src/app/services/animais.service';
 import TabelaAnimais from './model/tabela-animais.model';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import AnimaisModel from './model/animais.model';
 
 @Component({
   selector: 'app-animais',
@@ -27,15 +28,15 @@ export class AnimaisComponent implements OnInit {
     this.router.navigate([`/private/animal`]);
   }
 
-  async excluir(id: number): Promise<void> {
-    const res = await this.animaisService.deletar(id);
-
-    if (res) {
-      this.toast.mostrarSucesso('Excluído com sucesso!');
+  async excluir(animal: AnimaisModel): Promise<void> {
+    if (!animal.idAnimal) {
+      return;
+    }
+    if (animal.ativo) {
+      this.toast.mostrarErro('Não foi possivel remover, pois está ativo.');
     } else {
-      this.toast.mostrarErro(
-        'O Animal não pode ser excluido, pois já foi feito o atendimento.'
-      );
+      await this.animaisService.deletar(animal.idAnimal);
+      this.toast.mostrarSucesso('Removido com sucesso');
     }
   }
 

@@ -36,19 +36,7 @@ export class ProdutosService extends BaseService {
     });
   }
 
-  async buscarAtivosInativos(ativo: boolean): Promise<Array<Produto>> {
-    return new Promise((resolve) => {
-      this.get(`/produtos/buscarAtivosInativos/${ativo}`).subscribe(
-        (res: any) => {
-          if (res) {
-            resolve(res);
-          }
-        }
-      );
-    });
-  }
-
-  async DeletarProduto(id: number): Promise<boolean> {
+  async deletarProduto(id: number): Promise<boolean> {
     return new Promise((resolve) => {
       this.delete(`/produtos/${id}`).subscribe((res: any) => {
         resolve(res);

@@ -25,10 +25,6 @@ export class ProdutosComponent implements OnInit {
 
   async filtrar(): Promise<void> {
     const res = await this.produtosService.BuscarTodosProdutos();
-    if (!res) {
-      alert('Deu ruim!');
-      return;
-    }
     this.listagemProdutos = res.filter((el) => el.ativo === this.mostrarAtivos);
     this.mostrarAtivos = !this.mostrarAtivos;
   }
@@ -41,15 +37,16 @@ export class ProdutosComponent implements OnInit {
     this.router.navigate([`private/produto/${id}`]);
   }
 
-  async excluirProduto(id: number) {
-    const res = await this.produtosService.DeletarProduto(id);
-
-    if (res) {
-      this.toast.mostrarSucesso('Produto removido com sucesso!');
+  async excluirProduto(produto: ProdutosModel): Promise<void> {
+    if (!produto.idProdutos) {
+      return;
+    }
+    if (produto.ativo) {
+      this.toast.mostrarErro('Não pode remover um produto ativo.');
+      return;
     } else {
-      this.toast.mostrarErro(
-        'Não foi possivel remover esse produto, pois ele já está vinculado ao serviço.'
-      );
+      await this.produtosService.deletarProduto(produto.idProdutos);
+      this.toast.mostrarSucesso('Produto deletado com sucesso');
     }
   }
 }
