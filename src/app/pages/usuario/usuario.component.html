@@ -85,8 +85,14 @@
       </app-input>
     </div>
   </div>
-  <div class="row px-4 py-2 mt-3">
-    <div class="col-sm-12">
+  <div class="d-flex justify-content-between row px-4 py-2 mt-3">
+    <div class="col-sm-3">
+      <app-botao-voltar
+        route="usuarios"
+        toast="Criação de usuário cancelada!"
+      ></app-botao-voltar>
+    </div>
+    <div class="col-sm-3">
       <button
         [disabled]="this.formGroup.invalid"
         class="btn btn-primary rounded-pill w-100"
