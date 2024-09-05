@@ -10,6 +10,7 @@ import Clientes from 'src/app/shared/model/clientes';
 })
 export class ClientesComponent implements OnInit {
   public listaClientes: Clientes[] = [];
+  public ativos: boolean = true;
 
   constructor(
     public clientesService: ClientesService,
@@ -17,7 +18,7 @@ export class ClientesComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.buscarClientes();
+    this.buscarClientes(this.ativos);
   }
 
   adicionarCliente() {
@@ -28,8 +29,8 @@ export class ClientesComponent implements OnInit {
     this.router.navigate([`private/cliente/${id}`]);
   }
 
-  async buscarClientes() {
-    const res = await this.clientesService.buscarTodosClientes();
+  async buscarClientes(ativo: boolean) {
+    const res = await this.clientesService.buscarAtivosInativos(ativo);
 
     if (!res) {
       alert('DEU Errado');
@@ -47,6 +48,6 @@ export class ClientesComponent implements OnInit {
       return;
     }
 
-    await this.buscarClientes();
+    await this.buscarClientes(this.ativos);
   }
 }

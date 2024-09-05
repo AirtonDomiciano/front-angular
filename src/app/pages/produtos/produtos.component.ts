@@ -10,6 +10,7 @@ import { ProdutosService } from 'src/app/services/produtos.service';
 })
 export class ProdutosComponent implements OnInit {
   public listagemProdutos: ProdutosModel[] = [];
+  public ativos: boolean = false;
 
   constructor(
     private router: Router,
@@ -17,11 +18,11 @@ export class ProdutosComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.buscarTodosProdutos();
+    this.buscarProdutos(this.ativos);
   }
 
-  async buscarTodosProdutos() {
-    const res = await this.produtosService.BuscarTodosProdutos();
+  async buscarProdutos(ativo: boolean) {
+    const res = await this.produtosService.buscarAtivosInativos(ativo);
 
     if (!res) {
       alert('Deu ruim!');
@@ -47,6 +48,6 @@ export class ProdutosComponent implements OnInit {
       return;
     }
 
-    await this.buscarTodosProdutos();
+    await this.buscarProdutos(this.ativos);
   }
 }

@@ -45,9 +45,17 @@ export class AnimaisService extends BaseService {
     });
   }
 
-  async buscarTodos(): Promise<Array<TabelaAnimais>> {
+  async buscarAtivosInativos(ativo: boolean): Promise<Array<TabelaAnimais>> {
     return new Promise((resolve) => {
-      this.get('/animais/animaisclientes').subscribe((res: any) => {
+      this.get(`/animais/animaisclientes/${ativo}`).subscribe((res: any) => {
+        resolve(res);
+      });
+    });
+  }
+
+  async buscarPorIdClientes(id: number): Promise<Array<Animais>> {
+    return new Promise((resolve) => {
+      this.get(`/animais/buscarPorIdClientes/${id}`).subscribe((res: any) => {
         resolve(res);
       });
     });

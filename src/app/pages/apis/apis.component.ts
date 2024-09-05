@@ -11,17 +11,18 @@ import { ApisModel } from './model/apis.model';
 })
 export class ApisComponent implements OnInit {
   public listaApis: ApisModel[] = [];
+  public ativos: boolean = true;
 
   public formGroup: FormGroup = new FormGroup({});
 
   constructor(private router: Router, private apisService: ApisService) {}
 
   async ngOnInit(): Promise<void> {
-    await this.buscarTodasApis();
+    await this.buscarTodasApis(this.ativos);
   }
 
-  async buscarTodasApis() {
-    const apis = await this.apisService.buscarTodasApis();
+  async buscarTodasApis(ativo: boolean) {
+    const apis = await this.apisService.buscarAtivosInativos(ativo);
 
     if (!apis) {
       alert('Deu erro');
@@ -39,7 +40,7 @@ export class ApisComponent implements OnInit {
     const res = await this.apisService.deletarApi(id);
 
     if (res) {
-      await this.buscarTodasApis();
+      await this.buscarTodasApis(this.ativos);
     }
   }
 
