@@ -44,9 +44,12 @@ export class ProdutosComponent implements OnInit {
     if (produto.ativo) {
       this.toast.mostrarErro('Não pode remover um produto ativo.');
       return;
-    } else {
-      await this.produtosService.deletarProduto(produto.idProdutos);
+    }
+    const res = await this.produtosService.deletarProduto(produto.idProdutos);
+    if (res) {
       this.toast.mostrarSucesso('Produto deletado com sucesso');
+    } else {
+      this.toast.mostrarErro('Ops... Ação sem resposta.');
     }
   }
 }

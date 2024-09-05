@@ -3,6 +3,7 @@ import { ClientesService } from 'src/app/services/clientes.service';
 import { Router } from '@angular/router';
 import Clientes from 'src/app/shared/model/clientes';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { ClienteModel } from '../cliente/model/cliente.model';
 
 @Component({
   selector: 'app-clientes',
@@ -41,15 +42,18 @@ export class ClientesComponent implements OnInit {
     this.mostrarAtivos = !this.mostrarAtivos;
   }
 
-  async deletarCliente(id: number) {
-    const res = await this.clientesService.deletarCliente(id);
-
+  async deletarCliente(cliente: ClienteModel): Promise<void> {
+    if (!cliente.idClientes) {
+      return;
+    }
+    if (cliente.ativo) {
+      this.toast.mostrarErro('Cliente Ativo não pode ser removido.');
+    }
+    const res = await this.clientesService.deletarCliente(cliente.idClientes);
     if (res) {
-      this.toast.mostrarSucesso('Cliente removido com sucesso!');
+      this.toast.mostrarSucesso('Cliente removido.');
     } else {
-      this.toast.mostrarErro(
-        'Não foi possivel remover este cliente, pois já está vinculado no atendimento.'
-      );
+      this.toast.mostrarErro('Ops... Ação sem resposta.');
     }
   }
 }

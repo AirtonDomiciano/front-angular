@@ -33,10 +33,13 @@ export class AnimaisComponent implements OnInit {
       return;
     }
     if (animal.ativo) {
-      this.toast.mostrarErro('Não foi possivel remover, pois está ativo.');
+      this.toast.mostrarErro('Não é possível remover um animal ativo.');
+    }
+    const res = await this.animaisService.deletar(animal.idAnimal);
+    if (res) {
+      this.toast.mostrarSucesso('Animal removido!');
     } else {
-      await this.animaisService.deletar(animal.idAnimal);
-      this.toast.mostrarSucesso('Removido com sucesso');
+      this.toast.mostrarErro('Ops... Ação sem resposta');
     }
   }
 
