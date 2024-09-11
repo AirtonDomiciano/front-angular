@@ -14,7 +14,7 @@ export class AnimaisComponent implements OnInit {
   constructor(private router: Router, private animaisService: AnimaisService) {}
 
   async ngOnInit(): Promise<void> {
-    await this.pegarDadosTabela();
+    await this.buscarAnimais(true);
   }
 
   adicionar() {
@@ -29,8 +29,7 @@ export class AnimaisComponent implements OnInit {
     this.router.navigate([`/private/animal/${id}`]);
   }
 
-  async pegarDadosTabela(): Promise<void> {
-    const input = await this.animaisService.buscarTodos();
-    this.listarAnimais = input;
+  async buscarAnimais(ativo: boolean) {
+    this.listarAnimais = await this.animaisService.buscarAtivosInativos(ativo);
   }
 }

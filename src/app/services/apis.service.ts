@@ -50,4 +50,14 @@ export class ApisService extends BaseService {
       });
     });
   }
+
+  async buscarAtivosInativos(ativo: boolean): Promise<Array<Api>> {
+    return new Promise((resolve) => {
+      this.get(`/apis/buscarAtivosInativos/${ativo}`).subscribe((res: any) => {
+        if (res?.length) {
+          resolve(res);
+        }
+      });
+    });
+  }
 }

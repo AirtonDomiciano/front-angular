@@ -27,6 +27,18 @@ export class UsuariosService extends BaseService {
     });
   }
 
+  async buscarAtivosInativos(ativo: boolean): Promise<Array<Usuario>> {
+    return new Promise((resolve) => {
+      this.get(`/usuarios/buscarAtivosInativos/${ativo}`).subscribe(
+        (res: any) => {
+          if (res?.length) {
+            resolve(res);
+          }
+        }
+      );
+    });
+  }
+
   async deletarUsuario(id: number): Promise<boolean> {
     return new Promise((resolve) => {
       this.delete(`/usuarios/${id}`).subscribe((res: any) => {

@@ -8,8 +8,9 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./usuarios.component.scss'],
 })
 export class UsuariosComponent implements OnInit {
-  listagemUsuarios: UsuarioModel[] = [];
+  public listagemUsuarios: UsuarioModel[] = [];
   public contUsuariosRemovidos: number = 0;
+  public ativos: boolean = true;
 
   constructor(
     private router: Router,
@@ -17,11 +18,11 @@ export class UsuariosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.buscarTodosUsuarios();
+    this.buscarTodosUsuarios(this.ativos);
   }
 
-  async buscarTodosUsuarios() {
-    const res = await this.usuariosService.buscarTodosUsuarios();
+  async buscarTodosUsuarios(ativo: boolean) {
+    const res = await this.usuariosService.buscarAtivosInativos(ativo);
 
     if (!res) {
       alert('Deu ruim!');
@@ -44,7 +45,7 @@ export class UsuariosComponent implements OnInit {
 
     if (res) {
       // DELETADO COM SUCESSO;
-      await this.buscarTodosUsuarios();
+      await this.buscarTodosUsuarios(this.ativos);
     }
   }
 }

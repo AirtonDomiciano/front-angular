@@ -28,6 +28,18 @@ export class ClientesService extends BaseService {
     });
   }
 
+  async buscarAtivosInativos(ativo: boolean): Promise<Array<Clientes>> {
+    return new Promise((resolve) => {
+      this.get(`/clientes/buscarAtivosInativos/${ativo}`).subscribe(
+        (res: any) => {
+          if (res) {
+            resolve(res);
+          }
+        }
+      );
+    });
+  }
+
   async deletarCliente(id: number): Promise<boolean> {
     return new Promise((resolve) => {
       this.delete(`/clientes/${id}`).subscribe((res: any) => {
