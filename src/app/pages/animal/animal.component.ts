@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import AnimaisModel from '../animais/model/animais.model';
 import { AnimaisService } from 'src/app/services/animais.service';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { AnimaisComponent } from '../animais/animais.component';
 
 @Component({
   selector: 'app-animal',
@@ -11,6 +12,9 @@ import { ToastMessageService } from 'src/app/shared/services/toast-message.servi
   styleUrls: ['./animal.component.scss'],
 })
 export class AnimalComponent implements OnInit {
+  @ViewChild(AnimaisComponent)
+  animaisComponent!: AnimaisComponent;
+
   public formGroup!: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
   public model: AnimaisModel = new AnimaisModel();
@@ -59,6 +63,7 @@ export class AnimalComponent implements OnInit {
 
     if (this.id) input.idAnimal = this.id;
 
+    this.animaisComponent.receberAtivosInativos(input.ativo);
     const res = await this.animalService.salvar(input);
 
     if (res) {

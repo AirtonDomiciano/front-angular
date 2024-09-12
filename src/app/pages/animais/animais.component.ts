@@ -48,12 +48,19 @@ export class AnimaisComponent implements OnInit {
   }
 
   async filtrar(): Promise<void> {
-    const res = await this.animaisService.buscarTodos();
-    if (!res) {
-      alert('Deu erro.');
-      return;
-    }
-    this.listarAnimais = res.filter((el) => el.ativo === this.mostrarAtivos);
+    const res = await this.animaisService.buscarAtivosInativos(
+      this.mostrarAtivos
+    );
     this.mostrarAtivos = !this.mostrarAtivos;
+
+    if (res) {
+      this.listarAnimais = res;
+    } else {
+      this.toast.mostrarErro('Ops... Algo deu errado!');
+    }
+  }
+
+  receberAtivosInativos(ativo: boolean) {
+    this.mostrarAtivos = ativo;
   }
 }
