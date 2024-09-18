@@ -29,6 +29,16 @@
       </app-input-senha>
     </div>
     <div class="col-sm-3">
+      <app-input-senha
+        frmPlaceholder="Confirmar Senha"
+        frmName="confirmarSenha"
+        [form]="formGroup"
+      >
+      </app-input-senha>
+    </div>
+  </div>
+  <div class="row px-4 py-2">
+    <div class="col-sm-3">
       <app-input-cep
         placeholder="CEP"
         (onEvent)="onLoadCep($event)"
@@ -37,9 +47,7 @@
       >
       </app-input-cep>
     </div>
-  </div>
-  <div class="row px-4 py-2">
-    <div class="col-sm-9">
+    <div class="col-sm-6">
       <app-input placeholder="Função" frmName="funcao" [form]="formGroup">
       </app-input>
     </div>
@@ -87,11 +95,7 @@
   </div>
   <div class="row px-4 py-2 mt-3">
     <div class="col-sm-12">
-      <button
-        [disabled]="this.formGroup.invalid"
-        class="btn btn-primary rounded-pill w-100"
-        type="submit"
-      >
+      <button class="btn btn-primary rounded-pill w-100" type="submit">
         Salvar
       </button>
     </div>

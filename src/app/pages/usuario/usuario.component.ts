@@ -40,7 +40,6 @@ export class UsuarioComponent implements OnInit {
     this.model = await this.usuariosService.buscarUsuarioPorId(this.id);
 
     delete this.model.idUsuarios;
-
     this.formGroup.setValue(this.model);
   }
 
@@ -49,6 +48,9 @@ export class UsuarioComponent implements OnInit {
     this.formGroup.controls['sobrenome'].setValidators([Validators.required]);
     this.formGroup.controls['email'].setValidators([Validators.required]);
     this.formGroup.controls['senha'].setValidators([Validators.required]);
+    this.formGroup.controls['confirmarSenha'].setValidators([
+      Validators.required,
+    ]);
     this.formGroup.controls['cep'].setValidators([Validators.required]);
     this.formGroup.controls['funcao'].setValidators([Validators.required]);
     this.formGroup.controls['idade'].setValidators([Validators.required]);
@@ -59,6 +61,20 @@ export class UsuarioComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
+    const input: Usuario = this.formGroup.value;
+
+    if (input.senha !== input.confirmarSenha) {
+      this.toast.mostrarAviso('Os campos de senha precisam ser iguais!');
+      this.formGroup.controls['senha'].setErrors({ customError: true });
+      this.formGroup.controls['confirmarSenha'].setErrors({
+        customError: true,
+      });
+      return;
+    } else {
+      this.formGroup.controls['senha'].setErrors(null);
+      this.formGroup.controls['confirmarSenha'].setErrors(null);
+    }
+
     if (this.formGroup.invalid) {
       this.toast.mostrarAviso(
         'É preciso preencher todos os campos para prosseguir.'
@@ -66,7 +82,6 @@ export class UsuarioComponent implements OnInit {
       return;
     }
 
-    const input: Usuario = this.formGroup.value;
     input.email = input.email.toLocaleLowerCase();
 
     if (this.id) {
