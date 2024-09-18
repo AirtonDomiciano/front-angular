@@ -38,6 +38,12 @@ export class AnimalComponent implements OnInit {
     }
   }
 
+  async editar(): Promise<void> {
+    this.model = await this.animalService.buscarPorId(this.id);
+    delete this.model.idAnimal;
+    this.formGroup.setValue(this.model);
+  }
+
   validaCamposRequiridos() {
     const campos: Array<string> = [
       'nome',
@@ -47,12 +53,6 @@ export class AnimalComponent implements OnInit {
       'raca',
     ];
     this.utilsService.setarCamposRequeridos(campos, this.formGroup);
-  }
-
-  async editar(): Promise<void> {
-    this.model = await this.animalService.buscarPorId(this.id);
-    delete this.model.idAnimal;
-    this.formGroup.setValue(this.model);
   }
 
   async onSubmit(): Promise<void> {

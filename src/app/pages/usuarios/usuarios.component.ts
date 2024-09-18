@@ -49,15 +49,21 @@ export class UsuariosComponent implements OnInit {
     this.router.navigate([`private/usuario/${id}`]);
   }
 
-  async removerUsuario(id: number): Promise<void> {
-    const res = await this.usuariosService.deletarUsuario(id);
+  async removerUsuario(usuario: UsuarioModel): Promise<void> {
+    if (!usuario.idUsuarios) {
+      return;
+    }
+
+    if (usuario.ativo) {
+      this.toast.mostrarErro('Não é possivel remover um usuário ativo.');
+    }
+
+    const res = await this.usuariosService.deletarUsuario(usuario.idUsuarios);
 
     if (res) {
       this.toast.mostrarSucesso('Usuário removido com sucesso!');
     } else {
-      this.toast.mostrarErro(
-        'Não foi possivel remover o usuário, pois ele já está vinculado com o serviço.'
-      );
+      this.toast.mostrarErro('Ops! Ação sem resposta...');
     }
   }
 }

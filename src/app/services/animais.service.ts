@@ -47,7 +47,7 @@ export class AnimaisService extends BaseService {
 
   async buscarAtivosInativos(ativo: boolean): Promise<Array<TabelaAnimais>> {
     return new Promise((resolve) => {
-      this.get(`/animais/animaisclientes/${ativo}`).subscribe((res?: any) => {
+      this.get(`/animais/animaisclientes/${ativo}`).subscribe((res: any) => {
         resolve(res);
       });
     });

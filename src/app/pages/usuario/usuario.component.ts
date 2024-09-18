@@ -28,10 +28,11 @@ export class UsuarioComponent implements OnInit {
     private toast: ToastMessageService,
     private utilsService: UtilsService,
     private manipulaCampoAtivoService: ManipulaCampoAtivoService
-  ) {}
+  ) {
+    this.formGroup = this.fb.group(this.model);
+  }
 
   async ngOnInit(): Promise<void> {
-    this.formGroup = this.fb.group(this.model);
     this.validarCamposRequeridos();
     this.titulo = this.id > 0 ? 'Editar Usuário' : 'Cadastrar Usuário';
     if (this.id > 0) {

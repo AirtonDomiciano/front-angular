@@ -13,12 +13,13 @@ import { ManipulaCampoAtivoService } from 'src/app/services/ativo.service';
 })
 export class AnimaisComponent implements OnInit {
   public listarAnimais: TabelaAnimais[] = [];
-  public mostrarAtivos = false;
+  public mostrarAtivos = true;
 
   constructor(
     private router: Router,
     private animaisService: AnimaisService,
-    private manipulaCampoAtivoService: ManipulaCampoAtivoService
+    private manipulaCampoAtivoService: ManipulaCampoAtivoService,
+    private toast: ToastMessageService
   ) {}
 
   async ngOnInit(): Promise<void> {

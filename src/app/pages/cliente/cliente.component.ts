@@ -41,6 +41,12 @@ export class ClienteComponent {
     }
   }
 
+  async editar(): Promise<void> {
+    this.model = await this.clientesService.buscarClientePorId(this.id);
+    delete this.model.idClientes;
+    this.formGroup.setValue(this.model);
+  }
+
   async onSubmit() {
     const input: ClienteModel = this.formGroup.value;
     if (this.formGroup.invalid || input.idCidades! <= 0 || input.idUf! <= 0) {
@@ -87,11 +93,5 @@ export class ClienteComponent {
     this.formGroup.controls['uf'].setValue(event.uf);
     this.formGroup.controls['logradouro'].setValue(event.logradouro);
     this.formGroup.controls['bairro'].setValue(event.bairro);
-  }
-
-  async editar(): Promise<void> {
-    this.model = await this.clientesService.buscarClientePorId(this.id);
-    delete this.model.idClientes;
-    this.formGroup.setValue(this.model);
   }
 }
