@@ -3,6 +3,7 @@ import { UsuarioModel } from '../usuario/model/usuario.model';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { ManipulaCampoAtivoService } from 'src/app/services/ativo.service';
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -11,27 +12,33 @@ import { ToastMessageService } from 'src/app/shared/services/toast-message.servi
 export class UsuariosComponent implements OnInit {
   public listagemUsuarios: UsuarioModel[] = [];
   public contUsuariosRemovidos: number = 0;
-  public ativos: boolean = true;
+  public mostrarAtivos: boolean = true;
 
   constructor(
     private router: Router,
     private usuariosService: UsuariosService,
-    private toast: ToastMessageService
+    private toast: ToastMessageService,
+    private manipularCampoAtivosService: ManipulaCampoAtivoService
   ) {}
 
   ngOnInit(): void {
-    this.buscarTodosUsuarios(this.ativos);
+    this.mostrarAtivos =
+      this.manipularCampoAtivosService.MostrarValorAtivoAtual();
+    this.filtrar();
   }
 
-  async buscarTodosUsuarios(ativo: boolean) {
-    const res = await this.usuariosService.buscarAtivosInativos(ativo);
+  async filtrar() {
+    const res = await this.usuariosService.buscarAtivosInativos(
+      this.mostrarAtivos
+    );
+    this.mostrarAtivos = !this.mostrarAtivos;
+    this.manipularCampoAtivosService.atualizarValorAtivo(this.mostrarAtivos);
 
-    if (!res) {
-      alert('Deu ruim!');
-      return;
+    if (res) {
+      this.listagemUsuarios = res;
+    } else {
+      this.toast.mostrarAviso('Ops! Ação sem resposta...');
     }
-
-    this.listagemUsuarios = res;
   }
 
   adicionarUsuario() {

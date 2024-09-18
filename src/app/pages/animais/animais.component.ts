@@ -4,6 +4,7 @@ import { AnimaisService } from 'src/app/services/animais.service';
 import TabelaAnimais from './model/tabela-animais.model';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 import AnimaisModel from './model/animais.model';
+import { ManipulaCampoAtivoService } from 'src/app/services/ativo.service';
 
 @Component({
   selector: 'app-animais',
@@ -12,15 +13,17 @@ import AnimaisModel from './model/animais.model';
 })
 export class AnimaisComponent implements OnInit {
   public listarAnimais: TabelaAnimais[] = [];
-  public mostrarAtivos = true;
+  public mostrarAtivos = false;
 
   constructor(
     private router: Router,
     private animaisService: AnimaisService,
-    private toast: ToastMessageService
+    private manipulaCampoAtivoService: ManipulaCampoAtivoService
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.mostrarAtivos =
+      this.manipulaCampoAtivoService.MostrarValorAtivoAtual();
     await this.filtrar();
   }
 
@@ -52,15 +55,12 @@ export class AnimaisComponent implements OnInit {
       this.mostrarAtivos
     );
     this.mostrarAtivos = !this.mostrarAtivos;
+    this.manipulaCampoAtivoService.atualizarValorAtivo(this.mostrarAtivos);
 
     if (res) {
       this.listarAnimais = res;
     } else {
       this.toast.mostrarErro('Ops... Algo deu errado!');
     }
-  }
-
-  receberAtivosInativos(ativo: boolean) {
-    this.mostrarAtivos = ativo;
   }
 }

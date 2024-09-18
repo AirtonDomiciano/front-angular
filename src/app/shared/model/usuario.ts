@@ -7,7 +7,7 @@ export default class Usuario {
   senha!: string;
   cep!: string;
   funcao!: string;
-  ativo?: boolean;
+  ativo!: boolean;
   localidade?: string;
   uf?: string;
   bairro?: string;

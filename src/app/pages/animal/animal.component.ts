@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import AnimaisModel from '../animais/model/animais.model';
 import { AnimaisService } from 'src/app/services/animais.service';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
-import { AnimaisComponent } from '../animais/animais.component';
+import { ManipulaCampoAtivoService } from 'src/app/services/ativo.service';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
 
 @Component({
   selector: 'app-animal',
@@ -12,10 +13,7 @@ import { AnimaisComponent } from '../animais/animais.component';
   styleUrls: ['./animal.component.scss'],
 })
 export class AnimalComponent implements OnInit {
-  @ViewChild(AnimaisComponent)
-  animaisComponent!: AnimaisComponent;
-
-  public formGroup!: FormGroup;
+  public formGroup: FormGroup;
   public id = Number(this.route.snapshot.paramMap.get('id'));
   public model: AnimaisModel = new AnimaisModel();
   public titulo = '';
@@ -25,11 +23,14 @@ export class AnimalComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private animalService: AnimaisService,
-    private toast: ToastMessageService
-  ) {}
+    private toast: ToastMessageService,
+    private manipulaCampoAtivoService: ManipulaCampoAtivoService,
+    private utilsService: UtilsService
+  ) {
+    this.formGroup = this.fb.group(this.model);
+  }
 
   async ngOnInit(): Promise<void> {
-    this.formGroup = this.fb.group(this.model);
     this.validaCamposRequiridos();
     this.titulo = this.id > 0 ? 'Editar Animal' : 'Cadastrar Animal';
     if (this.id) {
@@ -38,11 +39,14 @@ export class AnimalComponent implements OnInit {
   }
 
   validaCamposRequiridos() {
-    this.formGroup.controls['nome'].setValidators([Validators.required]);
-    this.formGroup.controls['idClientes'].setValidators([Validators.required]);
-    this.formGroup.controls['divisao'].setValidators([Validators.required]);
-    this.formGroup.controls['especie'].setValidators([Validators.required]);
-    this.formGroup.controls['raca'].setValidators([Validators.required]);
+    const campos: Array<string> = [
+      'nome',
+      'idClientes',
+      'divisao',
+      'especie',
+      'raca',
+    ];
+    this.utilsService.setarCamposRequeridos(campos, this.formGroup);
   }
 
   async editar(): Promise<void> {
@@ -63,7 +67,6 @@ export class AnimalComponent implements OnInit {
 
     if (this.id) input.idAnimal = this.id;
 
-    this.animaisComponent.receberAtivosInativos(input.ativo);
     const res = await this.animalService.salvar(input);
 
     if (res) {
@@ -73,6 +76,7 @@ export class AnimalComponent implements OnInit {
         this.toast.mostrarSucesso('Animal Adicionado!');
       }
       this.router.navigate([`private/animais`]);
+      this.manipulaCampoAtivoService.atualizarValorAtivo(input.ativo);
     }
   }
 }

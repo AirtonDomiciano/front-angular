@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Clientes from 'src/app/shared/model/clientes';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
 import { ClienteModel } from '../cliente/model/cliente.model';
+import { ManipulaCampoAtivoService } from 'src/app/services/ativo.service';
 
 @Component({
   selector: 'app-clientes',
@@ -17,10 +18,12 @@ export class ClientesComponent implements OnInit {
   constructor(
     private clientesService: ClientesService,
     private router: Router,
-    private toast: ToastMessageService
+    private toast: ToastMessageService,
+    private manipularAtivosService: ManipulaCampoAtivoService
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.mostrarAtivos = this.manipularAtivosService.MostrarValorAtivoAtual();
     this.filtrar();
   }
 
@@ -33,13 +36,17 @@ export class ClientesComponent implements OnInit {
   }
 
   async filtrar() {
-    const res = await this.clientesService.buscarTodosClientes();
-    if (!res) {
-      alert('DEU Errado');
-      return;
-    }
-    this.listaClientes = res.filter((el) => el.ativo === this.mostrarAtivos);
+    const res = await this.clientesService.buscarAtivosInativos(
+      this.mostrarAtivos
+    );
     this.mostrarAtivos = !this.mostrarAtivos;
+    this.manipularAtivosService.atualizarValorAtivo(this.mostrarAtivos);
+
+    if (res) {
+      this.listaClientes = res;
+    } else {
+      this.toast.mostrarErro('Ops! Ação sem resposta...');
+    }
   }
 
   async deletarCliente(cliente: ClienteModel): Promise<void> {

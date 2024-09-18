@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { EnderecoInterface } from 'src/app/shared/components/input-cep/endereco.interface';
 import { ClienteModel } from './model/cliente.model';
 import Clientes from 'src/app/shared/model/clientes';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
+import { ManipulaCampoAtivoService } from 'src/app/services/ativo.service';
 
 @Component({
   selector: 'app-cliente',
@@ -24,20 +26,18 @@ export class ClienteComponent {
     private router: Router,
     private route: ActivatedRoute,
     private clientesService: ClientesService,
-    private toast: ToastMessageService
+    private toast: ToastMessageService,
+    private utilsService: UtilsService,
+    private manipulaCampoAtivoService: ManipulaCampoAtivoService
   ) {
     this.formGroup = this.fb.group(this.model);
   }
 
   async ngOnInit(): Promise<void> {
-    this.requiredForm();
-    this.iniciarTitulo();
+    this.validaCamposRequeridos();
+    this.titulo = this.id ? 'Editar Cliente' : 'Cadastro Cliente';
     if (this.id) {
-      const res = await this.clientesService.buscarClientePorId(this.id);
-      delete res.idClientes;
-      if (res) {
-        this.formGroup.setValue(res);
-      }
+      this.editar();
     }
   }
 
@@ -51,9 +51,7 @@ export class ClienteComponent {
     }
     input.email = input.email.toLocaleLowerCase();
 
-    if (this.id) {
-      input.idClientes = this.id;
-    }
+    if (this.id) input.idClientes = this.id;
 
     const res = await this.clientesService.salvar(input);
 
@@ -64,24 +62,24 @@ export class ClienteComponent {
         this.toast.mostrarSucesso('Cliente adicionado!');
       }
       this.router.navigate([`private/clientes`]);
+      this.manipulaCampoAtivoService.atualizarValorAtivo(input.ativo);
     }
   }
 
-  requiredForm() {
-    this.formGroup.controls['nomeClientes'].setValidators([
-      Validators.required,
-    ]);
-    this.formGroup.controls['cep'].setValidators([Validators.required]);
-    this.formGroup.controls['cpfCnpj'].setValidators([Validators.required]);
-    this.formGroup.controls['fone'].setValidators([Validators.required]);
-    this.formGroup.controls['email'].setValidators([
-      Validators.required,
-      Validators.email,
-    ]);
-    this.formGroup.controls['logradouro'].setValidators([Validators.required]);
-    this.formGroup.controls['bairro'].setValidators([Validators.required]);
-    this.formGroup.controls['idCidades'].setValidators([Validators.required]);
-    this.formGroup.controls['idUf'].setValidators([Validators.required]);
+  validaCamposRequeridos() {
+    const campos: Array<string> = [
+      'nomeClientes',
+      'cep',
+      'cpfCnpj',
+      'fone',
+      'email',
+      'logradouro',
+      'bairro',
+      'idCidades',
+      'idUf',
+    ];
+
+    this.utilsService.setarCamposRequeridos(campos, this.formGroup);
   }
 
   async onLoadCep(event: EnderecoInterface) {
@@ -91,7 +89,9 @@ export class ClienteComponent {
     this.formGroup.controls['bairro'].setValue(event.bairro);
   }
 
-  iniciarTitulo() {
-    this.titulo = this.id ? 'Editar Cliente' : 'Cadastro Cliente';
+  async editar(): Promise<void> {
+    this.model = await this.clientesService.buscarClientePorId(this.id);
+    delete this.model.idClientes;
+    this.formGroup.setValue(this.model);
   }
 }

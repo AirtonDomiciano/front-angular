@@ -9,6 +9,4 @@ export default class Produto {
   desconto!: number;
   imagem!: string;
   ativo!: boolean;
-
-  constructor() {}
 }

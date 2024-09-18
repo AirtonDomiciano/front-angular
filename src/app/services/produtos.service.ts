@@ -60,4 +60,14 @@ export class ProdutosService extends BaseService {
       });
     });
   }
+
+  async buscarAtivosInativos(ativo: boolean): Promise<Array<Produto>> {
+    return new Promise((resolve) => {
+      this.get(`/produtos/buscarAtivosInativos/${ativo}`).subscribe(
+        (res?: any) => {
+          resolve(res);
+        }
+      );
+    });
+  }
 }

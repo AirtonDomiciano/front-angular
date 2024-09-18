@@ -3,6 +3,7 @@ import { ProdutosModel } from './model/produtos.model';
 import { Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
 import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { ManipulaCampoAtivoService } from 'src/app/services/ativo.service';
 
 @Component({
   selector: 'app-produtos',
@@ -16,17 +17,28 @@ export class ProdutosComponent implements OnInit {
   constructor(
     private router: Router,
     private produtosService: ProdutosService,
-    private toast: ToastMessageService
+    private toast: ToastMessageService,
+    private manipulaCampoAtivoService: ManipulaCampoAtivoService
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.filtrar();
+    this.mostrarAtivos =
+      this.manipulaCampoAtivoService.MostrarValorAtivoAtual();
+    await this.filtrar();
   }
 
   async filtrar(): Promise<void> {
-    const res = await this.produtosService.BuscarTodosProdutos();
-    this.listagemProdutos = res.filter((el) => el.ativo === this.mostrarAtivos);
+    const res = await this.produtosService.buscarAtivosInativos(
+      this.mostrarAtivos
+    );
     this.mostrarAtivos = !this.mostrarAtivos;
+    this.manipulaCampoAtivoService.atualizarValorAtivo(this.mostrarAtivos);
+
+    if (res) {
+      this.listagemProdutos = res;
+    } else {
+      this.toast.mostrarErro('Ação sem resposta...');
+    }
   }
 
   adicionarProduto() {
