@@ -61,13 +61,6 @@ export class UsuarioComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    if (this.formGroup.invalid) {
-      this.toast.mostrarAviso(
-        'É preciso preencher todos os campos para prosseguir.'
-      );
-      return;
-    }
-
     const input: Usuario = this.formGroup.value;
 
     if (input.senha !== input.confirmarSenha) {
@@ -76,6 +69,16 @@ export class UsuarioComponent implements OnInit {
       this.formGroup.controls['confirmarSenha'].setErrors({
         customError: true,
       });
+      return;
+    } else {
+      this.formGroup.controls['senha'].setErrors(null);
+      this.formGroup.controls['confirmarSenha'].setErrors(null);
+    }
+
+    if (this.formGroup.invalid) {
+      this.toast.mostrarAviso(
+        'É preciso preencher todos os campos para prosseguir.'
+      );
       return;
     }
 
