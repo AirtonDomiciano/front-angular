@@ -2,22 +2,22 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
     <h1 class="text-center mb-4">{{ titulo }}</h1>
     <div class="row px-4 py-2">
-      <div class="col-sm-10">
-        <p class="m-0 p-0 text-end me-3"><strong>Data Nascimento:</strong></p>
-      </div>
-      <div class="col-sm-8 py-3">
-        <app-input placeholder="Nome" frmName="nomeClientes" [form]="formGroup">
-        </app-input>
-      </div>
-      <div class="col-sm-4 mt-2">
-        <!-- <app-input
-            class="form-control rounded-pill"
-            type="date"
-            placeholder="Data
-          Nascimento"
-            frmName="dtaNascimento"
+      <div class="col-sm-10"></div>
+      <div class="col-sm-9">
+        <div class="col-sm-11 py-3">
+          <app-input
+            placeholder="Nome"
+            frmName="nomeClientes"
             [form]="formGroup"
-          ></app-input> -->
+          >
+          </app-input>
+        </div>
+      </div>
+      <div class="col-sm-1 mt-2 d-flex justify-content-start">
+        <app-input-checkbox
+          frmName="ativo"
+          [form]="formGroup"
+        ></app-input-checkbox>
       </div>
     </div>
     <div class="row px-4 py-2">

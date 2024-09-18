@@ -1,4 +1,4 @@
-import { Usuario } from 'src/app/shared/model/usuario';
+import Usuario from 'src/app/shared/model/usuario';
 
 export class UsuariosModel extends Usuario {
   constructor() {

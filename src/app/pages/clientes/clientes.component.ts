@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { Router } from '@angular/router';
 import Clientes from 'src/app/shared/model/clientes';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { ClienteModel } from '../cliente/model/cliente.model';
+import { ManipulaCampoAtivoService } from 'src/app/services/ativo.service';
 
 @Component({
   selector: 'app-clientes',
@@ -10,15 +13,18 @@ import Clientes from 'src/app/shared/model/clientes';
 })
 export class ClientesComponent implements OnInit {
   public listaClientes: Clientes[] = [];
-  public ativos: boolean = true;
+  public mostrarAtivos = true;
 
   constructor(
-    public clientesService: ClientesService,
-    private router: Router
+    private clientesService: ClientesService,
+    private router: Router,
+    private toast: ToastMessageService,
+    private manipularAtivosService: ManipulaCampoAtivoService
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.buscarClientes(this.ativos);
+    this.mostrarAtivos = this.manipularAtivosService.MostrarValorAtivoAtual();
+    this.filtrar();
   }
 
   adicionarCliente() {
@@ -29,25 +35,32 @@ export class ClientesComponent implements OnInit {
     this.router.navigate([`private/cliente/${id}`]);
   }
 
-  async buscarClientes(ativo: boolean) {
-    const res = await this.clientesService.buscarAtivosInativos(ativo);
+  async filtrar() {
+    const res = await this.clientesService.buscarAtivosInativos(
+      this.mostrarAtivos
+    );
+    this.mostrarAtivos = !this.mostrarAtivos;
+    this.manipularAtivosService.atualizarValorAtivo(this.mostrarAtivos);
 
-    if (!res) {
-      alert('DEU Errado');
-      return;
+    if (res) {
+      this.listaClientes = res;
+    } else {
+      this.toast.mostrarErro('Ops! Ação sem resposta...');
     }
-
-    this.listaClientes = res;
   }
 
-  async deletarCliente(id: number) {
-    const res = await this.clientesService.deletarCliente(id);
-
-    if (!res) {
-      alert('Deu ruim');
+  async deletarCliente(cliente: ClienteModel): Promise<void> {
+    if (!cliente.idClientes) {
       return;
     }
-
-    await this.buscarClientes(this.ativos);
+    if (cliente.ativo) {
+      this.toast.mostrarErro('Cliente Ativo não pode ser removido.');
+    }
+    const res = await this.clientesService.deletarCliente(cliente.idClientes);
+    if (res) {
+      this.toast.mostrarSucesso('Cliente removido.');
+    } else {
+      this.toast.mostrarErro('Ops... Ação sem resposta.');
+    }
   }
 }

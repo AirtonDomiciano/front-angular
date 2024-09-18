@@ -5,4 +5,5 @@ export default class Animais {
   divisao!: string;
   especie!: string;
   raca!: string;
+  ativo!: boolean;
 }

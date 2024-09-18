@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProdutosModel } from './model/produtos.model';
 import { Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
+import { ToastMessageService } from 'src/app/shared/services/toast-message.service';
+import { ManipulaCampoAtivoService } from 'src/app/services/ativo.service';
 
 @Component({
   selector: 'app-produtos',
@@ -10,26 +12,33 @@ import { ProdutosService } from 'src/app/services/produtos.service';
 })
 export class ProdutosComponent implements OnInit {
   public listagemProdutos: ProdutosModel[] = [];
-  public ativos: boolean = false;
+  public mostrarAtivos = true;
 
   constructor(
     private router: Router,
-    private produtosService: ProdutosService
+    private produtosService: ProdutosService,
+    private toast: ToastMessageService,
+    private manipulaCampoAtivoService: ManipulaCampoAtivoService
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.buscarProdutos(this.ativos);
+    this.mostrarAtivos =
+      this.manipulaCampoAtivoService.MostrarValorAtivoAtual();
+    await this.filtrar();
   }
 
-  async buscarProdutos(ativo: boolean) {
-    const res = await this.produtosService.buscarAtivosInativos(ativo);
+  async filtrar(): Promise<void> {
+    const res = await this.produtosService.buscarAtivosInativos(
+      this.mostrarAtivos
+    );
+    this.mostrarAtivos = !this.mostrarAtivos;
+    this.manipulaCampoAtivoService.atualizarValorAtivo(this.mostrarAtivos);
 
-    if (!res) {
-      alert('Deu ruim!');
-      return;
+    if (res) {
+      this.listagemProdutos = res;
+    } else {
+      this.toast.mostrarErro('Ação sem resposta...');
     }
-
-    this.listagemProdutos = res;
   }
 
   adicionarProduto() {
@@ -40,14 +49,19 @@ export class ProdutosComponent implements OnInit {
     this.router.navigate([`private/produto/${id}`]);
   }
 
-  async excluirProduto(id: number) {
-    const res = await this.produtosService.DeletarProduto(id);
-
-    if (!res) {
-      alert('Deu ruim!');
+  async excluirProduto(produto: ProdutosModel): Promise<void> {
+    if (!produto.idProdutos) {
       return;
     }
-
-    await this.buscarProdutos(this.ativos);
+    if (produto.ativo) {
+      this.toast.mostrarErro('Não pode remover um produto ativo.');
+      return;
+    }
+    const res = await this.produtosService.deletarProduto(produto.idProdutos);
+    if (res) {
+      this.toast.mostrarSucesso('Produto deletado com sucesso');
+    } else {
+      this.toast.mostrarErro('Ops... Ação sem resposta.');
+    }
   }
 }

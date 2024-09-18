@@ -5,6 +5,7 @@ import { InputModule } from 'src/app/shared/components/input/input.module';
 import { CommonModule } from '@angular/common';
 import { ProdutoRoutingModule } from './produto-routing.module';
 import { InputCurrencyModule } from 'src/app/shared/components/input-currency/input-currency.module';
+import { InputCheckboxModule } from 'src/app/shared/components/input-checkbox/input-checkbox.module';
 
 @NgModule({
   declarations: [ProdutoComponent],
@@ -14,6 +15,7 @@ import { InputCurrencyModule } from 'src/app/shared/components/input-currency/in
     InputModule,
     ProdutoRoutingModule,
     InputCurrencyModule,
+    InputCheckboxModule,
   ],
   exports: [ProdutoComponent],
 })

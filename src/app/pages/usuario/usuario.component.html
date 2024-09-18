@@ -1,17 +1,21 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
   <h1 class="text-center">{{ titulo }}</h1>
   <div class="row px-4 py-2">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <app-input placeholder="Nome" frmName="nome" [form]="formGroup">
       </app-input>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <app-input frmName="sobrenome" placeholder="Sobrenome" [form]="formGroup">
       </app-input>
     </div>
+    <div class="col-sm-3 d-flex ms-5">
+      <app-input-checkbox frmName="ativo" [form]="formGroup">
+      </app-input-checkbox>
+    </div>
   </div>
   <div class="row px-4 py-4">
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       <app-input
         type="email"
         placeholder="E-mail"
@@ -20,7 +24,7 @@
       >
       </app-input>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <app-input-senha
         frmPlaceholder="Senha"
         frmName="senha"

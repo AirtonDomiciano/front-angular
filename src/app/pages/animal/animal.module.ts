@@ -7,6 +7,7 @@ import { InputModule } from 'src/app/shared/components/input/input.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SelectClientesModule } from 'src/app/shared/components/select-clientes/select-clientes.module';
+import { InputCheckboxModule } from 'src/app/shared/components/input-checkbox/input-checkbox.module';
 
 @NgModule({
   declarations: [AnimalComponent],
@@ -19,6 +20,7 @@ import { SelectClientesModule } from 'src/app/shared/components/select-clientes/
     RouterModule,
     ReactiveFormsModule,
     SelectClientesModule,
+    InputCheckboxModule,
   ],
   exports: [AnimalComponent],
 })

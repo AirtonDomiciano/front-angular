@@ -10,8 +10,7 @@ export default class Clientes {
   fone: string;
   email: string;
   dtaNascimento: Date;
-  listaNegra: boolean;
-  ativo: boolean;
+  ativo!: boolean;
 
   constructor() {
     this.nomeClientes = '';
@@ -22,7 +21,6 @@ export default class Clientes {
     this.fone = '';
     this.email = '';
     this.dtaNascimento = new Date('');
-    this.listaNegra = false;
     this.ativo = true;
   }
 }

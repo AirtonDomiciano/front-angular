@@ -9,6 +9,7 @@ import { InputTelefoneModule } from 'src/app/shared/components/input-telefone/in
 import { InputCpfCnpjModule } from 'src/app/shared/components/input-cpf-cnpj/input-cpf-cnpj.module';
 import { SelectUfsModule } from 'src/app/shared/components/select-ufs/select-ufs.module';
 import { SelectCidadesModule } from 'src/app/shared/components/select-cidades/select-cidades.module';
+import { InputCheckboxModule } from 'src/app/shared/components/input-checkbox/input-checkbox.module';
 
 @NgModule({
   declarations: [ClienteComponent],
@@ -22,6 +23,7 @@ import { SelectCidadesModule } from 'src/app/shared/components/select-cidades/se
     InputCpfCnpjModule,
     SelectUfsModule,
     SelectCidadesModule,
+    InputCheckboxModule,
   ],
   exports: [ClienteComponent],
 })

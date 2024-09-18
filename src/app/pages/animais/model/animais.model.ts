@@ -8,5 +8,6 @@ export default class AnimaisModel extends Animais {
     this.divisao = '';
     this.especie = '';
     this.raca = '';
+    this.ativo = true;
   }
 }

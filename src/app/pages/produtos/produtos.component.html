@@ -18,7 +18,15 @@
           />
         </div>
         <div class="d-flex justify-content-end col-sm-8">
-          <button class="btn btn-success" (click)="adicionarProduto()">
+          <button class="btn btn-secondary" (click)="filtrar()">
+            <span
+              [ngClass]="{
+                'bi bi-hand-thumbs-down': mostrarAtivos,
+                'bi bi-hand-thumbs-up': !mostrarAtivos
+              }"
+            ></span>
+          </button>
+          <button class="btn btn-success ms-2" (click)="adicionarProduto()">
             <span class="bi bi-plus"></span>
           </button>
         </div>
@@ -53,7 +61,7 @@
           </button>
           <button
             class="btn btn-danger btn-sm"
-            (click)="excluirProduto(produto.idProdutos)"
+            (click)="excluirProduto(produto)"
           >
             <span class="bi bi-trash"></span>
           </button>
