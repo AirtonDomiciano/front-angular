@@ -9,12 +9,12 @@ export class UsuarioModel extends Usuario {
     this.nome = '';
     this.email = '';
     this.senha = '';
+    this.confirmarSenha = '';
     this.funcao = '';
     this.sobrenome = '';
     this.localidade = '';
     this.bairro = '';
     this.logradouro = '';
     this.ativo = true;
-    // this.apis = [];
   }
 }

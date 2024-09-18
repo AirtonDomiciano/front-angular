@@ -5,6 +5,7 @@ export default class Usuario {
   idade!: number;
   email!: string;
   senha!: string;
+  confirmarSenha!: string;
   cep!: string;
   funcao!: string;
   ativo?: boolean;

@@ -50,6 +50,7 @@ export class UsuariosService extends BaseService {
   async buscarUsuarioPorId(id: number): Promise<Usuario> {
     return new Promise<Usuario>((resolve) => {
       this.get(`/usuarios/${id}`).subscribe((res: any) => {
+        res.confirmarSenha = res.senha;
         resolve(res);
       });
     });
