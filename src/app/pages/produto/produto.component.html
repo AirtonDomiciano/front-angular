@@ -1,49 +1,39 @@
-<div class="container d-flex justify-content-center align-items-center">
-  <div class="bg-white w-100 p-3">
-    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
-      <h1 class="text-center mb-4">{{ titulo }}</h1>
-      <div class="row px-4 py-4">
-        <div class="col-sm-4">
-          <app-input
-            placeholder="Nome"
-            frmName="nomeProduto"
-            [form]="formGroup"
-          >
-          </app-input>
-        </div>
-        <div class="col-sm-3 ms-5">
-          <app-input
-            placeholder="Estoque"
-            frmName="qtdeTotal"
-            [form]="formGroup"
-          ></app-input>
-        </div>
-        <div class="col-sm-3 d-flex ms-5">
-          <app-input-checkbox frmName="ativo" [form]="formGroup">
-          </app-input-checkbox>
-        </div>
+<div class="card bg-white w-100 p-3">
+  <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
+    <h1 class="text-center mb-4">{{ titulo }}</h1>
+    <div class="row px-4 py-4">
+      <div class="col-sm-9">
+        <app-input placeholder="Nome" frmName="nomeProduto" [form]="formGroup">
+        </app-input>
       </div>
-      <div class="row px-4 py-2">
-        <div class="col-sm-9">
-          <app-input placeholder="Imagem" frmName="imagem" [form]="formGroup">
-          </app-input>
-        </div>
-        <div class="col-sm-3">
-          <app-input-currency
-            placeholder="Valor"
-            frmName="valor"
-            [form]="formGroup"
-          >
-          </app-input-currency>
-        </div>
+      <div class="col-sm-3">
+        <app-input
+          placeholder="Estoque"
+          frmName="qtdeTotal"
+          [form]="formGroup"
+        ></app-input>
       </div>
-      <div class="row px-4">
-        <div class="col-sm-12">
-          <button class="btn btn-primary rounded-pill mt-2 w-100" type="submit">
-            Enviar
-          </button>
-        </div>
+    </div>
+    <div class="row px-4 py-2">
+      <div class="col-sm-9">
+        <app-input placeholder="Imagem" frmName="imagem" [form]="formGroup">
+        </app-input>
       </div>
-    </form>
-  </div>
+      <div class="col-sm-3">
+        <app-input-currency
+          placeholder="Valor"
+          frmName="valor"
+          [form]="formGroup"
+        >
+        </app-input-currency>
+      </div>
+    </div>
+    <div class="row px-4">
+      <div class="col-sm-12">
+        <button class="btn btn-primary rounded-pill mt-2 w-100" type="submit">
+          Enviar
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

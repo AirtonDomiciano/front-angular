@@ -51,7 +51,7 @@
       <tr>
         <td>{{ produto.nomeProduto }}</td>
         <td>{{ produto.qtdeTotal }}</td>
-        <td>{{ produto.valor }}</td>
+        <td>{{ produto.valor | currency : "BRL" }}</td>
         <td>
           <button
             class="btn-editar btn btn-primary btn-sm"

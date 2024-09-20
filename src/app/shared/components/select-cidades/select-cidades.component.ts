@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SelectCidadesService } from '../../services/select-cidades.service';
-import { Subscription } from 'rxjs';
 import Cidades from '../../model/cidades';
 
 @Component({
@@ -14,15 +13,11 @@ export class SelectCidadesComponent implements OnInit {
   @Input() class = 'form-control rounded-pill mt-2';
   @Input() id = '';
   @Input() frmName = '';
-  @Input() cidade = '';
   @Input() placeholder = '';
 
-  public idCidade!: number;
   public cidades!: Cidades[];
-  public subscripe!: Subscription;
-  constructor(private selectCidadesService: SelectCidadesService) {}
 
-  ngOnDestroy(): void {}
+  constructor(private selectCidadesService: SelectCidadesService) {}
 
   async ngOnInit(): Promise<void> {
     await this.buscarCidades();
@@ -30,9 +25,8 @@ export class SelectCidadesComponent implements OnInit {
   }
 
   listeners(): void {
-    this.form.controls[this.cidade].valueChanges.subscribe((evt) => {
-      const res = this.cidades.find((el) => el.nomeCidade === evt);
-      this.form.controls[this.frmName].setValue(res?.idCidades);
+    this.form.controls[this.frmName].valueChanges.subscribe((evt) => {
+      this.setarCidadePorNome(evt);
     });
   }
 
@@ -47,7 +41,10 @@ export class SelectCidadesComponent implements OnInit {
     this.cidades = res;
   }
 
-  onSelect(cidade: Cidades) {
-    console.log(cidade);
+  setarCidadePorNome(nomeCidade: string) {
+    const cidade = this.cidades.find((c) => c.nomeCidade === nomeCidade);
+    if (cidade) {
+      this.form.controls[this.frmName].setValue(cidade.idCidades);
+    }
   }
 }

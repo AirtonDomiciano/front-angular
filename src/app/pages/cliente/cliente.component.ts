@@ -89,9 +89,9 @@ export class ClienteComponent {
   }
 
   async onLoadCep(event: EnderecoInterface) {
-    this.formGroup.controls['localidade'].setValue(event.localidade);
-    this.formGroup.controls['uf'].setValue(event.uf);
     this.formGroup.controls['logradouro'].setValue(event.logradouro);
     this.formGroup.controls['bairro'].setValue(event.bairro);
+    this.formGroup.controls['idCidades'].setValue(event.localidade);
+    this.formGroup.controls['idUf'].setValue(event.uf);
   }
 }
