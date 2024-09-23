@@ -5,6 +5,6 @@ export default class ProdutosServicoModel extends ProdutosServico {
     super();
     this.idProdutosServico = 0;
     this.idTipoServico = 0;
-    this.idProdutos = 0;
+    this.idProdutos = '';
   }
 }
