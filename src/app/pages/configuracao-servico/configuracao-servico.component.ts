@@ -46,7 +46,6 @@ export class ConfiguracaoServicoComponent implements OnInit {
       });
     }
 
-    console.log(obj);
     const res = await this.produtosServicoService.salvarLista(obj);
 
     this.emitterToast.emit(res);
