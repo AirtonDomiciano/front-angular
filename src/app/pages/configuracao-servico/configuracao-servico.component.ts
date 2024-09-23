@@ -62,7 +62,6 @@ export class ConfiguracaoServicoComponent implements OnInit {
       });
     }
 
-    console.log(obj);
     const res = await this.produtosServicoService.salvarLista(obj);
     console.log(res);
 
