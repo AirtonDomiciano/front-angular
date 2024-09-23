@@ -115,14 +115,6 @@ export const privateRoutes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: 'kitprodutos',
-        loadChildren: () =>
-          import('../../pages/kit-produtos/kit-produtos.module').then(
-            (m) => m.KitProdutosModule
-          ),
-        canActivate: [AuthGuardService],
-      },
-      {
         path: 'servico/:id',
         loadChildren: () =>
           import('../../pages/servico/servico.module').then(

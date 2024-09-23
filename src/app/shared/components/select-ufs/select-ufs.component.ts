@@ -13,7 +13,6 @@ export class SelectUfsComponent implements OnInit {
   @Input() class = 'form-control rounded-pill mt-2';
   @Input() id = '';
   @Input() frmName = '';
-  @Input() uf = '';
   @Input() placeholder = '';
 
   public ufs!: Ufs[];
@@ -26,9 +25,8 @@ export class SelectUfsComponent implements OnInit {
   }
 
   listeners(): void {
-    this.form.controls[this.uf].valueChanges.subscribe((evt) => {
-      const res = this.ufs.find((el) => el.sigla === evt);
-      this.form.controls[this.frmName].setValue(res?.idUf);
+    this.form.controls[this.frmName].valueChanges.subscribe((evt) => {
+      this.setarUfPorSigla(evt);
     });
   }
 
@@ -41,5 +39,11 @@ export class SelectUfsComponent implements OnInit {
     }
 
     this.ufs = res;
+  }
+  setarUfPorSigla(siglaUf: string) {
+    const uf = this.ufs.find((u) => u.sigla === siglaUf);
+    if (uf) {
+      this.form.controls[this.frmName].setValue(uf.idUf);
+    }
   }
 }

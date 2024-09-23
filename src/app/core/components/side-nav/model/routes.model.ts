@@ -14,12 +14,6 @@ export const RoutesArray: Routes[] = [
     childs: [],
   },
   { title: 'Produtos', route: 'produtos', icon: 'bi bi-basket', childs: [] },
-  {
-    title: 'Kit Produtos',
-    route: 'kitprodutos',
-    icon: 'bi bi-basket',
-    childs: [],
-  },
   { title: 'Usuários', route: 'usuarios', icon: 'bi bi-people', childs: [] },
   { title: 'Animais', route: 'animais', icon: 'bi bi-heart-fill', childs: [] },
 ];

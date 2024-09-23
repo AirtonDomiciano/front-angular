@@ -26,9 +26,16 @@ export class InputCurrencyComponent implements OnInit {
   }
 
   verificaValor() {
-    let valorInput = this.form.controls[this.frmName].value;
-    this.valorValido = valorInput <= this.valor && valorInput !== 0;
-    this.emitterValorVerificado.emit(this.valorValido);
+    const valorInput = this.form.controls[this.frmName].value;
+    if (this.valor) {
+      this.valorValido = valorInput <= this.valor;
+      this.emitterValorVerificado.emit(this.valorValido);
+    }
+    if (valorInput === 0) {
+      this.valorValido = false;
+    } else {
+      this.valorValido = true;
+    }
   }
 
   verificaCampoRequerido() {
