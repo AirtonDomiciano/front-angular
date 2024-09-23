@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfiguracaoServicoModel } from './model/configuracao-servico.model';
 import { ProdutosServicoService } from 'src/app/services/produtos-servico.service';
 import ProdutosServicoModel from './model/produtos-servico.model';
+import { UtilsService } from 'src/app/shared/utils/utils.service';
 
 @Component({
   selector: 'app-configuracao-servico',
@@ -17,7 +18,8 @@ export class ConfiguracaoServicoComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private produtosServicoService: ProdutosServicoService
+    private produtosServicoService: ProdutosServicoService,
+    private utils: UtilsService
   ) {
     this.form = this.fb.group(this.model);
   }
@@ -40,17 +42,18 @@ export class ConfiguracaoServicoComponent implements OnInit {
     for (let produto of input.produtos) {
       obj.push({
         idTipoServico: input.tipoServico.idTipoServico,
-        idProdutos: produto.idProdutos!,
+        idProdutos: String(produto.idProdutos),
       });
     }
 
+    console.log(obj);
     const res = await this.produtosServicoService.salvarLista(obj);
 
     this.emitterToast.emit(res);
   }
 
   setarCamposObrigatorios() {
-    this.form.controls['tipoServico'].setValidators([Validators.required]);
-    this.form.controls['produtos'].setValidators([Validators.required]);
+    const campo: Array<string> = ['tipoServico', 'produtos'];
+    this.utils.setarCamposRequeridos(campo, this.form);
   }
 }

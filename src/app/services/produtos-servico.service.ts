@@ -4,6 +4,7 @@ import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
 import ProdutosServico from '../shared/interface/produtos-servico.interface';
+import ProdutosServicoModel from '../pages/configuracao-servico/model/produtos-servico.model';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +52,7 @@ export class ProdutosServicoService extends BaseService {
         if (res) {
           resolve(res);
         } else {
-          console.error('Ero!');
+          console.error('Erro!');
         }
       });
     });
@@ -73,21 +74,11 @@ export class ProdutosServicoService extends BaseService {
     });
   }
 
-  async salvar(produtoServico: ProdutosServico): Promise<boolean> {
+  async salvarLista(produtoServico: ProdutosServicoModel[]): Promise<boolean> {
     return new Promise((resolve) => {
       this.post('/produtos-servico', produtoServico).subscribe((res: any) => {
         resolve(res);
       });
-    });
-  }
-
-  async salvarLista(produtoServico: ProdutosServico[]): Promise<boolean> {
-    return new Promise((resolve) => {
-      this.post('/produtos-servico/salvarLista', produtoServico).subscribe(
-        (res: any) => {
-          resolve(res);
-        }
-      );
     });
   }
 }
