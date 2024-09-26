@@ -17,17 +17,15 @@ export class HomeComponent implements OnInit {
   public colunasGrafico: string[] = [];
   public datas: Date[] = [];
 
-  public labelGraficoAtendimento = ['Atendimentos'];
+  public labelGraficoAtendimento = ['Atendimento'];
   public coresGraficoAtendimento: string[] = ['#add8e6'];
   public valoresGraficoAtendimento: number[][] = [[0, 0, 0, 0, 0, 0, 0]];
   public atendimentos: GraficoAtendimentosInterface[] = [];
 
-  public labelGraficoLucro = ['Lucro', 'Valor Recebido'];
-  public coresGraficoLucro: string[] = [
-    'rgba(0, 204, 153, 1)',
-    'rgba(255, 127, 0, 1)',
-  ];
+  public labelGraficoLucro = ['Lucro', 'Valor Produtos', 'Valor Total Serviço'];
+  public coresGraficoLucro: string[] = ['#00CC99', '#CC4444', '#FF7F00'];
   public valoresGraficoLucro: number[][] = [
+    [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
   ];
@@ -91,6 +89,7 @@ export class HomeComponent implements OnInit {
     this.valoresGraficoAtendimento[0].reverse();
     this.valoresGraficoLucro[0].reverse();
     this.valoresGraficoLucro[1].reverse();
+    this.valoresGraficoLucro[2].reverse();
   }
 
   setarValores(
@@ -106,9 +105,12 @@ export class HomeComponent implements OnInit {
         if (tipo === 'atendimento') {
           this.valoresGraficoAtendimento[0][j]++;
         } else {
-          this.valoresGraficoLucro[0][j] +=
+          if (atendimento.valorPago - atendimento.valorTipoServico > 0) {
+            this.valoresGraficoLucro[0][j] += atendimento.valorTipoServico;
+          }
+          this.valoresGraficoLucro[1][j] +=
             atendimento.valor - atendimento.valorTipoServico;
-          this.valoresGraficoLucro[1][j] += atendimento.valor;
+          this.valoresGraficoLucro[2][j] += atendimento.valor;
         }
         break;
       }
