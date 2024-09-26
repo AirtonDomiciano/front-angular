@@ -63,7 +63,7 @@ export class ProdutoComponent implements OnInit {
       if (this.id) {
         this.toast.mostrarSucesso('Edição Concluída!');
       } else {
-        this.toast.mostrarErro('Produto cadastrado!');
+        this.toast.mostrarSucesso('Produto cadastrado!');
       }
       this.router.navigate([`private/produtos`]);
       this.manipulaCampoAtivoService.atualizarValorAtivo(input.ativo);
