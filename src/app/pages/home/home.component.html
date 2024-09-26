@@ -1,7 +1,7 @@
 <div class="div-principal">
   <div class="container">
     <div class="row">
-      <div class="col-lg-6 col-12">
+      <div class="col-12">
         <div class="container bg-light shadow">
           <h1 class="title text-primary">Bem Vindo</h1>
           <div class="bg-white">
@@ -33,7 +33,31 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6 col-12">
+    </div>
+    <div class="row my-5">
+      <div class="col-sm-4">
+        <div>
+          <app-grafico
+            [colunas]="colunasGrafico"
+            [cores]="coresGraficoAtendimento"
+            [labels]="labelGraficoAtendimento"
+            [valores]="valoresGraficoAtendimento"
+          >
+          </app-grafico>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div>
+          <app-grafico
+            [colunas]="colunasGrafico"
+            [cores]="coresGraficoLucro"
+            [labels]="labelGraficoLucro"
+            [valores]="valoresGraficoLucro"
+          >
+          </app-grafico>
+        </div>
+      </div>
+      <div class="col-sm-4">
         <div class="products bg-light shadow">
           <h3 class="titulo text-primary">Produtos sem estoque:</h3>
           <hr class="sidebar-divided" />

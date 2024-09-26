@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { LocalService } from '../core/services/local.service';
 import Atendimento from '../shared/model/atendimento';
 import ServicosInterface from '../shared/interface/servicos.interface';
+import { GraficoAtendimentosInterface } from '../shared/interface/grafico-atendimentos.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +40,19 @@ export class AtendimentoService extends BaseService {
   async buscarAtendimentoPorId(id: number): Promise<Atendimento> {
     return new Promise((resolve) => {
       this.get(`/atendimento/${id}`).subscribe((res: any) => {
+        resolve(res);
+      });
+    });
+  }
+
+  async buscarAtendimentosPorData(
+    dataInicio: string,
+    dataTermino: string
+  ): Promise<Array<GraficoAtendimentosInterface>> {
+    return new Promise((resolve) => {
+      this.get(
+        `/atendimento/buscarAtendimentosPorData/${dataInicio}/${dataTermino}`
+      ).subscribe((res: any) => {
         resolve(res);
       });
     });
