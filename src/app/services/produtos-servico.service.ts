@@ -68,7 +68,7 @@ export class ProdutosServicoService extends BaseService {
         if (res) {
           resolve(res);
         } else {
-          console.error('Ero!');
+          console.error('Erro!');
         }
       });
     });
