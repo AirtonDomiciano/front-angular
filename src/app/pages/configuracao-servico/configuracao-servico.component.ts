@@ -58,7 +58,7 @@ export class ConfiguracaoServicoComponent implements OnInit {
     for (let produto of input.produtos) {
       obj.push({
         idTipoServico: input.tipoServico.idTipoServico,
-        idProdutos: produto.idProdutos !== undefined ? produto.idProdutos : 0,
+        idProdutos: produto.idProdutos!,
       });
     }
 
