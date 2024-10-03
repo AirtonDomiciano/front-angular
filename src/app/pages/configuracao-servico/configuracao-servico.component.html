@@ -5,6 +5,8 @@
         [form]="form"
         frmName="tipoServico"
         tipoServico="tipoServico"
+        (emitterProdutosTipoServico)="setarProdutos($event)"
+        (emitterTipoServico)="setarServicoSelecionado($event)"
       ></app-select-tipo-servico>
     </div>
     <div class="col-sm-6">

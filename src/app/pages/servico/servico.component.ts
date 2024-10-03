@@ -188,7 +188,6 @@ export class ServicoComponent implements OnInit {
 
   async setarProdutos(input: ProdutosServico[]): Promise<void> {
     const produtos = await this.produtosService.BuscarTodosProdutos();
-    this.produtosSelecionados = [];
 
     for (let produto of input) {
       const salvar = produtos.find(
