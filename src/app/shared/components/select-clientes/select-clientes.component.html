@@ -4,6 +4,7 @@
     id="{{ frmName }}"
     formControlName="{{ frmName }}"
     [ngClass]="{ 'is-invalid': form.get(frmName)?.invalid }"
+    (focusout)="emitirIdClientes()"
     required
   >
     <option value="0">Selecione um Cliente:</option>

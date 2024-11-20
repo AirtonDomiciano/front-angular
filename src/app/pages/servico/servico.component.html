@@ -2,12 +2,20 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" #formDir="ngForm">
   <div class="row px-4 py-2">
     <div class="col-sm-6">
-      <app-input placeholder="Animal" frmName="idAnimal" [form]="formGroup">
-      </app-input>
+      <app-select-clientes
+        [form]="formGroup"
+        frmName="idClientes"
+        cliente="nomeClientes"
+        (emitterIdCliente)="selecionarAnimaisDoCliente($event)"
+      ></app-select-clientes>
     </div>
     <div class="col-sm-6">
-      <app-input placeholder="Cliente" frmName="idClientes" [form]="formGroup">
-      </app-input>
+      <app-select-animais-cliente
+        [form]="formGroup"
+        frmName="idAnimal"
+        animal="nome"
+        #selectAnimaisCliente
+      ></app-select-animais-cliente>
     </div>
   </div>
   <div class="row px-4 py-2">
